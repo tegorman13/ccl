@@ -44,7 +44,7 @@ Figures from @macmillan-scottIrrationalityCognitiveBiases2024
 
 ## Human-like intuitive behavior and reasoning biases emerged in large language models but disappeared in ChatGPT
 
-Hagendorff, T., Fabi, S., & Kosinski, M. (2023). Human-like intuitive behavior and reasoning biases emerged in large language models but disappeared in ChatGPT. Nature Computational Science, 3(10), 833–838. https://doi.org/10.1038/s43588-023-00527-x
+Hagendorff, T., Fabi, S., & Kosinski, M. (2023). **Human-like intuitive behavior and reasoning biases emerged in large language models but disappeared in ChatGPT.** Nature Computational Science, 3(10), 833–838. https://doi.org/10.1038/s43588-023-00527-x
 
 <details open class="relevant-callout">
 <summary>Abstract</summary>
@@ -84,7 +84,7 @@ We study GPT-3, a recent large language model, using tools from cognitive psycho
 
 ## Studying and improving reasoning in humans and machines. 
 
-Yax, N., Anlló, H., & Palminteri, S. (2024). Studying and improving reasoning in humans and machines. Communications Psychology, 2(1), 1–16. https://doi.org/10.1038/s44271-024-00091-8
+Yax, N., Anlló, H., & Palminteri, S. (2024). **Studying and improving reasoning in humans and machines.** Communications Psychology, 2(1), 1–16. https://doi.org/10.1038/s44271-024-00091-8
 
 
 <details open class="relevant-callout">
@@ -102,7 +102,7 @@ In the present study, we investigate and compare reasoning in large language mod
 
 ## Exploring variability in risk taking with large language models.
 
-Bhatia, S. (2024). Exploring variability in risk taking with large language models. Journal of Experimental Psychology: General, 153(7), 1838–1860. https://doi.org/10.1037/xge0001607
+Bhatia, S. (2024). **Exploring variability in risk taking with large language models.** Journal of Experimental Psychology: General, 153(7), 1838–1860. https://doi.org/10.1037/xge0001607
 
 <details open class="relevant-callout">
 <summary>Abstract</summary>
@@ -116,7 +116,7 @@ What are the sources of individual-level differences in risk taking, and how do 
 
 ## Human Bias in AI Models? Anchoring Effects and Mitigation Strategies in Large Language Models
 
-Nguyen, J. (2024). Human Bias in AI Models? Anchoring Effects and Mitigation Strategies in Large Language Models. Journal of Behavioral and Experimental Finance, 100971. https://doi.org/10.1016/j.jbef.2024.100971
+Nguyen, J. (2024). **Human Bias in AI Models? Anchoring Effects and Mitigation Strategies in Large Language Models.** Journal of Behavioral and Experimental Finance, 100971. https://doi.org/10.1016/j.jbef.2024.100971
 
 <details open class="relevant-callout">
 <summary>Abstract</summary>
@@ -237,7 +237,7 @@ Figures from @goliCanLargeLanguage2024
 
 ## Language models, like humans, show content effects on reasoning tasks
 
-Lampinen, A. K., Dasgupta, I., Chan, S. C. Y., Sheahan, H. R., Creswell, A., Kumaran, D., McClelland, J. L., & Hill, F. (2024). Language models, like humans, show content effects on reasoning tasks. PNAS Nexus, 3(7), pgae233. https://doi.org/10.1093/pnasnexus/pgae233
+Lampinen, A. K., Dasgupta, I., Chan, S. C. Y., Sheahan, H. R., Creswell, A., Kumaran, D., McClelland, J. L., & Hill, F. (2024). **Language models, like humans, show content effects on reasoning tasks.** PNAS Nexus, 3(7), pgae233. https://doi.org/10.1093/pnasnexus/pgae233
 
 <details open class="relevant-callout">
 <summary>Abstract</summary>
@@ -281,7 +281,7 @@ Matching the language or content of a message to the psychological profile of it
 
 ## Decision-Making Paradoxes in Humans vs Machines: The case of the Allais and Ellsberg Paradoxes.
 
-Nobandegani, A. S., Rish, I., & Shultz, T. R. (2023). Decision-Making Paradoxes in Humans vs Machines: The case of the Allais and Ellsberg Paradoxes. Proceedings of the Annual Meeting of the Cognitive Science Society, 46. https://arxiv.org/abs/2406.11426
+Nobandegani, A. S., Rish, I., & Shultz, T. R. (2023). **Decision-Making Paradoxes in Humans vs Machines: The case of the Allais and Ellsberg Paradoxes.** Proceedings of the Annual Meeting of the Cognitive Science Society, 46. https://arxiv.org/abs/2406.11426
 
 
 <details open class="relevant-callout">
@@ -290,3 +290,40 @@ Nobandegani, A. S., Rish, I., & Shultz, T. R. (2023). Decision-Making Paradoxes 
 Human decision-making is filled with a variety of paradoxes demonstrating deviations from rationality principles. Do state-of-the-art artificial intelligence (AI) models also manifest these paradoxes when making decisions? As a case study, in this work we investigate whether GPT-4, a recently released state-of-the-art language model, would show two well-known paradoxes in human decision-making: the Allais paradox and the Ellsberg paradox. We demonstrate that GPT-4 succeeds in the two variants of the Allais paradox (the common-consequence effect and the common-ratio effect) but fails in the case of the Ellsberg paradox. We also show that providing GPT-4 with high-level normative principles allows it to succeed in the Ellsberg paradox, thus elevating GPT-4's decision-making rationality. We discuss the implications of our work for AI rationality enhancement and AI-assisted decision-making.
 </div>
 </details>
+
+@nobandeganiDecisionMakingParadoxesHumans2023
+
+
+
+
+## Do LLMs Exhibit Human-like Response Biases? A Case Study in Survey Design.
+
+Tjuatja, L., Chen, V., Wu, T., Talwalkwar, A., & Neubig, G. (2024). **Do LLMs Exhibit Human-like Response Biases? A Case Study in Survey Design.** Transactions of the Association for Computational Linguistics, 12, 1011–1026. https://doi.org/10.1162/tacl_a_00685
+
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+One widely cited barrier to the adoption of LLMs as proxies for humans in subjective tasks is their sensitivity to prompt wording—but interestingly, humans also display sensitivities to instruction changes in the form of response biases. We investigate the extent to which LLMs reflect human response biases, if at all. We look to survey design, where human response biases caused by changes in the wordings of “prompts” have been extensively explored in social psychology literature. Drawing from these works, we design a dataset and framework to evaluate whether LLMs exhibit human-like response biases in survey questionnaires. Our comprehensive evaluation of nine models shows that popular open and commercial LLMs generally fail to reflect human-like behavior, particularly in models that have undergone RLHF. Furthermore, even if a model shows a significant change in the same direction as humans, we find that they are sensitive to perturbations that do not elicit significant changes in humans. These results highlight the pitfalls of using LLMs as human proxies, and underscore the need for finer-grained characterizations of model behavior.
+</div>
+</details>
+
+
+![Figure from @tjuatjaLLMsExhibitHumanlike2024](images/Tjuatja_24_img.png)
+
+
+
+## Cognitive ease at a cost: LLMs reduce mental effort but compromise depth in student scientific inquiry
+
+Stadler, M., Bannert, M., & Sailer, M. (2024). **Cognitive ease at a cost: LLMs reduce mental effort but compromise depth in student scientific inquiry.** Computers in Human Behavior, 160, 108386. https://doi.org/10.1016/j.chb.2024.108386
+
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+This study explores the cognitive load and learning outcomes associated with using large language models (LLMs) versus traditional search engines for information gathering during learning. A total of 91 university students were randomly assigned to either use ChatGPT3.5 or Google to research the socio-scientific issue of nanoparticles in sunscreen to derive valid recommendations and justifications. The study aimed to investigate potential differences in cognitive load, as well as the quality and homogeneity of the students' recommendations and justifications. Results indicated that students using LLMs experienced significantly lower cognitive load. However, despite this reduction, these students demonstrated lower-quality reasoning and argumentation in their final recommendations compared to those who used traditional search engines. Further, the homogeneity of the recommendations and justifications did not differ significantly between the two groups, suggesting that LLMs did not restrict the diversity of students’ perspectives. These findings highlight the nuanced implications of digital tools on learning, suggesting that while LLMs can decrease the cognitive burden associated with information gathering during a learning task, they may not promote deeper engagement with content necessary for high-quality learning per se.
+</div>
+</details>
+
+@stadlerCognitiveEaseCost2024
+

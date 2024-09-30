@@ -8,11 +8,17 @@ Thomas E. Gorman
   - [Human-AI teaming: Leveraging transactive memory and speaking up for
     enhanced team
     effectiveness.](#human-ai-teaming-leveraging-transactive-memory-and-speaking-up-for-enhanced-team-effectiveness)
+  - [Large language models empowered agent-based modeling and
+    simulation: A survey and
+    perspectives.](#large-language-models-empowered-agent-based-modeling-and-simulation-a-survey-and-perspectives)
   - [Building Machines that Learn and Think with
     People](#building-machines-that-learn-and-think-with-people)
   - [Large Language Models for Collective Problem-Solving: Insights into
     Group Consensus
     Decision-Making](#large-language-models-for-collective-problem-solving-insights-into-group-consensus-decision-making)
+  - [Exploring collaborative decision-making: A quasi-experimental study
+    of human and Generative AI
+    interaction.](#exploring-collaborative-decision-making-a-quasi-experimental-study-of-human-and-generative-ai-interaction)
   - [How large language models can reshape collective
     intelligence](#how-large-language-models-can-reshape-collective-intelligence)
   - [Enhancing AI-Assisted Group Decision Making through LLM-Powered
@@ -114,7 +120,6 @@ AI agents as knowledge sources in a team’s transactive memory system, as
 well as highlighting their role as catalysts for speaking up. Practical
 implications include suggestions for the design of future AI systems and
 human-AI team training in healthcare and beyond.
-</p>
 
 </div>
 
@@ -124,6 +129,49 @@ human-AI team training in healthcare and beyond.
 
   
   
+
+## Large language models empowered agent-based modeling and simulation: A survey and perspectives.
+
+Gao, C., Lan, X., Li, N., Yuan, Y., Ding, J., Zhou, Z., Xu, F., & Li, Y.
+(2024). Large language models empowered agent-based modeling and
+simulation: A survey and perspectives. Humanities and Social Sciences
+Communications, 11(1), 1–24. https://doi.org/10.1057/s41599-024-03611-3
+
+<details open class="relevant-callout">
+<summary>
+Abstract
+</summary>
+
+<div>
+
+Agent-based modeling and simulation have evolved as a powerful tool for
+modeling complex systems, offering insights into emergent behaviors and
+interactions among diverse agents. Recently, integrating large language
+models into agent-based modeling and simulation presents a promising
+avenue for enhancing simulation capabilities. This paper surveys the
+landscape of utilizing large language models in agent-based modeling and
+simulation, discussing their challenges and promising future directions.
+In this survey, since this is an interdisciplinary field, we first
+introduce the background of agent-based modeling and simulation and
+large language model-empowered agents. We then discuss the motivation
+for applying large language models to agent-based simulation and
+systematically analyze the challenges in environment perception, human
+alignment, action generation, and evaluation. Most importantly, we
+provide a comprehensive overview of the recent works of large language
+model-empowered agent-based modeling and simulation in multiple
+scenarios, which can be divided into four domains: cyber, physical,
+social, and hybrid, covering simulation of both real-world and virtual
+environments, and how these works address the above challenges. Finally,
+since this area is new and quickly evolving, we discuss the open
+problems and promising future directions. We summarize the
+representative papers along with their code repositories in
+https://github.com/tsinghua-fib-lab/LLM-Agent-Based-Modeling-and-Simulation.
+
+</div>
+
+</details>
+
+![Figure from Gao et al. (2024)](images/Gao_24_img.png)
 
 ## Building Machines that Learn and Think with People
 
@@ -211,6 +259,48 @@ agents.
 Figure 1: Figure from Du et al. (2024)
 
 </div>
+
+## Exploring collaborative decision-making: A quasi-experimental study of human and Generative AI interaction.
+
+Hao, X., Demir, E., & Eyers, D. (2024). Exploring collaborative
+decision-making: A quasi-experimental study of human and Generative AI
+interaction. Technology in Society, 78, 102662.
+https://doi.org/10.1016/j.techsoc.2024.102662
+
+<details class="relevant-callout">
+<summary>
+Abstract
+</summary>
+
+<div>
+
+This paper explores the effects of integrating Generative Artificial
+Intelligence (GAI) into decision-making processes within organizations,
+employing a quasi-experimental pretest-posttest design. The study
+examines the synergistic interaction between Human Intelligence (HI) and
+GAI across four group decision-making scenarios within three global
+organizations renowned for their cutting-edge operational techniques.
+The research progresses through several phases: identifying research
+problems, collecting baseline data on decision-making, implementing AI
+interventions, and evaluating the outcomes post-intervention to identify
+shifts in performance. The results demonstrate that GAI effectively
+reduces human cognitive burdens and mitigates heuristic biases by
+offering data-driven support and predictive analytics, grounded in
+System 2 reasoning. This is particularly valuable in complex situations
+characterized by unfamiliarity and information overload, where
+intuitive, System 1 thinking is less effective. However, the study also
+uncovers challenges related to GAI integration, such as potential
+over-reliance on technology, intrinsic biases particularly
+‘out-of-the-box’ thinking without contextual creativity. To address
+these issues, this paper proposes an innovative strategic framework for
+HI-GAI collaboration that emphasizes transparency, accountability, and
+inclusiveness.
+
+</div>
+
+</details>
+
+![](images/Hao_24_img.png)
 
   
   
@@ -726,6 +816,16 @@ Learn and Think with People* (arXiv:2408.03943). arXiv.
 Du, Y., Rajivan, P., & Gonzalez, C. C. (2024). *Large Language Models
 for Collective Problem-Solving: Insights into Group Consensus
 Decision-Making*.
+
+</div>
+
+<div id="ref-gaoLargeLanguageModels2024" class="csl-entry">
+
+Gao, C., Lan, X., Li, N., Yuan, Y., Ding, J., Zhou, Z., Xu, F., & Li, Y.
+(2024). Large language models empowered agent-based modeling and
+simulation: A survey and perspectives. *Humanities and Social Sciences
+Communications*, *11*(1), 1–24.
+<https://doi.org/10.1057/s41599-024-03611-3>
 
 </div>
 
