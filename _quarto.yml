@@ -30,8 +30,9 @@ website:
       #- index.qmd
       #- text: "---"
       - text: "---"
-      - text: "AI Group Decision Making"
-        href: ai_gd.qmd
+      - section: "AI Group Decision Making"
+        contents:
+        - ai_gd.qmd
       - text: "---"
 
 format:
