@@ -2,6 +2,7 @@
 title: "Literature Notes"
 author:
 - name: Thomas E. Gorman
+  url: https://tegorman13.github.io/
   affiliations: 
   - name:  Communication and Cognition Lab, Purdue University, USA
     affiliation-url: https://web.ics.purdue.edu/~treimer/
@@ -47,6 +48,25 @@ In this prospective observational study, we investigate the role of transactive 
 
 \
 \
+
+
+## Building Machines that Learn and Think with People
+
+Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee, M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A., Tenenbaum, J. B., & Griffiths, T. L. (2024). **Building Machines that Learn and Think with People** (arXiv:2408.03943). arXiv. http://arxiv.org/abs/2408.03943
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+What do we want from machine intelligence? We envision machines that are not just tools for thought, but partners in thought: reasonable, insightful, knowledgeable, reliable, and trustworthy systems that think with us. Current artificial intelligence (AI) systems satisfy some of these criteria, some of the time. In this Perspective, we show how the science of collaborative cognition can be put to work to engineer systems that really can be called “thought partners,” systems built to meet our expectations and complement our limitations. We lay out several modes of collaborative thought in which humans and AI thought partners can engage and propose desiderata for human-compatible thought partnerships. Drawing on motifs from computational cognitive science, we motivate an alternative scaling path for the design of thought partners and ecosystems around their use through a Bayesian lens, whereby the partners we construct actively build and reason over models of the human and world.</p>
+</div>
+</details>
+
+![Figure from @collinsBuildingMachinesThat2024](images/Collins_24_img.png)
+
+
+\
+
+
 
 ## Large Language Models for Collective Problem-Solving: Insights into Group Consensus Decision-Making
 

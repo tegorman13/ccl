@@ -2,6 +2,7 @@
 title: "Transactive Memory Systems"
 author:
 - name: Thomas E. Gorman
+  url: https://tegorman13.github.io/
   affiliations: 
   - name:  Communication and Cognition Lab, Purdue University, USA
     affiliation-url: https://web.ics.purdue.edu/~treimer/
@@ -26,13 +27,46 @@ In this prospective observational study, we investigate the role of transactive 
 
 
 
+## Communication in Transactive Memory Systems: A Review and Multidimensional Network Perspective
+
+Yan, B., Hollingshead, A. B., Alexander, K. S., Cruz, I., & Shaikh, S. J. (2021). **Communication in Transactive Memory Systems: A Review and Multidimensional Network Perspective.** Small Group Research, 52(1), 3–32. https://doi.org/10.1177/1046496420967764
+
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+The comprehensive review synthesizes 64 empirical studies on communication and transactive memory systems (TMS). The results reveal that (a) a TMS forms through communication about expertise; (b) as a TMS develops, communication to allocate information and coordinate retrieval increases, promoting information exchange; and (c) groups update their TMS through communicative learning. However, direct interpersonal communication is not necessary for TMS development or utilization. Nor do high-quality information-sharing processes always occur within developed TMS structures. For future research, we propose a multidimensional network approach to TMS that incorporates technologies, addresses member characteristics, considers multiple communication types, and situates groups in context.</p>
+</div>
+</details>
 
 
 
 
+## Alignment, Transactive Memory, and Collective Cognitive Systems
+
+Tollefsen, D. P., Dale, R., & Paxton, A. (2013). **Alignment, Transactive Memory, and Collective Cognitive Systems.** Review of Philosophy and Psychology, 4(1), 49–64. https://doi.org/10.1007/s13164-012-0126-z
 
 
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Research on linguistic interaction suggests that two or more individuals can sometimes form adaptive and cohesive systems. We describe an “alignment system” as a loosely interconnected set of cognitive processes that facilitate social interactions. As a dynamic, multi-component system, it is responsive to higher-level cognitive states such as shared beliefs and intentions (those involving collective intentionality) but can also give rise to such shared cognitive states via bottom-up processes. As an example of putative group cognition we turn to transactive memory and suggest how further research on alignment in these cases might reveal how such systems can be genuinely described as cognitive. Finally, we address a prominent critique of collective cognitive systems, arguing that there is much empirical and explanatory benefit to be gained from considering the possibility of group cognitive systems, especially in the context of small-group human interaction.</p>
+</div>
+</details>
 
+
+## Building Machines that Learn and Think with People
+
+Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee, M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A., Tenenbaum, J. B., & Griffiths, T. L. (2024). **Building Machines that Learn and Think with People** (arXiv:2408.03943). arXiv. http://arxiv.org/abs/2408.03943
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+What do we want from machine intelligence? We envision machines that are not just tools for thought, but partners in thought: reasonable, insightful, knowledgeable, reliable, and trustworthy systems that think with us. Current artificial intelligence (AI) systems satisfy some of these criteria, some of the time. In this Perspective, we show how the science of collaborative cognition can be put to work to engineer systems that really can be called “thought partners,” systems built to meet our expectations and complement our limitations. We lay out several modes of collaborative thought in which humans and AI thought partners can engage and propose desiderata for human-compatible thought partnerships. Drawing on motifs from computational cognitive science, we motivate an alternative scaling path for the design of thought partners and ecosystems around their use through a Bayesian lens, whereby the partners we construct actively build and reason over models of the human and world.</p>
+</div>
+</details>
+
+![Figure from @collinsBuildingMachinesThat2024](images/Collins_24_img.png)
 
 
 
