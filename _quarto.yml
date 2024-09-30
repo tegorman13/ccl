@@ -34,6 +34,7 @@ website:
         contents:
         - ai_gd.qmd
         - chapter_structure.qmd
+        - ai_decision.qmd
       - text: "---"
       - section: "Misc"
         contents:
