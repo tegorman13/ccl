@@ -9,6 +9,13 @@ author:
 date: today
 toc: true
 lightbox: true
+format:
+  html: default
+  gfm: default
+  docx:
+    prefer-html: true
+    output-file: "gd_ai_lit_notes.docx"
+    toc: false
 ---
 
 
