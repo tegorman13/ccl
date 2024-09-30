@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tegorman13.github.io/ccl/index.html</loc>
-    <lastmod>2024-09-30T01:04:14.456Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tegorman13.github.io/ccl/ai_gd.html</loc>
-    <lastmod>2024-09-30T20:43:25.434Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tegorman13.github.io/ccl/Samuel_Project.html</loc>
-    <lastmod>2024-09-30T15:08:18.785Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tegorman13.github.io/ccl/Driving.html</loc>
-    <lastmod>2024-09-30T03:03:22.306Z</lastmod>
-  </url>
-  <url>
     <loc>https://tegorman13.github.io/ccl/tms.html</loc>
     <lastmod>2024-09-30T15:46:18.283Z</lastmod>
   </url>
@@ -27,5 +11,21 @@
   <url>
     <loc>https://tegorman13.github.io/ccl/ai_decision.html</loc>
     <lastmod>2024-09-30T20:12:41.303Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/ccl/Driving.html</loc>
+    <lastmod>2024-09-30T03:03:22.306Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/ccl/Samuel_Project.html</loc>
+    <lastmod>2024-09-30T15:08:18.785Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/ccl/ai_gd.html</loc>
+    <lastmod>2024-09-30T20:43:25.434Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/ccl/index.html</loc>
+    <lastmod>2024-09-30T01:04:14.456Z</lastmod>
   </url>
 </urlset>

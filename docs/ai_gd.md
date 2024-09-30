@@ -300,7 +300,7 @@ inclusiveness.
 
 </details>
 
-![](images/Hao_24_img.png)
+![Figure from Hao et al. (2024)](images/Hao_24_img.png)
 
   
   
@@ -835,6 +835,16 @@ Guo, X., Huang, K., Liu, J., Fan, W., Vélez, N., Wu, Q., Wang, H.,
 Griffiths, T. L., & Wang, M. (2024). *Embodied LLM Agents Learn to
 Cooperate in Organized Teams* (arXiv:2403.12482). arXiv.
 <https://arxiv.org/abs/2403.12482>
+
+</div>
+
+<div id="ref-haoExploringCollaborativeDecisionmaking2024"
+class="csl-entry">
+
+Hao, X., Demir, E., & Eyers, D. (2024). Exploring collaborative
+decision-making: A quasi-experimental study of human and Generative AI
+interaction. *Technology in Society*, *78*, 102662.
+<https://doi.org/10.1016/j.techsoc.2024.102662>
 
 </div>
 
