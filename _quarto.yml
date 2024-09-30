@@ -33,6 +33,7 @@ website:
       - section: "AI Group Decision Making"
         contents:
         - ai_gd.qmd
+        - chapter_structure.qmd
       - text: "---"
       - section: "Misc"
         contents:

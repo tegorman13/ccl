@@ -240,5 +240,49 @@
       "AI Group Decision Making",
       "Literature Notes"
     ]
+  },
+  {
+    "objectID": "chapter_structure.html",
+    "href": "chapter_structure.html",
+    "title": "Possible Chapter Structures",
+    "section": "",
+    "text": "Brainstorming chapter structures with the help of various AI assistants:",
+    "crumbs": [
+      "AI Group Decision Making",
+      "Possible Chapter Structures"
+    ]
+  },
+  {
+    "objectID": "chapter_structure.html#alternative-1",
+    "href": "chapter_structure.html#alternative-1",
+    "title": "Possible Chapter Structures",
+    "section": "Alternative 1",
+    "text": "Alternative 1\n\nHuman-AI Teaming and Collaboration:\n\nPapers that explore how LLMs collaborate with humans in decision-making, problem-solving, and teamwork contexts.\nExample: “Human-AI teaming: Leveraging transactive memory and speaking up for enhanced team effectiveness” .\n\nLLMs as Models for Social and Group Dynamics:\n\nPapers that investigate how LLMs simulate or replicate human group behavior, including group decision-making, social interactions, and collective intelligence.\nExample: “The Wisdom of Partisan Crowds: Comparing Collective Intelligence in Humans and LLM-based Agents” .\n\nLLMs in Decision-Making and Game Theory:\n\nPapers that focus on the decision-making abilities of LLMs, including their performance in structured games and strategic contexts.\nExample: “Can Large Language Models Serve as Rational Players in Game Theory?” .\n\nEvaluation of LLM Capabilities and Limitations:\n\nPapers that assess the reasoning, problem-solving, and decision-making capabilities of LLMs, often by comparing them to human performance.\nExample: “LLM-Deliberation: Evaluating LLMs with Interactive Multi-Agent Negotiation Games” .\n\nEthical and Societal Implications of LLM Use:\n\nPapers that address the ethical, societal, and policy-related considerations associated with the use of LLMs in human-centered contexts.\nExample: “Large language models cannot replace human participants because they cannot portray identity groups”.",
+    "crumbs": [
+      "AI Group Decision Making",
+      "Possible Chapter Structures"
+    ]
+  },
+  {
+    "objectID": "chapter_structure.html#alternative-2",
+    "href": "chapter_structure.html#alternative-2",
+    "title": "Possible Chapter Structures",
+    "section": "Alternative 2",
+    "text": "Alternative 2\n\nCollective Intelligence and Decision Making This category focuses on how LLMs can be used to simulate or enhance collective intelligence, group decision-making processes, and wisdom of crowds phenomena.\nMulti-Agent Systems and Collaboration This category includes papers that explore interactions between multiple LLM agents, their collaborative behaviors, and emergent properties in multi-agent systems.\nHuman-AI Teaming and Interaction This category covers research on the integration of LLMs with human teams, human-AI collaboration, and the use of LLMs to augment human capabilities in various domains.\nSocial Behavior and Network Dynamics This category encompasses studies that investigate whether LLMs exhibit human-like social behaviors, network formation tendencies, and how they might influence or simulate social dynamics.",
+    "crumbs": [
+      "AI Group Decision Making",
+      "Possible Chapter Structures"
+    ]
+  },
+  {
+    "objectID": "chapter_structure.html#alternative-3",
+    "href": "chapter_structure.html#alternative-3",
+    "title": "Possible Chapter Structures",
+    "section": "Alternative 3",
+    "text": "Alternative 3\n1. LLM Agents as Simulators of Human Behavior:\n\nDescription: This category encompasses papers that explore the use of LLMs to simulate individual and group human behavior in various contexts, including social dilemmas, games, and collective decision-making.\nPapers:\n\nAher et al. (2022) - Using Large Language Models to Simulate Multiple Humans\nChuang et al. (2023) - Evaluating LLM Agent Group Dynamics against Human Group Dynamics\nChuang et al. (2024) - The Wisdom of Partisan Crowds\nFan et al. (2024) - Can Large Language Models Serve as Rational Players in Game Theory?\nJin et al. (2024) - What if LLMs Have Different World Views\nLeng & Yuan (2024) - Do LLM Agents Exhibit Social Behavior?\nSun et al. - Random Silicon Sampling\nWang et al. (2024) - Large language models cannot replace human participants because they cannot portray identity groups\n\n\n2. LLM-Enhanced Collective Intelligence:\n\nDescription: This category includes papers that investigate how LLMs can be integrated into human groups or systems to augment collective intelligence, improve decision-making, and facilitate problem-solving.\nPapers:\n\nBurton et al. (2024) - How large language models can reshape collective intelligence\nChiang et al. (2024) - Enhancing AI-Assisted Group Decision Making through LLM-Powered Devil’s Advocate\nCui & Yasseri (2024) - AI-enhanced Collective Intelligence\nDu et al. (2024) - Large Language Models for Collective Problem-Solving\nGruen et al. (2023) - Machine learning augmentation reduces prediction error in collective forecasting\nNisioti et al. (2024) - Collective Innovation in Groups of Large Language Models\n\n\n3. LLM Agent Interaction and Network Dynamics:\n\nDescription: This category focuses on papers that examine the interactions and emergent behaviors of multiple LLM agents, including network formation, communication patterns, and the dynamics of cooperation and competition.\nPapers:\n\nCisneros-Velarde (2024) - On the Principles behind Opinion Dynamics in Multi-Agent Systems of Large Language Models\nHuang et al. (2024) - How Far Are We on the Decision-Making of LLMs?\nKim et al. (2024) - Adaptive Collaboration Strategy for LLMs in Medical Decision Making\nMarjieh et al. (2024) - Task Allocation in Teams as a Multi-Armed Bandit\nPapachristou & Yuan (2024) - Network Formation and Dynamics Among Multi-LLMs\nPiatti et al. (2024) - Cooperate or Collapse: Emergence of Sustainable Cooperation in a Society of LLM Agents\nZhang et al. (2024) - Simulating Classroom Education with LLM-Empowered Agents\n\n\n4. LLMs in Collaborative Tasks:\n\nDescription: If you want to further emphasize the practical applications of LLMs in collaborative settings, you could create a separate category for papers specifically addressing human-LLM collaboration in tasks like annotation or knowledge creation.\nPapers:\n\nWang et al. (2024) - Human-LLM Collaborative Annotation Through Effective Verification of LLM Labels",
+    "crumbs": [
+      "AI Group Decision Making",
+      "Possible Chapter Structures"
+    ]
   }
 ]
