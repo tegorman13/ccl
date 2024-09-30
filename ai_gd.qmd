@@ -7,8 +7,8 @@ author:
     affiliation-url: https://web.ics.purdue.edu/~treimer/
 date: today
 toc: true
+lightbox: true
 ---
-
 
 
 # Relevant Papers
@@ -32,7 +32,8 @@ Humans rely on efficient distribution of resources to transcend the abilities of
 
 
 
-
+\
+\
 
 ## Large Language Models for Collective Problem-Solving: Insights into Group Consensus Decision-Making
 
@@ -54,3 +55,94 @@ Large Language models (LLM) exhibit human-like proficiency in various tasks such
 
 @duLargeLanguageModels2024
 :::
+
+
+## How large language models can reshape collective intelligence
+
+
+
+
+
+
+Burton, J. W., Lopez-Lopez, E., Hechtlinger, S., Rahwan, Z., Aeschbach, S., Bakker, M. A., Becker, J. A., Berditchevskaia, A., Berger, J., Brinkmann, L., Flek, L., Herzog, S. M., Huang, S., Kapoor, S., Narayanan, A., Nussberger, A.-M., Yasseri, T., Nickl, P., Almaatouq, A., … Hertwig, R. (2024). **How large language models can reshape collective intelligence.** Nature Human Behaviour, 1–13. https://doi.org/10.1038/s41562-024-01959-9
+
+
+<details class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Collective intelligence underpins the success of groups, organizations, markets and societies. Through distributed cognition and coordination, collectives can achieve outcomes that exceed the capabilities of individuals—even experts—resulting in improved accuracy and novel capabilities. Often, collective intelligence is supported by information technology, such as online prediction markets that elicit the ‘wisdom of crowds’, online forums that structure collective deliberation or digital platforms that crowdsource knowledge from the public. Large language models, however, are transforming how information is aggregated, accessed and transmitted online. Here we focus on the unique opportunities and challenges this transformation poses for collective intelligence. We bring together interdisciplinary perspectives from industry and academia to identify potential benefits, risks, policy-relevant considerations and open research questions, culminating in a call for a closer examination of how large language models affect humans’ ability to collectively tackle complex problems.
+</div>
+</details>
+
+
+![@burtonHowLargeLanguage2024](images/Burton_24_img.png)
+
+
+
+## Enhancing AI-Assisted Group Decision Making through LLM-Powered Devil’s Advocate.
+
+Chiang, C.-W., Lu, Z., Li, Z., & Yin, M. (2024). **Enhancing AI-Assisted Group Decision Making through LLM-Powered Devil’s Advocate.** Proceedings of the 29th International Conference on Intelligent User Interfaces, 103–119. https://doi.org/10.1145/3640543.3645199
+
+
+<details class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Group decision making plays a crucial role in our complex and
+interconnected world. The rise of AI technologies has the potential
+to provide data-driven insights to facilitate group decision making,
+although it is found that groups do not always utilize AI assistance
+appropriately. In this paper, we aim to examine whether and how
+the introduction of a devil’s advocate in the AI-assisted group deci-
+sion making processes could help groups better utilize AI assistance
+and change the perceptions of group processes during decision
+making. Inspired by the exceptional conversational capabilities ex-
+hibited by modern large language models (LLMs), we design four
+different styles of devil’s advocate powered by LLMs, varying their
+interactivity (i.e., interactive vs. non-interactive) and their target of
+objection (i.e., challenge the AI recommendation or the majority
+opinion within the group). Through a randomized human-subject
+experiment, we find evidence suggesting that LLM-powered devil’s
+advocates that argue against the AI model’s decision recommenda-
+tion have the potential to promote groups’ appropriate reliance on
+AI. Meanwhile, the introduction of LLM-powered devil’s advocate
+usually does not lead to substantial increases in people’s perceived
+workload for completing the group decision making tasks, while
+interactive LLM-powered devil’s advocates are perceived as more
+collaborating and of higher quality. We conclude by discussing the
+practical implications of our findings.
+</div>
+</details>
+
+
+![@chiangEnhancingAIAssistedGroup2024](images/chiang_24_img.png)
+
+
+
+
+# The Wisdom of Partisan Crowds: Comparing Collective Intelligence in Humans and LLM-based Agents
+
+Chuang, Y.-S., Harlalka, N., Suresh, S., Goyal, A., Hawkins, R., Yang, S., Shah, D., Hu, J., & Rogers, T. T. (2024). **The Wisdom of Partisan Crowds: Comparing Collective Intelligence in Humans and LLM-based Agents.** https://escholarship.org/uc/item/3k67x8s5
+
+
+<details class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Human groups are able to converge to more accurate beliefs
+through deliberation, even in the presence of polarization and
+partisan bias — a phenomenon known as the “wisdom of partisan crowds.” Large Language Models (LLMs) are increasingly being used to simulate human collective behavior, yet
+few benchmarks exist for evaluating their dynamics against the
+behavior of human groups. In this paper, we examine the extent to which the wisdom of partisan crowds emerges in groups
+of LLM-based agents that are prompted to role-play as partisan
+personas (e.g., Democrat or Republican). We find that they not
+only display human-like partisan biases, but also converge to
+more accurate beliefs through deliberation, as humans do. We
+then identify several factors that interfere with convergence,
+including the use of chain-of-thought prompting and lack of
+details in personas. Conversely, fine-tuning on human data appears to enhance convergence. These findings show the potential and limitations of LLM-based agents as a model of human
+collective intelligence.
+</div>
+</details>
+
+
+[@chuangWisdomPartisanCrowds2024](images/Chuang_24_img.png)
+
