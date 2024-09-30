@@ -537,5 +537,27 @@
       "AI Group Decision Making",
       "Literature Notes"
     ]
+  },
+  {
+    "objectID": "ai_decision.html#cognitive-llms-towards-integrating-cognitive-architectures-and-large-language-models-for-manufacturing-decision-making",
+    "href": "ai_decision.html#cognitive-llms-towards-integrating-cognitive-architectures-and-large-language-models-for-manufacturing-decision-making",
+    "title": "Individual decision lit",
+    "section": "Cognitive LLMs: Towards Integrating Cognitive Architectures and Large Language Models for Manufacturing Decision-making",
+    "text": "Cognitive LLMs: Towards Integrating Cognitive Architectures and Large Language Models for Manufacturing Decision-making\nWu, S., Oltramari, A., Francis, J., Giles, C. L., & Ritter, F. E. (2024). Cognitive LLMs: Towards Integrating Cognitive Architectures and Large Language Models for Manufacturing Decision-making (arXiv:2408.09176). arXiv. http://arxiv.org/abs/2408.09176\n\n\nAbstract\n\n\nResolving the dichotomy between the human-like yet constrained reasoning processes of Cognitive Architectures and the broad but often noisy inference behavior of Large Language Models (LLMs) remains a challenging but exciting pursuit, for enabling reliable machine reasoning capabilities in production systems. Because Cognitive Architectures are famously developed for the purpose of modeling the internal mechanisms of human cognitive decision-making at a computational level, new investigations consider the goal of informing LLMs with the knowledge necessary for replicating such processes, e.g., guided perception, memory, goal-setting, and action. Previous approaches that use LLMs for grounded decision-making struggle with complex reasoning tasks that require slower, deliberate cognition over fast and intuitive inference—reporting issues related to the lack of sufficient grounding, as in hallucination. To resolve these challenges, we introduce LLM-ACTR, a novel neurosymbolic architecture that provides human-aligned and versatile decision-making by integrating the ACT-R Cognitive Architecture with LLMs. Our framework extracts and embeds knowledge of ACT-R’s internal decision-making process as latent neural representations, injects this information into trainable LLM adapter layers, and fine-tunes the LLMs for downstream prediction. Our experiments on novel Design for Manufacturing tasks show both improved task performance as well as improved grounded decision-making capability of our approach, compared to LLM-only baselines that leverage chain-of-thought reasoning strategies.",
+    "crumbs": [
+      "AI Group Decision Making",
+      "Individual decision lit"
+    ]
+  },
+  {
+    "objectID": "ai_decision.html#large-language-models-amplify-human-biases-in-moral-decision-making",
+    "href": "ai_decision.html#large-language-models-amplify-human-biases-in-moral-decision-making",
+    "title": "Individual decision lit",
+    "section": "Large Language Models Amplify Human Biases in Moral Decision-Making",
+    "text": "Large Language Models Amplify Human Biases in Moral Decision-Making\nCheung, V., Maier, M., & Lieder, F. (2024). Large Language Models Amplify Human Biases in Moral Decision-Making (https://osf.io/3kvjd/). https://doi.org/10.31234/osf.io/aj46b\n\n\nAbstract\n\n\nAs large language models (LLMs) become more widely used, people increasingly rely on them to make or advise on moral decisions. Some researchers even propose using LLMs as participants in psychology experiments. It is therefore important to understand how well LLMs make moral decisions and how they compare to humans. We investigated this question in realistic moral dilemmas using prompts where GPT-4, Llama 3, and Claude 3 give advice and where they emulate a research participant. In Study 1, we compared responses from LLMs to a representative US sample (N = 285) for 22 dilemmas: social dilemmas that pitted self-interest against the greater good, and moral dilemmas that pitted utilitarian cost-benefit reasoning against deontological rules. In social dilemmas, LLMs were more altruistic than participants. In moral dilemmas, LLMs exhibited stronger omission bias than participants: they usually endorsed inaction over action. In Study 2 (N = 490, preregistered), we replicated this omission bias and document an additional bias: unlike humans, LLMs (except GPT-4o) tended to answer “no” in moral dilemmas, whereby the phrasing of the question influences the decision even when physical action remains the same. Our findings show that LLM moral decision-making amplifies human biases and introduces potentially problematic biases.Cheung\n\n\n\n\n\nFigure from Cheung et al. (2024)",
+    "crumbs": [
+      "AI Group Decision Making",
+      "Individual decision lit"
+    ]
   }
 ]
