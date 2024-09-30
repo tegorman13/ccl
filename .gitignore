@@ -1,0 +1,46 @@
+.DS_Store
+
+
+/.quarto/
+/.luarc.json
+.Rproj.user
+.cursorignore
+
+
+
+# misc knit files
+*.aux
+*.gz
+*.log
+*.rdx
+*.rdb
+#*.knit.md
+*.results
+*.canvas
+*.vdoc.r
+*.here
+
+
+# r created files
+*.rproj
+*.rproj.user
+*.rhistory
+*.ruserdata
+*.history
+*.rdata
+#*.rds
+
+
+.lintr
+.luarc.json
+license 
+
+
+# folders
+.trash/*
+.obsidian/*
+.quarto/*
+_freeze/*
+.vscode/*
+rsconnect/*
+_extensions/*

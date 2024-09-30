@@ -1,0 +1,42 @@
+project:
+  type: website
+  output-dir: docs
+  preview:
+    port: 4209
+  render:
+    - "*.qmd"
+    - "!_*"
+
+
+exclude: ["*.rds","*.tex"]
+
+
+website:
+  title: "CCL Projects"
+  repo-url: https://github.com/tegorman13/ccl
+  site-url: "https://tegorman13.github.io/ccl"
+  reader-mode: true
+  page-navigation: false
+
+
+format:
+  html:
+    theme:
+      - cosmo
+      - Assets/Style/style.scss
+    css: Assets/Style/calloutTG.css
+    code-link: false
+    code-summary: "Display code"
+    html-math-method: mathjax
+    citations-hover: true
+    link-external-newwindow: true
+
+
+
+execute:
+  freeze: auto
+
+
+
+bibliography: [Assets/ccl_bib.bib]
+csl: Assets/apa.csl

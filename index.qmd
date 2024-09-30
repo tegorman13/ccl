@@ -1,0 +1,19 @@
+---
+title: "CCL Projects"
+author:
+- name: Thomas E. Gorman
+  affiliations: 
+  - name:  Communication and Cognition Lab, Purdue University, USA
+    affiliation-url: https://web.ics.purdue.edu/~treimer/
+comments: false
+date: today
+#date-format: 'MMM YYYY'
+format:
+  html:
+    grid:
+      sidebar-width: 250px
+      body-width: 1400px
+      margin-width: 170px
+      gutter-width: 1.5rem
+    self-contained: false
+---
