@@ -34,6 +34,11 @@ website:
         contents:
         - ai_gd.qmd
       - text: "---"
+      - section: "Misc"
+        contents:
+        - tms.qmd
+        - Samuel_Project.qmd
+        - Driving.qmd
 
 format:
   html:

@@ -1,0 +1,8 @@
+---
+title: "Samuel"
+author:
+- name: Thomas E. Gorman
+  affiliations: 
+  - name:  Communication and Cognition Lab, Purdue University, USA
+    affiliation-url: https://web.ics.purdue.edu/~treimer/
+---

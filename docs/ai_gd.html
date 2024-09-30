@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Thomas E. Gorman">
-<meta name="dcterms.date" content="2024-09-29">
+<meta name="dcterms.date" content="2024-09-30">
 
 <title>Literature Notes – CCL Projects</title>
 <style>
@@ -157,6 +157,35 @@ div.csl-indent {
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Misc</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transactive Memory Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Samuel_Project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Samuel</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Driving.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Driving Lit</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -170,11 +199,19 @@ div.csl-indent {
   <li><a href="#relevant-papers" id="toc-relevant-papers" class="nav-link active" data-scroll-target="#relevant-papers">Relevant Papers</a>
   <ul class="collapse">
   <li><a href="#task-allocation-in-teams-as-a-multi-armed-bandit." id="toc-task-allocation-in-teams-as-a-multi-armed-bandit." class="nav-link" data-scroll-target="#task-allocation-in-teams-as-a-multi-armed-bandit.">Task Allocation in Teams as a Multi-Armed Bandit.</a></li>
+  <li><a href="#human-ai-teaming-leveraging-transactive-memory-and-speaking-up-for-enhanced-team-effectiveness." id="toc-human-ai-teaming-leveraging-transactive-memory-and-speaking-up-for-enhanced-team-effectiveness." class="nav-link" data-scroll-target="#human-ai-teaming-leveraging-transactive-memory-and-speaking-up-for-enhanced-team-effectiveness.">Human-AI teaming: Leveraging transactive memory and speaking up for enhanced team effectiveness.</a></li>
   <li><a href="#large-language-models-for-collective-problem-solving-insights-into-group-consensus-decision-making" id="toc-large-language-models-for-collective-problem-solving-insights-into-group-consensus-decision-making" class="nav-link" data-scroll-target="#large-language-models-for-collective-problem-solving-insights-into-group-consensus-decision-making">Large Language Models for Collective Problem-Solving: Insights into Group Consensus Decision-Making</a></li>
   <li><a href="#how-large-language-models-can-reshape-collective-intelligence" id="toc-how-large-language-models-can-reshape-collective-intelligence" class="nav-link" data-scroll-target="#how-large-language-models-can-reshape-collective-intelligence">How large language models can reshape collective intelligence</a></li>
   <li><a href="#enhancing-ai-assisted-group-decision-making-through-llm-powered-devils-advocate." id="toc-enhancing-ai-assisted-group-decision-making-through-llm-powered-devils-advocate." class="nav-link" data-scroll-target="#enhancing-ai-assisted-group-decision-making-through-llm-powered-devils-advocate.">Enhancing AI-Assisted Group Decision Making through LLM-Powered Devil’s Advocate.</a></li>
   <li><a href="#the-wisdom-of-partisan-crowds-comparing-collective-intelligence-in-humans-and-llm-based-agents" id="toc-the-wisdom-of-partisan-crowds-comparing-collective-intelligence-in-humans-and-llm-based-agents" class="nav-link" data-scroll-target="#the-wisdom-of-partisan-crowds-comparing-collective-intelligence-in-humans-and-llm-based-agents">The Wisdom of Partisan Crowds: Comparing Collective Intelligence in Humans and LLM-based Agents</a></li>
   <li><a href="#collective-innovation-in-groups-of-large-language-models." id="toc-collective-innovation-in-groups-of-large-language-models." class="nav-link" data-scroll-target="#collective-innovation-in-groups-of-large-language-models.">Collective Innovation in Groups of Large Language Models.</a></li>
+  <li><a href="#evaluating-llm-agent-group-dynamics-against-human-group-dynamics-a-case-study-on-wisdom-of-partisan-crowds" id="toc-evaluating-llm-agent-group-dynamics-against-human-group-dynamics-a-case-study-on-wisdom-of-partisan-crowds" class="nav-link" data-scroll-target="#evaluating-llm-agent-group-dynamics-against-human-group-dynamics-a-case-study-on-wisdom-of-partisan-crowds">Evaluating LLM Agent Group Dynamics against Human Group Dynamics: A Case Study on Wisdom of Partisan Crowds</a></li>
+  <li><a href="#exploring-collaboration-mechanisms-for-llm-agents-a-social-psychology-view" id="toc-exploring-collaboration-mechanisms-for-llm-agents-a-social-psychology-view" class="nav-link" data-scroll-target="#exploring-collaboration-mechanisms-for-llm-agents-a-social-psychology-view">Exploring Collaboration Mechanisms for LLM Agents: A Social Psychology View</a></li>
+  <li><a href="#llm-deliberation-evaluating-llms-with-interactive-multi-agent-negotiation-games." id="toc-llm-deliberation-evaluating-llms-with-interactive-multi-agent-negotiation-games." class="nav-link" data-scroll-target="#llm-deliberation-evaluating-llms-with-interactive-multi-agent-negotiation-games.">LLM-Deliberation: Evaluating LLMs with Interactive Multi-Agent Negotiation Games.</a></li>
+  <li><a href="#llm-voting-human-choices-and-ai-collective-decision-making" id="toc-llm-voting-human-choices-and-ai-collective-decision-making" class="nav-link" data-scroll-target="#llm-voting-human-choices-and-ai-collective-decision-making">LLM Voting: Human Choices and AI Collective Decision Making</a></li>
+  <li><a href="#embodied-llm-agents-learn-to-cooperate-in-organized-teams" id="toc-embodied-llm-agents-learn-to-cooperate-in-organized-teams" class="nav-link" data-scroll-target="#embodied-llm-agents-learn-to-cooperate-in-organized-teams">Embodied LLM Agents Learn to Cooperate in Organized Teams</a></li>
+  <li><a href="#measuring-latent-trust-patterns-in-large-language-models-in-the-context-of-human-ai-teaming" id="toc-measuring-latent-trust-patterns-in-large-language-models-in-the-context-of-human-ai-teaming" class="nav-link" data-scroll-target="#measuring-latent-trust-patterns-in-large-language-models-in-the-context-of-human-ai-teaming">Measuring Latent Trust Patterns in Large Language Models in the Context of Human-AI Teaming</a></li>
+  <li><a href="#a-survey-on-human-ai-teaming-with-large-pre-trained-models" id="toc-a-survey-on-human-ai-teaming-with-large-pre-trained-models" class="nav-link" data-scroll-target="#a-survey-on-human-ai-teaming-with-large-pre-trained-models">A Survey on Human-AI Teaming with Large Pre-Trained Models</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -210,7 +247,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 29, 2024</p>
+      <p class="date">September 30, 2024</p>
     </div>
   </div>
   
@@ -227,7 +264,7 @@ div.csl-indent {
 <section id="task-allocation-in-teams-as-a-multi-armed-bandit." class="level2">
 <h2 class="anchored" data-anchor-id="task-allocation-in-teams-as-a-multi-armed-bandit.">Task Allocation in Teams as a Multi-Armed Bandit.</h2>
 <p>Marjieh, R., Gokhale, A., Bullo, F., &amp; Griffiths, T. L. (2024). <strong>Task Allocation in Teams as a Multi-Armed Bandit.</strong> https://cocosci.princeton.edu/papers/marjieh2024task.pdf</p>
-<details class="relevant-callout">
+<details open="" class="relevant-callout">
 <summary>
 Abstract
 </summary>
@@ -237,8 +274,27 @@ Abstract
 </details>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/marjieh_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="@marjiehTaskAllocationTeams2024"><img src="images/marjieh_24_img.png" class="img-fluid figure-img" alt="Marjieh et al. (2024)"></a></p>
-<figcaption><span class="citation" data-cites="marjiehTaskAllocationTeams2024">Marjieh et al. (<a href="#ref-marjiehTaskAllocationTeams2024" role="doc-biblioref">2024</a>)</span></figcaption>
+<p><a href="images/marjieh_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure from @marjiehTaskAllocationTeams2024"><img src="images/marjieh_24_img.png" class="img-fluid figure-img" alt="Figure from Marjieh et al. (2024)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="marjiehTaskAllocationTeams2024">Marjieh et al. (<a href="#ref-marjiehTaskAllocationTeams2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="human-ai-teaming-leveraging-transactive-memory-and-speaking-up-for-enhanced-team-effectiveness." class="level2">
+<h2 class="anchored" data-anchor-id="human-ai-teaming-leveraging-transactive-memory-and-speaking-up-for-enhanced-team-effectiveness.">Human-AI teaming: Leveraging transactive memory and speaking up for enhanced team effectiveness.</h2>
+<p>Bienefeld, N., Kolbe, M., Camen, G., Huser, D., &amp; Buehler, P. K. (2023). <strong>Human-AI teaming: Leveraging transactive memory and speaking up for enhanced team effectiveness.</strong> Frontiers in Psychology, 14. https://doi.org/10.3389/fpsyg.2023.1208019</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+In this prospective observational study, we investigate the role of transactive memory and speaking up in human-AI teams comprising 180 intensive care (ICU) physicians and nurses working with AI in a simulated clinical environment. Our findings indicate that interactions with AI agents differ significantly from human interactions, as accessing information from AI agents is positively linked to a team’s ability to generate novel hypotheses and demonstrate speaking-up behavior, but only in higher-performing teams. Conversely, accessing information from human team members is negatively associated with these aspects, regardless of team performance. This study is a valuable contribution to the expanding field of research on human-AI teams and team science in general, as it emphasizes the necessity of incorporating AI agents as knowledge sources in a team’s transactive memory system, as well as highlighting their role as catalysts for speaking up. Practical implications include suggestions for the design of future AI systems and human-AI team training in healthcare and beyond.
+<p></p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Bienefeld_23_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure from @bienefeldHumanAITeamingLeveraging2023"><img src="images/Bienefeld_23_img.png" class="img-fluid figure-img" alt="Figure from Bienefeld et al. (2023)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="bienefeldHumanAITeamingLeveraging2023">Bienefeld et al. (<a href="#ref-bienefeldHumanAITeamingLeveraging2023" role="doc-biblioref">2023</a>)</span></figcaption>
 </figure>
 </div>
 <p><br>
@@ -261,18 +317,21 @@ Abstract
 <div aria-describedby="fig-du-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="images/du_24_img1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;1: @duLargeLanguageModels2024"><img src="images/du_24_img1.png" class="img-fluid figure-img"></a></p>
+<p><a href="images/du_24_img1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;1: Figure from @duLargeLanguageModels2024"><img src="images/du_24_img1.png" class="img-fluid figure-img"></a></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="images/du_24_img2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;1: @duLargeLanguageModels2024"><img src="images/du_24_img2.png" class="img-fluid figure-img"></a></p>
+<p><a href="images/du_24_img2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;1: Figure from @duLargeLanguageModels2024"><img src="images/du_24_img2.png" class="img-fluid figure-img"></a></p>
 </div>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-du-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: <span class="citation" data-cites="duLargeLanguageModels2024">Du et al. (<a href="#ref-duLargeLanguageModels2024" role="doc-biblioref">2024</a>)</span>
+Figure&nbsp;1: Figure from <span class="citation" data-cites="duLargeLanguageModels2024">Du et al. (<a href="#ref-duLargeLanguageModels2024" role="doc-biblioref">2024</a>)</span>
 </figcaption>
 </figure>
 </div>
+<p><br>
+<br>
+</p>
 </section>
 <section id="how-large-language-models-can-reshape-collective-intelligence" class="level2">
 <h2 class="anchored" data-anchor-id="how-large-language-models-can-reshape-collective-intelligence">How large language models can reshape collective intelligence</h2>
@@ -287,10 +346,12 @@ Abstract
 </details>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Burton_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="@burtonHowLargeLanguage2024"><img src="images/Burton_24_img.png" class="img-fluid figure-img" alt="Burton et al. (2024)"></a></p>
+<p><a href="images/Burton_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="@burtonHowLargeLanguage2024"><img src="images/Burton_24_img.png" class="img-fluid figure-img" alt="Burton et al. (2024)"></a></p>
 <figcaption><span class="citation" data-cites="burtonHowLargeLanguage2024">Burton et al. (<a href="#ref-burtonHowLargeLanguage2024" role="doc-biblioref">2024</a>)</span></figcaption>
 </figure>
 </div>
+<p><br>
+</p>
 </section>
 <section id="enhancing-ai-assisted-group-decision-making-through-llm-powered-devils-advocate." class="level2">
 <h2 class="anchored" data-anchor-id="enhancing-ai-assisted-group-decision-making-through-llm-powered-devils-advocate.">Enhancing AI-Assisted Group Decision Making through LLM-Powered Devil’s Advocate.</h2>
@@ -305,8 +366,8 @@ Abstract
 </details>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/chiang_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="@chiangEnhancingAIAssistedGroup2024"><img src="images/chiang_24_img.png" class="img-fluid figure-img" alt="Chiang et al. (2024)"></a></p>
-<figcaption><span class="citation" data-cites="chiangEnhancingAIAssistedGroup2024">Chiang et al. (<a href="#ref-chiangEnhancingAIAssistedGroup2024" role="doc-biblioref">2024</a>)</span></figcaption>
+<p><a href="images/chiang_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure from @chiangEnhancingAIAssistedGroup2024"><img src="images/chiang_24_img.png" class="img-fluid figure-img" alt="Figure from Chiang et al. (2024)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="chiangEnhancingAIAssistedGroup2024">Chiang et al. (<a href="#ref-chiangEnhancingAIAssistedGroup2024" role="doc-biblioref">2024</a>)</span></figcaption>
 </figure>
 </div>
 </section>
@@ -323,7 +384,7 @@ Abstract
 </details>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Chuang_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="@chuangWisdomPartisanCrowds2024"><img src="images/Chuang_24_img.png" class="img-fluid figure-img" alt="Chuang et al. (2024)"></a></p>
+<p><a href="images/Chuang_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="@chuangWisdomPartisanCrowds2024"><img src="images/Chuang_24_img.png" class="img-fluid figure-img" alt="Chuang et al. (2024)"></a></p>
 <figcaption><span class="citation" data-cites="chuangWisdomPartisanCrowds2024">Chuang et al. (<a href="#ref-chuangWisdomPartisanCrowds2024" role="doc-biblioref">2024</a>)</span></figcaption>
 </figure>
 </div>
@@ -341,8 +402,141 @@ Abstract
 </details>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Nisioti_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="@nisiotiCollectiveInnovationGroups2024"><img src="images/Nisioti_24_img.png" class="img-fluid figure-img" alt="Nisioti et al. (2024)"></a></p>
+<p><a href="images/Nisioti_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="@nisiotiCollectiveInnovationGroups2024"><img src="images/Nisioti_24_img.png" class="img-fluid figure-img" alt="Nisioti et al. (2024)"></a></p>
 <figcaption><span class="citation" data-cites="nisiotiCollectiveInnovationGroups2024">Nisioti et al. (<a href="#ref-nisiotiCollectiveInnovationGroups2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="evaluating-llm-agent-group-dynamics-against-human-group-dynamics-a-case-study-on-wisdom-of-partisan-crowds" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-llm-agent-group-dynamics-against-human-group-dynamics-a-case-study-on-wisdom-of-partisan-crowds">Evaluating LLM Agent Group Dynamics against Human Group Dynamics: A Case Study on Wisdom of Partisan Crowds</h2>
+<p>Chuang, Y.-S., Suresh, S., Harlalka, N., Goyal, A., Hawkins, R., Yang, S., Shah, D., Hu, J., &amp; Rogers, T. T. (2023). <strong>Evaluating LLM Agent Group Dynamics against Human Group Dynamics: A Case Study on Wisdom of Partisan Crowds</strong> http://arxiv.org/abs/2311.09665</p>
+<details class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>This study investigates the potential of Large Language Models (LLMs) to simulate human group dynamics, particularly within politically charged contexts. We replicate the Wisdom of Partisan Crowds phenomenon using LLMs to role-play as Democrat and Republican personas, engaging in a structured interaction akin to human group study. Our approach evaluates how agents’ responses evolve through social influence. Our key findings indicate that LLM agents role-playing detailed personas and without Chain-of-Thought (CoT) reasoning closely align with human behaviors, while having CoT reasoning hurts the alignment. However, incorporating explicit biases into agent prompts does not necessarily enhance the wisdom of partisan crowds. Moreover, fine-tuning LLMs with human data shows promise in achieving human-like behavior but poses a risk of overfitting certain behaviors. These findings show the potential and limitations of using LLM agents in modeling human group phenomena.</p>
+</div>
+</details>
+<p><span class="citation" data-cites="chuangEvaluatingLLMAgent2023">Chuang et al. (<a href="#ref-chuangEvaluatingLLMAgent2023" role="doc-biblioref">2023</a>)</span></p>
+</section>
+<section id="exploring-collaboration-mechanisms-for-llm-agents-a-social-psychology-view" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-collaboration-mechanisms-for-llm-agents-a-social-psychology-view">Exploring Collaboration Mechanisms for LLM Agents: A Social Psychology View</h2>
+<p>Zhang, J., Xu, X., Zhang, N., Liu, R., Hooi, B., &amp; Deng, S. (2024). <strong>Exploring Collaboration Mechanisms for LLM Agents: A Social Psychology View</strong> (arXiv:2310.02124). arXiv. http://arxiv.org/abs/2310.02124</p>
+<p><a href="https://www.zjukg.org/project/MachineSoM/">https://www.zjukg.org/project/MachineSoM/</a></p>
+<details class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>As Natural Language Processing (NLP) systems are increasingly employed in intricate social environments, a pressing query emerges: Can these NLP systems mirror human-esque collaborative intelligence, in a multi-agent society consisting of multiple large language models (LLMs)? This paper probes the collaboration mechanisms among contemporary NLP systems by melding practical experiments with theoretical insights. We fabricate four unique ‘societies’ comprised of LLM agents, where each agent is characterized by a specific ‘trait’ (easy-going or overconfident) and engages in collaboration with a distinct ‘thinking pattern’ (debate or reflection). Through evaluating these multi-agent societies on three benchmark datasets, we discern that certain collaborative strategies not only outshine previous top-tier approaches but also optimize efficiency (using fewer API tokens). Moreover, our results further illustrate that LLM agents manifest humanlike social behaviors, such as conformity and consensus reaching, mirroring foundational social psychology theories. In conclusion, we integrate insights from social psychology to contextualize the collaboration of LLM agents, inspiring further investigations into the collaboration mechanism for LLMs. We have shared our code and datasets1, hoping to catalyze further research in this promising avenue.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Zhang_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="@zhangExploringCollaborationMechanisms2024"><img src="images/Zhang_24_img.png" class="img-fluid figure-img" alt="Zhang et al. (2024)"></a></p>
+<figcaption><span class="citation" data-cites="zhangExploringCollaborationMechanisms2024">Zhang et al. (<a href="#ref-zhangExploringCollaborationMechanisms2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="llm-deliberation-evaluating-llms-with-interactive-multi-agent-negotiation-games." class="level2">
+<h2 class="anchored" data-anchor-id="llm-deliberation-evaluating-llms-with-interactive-multi-agent-negotiation-games.">LLM-Deliberation: Evaluating LLMs with Interactive Multi-Agent Negotiation Games.</h2>
+<p>Abdelnabi, S., Gomaa, A., Sivaprasad, S., Schönherr, L., &amp; Fritz, M. (2023). <strong>LLM-Deliberation: Evaluating LLMs with Interactive Multi-Agent Negotiation Games.</strong> https://doi.org/10.60882/cispa.25233028.v1</p>
+<details class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>There is a growing interest in using Large Language Models (LLMs) as agents to tackle real-world tasks that may require assessing complex situations. Yet, we have a limited understanding of LLMs’ reasoning and decision-making capabilities, partly stemming from a lack of dedicated evaluation benchmarks. As negotiating and compromising are key aspects of our everyday communication and collaboration, we propose using scorable negotiation games as a new evaluation framework for LLMs. We create a testbed of diverse text-based, multi-agent, multi-issue, semantically rich negotiation games, with easily tunable difficulty. To solve the challenge, agents need to have strong arithmetic, inference, exploration, and planning capabilities, while seamlessly integrating them. Via a systematic zero-shot Chain-of-Thought prompting (CoT), we show that agents can negotiate and consistently reach successful deals. We quantify the performance with multiple metrics and observe a large gap between GPT-4 and earlier models. Importantly, we test the generalization to new games and setups. Finally, we show that these games can help evaluate other critical aspects, such as the interaction dynamics between agents in the presence of greedy and adversarial players.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Abdelnabi_23_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="@abdelnabiLLMDeliberationEvaluatingLLMs2023"><img src="images/Abdelnabi_23_img.png" class="img-fluid figure-img" alt="Abdelnabi et al. (2023)"></a></p>
+<figcaption><span class="citation" data-cites="abdelnabiLLMDeliberationEvaluatingLLMs2023">Abdelnabi et al. (<a href="#ref-abdelnabiLLMDeliberationEvaluatingLLMs2023" role="doc-biblioref">2023</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="llm-voting-human-choices-and-ai-collective-decision-making" class="level2">
+<h2 class="anchored" data-anchor-id="llm-voting-human-choices-and-ai-collective-decision-making">LLM Voting: Human Choices and AI Collective Decision Making</h2>
+<p>Yang, J. C., Dailisan, D., Korecki, M., Hausladen, C. I., &amp; Helbing, D. (2024). <strong>LLM Voting: Human Choices and AI Collective Decision Making</strong> (arXiv:2402.01766). arXiv. http://arxiv.org/abs/2402.01766</p>
+<details class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>This paper investigates the voting behaviors of Large Language Models (LLMs), specifically GPT-4 and LLaMA-2, their biases, and how they align with human voting patterns. Our methodology involved using a dataset from a human voting experiment to establish a baseline for human preferences and conducting a corresponding experiment with LLM agents. We observed that the choice of voting methods and the presentation order influenced LLM voting outcomes. We found that varying the persona can reduce some of these biases and enhance alignment with human choices. While the Chain-of-Thought approach did not improve prediction accuracy, it has potential for AI explainability in the voting process. We also identified a trade-off between preference diversity and alignment accuracy in LLMs, influenced by different temperature settings. Our findings indicate that LLMs may lead to less diverse collective outcomes and biased assumptions when used in voting scenarios, emphasizing the need for cautious integration of LLMs into democratic processes.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Yang_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="@yangLLMVotingHuman2024"><img src="images/Yang_24_img.png" class="img-fluid figure-img" alt="Yang et al. (2024)"></a></p>
+<figcaption><span class="citation" data-cites="yangLLMVotingHuman2024">Yang et al. (<a href="#ref-yangLLMVotingHuman2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="embodied-llm-agents-learn-to-cooperate-in-organized-teams" class="level2">
+<h2 class="anchored" data-anchor-id="embodied-llm-agents-learn-to-cooperate-in-organized-teams">Embodied LLM Agents Learn to Cooperate in Organized Teams</h2>
+<p>Guo, X., Huang, K., Liu, J., Fan, W., Vélez, N., Wu, Q., Wang, H., Griffiths, T. L., &amp; Wang, M. (2024). <strong>Embodied LLM Agents Learn to Cooperate in Organized Teams</strong> (arXiv:2403.12482). arXiv. http://arxiv.org/abs/2403.12482</p>
+<details class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Large Language Models (LLMs) have emerged as integral tools for reasoning, planning, and decision-making, drawing upon their extensive world knowledge and proficiency in language-related tasks. LLMs thus hold tremendous potential for natural language interaction within multi-agent systems to foster cooperation. However, LLM agents tend to over-report and comply with any instruction, which may result in information redundancy and confusion in multi-agent cooperation. Inspired by human organizations, this paper introduces a framework that imposes prompt-based organization structures on LLM agents to mitigate these problems. Through a series of experiments with embodied LLM agents and human-agent collaboration, our results highlight the impact of designated leadership on team efficiency, shedding light on the leadership qualities displayed by LLM agents and their spontaneous cooperative behaviors. Further, we harness the potential of LLMs to propose enhanced organizational prompts, via a Criticize-Reflect process, resulting in novel organization structures that reduce communication costs and enhance team efficiency.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Guo_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="@guoEmbodiedLLMAgents2024"><img src="images/Guo_24_img.png" class="img-fluid figure-img" alt="Guo et al. (2024)"></a></p>
+<figcaption><span class="citation" data-cites="guoEmbodiedLLMAgents2024">Guo et al. (<a href="#ref-guoEmbodiedLLMAgents2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="measuring-latent-trust-patterns-in-large-language-models-in-the-context-of-human-ai-teaming" class="level2">
+<h2 class="anchored" data-anchor-id="measuring-latent-trust-patterns-in-large-language-models-in-the-context-of-human-ai-teaming">Measuring Latent Trust Patterns in Large Language Models in the Context of Human-AI Teaming</h2>
+<p>Koehl, D., &amp; Vangsness, L. (2023). <strong>Measuring Latent Trust Patterns in Large Language Models in the Context of Human-AI Teaming.</strong> Proceedings of the Human Factors and Ergonomics Society Annual Meeting, 67. https://doi.org/10.1177/21695067231192869</p>
+<details class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Qualitative self-report methods such as think-aloud procedures and open-ended response questions can provide valuable data to human factors research. These measures come with analytic weaknesses, such as researcher bias, intra- and inter-rater reliability concerns, and time-consuming coding protocols. A possible solution exists in the latent semantic patterns that exist in machine learning large language models. These semantic patterns could be used to analyze qualitative responses. This exploratory research compared the statistical quality of automated sentence coding using large language models to the benchmarks of self-report and behavioral measures within the context of trust in automation research. The results indicated that three large language models show promise as tools for analyzing qualitative responses. The study also provides insight on minimum sample sizes for model creation and offers recommendations for further validating the robustness of large language models as research tools.</p>
+</div>
+</details>
+<div id="fig-koehl" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-koehl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="images/Koehl_23_img1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;2: @koehlMeasuringLatentTrust2023a"><img src="images/Koehl_23_img1.png" class="img-fluid figure-img"></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="images/Koehl_23_img2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;2: @koehlMeasuringLatentTrust2023a"><img src="images/Koehl_23_img2.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-koehl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: <span class="citation" data-cites="koehlMeasuringLatentTrust2023a">Koehl &amp; Vangsness (<a href="#ref-koehlMeasuringLatentTrust2023a" role="doc-biblioref">2023</a>)</span>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="a-survey-on-human-ai-teaming-with-large-pre-trained-models" class="level2">
+<h2 class="anchored" data-anchor-id="a-survey-on-human-ai-teaming-with-large-pre-trained-models">A Survey on Human-AI Teaming with Large Pre-Trained Models</h2>
+<p>Vats, V., Nizam, M. B., Liu, M., Wang, Z., Ho, R., Prasad, M. S., Titterton, V., Malreddy, S. V., Aggarwal, R., Xu, Y., Ding, L., Mehta, J., Grinnell, N., Liu, L., Zhong, S., Gandamani, D. N., Tang, X., Ghosalkar, R., Shen, C., … Davis, J. (2024). <strong>A Survey on Human-AI Teaming with Large Pre-Trained Models</strong> (arXiv:2403.04931). arXiv. http://arxiv.org/abs/2403.04931</p>
+<details class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>In the rapidly evolving landscape of artificial intelligence (AI), the collaboration between human intelligence and AI systems, known as Human-AI (HAI) Teaming, has emerged as a cornerstone for advancing problem-solving and decision-making processes. The advent of Large Pre-trained Models (LPtM) has significantly transformed this landscape, offering unprecedented capabilities by leveraging vast amounts of data to understand and predict complex patterns. This paper surveys the pivotal integration of LPtMs with HAI, emphasizing how these models enhance collaborative intelligence beyond traditional approaches. It examines the potential of LPtMs in augmenting human capabilities, discussing this collaboration for AI model improvements, effective teaming, ethical considerations, and their broad applied implications in various sectors. Through this exploration, the study sheds light on the transformative impact of LPtM-enhanced HAI Teaming, providing insights for future research, policy development, and strategic implementations aimed at harnessing the full potential of this collaboration for research and societal benefit.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Vats_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Table from @vatsSurveyHumanAITeaming2024"><img src="images/Vats_24_img.png" class="img-fluid figure-img" alt="Table from Vats et al. (2024)"></a></p>
+<figcaption>Table from <span class="citation" data-cites="vatsSurveyHumanAITeaming2024">Vats et al. (<a href="#ref-vatsSurveyHumanAITeaming2024" role="doc-biblioref">2024</a>)</span></figcaption>
 </figure>
 </div>
 
@@ -352,6 +546,12 @@ Abstract
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-abdelnabiLLMDeliberationEvaluatingLLMs2023" class="csl-entry" role="listitem">
+Abdelnabi, S., Gomaa, A., Sivaprasad, S., Schönherr, L., &amp; Fritz, M. (2023). <em><span>LLM-Deliberation</span>: <span>Evaluating LLMs</span> with <span>Interactive Multi-Agent Negotiation Games</span>.</em> <a href="https://doi.org/10.60882/cispa.25233028.v1">https://doi.org/10.60882/cispa.25233028.v1</a>
+</div>
+<div id="ref-bienefeldHumanAITeamingLeveraging2023" class="csl-entry" role="listitem">
+Bienefeld, N., Kolbe, M., Camen, G., Huser, D., &amp; Buehler, P. K. (2023). Human-<span>AI</span> teaming: Leveraging transactive memory and speaking up for enhanced team effectiveness. <em>Frontiers in Psychology</em>, <em>14</em>. <a href="https://doi.org/10.3389/fpsyg.2023.1208019">https://doi.org/10.3389/fpsyg.2023.1208019</a>
+</div>
 <div id="ref-burtonHowLargeLanguage2024" class="csl-entry" role="listitem">
 Burton, J. W., Lopez-Lopez, E., Hechtlinger, S., Rahwan, Z., Aeschbach, S., Bakker, M. A., Becker, J. A., Berditchevskaia, A., Berger, J., Brinkmann, L., Flek, L., Herzog, S. M., Huang, S., Kapoor, S., Narayanan, A., Nussberger, A.-M., Yasseri, T., Nickl, P., Almaatouq, A., … Hertwig, R. (2024). How large language models can reshape collective intelligence. <em>Nature Human Behaviour</em>, 1–13. <a href="https://doi.org/10.1038/s41562-024-01959-9">https://doi.org/10.1038/s41562-024-01959-9</a>
 </div>
@@ -361,14 +561,32 @@ Chiang, C.-W., Lu, Z., Li, Z., &amp; Yin, M. (2024). Enhancing <span>AI-Assisted
 <div id="ref-chuangWisdomPartisanCrowds2024" class="csl-entry" role="listitem">
 Chuang, Y.-S., Harlalka, N., Suresh, S., Goyal, A., Hawkins, R., Yang, S., Shah, D., Hu, J., &amp; Rogers, T. T. (2024). <em>The <span>Wisdom</span> of <span>Partisan Crowds</span>: <span>Comparing Collective Intelligence</span> in <span>Humans</span> and <span class="nocase">LLM-based Agents</span></em>.
 </div>
+<div id="ref-chuangEvaluatingLLMAgent2023" class="csl-entry" role="listitem">
+Chuang, Y.-S., Suresh, S., Harlalka, N., Goyal, A., Hawkins, R., Yang, S., Shah, D., Hu, J., &amp; Rogers, T. T. (2023). <em>Evaluating <span>LLM Agent Group Dynamics</span> against <span>Human Group Dynamics</span>: <span>A Case Study</span> on <span>Wisdom</span> of <span>Partisan Crowds</span></em> (arXiv:2311.09665). arXiv. <a href="https://arxiv.org/abs/2311.09665">https://arxiv.org/abs/2311.09665</a>
+</div>
 <div id="ref-duLargeLanguageModels2024" class="csl-entry" role="listitem">
 Du, Y., Rajivan, P., &amp; Gonzalez, C. C. (2024). <em>Large <span>Language Models</span> for <span>Collective Problem-Solving</span>: <span>Insights</span> into <span>Group Consensus Decision-Making</span></em>.
+</div>
+<div id="ref-guoEmbodiedLLMAgents2024" class="csl-entry" role="listitem">
+Guo, X., Huang, K., Liu, J., Fan, W., Vélez, N., Wu, Q., Wang, H., Griffiths, T. L., &amp; Wang, M. (2024). <em>Embodied <span>LLM Agents Learn</span> to <span>Cooperate</span> in <span>Organized Teams</span></em> (arXiv:2403.12482). arXiv. <a href="https://arxiv.org/abs/2403.12482">https://arxiv.org/abs/2403.12482</a>
+</div>
+<div id="ref-koehlMeasuringLatentTrust2023a" class="csl-entry" role="listitem">
+Koehl, D., &amp; Vangsness, L. (2023). Measuring <span>Latent Trust Patterns</span> in <span>Large Language Models</span> in the <span>Context</span> of <span>Human-AI Teaming</span>. <em>Proceedings of the Human Factors and Ergonomics Society Annual Meeting</em>, <em>67</em>. <a href="https://doi.org/10.1177/21695067231192869">https://doi.org/10.1177/21695067231192869</a>
 </div>
 <div id="ref-marjiehTaskAllocationTeams2024" class="csl-entry" role="listitem">
 Marjieh, R., Gokhale, A., Bullo, F., &amp; Griffiths, T. L. (2024). <em>Task <span>Allocation</span> in <span>Teams</span> as a <span>Multi-Armed Bandit</span></em>.
 </div>
 <div id="ref-nisiotiCollectiveInnovationGroups2024" class="csl-entry" role="listitem">
 Nisioti, E., Risi, S., Momennejad, I., Oudeyer, P.-Y., &amp; Moulin-Frier, C. (2024, July). Collective <span>Innovation</span> in <span>Groups</span> of <span>Large Language Models</span>. <em><span>ALIFE</span> 2024: <span>Proceedings</span> of the 2024 <span>Artificial Life Conference</span></em>. <a href="https://doi.org/10.1162/isal_a_00730">https://doi.org/10.1162/isal_a_00730</a>
+</div>
+<div id="ref-vatsSurveyHumanAITeaming2024" class="csl-entry" role="listitem">
+Vats, V., Nizam, M. B., Liu, M., Wang, Z., Ho, R., Prasad, M. S., Titterton, V., Malreddy, S. V., Aggarwal, R., Xu, Y., Ding, L., Mehta, J., Grinnell, N., Liu, L., Zhong, S., Gandamani, D. N., Tang, X., Ghosalkar, R., Shen, C., … Davis, J. (2024). <em>A <span>Survey</span> on <span>Human-AI Teaming</span> with <span>Large Pre-Trained Models</span></em> (arXiv:2403.04931). arXiv. <a href="https://arxiv.org/abs/2403.04931">https://arxiv.org/abs/2403.04931</a>
+</div>
+<div id="ref-yangLLMVotingHuman2024" class="csl-entry" role="listitem">
+Yang, J. C., Dailisan, D., Korecki, M., Hausladen, C. I., &amp; Helbing, D. (2024). <em><span>LLM Voting</span>: <span>Human Choices</span> and <span>AI Collective Decision Making</span></em> (arXiv:2402.01766). arXiv. <a href="https://arxiv.org/abs/2402.01766">https://arxiv.org/abs/2402.01766</a>
+</div>
+<div id="ref-zhangExploringCollaborationMechanisms2024" class="csl-entry" role="listitem">
+Zhang, J., Xu, X., Zhang, N., Liu, R., Hooi, B., &amp; Deng, S. (2024). <em>Exploring <span>Collaboration Mechanisms</span> for <span>LLM Agents</span>: <span>A Social Psychology View</span></em> (arXiv:2310.02124). arXiv. <a href="https://arxiv.org/abs/2310.02124">https://arxiv.org/abs/2310.02124</a>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -797,7 +1015,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
