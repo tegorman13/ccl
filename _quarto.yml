@@ -17,7 +17,22 @@ website:
   site-url: "https://tegorman13.github.io/ccl"
   reader-mode: true
   page-navigation: false
-
+  sidebar:
+    style: "docked"
+    border: false
+    collapse-level: 2
+    pinned: false
+    target: _blank
+    tools:
+    - icon: github
+      href: https://github.com/tegorman13/Dissertation
+    contents:
+      #- index.qmd
+      #- text: "---"
+      - text: "---"
+      - text: "AI Group Decision Making"
+        href: ai_gd.qmd
+      - text: "---"
 
 format:
   html:

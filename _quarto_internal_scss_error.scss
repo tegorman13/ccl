@@ -1204,7 +1204,7 @@ $btn-code-copy-color-active: #4758AB !default;
 $code-copy-selector: "pre.sourceCode:hover > " !default;
 $code-white-space: pre !default;
 $tbl-cap-location: top !default;
-$sidebar-bg: if(variable-exists(body-bg), $body-bg, #fff) !default;
+$sidebar-border: false !default;
 // Default the theme name
 $theme-name: if(variable-exists(theme), $theme, "");
 

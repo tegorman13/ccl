@@ -46,6 +46,7 @@ div.csl-indent {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -59,7 +60,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-018089954d508eae8a473f0b7f0491f0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9010f3bb41dd0f85d45919bd4fecb1d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ea6092777d2b9bd5626cc41d5bba4270.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,14 +93,74 @@ div.csl-indent {
 <link rel="stylesheet" href="Assets/Style/calloutTG.css">
 </head>
 
-<body class="fullcontent">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ai_gd.html">AI Group Decision Making</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">CCL Projects</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/tegorman13/Dissertation" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ai_gd.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">AI Group Decision Making</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#relevant-papers" id="toc-relevant-papers" class="nav-link active" data-scroll-target="#relevant-papers">Relevant Papers</a>
+  <ul class="collapse">
+  <li><a href="#task-allocation-in-teams-as-a-multi-armed-bandit." id="toc-task-allocation-in-teams-as-a-multi-armed-bandit." class="nav-link" data-scroll-target="#task-allocation-in-teams-as-a-multi-armed-bandit.">Task Allocation in Teams as a Multi-Armed Bandit.</a></li>
+  <li><a href="#large-language-models-for-collective-problem-solving-insights-into-group-consensus-decision-making" id="toc-large-language-models-for-collective-problem-solving-insights-into-group-consensus-decision-making" class="nav-link" data-scroll-target="#large-language-models-for-collective-problem-solving-insights-into-group-consensus-decision-making">Large Language Models for Collective Problem-Solving: Insights into Group Consensus Decision-Making</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -143,8 +204,8 @@ div.csl-indent {
 </header>
 
 
-<section id="papers" class="level1">
-<h1>Papers</h1>
+<section id="relevant-papers" class="level1">
+<h1>Relevant Papers</h1>
 <section id="task-allocation-in-teams-as-a-multi-armed-bandit." class="level2">
 <h2 class="anchored" data-anchor-id="task-allocation-in-teams-as-a-multi-armed-bandit.">Task Allocation in Teams as a Multi-Armed Bandit.</h2>
 <p>Marjieh, R., Gokhale, A., Bullo, F., &amp; Griffiths, T. L. (2024). <strong>Task Allocation in Teams as a Multi-Armed Bandit.</strong> https://cocosci.princeton.edu/papers/marjieh2024task.pdf</p>
@@ -156,7 +217,41 @@ Abstract
 <p>Humans rely on efficient distribution of resources to transcend the abilities of individuals. Successful task allocation, whether in small teams or across large institutions, depends on individuals’ ability to discern their own and others’ strengths and weaknesses, and to optimally act on them. This dependence creates a tension between exploring the capabilities of others and exploiting the knowledge acquired so far, which can be challenging. How do people navigate this tension? To address this question, we propose a novel task allocation paradigm in which a human agent is asked to repeatedly allocate tasks in three distinct classes (categorizing a blurry image, detecting a noisy voice command, and solving an anagram) between themselves and two other (bot) team members to maximize team performance. We show that this problem can be recast as a combinatorial multi-armed bandit which allows us to compare people’s performance against two well-known strategies, Thompson Sampling and Upper Confidence Bound (UCB). We find that humans are able to successfully integrate information about the capabilities of different team members to infer optimal allocations, and in some cases perform on par with these optimal strategies. Our approach opens up new avenues for studying the mechanisms underlying collective cooperation in teams.</p>
 </div>
 </details>
-<p><span class="citation" data-cites="marjiehTaskAllocationTeams2024">Marjieh et al. (<a href="#ref-marjiehTaskAllocationTeams2024" role="doc-biblioref">2024</a>)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/marjieh_24_img.png" class="img-fluid figure-img"></p>
+<figcaption><span class="citation" data-cites="marjiehTaskAllocationTeams2024">Marjieh et al. (<a href="#ref-marjiehTaskAllocationTeams2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="large-language-models-for-collective-problem-solving-insights-into-group-consensus-decision-making" class="level2">
+<h2 class="anchored" data-anchor-id="large-language-models-for-collective-problem-solving-insights-into-group-consensus-decision-making">Large Language Models for Collective Problem-Solving: Insights into Group Consensus Decision-Making</h2>
+<p>Du, Y., Rajivan, P., &amp; Gonzalez, C. C. (2024). <strong>Large Language Models for Collective Problem-Solving: Insights into Group Consensus Decision-Making.</strong> https://escholarship.org/uc/item/6s060914</p>
+<details class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Large Language models (LLM) exhibit human-like proficiency in various tasks such as translation, question answering, essay writing, and programming. Emerging research explores the use of LLMs in collective problem-solving endeavors, such as tasks where groups try to uncover clues through discussions. Although prior work has investigated individual problem-solving tasks, leveraging LLM-powered agents for group consensus and decision-making remains largely unexplored. This research addresses this gap by (1) proposing an algorithm to enable free-form conversation in groups of LLM agents, (2) creating metrics to evaluate the human-likeness of the generated dialogue and problem-solving performance, and (3) evaluating LLM agent groups against human groups using an open source dataset. Our results reveal that LLM groups outperform human groups in problem-solving tasks. LLM groups also show a greater improvement in scores after participating in free discussions. In particular, analyses indicate that LLM agent groups exhibit more disagreements, complex statements, and a propensity for positive statements compared to human groups. The results shed light on the potential of LLMs to facilitate collective reasoning and provide insight into the dynamics of group interactions involving synthetic LLM agents.</p>
+</div>
+</details>
+<div id="fig-du" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-du-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="images/du_24_img1.png" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="images/du_24_img2.png" class="img-fluid figure-img"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-du-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: <span class="citation" data-cites="duLargeLanguageModels2024">Du et al. (<a href="#ref-duLargeLanguageModels2024" role="doc-biblioref">2024</a>)</span>
+</figcaption>
+</figure>
+</div>
 
 
 
@@ -164,6 +259,9 @@ Abstract
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-duLargeLanguageModels2024" class="csl-entry" role="listitem">
+Du, Y., Rajivan, P., &amp; Gonzalez, C. C. (2024). <em>Large <span>Language Models</span> for <span>Collective Problem-Solving</span>: <span>Insights</span> into <span>Group Consensus Decision-Making</span></em>.
+</div>
 <div id="ref-marjiehTaskAllocationTeams2024" class="csl-entry" role="listitem">
 Marjieh, R., Gokhale, A., Bullo, F., &amp; Griffiths, T. L. (2024). <em>Task <span>Allocation</span> in <span>Teams</span> as a <span>Multi-Armed Bandit</span></em>.
 </div>
