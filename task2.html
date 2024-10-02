@@ -5,21 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Movement on Road Grid</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        #game-container {
-            position: relative;
-            width: 600px;
-            height: 600px;
-            background-color: #228B22;
-        }
+
         .cell {
             width: 50px;
             height: 50px;
@@ -70,15 +56,27 @@
             color: black;
             z-index: 5;
         }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #game-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         #fuel-container {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 160px;
-            background-color: rgba(255, 255, 255, 0.8);
+            width: 600px;
+            background-color: #fff;
             padding: 10px;
-            border-radius: 5px;
-            z-index: 20;
+            border-radius: 5px 5px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         #fuel-gauge {
             width: 100%;
@@ -97,9 +95,21 @@
             font-weight: bold;
             text-align: center;
         }
+        #game-container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            background-color: #228B22;
+        }
+
     </style>
 </head>
 <body>
+    <div id="game-wrapper">
+        <div id="fuel-container">
+            <div id="fuel-gauge"><div id="fuel-level"></div></div>
+            <div id="fuel-text">Fuel: <span id="fuel-percentage">100</span>%</div>
+        </div>
     <div id="game-container">
         <div id="fuel-container">
             <div id="fuel-gauge"><div id="fuel-level"></div></div>
