@@ -6,3 +6,41 @@ author:
   - name:  Communication and Cognition Lab, Purdue University, USA
     affiliation-url: https://web.ics.purdue.edu/~treimer/
 ---
+
+
+
+## Original
+
+::: column-page-right
+
+![Sam's original mockup](task1.html){width="600" height="550"}
+
+::: 
+
+
+
+## Alt 2
+
+::: column-page-right
+
+![](task2.html){width="800" height="650"}
+
+::: 
+
+
+## Alt 2b
+
+::: column-page-right
+
+![](task2b.html){width="800" height="650"}
+
+::: 
+
+
+## Alt 2c
+
+::: column-page-right
+
+![](task2c.html){width="800" height="650"}
+
+::: 

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mover Coche en Cuadrícula 4x4</title>
+
+
+    <script>
+        const serverurl= "ws://localhost:5050"
+
+        const ws = new WebSocket(serverurl);
+
+        ws.addEventListener("open", () => {
+            console.log("we Are connected");
+        })
+        
+        const SendPositionToServer = (car) => {
+            const message = {
+                car: {
+                    y: `${car.style.top}`,
+                    x: `${car.style.left}`
+                }
+            }
+            ws.send(JSON.stringify(message));
+        }
+        ws.onmessage = (message) => {
+    const serverMessage = JSON.parse(message.data);
+    const car = document.getElementById("car");
+    
+    // Actualiza las coordenadas del coche según el mensaje recibido del servidor
+    car.style.top = serverMessage.car.y;
+    car.style.left = serverMessage.car.x;
+};
+
+
+    </script>
+
+    <!-- CSS dentro del head -->
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .map {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            background-color: #e0e0e0;
+            border: 2px solid black;
+        }
+
+        .car {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            top: 235px;
+            left: 235px;
+        }
+
+        /* Vías o carreteras */
+        .road {
+            position: absolute;
+            background-color: #808080;
+        }
+
+        /* Calles verticales y horizontales */
+        .vertical-road {
+            width: 30px;
+            height: 500px;
+        }
+
+        .horizontal-road {
+            width: 500px;
+            height: 30px;
+        }
+
+        /* Definir calles (coordenadas) */
+        .vertical-road-1 { left: 115px; top: 0; }
+        .vertical-road-2 { left: 235px; top: 0; }
+        .vertical-road-3 { left: 355px; top: 0; }
+
+        .horizontal-road-1 { top: 115px; left: 0; }
+        .horizontal-road-2 { top: 235px; left: 0; }
+        .horizontal-road-3 { top: 355px; left: 0; }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Mapa y coche -->
+    <div class="map">
+        <!-- Calles verticales -->
+        <div class="road vertical-road vertical-road-1"></div>
+        <div class="road vertical-road vertical-road-2"></div>
+        <div class="road vertical-road vertical-road-3"></div>
+
+        <!-- Calles horizontales -->
+        <div class="road horizontal-road horizontal-road-1"></div>
+        <div class="road horizontal-road horizontal-road-2"></div>
+        <div class="road horizontal-road horizontal-road-3"></div>
+
+        <!-- Coche en el mapa -->
+        <img src="/assets/car.png" class="car" id="car">
+
+    <!-- JavaScript para mover el coche -->
+    <script>
+        const car = document.getElementById("car");
+        let carPositionX = 235; // Posición inicial en el eje X
+        let carPositionY = 235; // Posición inicial en el eje Y
+
+        // Dimensiones de la carretera y del mapa
+        const roadWidth = 30;
+        const mapSize = 500;
+
+        // Función para mover el coche con las flechas
+        document.addEventListener("keydown", function(event) {
+            const key = event.key;
+
+            // Movimiento hacia arriba
+            if (key === "ArrowUp") {
+                if (carPositionY > 0 && (carPositionX % 120 >= 115 && carPositionX % 120 <= 145)) {
+                    carPositionY -= 10;
+                }
+            }
+            // Movimiento hacia abajo
+            else if (key === "ArrowDown") {
+                if (carPositionY < mapSize - car.clientHeight && (carPositionX % 120 >= 115 && carPositionX % 120 <= 145)) {
+                    carPositionY += 10;
+                }
+            }
+            // Movimiento hacia la izquierda
+            else if (key === "ArrowLeft") {
+                if (carPositionX > 0 && (carPositionY % 120 >= 115 && carPositionY % 120 <= 145)) {
+                    carPositionX -= 10;
+                }
+            }
+            // Movimiento hacia la derecha
+            else if (key === "ArrowRight") {
+                if (carPositionX < mapSize - car.clientWidth && (carPositionY % 120 >= 115 && carPositionY % 120 <= 145)) {
+                    carPositionX += 10;
+                }
+            }
+
+            // Actualizar la posición del coche
+            car.style.top = carPositionY + "px";
+            car.style.left = carPositionX + "px";
+            
+            SendPositionToServer(car);
+
+        });
+    </script>
+
+</body>
+</html>

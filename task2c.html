@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Move Car on 4x4 Grid</title>
+    <style>
+        #gameContainer {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            border: 2px solid black;
+            position: relative;
+        }
+        .cell {
+            border: 1px solid #ccc;
+            background-color: #87CEEB; /* Sky color */
+        }
+        .road {
+            background-color: #808080; /* Gray roads */
+        }
+        .charging-station {
+            background-color: #FFD700; /* Gold charging stations */
+        }
+        #car {
+            width: 100%;
+            height: 100%;
+            background-color: red;
+        }
+        #fuelIndicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: white;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- Fuel level indicator -->
+        <div id="fuelIndicator">Fuel: 100%</div>
+    </div>
+
+    <script>
+        const gridSize = 4;
+        const gameContainer = document.getElementById('gameContainer');
+        let carPosition = { x: 0, y: 0 };
+        let fuelLevel = 100;
+        const cells = [];
+
+        // Function to create the grid
+        function createGrid() {
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.dataset.x = x;
+                    cell.dataset.y = y;
+
+                    // Randomly decide if the cell is a road
+                    if (Math.random() > 0.3) {
+                        cell.classList.add('road');
+                    }
+
+                    gameContainer.appendChild(cell);
+                    cells.push(cell);
+                }
+            }
+        }
+
+        // Function to place the car on the grid
+        function placeCar() {
+            let roadCells = cells.filter(cell => cell.classList.contains('road'));
+            
+            // If no road cells, make all cells roads
+            if (roadCells.length === 0) {
+                cells.forEach(cell => cell.classList.add('road'));
+                roadCells = cells;
+            }
+            
+            const startCell = roadCells[Math.floor(Math.random() * roadCells.length)];
+            carPosition.x = parseInt(startCell.dataset.x);
+            carPosition.y = parseInt(startCell.dataset.y);
+
+            const car = document.createElement('div');
+            car.id = 'car';
+            startCell.appendChild(car);
+        }
+
+        // Function to add charging stations
+        function addChargingStations() {
+            const roadCells = cells.filter(cell => cell.classList.contains('road') && !cell.firstChild);
+            for (let i = 0; i < 3; i++) {
+                const randomCell = roadCells[Math.floor(Math.random() * roadCells.length)];
+                randomCell.classList.add('charging-station');
+            }
+        }
+
+        // Function to update the fuel level display
+        function updateFuelIndicator() {
+            const fuelIndicator = document.getElementById('fuelIndicator');
+            fuelIndicator.textContent = `Fuel: ${fuelLevel}%`;
+        }
+
+        // Function to move the car
+        function moveCar(event) {
+            let newX = carPosition.x;
+            let newY = carPosition.y;
+
+            if (event.key === 'ArrowUp') {
+                newY = Math.max(0, newY - 1);
+            } else if (event.key === 'ArrowDown') {
+                newY = Math.min(gridSize - 1, newY + 1);
+            } else if (event.key === 'ArrowLeft') {
+                newX = Math.max(0, newX - 1);
+            } else if (event.key === 'ArrowRight') {
+                newX = Math.min(gridSize - 1, newX + 1);
+            } else {
+                return;
+            }
+
+            const newIndex = newY * gridSize + newX;
+            const newCell = cells[newIndex];
+
+            // Check if the new cell is a road
+            if (newCell.classList.contains('road')) {
+                const currentCell = cells[carPosition.y * gridSize + carPosition.x];
+                const car = document.getElementById('car');
+                currentCell.removeChild(car);
+                newCell.appendChild(car);
+
+                carPosition.x = newX;
+                carPosition.y = newY;
+
+                // Decrease fuel level
+                fuelLevel -= 5;
+                if (fuelLevel <= 0) {
+                    fuelLevel = 0;
+                    updateFuelIndicator();
+                    alert('Out of fuel!');
+                    document.removeEventListener('keydown', moveCar);
+                    return;
+                }
+
+                updateFuelIndicator();
+
+                // Check for charging station
+                if (newCell.classList.contains('charging-station')) {
+                    fuelLevel = 100;
+                    updateFuelIndicator();
+                    alert('Car recharged!');
+                    newCell.classList.remove('charging-station');
+                }
+            }
+        }
+
+        // Initialize the game
+        createGrid();
+        placeCar();
+        addChargingStations();
+        updateFuelIndicator();
+        document.addEventListener('keydown', moveCar);
+    </script>
+</body>
+</html>

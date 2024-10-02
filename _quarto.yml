@@ -8,6 +8,12 @@ project:
     - "!_*"
 
 
+
+  resources: 
+    - "assets/car.png"
+    #- "Manuscript/Assets/"
+
+
 exclude: ["*.rds","*.tex"]
 
 

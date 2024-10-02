@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive Car on Grid</title>
+
+    <!-- CSS inside the head -->
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .header {
+            width: 900px;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .fuel-level {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .map {
+            position: relative;
+            width: 900px;
+            height: 900px;
+            background-color: #e0e0e0;
+            border: 2px solid black;
+        }
+
+        .car {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            top: 125px; /* Starting on a road */
+            left: 125px; /* Starting on a road */
+        }
+
+        /* Roads */
+        .road {
+            position: absolute;
+            background-color: #808080;
+        }
+
+        /* Vertical and horizontal roads */
+        .vertical-road {
+            width: 100px;
+            height: 900px;
+        }
+
+        .horizontal-road {
+            width: 900px;
+            height: 100px;
+        }
+
+        /* Define varied road coordinates */
+        .vertical-road-1 { left: 125px; top: 0; }
+        .vertical-road-2 { left: 325px; top: 0; }
+        .vertical-road-3 { left: 525px; top: 0; }
+        .vertical-road-4 { left: 725px; top: 0; }
+
+        .horizontal-road-1 { top: 125px; left: 0; }
+        .horizontal-road-2 { top: 325px; left: 0; }
+        .horizontal-road-3 { top: 525px; left: 0; }
+        .horizontal-road-4 { top: 725px; left: 0; }
+
+        /* Charging station */
+        .charging-station {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <!-- Fuel Level Indicator -->
+        <div class="fuel-level" id="fuel">Fuel: 100%</div>
+    </div>
+
+    <!-- Map and car -->
+    <div class="map">
+        <!-- Vertical roads -->
+        <div class="road vertical-road vertical-road-1"></div>
+        <div class="road vertical-road vertical-road-2"></div>
+        <div class="road vertical-road vertical-road-3"></div>
+        <div class="road vertical-road vertical-road-4"></div>
+
+        <!-- Horizontal roads -->
+        <div class="road horizontal-road horizontal-road-1"></div>
+        <div class="road horizontal-road horizontal-road-2"></div>
+        <div class="road horizontal-road horizontal-road-3"></div>
+        <div class="road horizontal-road horizontal-road-4"></div>
+
+        <!-- Car on the map -->
+        <img src="/assets/car.png" class="car" id="car">
+
+        <!-- Random charging stations -->
+        <div class="charging-station" style="top: 125px; left: 525px;"></div>
+        <div class="charging-station" style="top: 725px; left: 325px;"></div>
+    </div>
+
+    <!-- JavaScript to move the car -->
+    <script>
+        const car = document.getElementById("car");
+        const fuelDisplay = document.getElementById("fuel");
+        let carPositionX = 125; // Initial X position (on road)
+        let carPositionY = 125; // Initial Y position (on road)
+        let fuel = 100; // Initial fuel level
+
+        // Map and road dimensions
+        const roadWidth = 100;
+        const mapSize = 900;
+
+        // Function to move the car with arrow keys
+        document.addEventListener("keydown", function(event) {
+            const key = event.key;
+
+            // Check for fuel before moving
+            if (fuel <= 0) {
+                alert("Out of fuel!");
+                return;
+            }
+
+            // Move up
+            if (key === "ArrowUp") {
+                if (carPositionY > 0 && (carPositionX % 200 >= 125 && carPositionX % 200 <= 175)) {
+                    carPositionY -= 10;
+                    fuel -= 1;
+                }
+            }
+            // Move down
+            else if (key === "ArrowDown") {
+                if (carPositionY < mapSize - car.clientHeight && (carPositionX % 200 >= 125 && carPositionX % 200 <= 175)) {
+                    carPositionY += 10;
+                    fuel -= 1;
+                }
+            }
+            // Move left
+            else if (key === "ArrowLeft") {
+                if (carPositionX > 0 && (carPositionY % 200 >= 125 && carPositionY % 200 <= 175)) {
+                    carPositionX -= 10;
+                    fuel -= 1;
+                }
+            }
+            // Move right
+            else if (key === "ArrowRight") {
+                if (carPositionX < mapSize - car.clientWidth && (carPositionY % 200 >= 125 && carPositionY % 200 <= 175)) {
+                    carPositionX += 10;
+                    fuel -= 1;
+                }
+            }
+
+            // Update the car's position
+            car.style.top = carPositionY + "px";
+            car.style.left = carPositionX + "px";
+
+            // Update the fuel level display
+            fuelDisplay.textContent = "Fuel: " + fuel + "%";
+
+            // Check for charging station
+            checkChargingStation();
+        });
+
+        // Function to check if the car is on a charging station
+        function checkChargingStation() {
+            const chargingStations = document.getElementsByClassName("charging-station");
+            for (let i = 0; i < chargingStations.length; i++) {
+                const station = chargingStations[i];
+                const stationRect = station.getBoundingClientRect();
+                const carRect = car.getBoundingClientRect();
+
+                if (
+                    carRect.left < stationRect.right &&
+                    carRect.right > stationRect.left &&
+                    carRect.top < stationRect.bottom &&
+                    carRect.bottom > stationRect.top
+                ) {
+                    fuel = 100; // Refuel to full
+                    fuelDisplay.textContent = "Fuel: 100%";
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>
