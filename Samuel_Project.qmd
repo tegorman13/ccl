@@ -33,6 +33,15 @@ Click on one of the tasks to activate, then use the arrow keys to control the ca
 
 ::: 
 
+## Alt 2 - larger
+
+::: column-page-right
+
+![](task4.html){width="800" height="800"}
+
+::: 
+
+
 
 ## Alt 2b
 
@@ -51,6 +60,30 @@ Click on one of the tasks to activate, then use the arrow keys to control the ca
 
 ::: 
 
+## Alt 3
+
+::: column-page-right
+
+![](task3.html){width="800" height="700"}
+
+::: 
+
+## Alt 3b
+
+::: column-page-right
+
+![](task3b.html){width="800" height="700"}
+
+::: 
+
+
+## Alt 3c
+
+::: column-page-right
+
+![](task3c.html){width="800" height="700"}
+
+::: 
 
 ----
 

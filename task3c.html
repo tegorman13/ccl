@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Navigation Task</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #gameContainer {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            border: 2px solid #333;
+        }
+        #gameBoard {
+            position: absolute;
+            transition: transform 0.3s ease;
+        }
+        .cell {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .road { background-color: #333; }
+        .charging-station {
+            background-color: #FFD700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+        #car {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+            z-index: 10;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #fuelIndicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        #notification {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="gameBoard"></div>
+        <div id="car"></div>
+        <div id="fuelIndicator">Fuel: 100%</div>
+        <div id="notification"></div>
+    </div>
+
+    <script>
+        const roadMap = [
+            "█████████████████████████",
+            "█.....█.........█.......█",
+            "█.███.█.███████.█.█████.█",
+            "█.█ █.█.█     █.█.█   █.█",
+            "█.█ █.█.█ ███ █.█.█ █ █.█",
+            "█.█ █...█ █ █ █...█ █ █.█",
+            "█.█ █████ █ █ █████ █ █.█",
+            "█.█       █ █       █ █.█",
+            "█.███████████████████ █.█",
+            "█.......................█",
+            "█.█████████.█████████.███",
+            "█.█       █.█       █...█",
+            "█.█ █████ █.█ █████ ███.█",
+            "█.█ █   █ █.█ █   █ █...█",
+            "█.█ ███ █ █.█ ███ █ █.███",
+            "█.█     █ █.█     █ █...█",
+            "█.███████ █.███████ ███.█",
+            "█.........█.............█",
+            "█.█████████████████████.█",
+            "█.......................█",
+            "█████████████████████.███",
+            "█.......................█",
+            "█.███████████████████.███",
+            "█...................█...█",
+            "█████████████████████████"
+        ];
+
+        const gridSize = roadMap.length;
+        const cellSize = 40;
+        const gameBoard = document.getElementById('gameBoard');
+        const carElement = document.getElementById('car');
+        const fuelIndicator = document.getElementById('fuelIndicator');
+        const notification = document.getElementById('notification');
+        const gameContainer = document.getElementById('gameContainer');
+
+        let carPosition = { x: 0, y: 0 };
+        let fuelLevel = 100;
+        let cells = [];
+
+        function createGrid() {
+            gameBoard.style.width = `${gridSize * cellSize}px`;
+            gameBoard.style.height = `${gridSize * cellSize}px`;
+
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.style.left = `${x * cellSize}px`;
+                    cell.style.top = `${y * cellSize}px`;
+
+                    if (roadMap[y][x] === '█') {
+                        cell.classList.add('road');
+                    }
+
+                    gameBoard.appendChild(cell);
+                    cells.push(cell);
+                }
+            }
+        }
+
+        function isRoad(x, y) {
+            return x >= 0 && x < gridSize && y >= 0 && y < gridSize && roadMap[y][x] === '█';
+        }
+
+        function getReachableCells() {
+            const visited = new Set();
+            const queue = [{x: carPosition.x, y: carPosition.y}];
+            const directions = [{dx: -1, dy: 0}, {dx: 1, dy: 0}, {dx: 0, dy: -1}, {dx: 0, dy: 1}];
+
+            while (queue.length > 0) {
+                const current = queue.shift();
+                const key = `${current.x},${current.y}`;
+
+                if (visited.has(key)) continue;
+                visited.add(key);
+
+                for (const dir of directions) {
+                    const newX = current.x + dir.dx;
+                    const newY = current.y + dir.dy;
+                    if (isRoad(newX, newY)) {
+                        queue.push({x: newX, y: newY});
+                    }
+                }
+            }
+
+            return Array.from(visited).map(key => {
+                const [x, y] = key.split(',').map(Number);
+                return cells[y * gridSize + x];
+            });
+        }
+
+        function placeCar() {
+            const roadCells = cells.filter((_, index) => {
+                const x = index % gridSize;
+                const y = Math.floor(index / gridSize);
+                return isRoad(x, y);
+            });
+            const startCell = roadCells[Math.floor(Math.random() * roadCells.length)];
+            const index = cells.indexOf(startCell);
+            carPosition.x = index % gridSize;
+            carPosition.y = Math.floor(index / gridSize);
+            updateCarPosition();
+        }
+
+        function addChargingStations() {
+            const reachableCells = getReachableCells();
+            const numberOfStations = 10;
+
+            for (let i = 0; i < numberOfStations; i++) {
+                if (reachableCells.length === 0) break;
+                const randomIndex = Math.floor(Math.random() * reachableCells.length);
+                const randomCell = reachableCells.splice(randomIndex, 1)[0];
+                randomCell.classList.add('charging-station');
+                randomCell.textContent = '⚡';
+            }
+        }
+
+        function updateFuelIndicator() {
+            fuelIndicator.textContent = `Fuel: ${fuelLevel}%`;
+        }
+
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+
+        function moveCar(event) {
+            let newX = carPosition.x;
+            let newY = carPosition.y;
+
+            switch(event.key) {
+                case 'ArrowUp': newY--; break;
+                case 'ArrowDown': newY++; break;
+                case 'ArrowLeft': newX--; break;
+                case 'ArrowRight': newX++; break;
+                default: return;
+            }
+
+            if (isRoad(newX, newY)) {
+                carPosition.x = newX;
+                carPosition.y = newY;
+                updateCarPosition();
+
+                fuelLevel = Math.max(0, fuelLevel - 1);
+                updateFuelIndicator();
+
+                if (fuelLevel === 0) {
+                    showNotification('Out of fuel!');
+                    document.removeEventListener('keydown', moveCar);
+                    return;
+                }
+
+                const newCell = cells[newY * gridSize + newX];
+                if (newCell.classList.contains('charging-station')) {
+                    fuelLevel = 100;
+                    updateFuelIndicator();
+                    showNotification('Car recharged!');
+                    newCell.classList.remove('charging-station');
+                    newCell.textContent = '';
+                }
+            }
+        }
+
+        function updateCarPosition() {
+            updateCamera();
+        }
+
+        function updateCamera() {
+            const offsetX = -carPosition.x * cellSize + gameContainer.clientWidth / 2;
+            const offsetY = -carPosition.y * cellSize + gameContainer.clientHeight / 2;
+            gameBoard.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        }
+
+        createGrid();
+        placeCar();
+        addChargingStations();
+        updateFuelIndicator();
+        document.addEventListener('keydown', moveCar);
+        window.addEventListener('resize', updateCamera);
+    </script>
+</body>
+</html>

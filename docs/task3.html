@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Realistic Car Navigation Task</title>
+    <style>
+        /* Reset default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Container for the game grid */
+        #gameContainer {
+            width: 800px;
+            height: 800px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(25, 32px);
+            grid-template-rows: repeat(25, 32px);
+            border: 2px solid #333;
+            position: relative;
+            background-color: #a3d2ca; /* Light background for non-road areas */
+            overflow: hidden;
+        }
+
+        /* General cell styling */
+        .cell {
+            border: 1px solid #999;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        /* Road cells styling */
+        .road {
+            background-color: #808080; /* Gray roads */
+        }
+
+        /* Horizontal and vertical roads for better visibility */
+        .road.horizontal {
+            background-color: #696969;
+        }
+
+        .road.vertical {
+            background-color: #696969;
+        }
+
+        /* Charging station styling */
+        .charging-station {
+            background-color: #FFD700; /* Gold charging stations */
+        }
+
+        /* Landmark styling */
+        .landmark {
+            background-image: url('https://cdn-icons-png.flaticon.com/32/684/684908.png'); /* Example landmark icon */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* Car styling */
+        #car {
+            width: 100%;
+            height: 100%;
+            background-color: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        /* Fuel level indicator */
+        #fuelIndicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 3;
+        }
+
+        /* Notification area */
+        #notification {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+            z-index: 3;
+        }
+
+        /* Limited Field of View Overlay */
+        .shadow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle closest-side, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 850px) {
+            #gameContainer {
+                width: 90vw;
+                height: 90vw;
+                grid-template-columns: repeat(25, 3.6vw);
+                grid-template-rows: repeat(25, 3.6vw);
+            }
+
+            #fuelIndicator {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+
+            #notification {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- Fuel level indicator -->
+        <div id="fuelIndicator">Fuel: 100%</div>
+        <!-- Notification area -->
+        <div id="notification"></div>
+        <!-- Shadow overlay for limited field of view -->
+        <div class="shadow"></div>
+        <!-- Car element -->
+        <div id="car"></div>
+    </div>
+
+    <script>
+        // Define the road map using a 25x25 grid
+        const roadMap = [
+            "█████████████████████████",
+            "█.......................█",
+            "█.█████.█████████.███████",
+            "█.█   █.█     █.█     █.█",
+            "█.█ ███.█ ███ █.█ ███ █.█",
+            "█.█ █ █.█ █ █ █.█ █ █ █.█",
+            "█.█ ███.█ ███ █.█ ███ █.█",
+            "█.█     █     █.█     █.█",
+            "█.█████████████.█████████",
+            "█.......................█",
+            "█.█████████.█████████.███",
+            "█.█       █.█       █.█.█",
+            "█.█ █████ █.█ █████ █.█.█",
+            "█.█ █   █ █.█ █   █ █.█.█",
+            "█.█ ███ █ █.█ ███ █ █.█.█",
+            "█.█     █ █.█     █ █.█.█",
+            "█.███████ █.███████ █.█.█",
+            "█.......................█",
+            "█.█████████████████████.█",
+            "█.......................█",
+            "█████████████████████████",
+            "█.......................█",
+            "█.███████████████████████",
+            "█.█                     █",
+            "█.█.███████████████████.█",
+            "█.█.....................█",
+            "█████████████████████████"
+        ];
+
+        const gridSize = roadMap.length; // 25x25 grid
+        const gameContainer = document.getElementById('gameContainer');
+        const fuelIndicator = document.getElementById('fuelIndicator');
+        const notification = document.getElementById('notification');
+        const carElement = document.getElementById('car');
+        const shadowOverlay = document.querySelector('.shadow');
+
+        let carPosition = { x: 0, y: 0 };
+        let fuelLevel = 100;
+        const cells = [];
+
+        // Function to create the grid based on roadMap
+        function createGrid() {
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.dataset.x = x;
+                    cell.dataset.y = y;
+
+                    const char = roadMap[y][x];
+                    if (char === '█') {
+                        cell.classList.add('road');
+                        // Additional classes for road orientation can be added based on roadMap design
+                    } else if (char === '.') {
+                        // Non-road area, could add landmarks here
+                    }
+
+                    // Example: Adding landmarks at specific positions
+                    // Customize landmark positions as per your roadMap
+                    const landmarks = [
+                        { x: 5, y: 5 },
+                        { x: 19, y: 5 },
+                        { x: 5, y: 19 },
+                        { x: 19, y: 19 },
+                        { x: 12, y: 12 } // Center landmark
+                    ];
+
+                    landmarks.forEach(landmark => {
+                        if (x === landmark.x && y === landmark.y) {
+                            cell.classList.add('landmark');
+                        }
+                    });
+
+                    gameContainer.appendChild(cell);
+                    cells.push(cell);
+                }
+            }
+        }
+
+        // Function to place the car on a random road cell
+        function placeCar() {
+            const roadCells = cells.filter(cell => cell.classList.contains('road'));
+            
+            // Ensure there are road cells
+            if (roadCells.length === 0) {
+                cells.forEach(cell => cell.classList.add('road'));
+            }
+
+            // Select a random road cell
+            const startCell = roadCells[Math.floor(Math.random() * roadCells.length)];
+            carPosition.x = parseInt(startCell.dataset.x);
+            carPosition.y = parseInt(startCell.dataset.y);
+
+            // Position the car
+            updateCarPosition();
+        }
+
+        // Function to add charging stations on random road cells
+        function addChargingStations() {
+            const roadCells = cells.filter(cell => 
+                cell.classList.contains('road') && 
+                !cell.classList.contains('charging-station') &&
+                !cell.classList.contains('landmark')
+            );
+
+            const numberOfStations = 10; // Adjust as needed
+
+            for (let i = 0; i < numberOfStations; i++) {
+                if (roadCells.length === 0) break; // No more available cells
+                const randomIndex = Math.floor(Math.random() * roadCells.length);
+                const randomCell = roadCells.splice(randomIndex, 1)[0];
+                randomCell.classList.add('charging-station');
+            }
+        }
+
+        // Function to update the fuel level display
+        function updateFuelIndicator() {
+            fuelIndicator.textContent = `Fuel: ${fuelLevel}%`;
+        }
+
+        // Function to display notifications
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000); // Hide after 2 seconds
+        }
+
+        // Function to move the car
+        function moveCar(event) {
+            let newX = carPosition.x;
+            let newY = carPosition.y;
+
+            if (event.key === 'ArrowUp') {
+                newY = Math.max(0, newY - 1);
+            } else if (event.key === 'ArrowDown') {
+                newY = Math.min(gridSize - 1, newY + 1);
+            } else if (event.key === 'ArrowLeft') {
+                newX = Math.max(0, newX - 1);
+            } else if (event.key === 'ArrowRight') {
+                newX = Math.min(gridSize - 1, newX + 1);
+            } else {
+                return; // Ignore other keys
+            }
+
+            const newIndex = newY * gridSize + newX;
+            const newCell = cells[newIndex];
+
+            // Check if the new cell is a road
+            if (newCell.classList.contains('road')) {
+                carPosition.x = newX;
+                carPosition.y = newY;
+                updateCarPosition();
+
+                // Decrease fuel level
+                fuelLevel -= 1; // Reduced fuel consumption for larger grid
+                if (fuelLevel <= 0) {
+                    fuelLevel = 0;
+                    updateFuelIndicator();
+                    showNotification('Out of fuel!');
+                    document.removeEventListener('keydown', moveCar);
+                    return;
+                }
+
+                updateFuelIndicator();
+
+                // Check for charging station
+                if (newCell.classList.contains('charging-station')) {
+                    fuelLevel = 100;
+                    updateFuelIndicator();
+                    showNotification('Car recharged!');
+                    newCell.classList.remove('charging-station');
+                }
+            }
+        }
+
+        // Function to update the car's position in the DOM
+        function updateCarPosition() {
+            const cellSize = gameContainer.clientWidth / gridSize;
+            carElement.style.width = `${cellSize}px`;
+            carElement.style.height = `${cellSize}px`;
+            carElement.style.transform = `translate(${carPosition.x * cellSize}px, ${carPosition.y * cellSize}px)`;
+            updateFieldOfView();
+        }
+
+        // Function to update the limited field of view
+        function updateFieldOfView() {
+            const viewRadius = 5; // Number of cells to show around the car
+            cells.forEach(cell => {
+                const cellX = parseInt(cell.dataset.x);
+                const cellY = parseInt(cell.dataset.y);
+                const distance = Math.max(Math.abs(cellX - carPosition.x), Math.abs(cellY - carPosition.y));
+                if (distance > viewRadius) {
+                    cell.style.opacity = '0.3';
+                } else {
+                    cell.style.opacity = '1';
+                }
+            });
+        }
+
+        // Handle window resize to reposition the car
+        window.addEventListener('resize', updateCarPosition);
+
+        // Initialize the game
+        createGrid();
+        placeCar();
+        addChargingStations();
+        updateFuelIndicator();
+        document.addEventListener('keydown', moveCar);
+    </script>
+</body>
+</html>

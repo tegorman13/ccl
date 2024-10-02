@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Map Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #game-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #fuel-container {
+            width: 600px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #fuel-gauge {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #fuel-level {
+            height: 100%;
+            background-color: #4CAF50;
+            transition: width 0.3s ease;
+        }
+        #fuel-text {
+            margin-top: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        #game-container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            overflow: hidden;
+            background-color: #a8d5a8;
+        }
+        #map {
+            position: absolute;
+            width: 1200px;
+            height: 1200px;
+            background-color: #a8d5a8;
+        }
+        .road {
+            position: absolute;
+            background-color: #777;
+        }
+        .landmark {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+        }
+        #car {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .charging-station {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: black;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-wrapper">
+        <div id="fuel-container">
+            <div id="fuel-gauge"><div id="fuel-level"></div></div>
+            <div id="fuel-text">Fuel: <span id="fuel-percentage">100</span>%</div>
+        </div>
+        <div id="game-container">
+            <div id="map">
+                <div id="car"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const gameContainer = document.getElementById('game-container');
+        const map = document.getElementById('map');
+        const car = document.getElementById('car');
+        const fuelLevel = document.getElementById('fuel-level');
+        const fuelPercentage = document.getElementById('fuel-percentage');
+        
+        let currentFuel = 100;
+        let carPosition = { x: 600, y: 600 };
+        const mapSize = 1200;
+        const viewSize = 600;
+
+        // Create roads
+        const roads = [
+            { x: 100, y: 0, width: 40, height: 1200 },
+            { x: 0, y: 300, width: 1200, height: 40 },
+            { x: 600, y: 0, width: 40, height: 800 },
+            { x: 400, y: 600, width: 800, height: 40 },
+            { cx: 800, cy: 400, r: 200, start: 0, end: Math.PI }, // Curved road
+        ];
+
+        roads.forEach((road, index) => {
+            const roadElement = document.createElement('div');
+            roadElement.classList.add('road');
+            
+            if (road.cx !== undefined) {
+                // Curved road
+                roadElement.style.width = '40px';
+                roadElement.style.height = '400px';
+                roadElement.style.borderRadius = '200px 200px 0 0';
+                roadElement.style.transform = 'rotate(90deg)';
+                roadElement.style.left = `${road.cx - 220}px`;
+                roadElement.style.top = `${road.cy - 20}px`;
+            } else {
+                // Straight road
+                roadElement.style.left = `${road.x}px`;
+                roadElement.style.top = `${road.y}px`;
+                roadElement.style.width = `${road.width}px`;
+                roadElement.style.height = `${road.height}px`;
+            }
+            
+            map.appendChild(roadElement);
+        });
+
+        // Create landmarks
+        const landmarks = [
+            { x: 50, y: 50, emoji: '🏠' },
+            { x: 1100, y: 50, emoji: '🏢' },
+            { x: 50, y: 1100, emoji: '🏫' },
+            { x: 1100, y: 1100, emoji: '🏥' },
+        ];
+
+        landmarks.forEach(landmark => {
+            const landmarkElement = document.createElement('div');
+            landmarkElement.classList.add('landmark');
+            landmarkElement.style.left = `${landmark.x}px`;
+            landmarkElement.style.top = `${landmark.y}px`;
+            landmarkElement.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 50%)`;
+            landmarkElement.textContent = landmark.emoji;
+            map.appendChild(landmarkElement);
+        });
+
+        // Function to find a point on a road
+        function findPointOnRoad(road) {
+            if (road.cx !== undefined) {
+                // Curved road
+                const angle = (road.start + road.end) / 2; // Middle of the curve
+                return {
+                    x: road.cx + road.r * Math.cos(angle),
+                    y: road.cy + road.r * Math.sin(angle)
+                };
+            } else {
+                // Straight road
+                return {
+                    x: road.x + road.width / 2,
+                    y: road.y + road.height / 2
+                };
+            }
+        }
+
+        // Create charging stations
+        const chargingStations = roads.map(road => findPointOnRoad(road));
+
+        chargingStations.forEach(station => {
+            const stationElement = document.createElement('div');
+            stationElement.classList.add('charging-station');
+            stationElement.style.left = `${station.x - 15}px`; // Adjust for the station's size
+            stationElement.style.top = `${station.y - 15}px`;
+            stationElement.textContent = '⚡';
+            map.appendChild(stationElement);
+        });
+
+        function updateCarPosition() {
+            car.style.left = `${carPosition.x}px`;
+            car.style.top = `${carPosition.y}px`;
+            
+            // Update map position to keep car centered
+            map.style.left = `${viewSize / 2 - carPosition.x}px`;
+            map.style.top = `${viewSize / 2 - carPosition.y}px`;
+        }
+
+        function isOnRoad(x, y) {
+            for (const road of roads) {
+                if (road.cx !== undefined) {
+                    // Curved road
+                    const dx = x - road.cx;
+                    const dy = y - road.cy;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance >= road.r - 20 && distance <= road.r + 20) {
+                        const angle = Math.atan2(dy, dx);
+                        if (angle >= road.start && angle <= road.end) {
+                            return true;
+                        }
+                    }
+                } else {
+                    // Straight road
+                    if (x >= road.x - 20 && x <= road.x + road.width + 20 &&
+                        y >= road.y - 20 && y <= road.y + road.height + 20) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        function moveCar(dx, dy) {
+            const newX = carPosition.x + dx;
+            const newY = carPosition.y + dy;
+
+            if (newX >= 0 && newX < mapSize && newY >= 0 && newY < mapSize && isOnRoad(newX, newY)) {
+                carPosition.x = newX;
+                carPosition.y = newY;
+                updateCarPosition();
+                consumeFuel();
+                checkCharging();
+            }
+        }
+
+        function consumeFuel() {
+            currentFuel = Math.max(0, currentFuel - 0.5);
+            updateFuelGauge();
+        }
+
+        function updateFuelGauge() {
+            fuelLevel.style.width = `${currentFuel}%`;
+            fuelPercentage.textContent = Math.round(currentFuel);
+        }
+
+        function checkCharging() {
+            for (const station of chargingStations) {
+                const dx = carPosition.x - station.x;
+                const dy = carPosition.y - station.y;
+                if (dx * dx + dy * dy < 900) { // Within 30px
+                    currentFuel = Math.min(100, currentFuel + 1);
+                    updateFuelGauge();
+                    break;
+                }
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            const speed = 5;
+            switch (event.key) {
+                case 'ArrowUp':
+                    moveCar(0, -speed);
+                    break;
+                case 'ArrowDown':
+                    moveCar(0, speed);
+                    break;
+                case 'ArrowLeft':
+                    moveCar(-speed, 0);
+                    break;
+                case 'ArrowRight':
+                    moveCar(speed, 0);
+                    break;
+            }
+        });
+
+        updateCarPosition();
+        updateFuelGauge();
+    </script>
+</body>
+</html>
