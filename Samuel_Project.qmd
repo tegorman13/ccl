@@ -75,14 +75,14 @@ Ho, M. K., Abel, D., Correa, C. G., Littman, M. L., Cohen, J. D., & Griffiths, T
 
 Ho, M. K., Abel, D., Correa, C. G., Littman, M. L., Cohen, J. D., & Griffiths, T. L. (2021). Control of mental representations in human planning. arXiv:2105.06948 [Cs].  http://arxiv.org/abs/2105.06948
 
-![Figure from Ho et al. 2021 ](images/ho_drive2.png)
+![Figure from @hoControlMentalRepresentations2021 ](images/ho_drive2.png)
 
 -----
 
 Krafft, P. M., Hawkins, R. X., Pentland, A., Goodman, N. D., & Tenenbaum, J. B. (2015). Emergent Collective Sensing in Human Groups. In CogSci.
 https://people.csail.mit.edu/pkrafft/papers/krafft-et-al-2015-emergent.pdf
 
-![Figure from Krafft et al. 2015 ](images/Kraft_drive1.png)
+![Figure from @krafftEmergentCollectiveSensing2015 ](images/Kraft_drive1.png)
 
 
 
@@ -93,3 +93,13 @@ Tsirtsis, S., Gomez Rodriguez, M., & Gerstenberg, T. (2024). **Towards a computa
 
 
 ![Figure from @tsirtsisComputationalModelResponsibility2024 ](images/Tsirtsis_drive1.png)
+
+
+------
+
+Mugan, U., & MacIver, M. A. (2020). **Spatial planning with long visual range benefits escape from visual predators in complex naturalistic environments.** Nature Communications, 11(1), 3057. https://doi.org/10.1038/s41467-020-16102-1
+
+[live task demo](https://maciver-lab.github.io/plangame/) \
+[code repository](https://github.com/MacIver-Lab/plangame) \
+
+![Figure from @muganSpatialPlanningLong2020 ](images/Mugan_drive1.png)

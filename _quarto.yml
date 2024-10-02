@@ -10,7 +10,7 @@ project:
 
 
   resources: 
-    - "assets/car.png"
+    - "Assets/car.png"
     #- "Manuscript/Assets/"
 
 
@@ -67,5 +67,5 @@ execute:
 
 
 
-bibliography: [assets/ccl_bib.bib]
-csl: assets/apa.csl
+bibliography: [Assets/ccl_bib.bib]
+csl: Assets/apa.csl
