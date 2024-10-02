@@ -1,10 +1,12 @@
 ---
-title: "Samuel"
+title: "Samuel's Project"
 author:
 - name: Thomas E. Gorman
+  url: https://tegorman13.github.io/
   affiliations: 
   - name:  Communication and Cognition Lab, Purdue University, USA
     affiliation-url: https://web.ics.purdue.edu/~treimer/
+lightbox: true
 ---
 
 
@@ -57,7 +59,46 @@ Click on one of the tasks to activate, then use the arrow keys to control the ca
 
 ## Tasks used in Other Studes
 
-### 
+### Wormholes in virtual space: From cognitive maps to cognitive graphs
+
+Warren, W. H., Rothman, D. B., Schnapp, B. H., & Ericson, J. D. (2017). **Wormholes in virtual space: From cognitive maps to cognitive graphs.** Cognition, 166, 152–163. https://doi.org/10.1016/j.cognition.2017.05.020
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Humans and other animals build up spatial knowledge of the environment on the basis of visual information and path integration. We compare three hypotheses about the geometry of this knowledge of navigation space: (a) ‘cognitive map’ with metric Euclidean structure and a consistent coordinate system, (b) ‘topological graph’ or network of paths between places, and (c) ‘labelled graph’ incorporating local metric information about path lengths and junction angles. In two experiments, participants walked in a non-Euclidean environment, a virtual hedge maze containing two ‘wormholes’ that visually rotated and teleported them between locations. During training, they learned the metric locations of eight target objects from a ‘home’ location, which were visible individually. During testing, shorter wormhole routes to a target were preferred, and novel shortcuts were directional, contrary to the topological hypothesis. Shortcuts were strongly biased by the wormholes, with mean constant errors of 37° and 41° (45° expected), revealing violations of the metric postulates in spatial knowledge. In addition, shortcuts to targets near wormholes shifted relative to flanking targets, revealing ‘rips’ (86% of cases), 'folds' (91%), and ordinal reversals (66%) in spatial knowledge. Moreover, participants were completely unaware of these geometric inconsistencies, reflecting a surprising insensitivity to Euclidean structure. The probability of the shortcut data under the Euclidean map model and labelled graph model indicated decisive support for the latter (BFGM>100). We conclude that knowledge of navigation space is best characterized by a labelled graph, in which local metric information is approximate, geometrically inconsistent, and not embedded in a common coordinate system. This class of ‘cognitive graph’ models supports route finding, novel detours, and rough shortcuts, and has the potential to unify a range of data on spatial navigation.
+</div>
+</details>
+
+
+![Figure from Warren et al. 2017](images/Warren_drive1.png)
+
+
+-----
+
+
+### Spatial decision dynamics during wayfinding: Intersections prompt the decision-making process.
+
+Brunyé, T. T., Gardony, A. L., Holmes, A., & Taylor, H. A. (2018). **Spatial decision dynamics during wayfinding: Intersections prompt the decision-making process.** Cognitive Research: Principles and Implications, 3(1), 13. https://doi.org/10.1186/s41235-018-0098-3
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Intersections are critical decision points for wayfinders, but it is unknown how decision dynamics unfold during pedestrian wayfinding. Some research implies that pedestrians leverage available visual cues to actively compare options while in an intersection, whereas other research suggests that people strive to make decisions long before overt responses are required. Two experiments examined these possibilities while participants navigated virtual desktop environments, assessing information-seeking behavior (Experiment 1) and movement dynamics (Experiment 2) while approaching intersections. In Experiment 1, we found that participants requested navigation guidance while in path segments approaching an intersection and the guidance facilitated choice behavior. In Experiment 2, we found that participants tended to orient themselves toward an upcoming turn direction before entering an intersection, particularly as they became more familiar with the environment. Some of these patterns were modulated by individual differences in spatial ability, sense of direction, spatial strategies, and gender. Together, we provide novel evidence that deciding whether to continue straight or turn involves a dynamic, distributed decision-making process that is prompted by upcoming intersections and modulated by individual differences and environmental experience. We discuss implications of these results for spatial decision-making theory and the development of innovative adaptive, beacon-based navigation guidance systems.
+</div>
+</details>
+
+![Figure from @brunyeSpatialDecisionDynamics2018](images/Brunye_drive1.png)
+
+
+
+
+----
+
+### Rational use of cognitive resources in human planning
+
+Callaway, F., Van Opheusden, B., Gul, S., Das, P., Krueger, P. M., Griffiths, T. L., & Lieder, F. (2022). Rational use of cognitive resources in human planning. Nature Human Behaviour, 6(8), 1112–1125. https://doi.org/10.1038/s41562-022-01332-8
+
 
 [link to code](https://osf.io/6venh/) \ 
 [link to paper](https://cocosci.princeton.edu/papers/callawayrationaluse.pdf) \ 
@@ -68,18 +109,22 @@ Click on one of the tasks to activate, then use the arrow keys to control the ca
 
 ----
 
-Ho, M. K., Abel, D., Correa, C. G., Littman, M. L., Cohen, J. D., & Griffiths, T. L. (2022). People construct simplified mental representations to plan. Nature, 1–8.  https://doi.org/10.1038/s41586-022-04743-9
+### People construct simplified mental representations to plan.
+
+Ho, M. K., Abel, D., Correa, C. G., Littman, M. L., Cohen, J. D., & Griffiths, T. L. (2022). **People construct simplified mental representations to plan.** Nature, 1–8.  https://doi.org/10.1038/s41586-022-04743-9
 
 ![Figure from Ho et al. 2022 ](images/ho_drive1.png)
 
 
-Ho, M. K., Abel, D., Correa, C. G., Littman, M. L., Cohen, J. D., & Griffiths, T. L. (2021). Control of mental representations in human planning. arXiv:2105.06948 [Cs].  http://arxiv.org/abs/2105.06948
+Ho, M. K., Abel, D., Correa, C. G., Littman, M. L., Cohen, J. D., & Griffiths, T. L. (2021). **Control of mental representations in human planning.** arXiv:2105.06948 [Cs].  http://arxiv.org/abs/2105.06948
 
 ![Figure from @hoControlMentalRepresentations2021 ](images/ho_drive2.png)
 
 -----
 
-Krafft, P. M., Hawkins, R. X., Pentland, A., Goodman, N. D., & Tenenbaum, J. B. (2015). Emergent Collective Sensing in Human Groups. In CogSci.
+### Emergent Collective Sensing in Human Groups.
+
+Krafft, P. M., Hawkins, R. X., Pentland, A., Goodman, N. D., & Tenenbaum, J. B. (2015). **Emergent Collective Sensing in Human Groups.** In CogSci.
 https://people.csail.mit.edu/pkrafft/papers/krafft-et-al-2015-emergent.pdf
 
 ![Figure from @krafftEmergentCollectiveSensing2015 ](images/Kraft_drive1.png)
@@ -89,6 +134,8 @@ https://people.csail.mit.edu/pkrafft/papers/krafft-et-al-2015-emergent.pdf
 
 ----
 
+### Towards a computational model of responsibility judgments in sequential human-AI collaboration
+
 Tsirtsis, S., Gomez Rodriguez, M., & Gerstenberg, T. (2024). **Towards a computational model of responsibility judgments in sequential human-AI collaboration.** In Proceedings of the Annual Meeting of the Cognitive Science Society (Vol. 46). https://osf.io/preprints/psyarxiv/m4yad
 
 
@@ -96,6 +143,8 @@ Tsirtsis, S., Gomez Rodriguez, M., & Gerstenberg, T. (2024). **Towards a computa
 
 
 ------
+
+### Spatial planning with long visual range benefits escape from visual predators in complex naturalistic environments.
 
 Mugan, U., & MacIver, M. A. (2020). **Spatial planning with long visual range benefits escape from visual predators in complex naturalistic environments.** Nature Communications, 11(1), 3057. https://doi.org/10.1038/s41467-020-16102-1
 
