@@ -1,6 +1,6 @@
 # Literature Notes
 Thomas E. Gorman
-2024-09-30
+2024-10-01
 
 - [Relevant Papers](#relevant-papers)
   - [Task Allocation in Teams as a Multi-Armed
@@ -57,7 +57,9 @@ Allocation in Teams as a Multi-Armed Bandit.**
 https://cocosci.princeton.edu/papers/marjieh2024task.pdf
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -98,7 +100,9 @@ enhanced team effectiveness.** Frontiers in Psychology, 14.
 https://doi.org/10.3389/fpsyg.2023.1208019
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -138,7 +142,9 @@ simulation: A survey and perspectives. Humanities and Social Sciences
 Communications, 11(1), 1–24. https://doi.org/10.1057/s41599-024-03611-3
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -182,7 +188,9 @@ Learn and Think with People** (arXiv:2408.03943). arXiv.
 http://arxiv.org/abs/2408.03943
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -220,7 +228,9 @@ for Collective Problem-Solving: Insights into Group Consensus
 Decision-Making.** https://escholarship.org/uc/item/6s060914
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -250,6 +260,7 @@ agents.
 </div>
 
 </details>
+
 <div id="fig-du">
 
 ![](images/du_24_img1.png)
@@ -268,7 +279,9 @@ interaction. Technology in Society, 78, 102662.
 https://doi.org/10.1016/j.techsoc.2024.102662
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -316,7 +329,9 @@ intelligence.** Nature Human Behaviour, 1–13.
 https://doi.org/10.1038/s41562-024-01959-9
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -355,7 +370,9 @@ Proceedings of the 29th International Conference on Intelligent User
 Interfaces, 103–119. https://doi.org/10.1145/3640543.3645199
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -398,7 +415,9 @@ Crowds: Comparing Collective Intelligence in Humans and LLM-based
 Agents.** https://escholarship.org/uc/item/3k67x8s5
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -435,7 +454,9 @@ Models.** ALIFE 2024: Proceedings of the 2024 Artificial Life
 Conference. https://doi.org/10.1162/isal_a_00730
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -476,7 +497,9 @@ Group Dynamics against Human Group Dynamics: A Case Study on Wisdom of
 Partisan Crowds** http://arxiv.org/abs/2311.09665
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -512,7 +535,9 @@ View** (arXiv:2310.02124). arXiv. http://arxiv.org/abs/2310.02124
 <https://www.zjukg.org/project/MachineSoM/>
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -552,7 +577,9 @@ Abdelnabi, S., Gomaa, A., Sivaprasad, S., Schönherr, L., & Fritz, M.
 Negotiation Games.** https://doi.org/10.60882/cispa.25233028.v1
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -591,7 +618,9 @@ Yang, J. C., Dailisan, D., Korecki, M., Hausladen, C. I., & Helbing, D.
 (arXiv:2402.01766). arXiv. http://arxiv.org/abs/2402.01766
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -627,7 +656,9 @@ Cooperate in Organized Teams** (arXiv:2403.12482). arXiv.
 http://arxiv.org/abs/2403.12482
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -665,7 +696,9 @@ of the Human Factors and Ergonomics Society Annual Meeting, 67.
 https://doi.org/10.1177/21695067231192869
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -690,6 +723,7 @@ large language models as research tools.
 </div>
 
 </details>
+
 <div id="fig-koehl">
 
 ![](images/Koehl_23_img1.png)
@@ -710,7 +744,9 @@ Teaming with Large Pre-Trained Models** (arXiv:2403.04931). arXiv.
 http://arxiv.org/abs/2403.04931
 
 <details class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 

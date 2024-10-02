@@ -9,6 +9,10 @@ author:
 
 
 
+# Task Brainstorming
+
+Click on one of the tasks to activate, then use the arrow keys to control the car
+
 ## Original
 
 ::: column-page-right
@@ -23,7 +27,7 @@ author:
 
 ::: column-page-right
 
-![](task2.html){width="800" height="650"}
+![](task2.html){width="800" height="700"}
 
 ::: 
 
@@ -32,7 +36,7 @@ author:
 
 ::: column-page-right
 
-![](task2b.html){width="800" height="650"}
+![](task2b.html){width="850" height="800"}
 
 ::: 
 
@@ -41,6 +45,51 @@ author:
 
 ::: column-page-right
 
-![](task2c.html){width="800" height="650"}
+![](task2c.html){width="800" height="700"}
 
 ::: 
+
+
+----
+
+# Literature
+
+
+## Tasks used in Other Studes
+
+### 
+
+[link to code](https://osf.io/6venh/) \ 
+[link to paper](https://cocosci.princeton.edu/papers/callawayrationaluse.pdf) \ 
+[link to live task demo](https://roadtrip-task-demo.netlify.app/) \ 
+
+![Figure from @callawayRationalUseCognitive2022 ](images/callaway_drive1.png)
+
+
+----
+
+Ho, M. K., Abel, D., Correa, C. G., Littman, M. L., Cohen, J. D., & Griffiths, T. L. (2022). People construct simplified mental representations to plan. Nature, 1–8.  https://doi.org/10.1038/s41586-022-04743-9
+
+![Figure from Ho et al. 2022 ](images/ho_drive1.png)
+
+
+Ho, M. K., Abel, D., Correa, C. G., Littman, M. L., Cohen, J. D., & Griffiths, T. L. (2021). Control of mental representations in human planning. arXiv:2105.06948 [Cs].  http://arxiv.org/abs/2105.06948
+
+![Figure from Ho et al. 2021 ](images/ho_drive2.png)
+
+-----
+
+Krafft, P. M., Hawkins, R. X., Pentland, A., Goodman, N. D., & Tenenbaum, J. B. (2015). Emergent Collective Sensing in Human Groups. In CogSci.
+https://people.csail.mit.edu/pkrafft/papers/krafft-et-al-2015-emergent.pdf
+
+![Figure from Krafft et al. 2015 ](images/Kraft_drive1.png)
+
+
+
+
+----
+
+Tsirtsis, S., Gomez Rodriguez, M., & Gerstenberg, T. (2024). **Towards a computational model of responsibility judgments in sequential human-AI collaboration.** In Proceedings of the Annual Meeting of the Cognitive Science Society (Vol. 46). https://osf.io/preprints/psyarxiv/m4yad
+
+
+![Figure from @tsirtsisComputationalModelResponsibility2024 ](images/Tsirtsis_drive1.png)

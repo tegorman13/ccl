@@ -1,6 +1,6 @@
 # Individual decision lit
 Thomas E. Gorman
-2024-09-30
+2024-10-01
 
 - [(Ir)rationality and cognitive biases in large language
   models.](#irrationality-and-cognitive-biases-in-large-language-models)
@@ -45,6 +45,11 @@ Thomas E. Gorman
 - [Cognitive ease at a cost: LLMs reduce mental effort but compromise
   depth in student scientific
   inquiry](#cognitive-ease-at-a-cost-llms-reduce-mental-effort-but-compromise-depth-in-student-scientific-inquiry)
+- [Cognitive LLMs: Towards Integrating Cognitive Architectures and Large
+  Language Models for Manufacturing
+  Decision-making](#cognitive-llms-towards-integrating-cognitive-architectures-and-large-language-models-for-manufacturing-decision-making)
+- [Large Language Models Amplify Human Biases in Moral
+  Decision-Making](#large-language-models-amplify-human-biases-in-moral-decision-making)
 
 ## (Ir)rationality and cognitive biases in large language models.
 
@@ -53,7 +58,9 @@ cognitive biases in large language models** Royal Society Open Science,
 11(6), 240255. https://doi.org/10.1098/rsos.240255
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -78,6 +85,7 @@ rational reasoning.
 </div>
 
 </details>
+
 <div id="fig-macmillian">
 
 ![](images/Macmillian_24_img2.png)
@@ -96,7 +104,9 @@ disappeared in ChatGPT.** Nature Computational Science, 3(10), 833–838.
 https://doi.org/10.1038/s43588-023-00527-x
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -123,6 +133,7 @@ uncover previously undetected emergent characteristics.
 </div>
 
 </details>
+
 <div id="fig-macmillian">
 
 ![](images/Hagendorff_23_img1.png)
@@ -142,7 +153,9 @@ understand GPT-3.** Proceedings of the National Academy of Sciences,
 120(6), e2218523120. https://doi.org/10.1073/pnas.2218523120
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -177,7 +190,9 @@ reasoning in humans and machines.** Communications Psychology, 2(1),
 1–16. https://doi.org/10.1038/s44271-024-00091-8
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -214,7 +229,9 @@ language models.** Journal of Experimental Psychology: General, 153(7),
 1838–1860. https://doi.org/10.1037/xge0001607
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -257,7 +274,9 @@ and Experimental Finance, 100971.
 https://doi.org/10.1016/j.jbef.2024.100971
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -291,7 +310,9 @@ the National Academy of Sciences, 121(9), e2313925121.
 https://doi.org/10.1073/pnas.2313925121
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -328,7 +349,9 @@ Human-Computer Interaction, 6(CSCW1), 1–22.
 https://doi.org/10.1145/3512930
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -361,6 +384,7 @@ confidence and is incorrect.
 </div>
 
 </details>
+
 <div id="fig-rastogi">
 
 ![](images/Rastogi_24_img1.png)
@@ -379,7 +403,9 @@ Improving user perceptions and compliance.** Computers in Human
 Behavior, 144, 107714. https://doi.org/10.1016/j.chb.2023.107714
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -420,7 +446,9 @@ chatbots.** Scientific Reports, 14(1), 7095.
 https://doi.org/10.1038/s41598-024-55949-y
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -461,7 +489,9 @@ using GPT-3.5.** Journal of Experimental Psychology: General, 153(4),
 1066–1075. https://doi.org/10.1037/xge0001547
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -505,7 +535,9 @@ Goli, A., & Singh, A. (2024). **Can Large Language Models Capture Human
 Preferences?** Marketing Science. https://doi.org/10.1287/mksc.2023.0306
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -540,6 +572,7 @@ different customers and contexts.
 </div>
 
 </details>
+
 <div id="fig-goli">
 
 ![](images/Goli_24_img1.png)
@@ -558,7 +591,9 @@ models, like humans, show content effects on reasoning tasks.** PNAS
 Nexus, 3(7), pgae233. https://doi.org/10.1093/pnasnexus/pgae233
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -603,7 +638,9 @@ economic rationality of GPT.** Proceedings of the National Academy of
 Sciences, 120(51), e2316205120. https://doi.org/10.1073/pnas.2316205120
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -641,7 +678,9 @@ persuasion at scale.** Scientific Reports, 14(1), 4692.
 https://doi.org/10.1038/s41598-024-53755-0
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -679,7 +718,9 @@ Paradoxes.** Proceedings of the Annual Meeting of the Cognitive Science
 Society, 46. https://arxiv.org/abs/2406.11426
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -714,7 +755,9 @@ Design.** Transactions of the Association for Computational Linguistics,
 12, 1011–1026. https://doi.org/10.1162/tacl_a_00685
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -752,7 +795,9 @@ scientific inquiry.** Computers in Human Behavior, 160, 108386.
 https://doi.org/10.1016/j.chb.2024.108386
 
 <details open class="relevant-callout">
+
 <summary>
+
 Abstract
 </summary>
 
@@ -785,6 +830,93 @@ high-quality learning per se.
 
 Stadler et al. (2024)
 
+## Cognitive LLMs: Towards Integrating Cognitive Architectures and Large Language Models for Manufacturing Decision-making
+
+Wu, S., Oltramari, A., Francis, J., Giles, C. L., & Ritter, F. E.
+(2024). **Cognitive LLMs: Towards Integrating Cognitive Architectures
+and Large Language Models for Manufacturing Decision-making**
+(arXiv:2408.09176). arXiv. http://arxiv.org/abs/2408.09176
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Resolving the dichotomy between the human-like yet constrained reasoning
+processes of Cognitive Architectures and the broad but often noisy
+inference behavior of Large Language Models (LLMs) remains a challenging
+but exciting pursuit, for enabling reliable machine reasoning
+capabilities in production systems. Because Cognitive Architectures are
+famously developed for the purpose of modeling the internal mechanisms
+of human cognitive decision-making at a computational level, new
+investigations consider the goal of informing LLMs with the knowledge
+necessary for replicating such processes, e.g., guided perception,
+memory, goal-setting, and action. Previous approaches that use LLMs for
+grounded decision-making struggle with complex reasoning tasks that
+require slower, deliberate cognition over fast and intuitive
+inference—reporting issues related to the lack of sufficient grounding,
+as in hallucination. To resolve these challenges, we introduce LLM-ACTR,
+a novel neurosymbolic architecture that provides human-aligned and
+versatile decision-making by integrating the ACT-R Cognitive
+Architecture with LLMs. Our framework extracts and embeds knowledge of
+ACT-R’s internal decision-making process as latent neural
+representations, injects this information into trainable LLM adapter
+layers, and fine-tunes the LLMs for downstream prediction. Our
+experiments on novel Design for Manufacturing tasks show both improved
+task performance as well as improved grounded decision-making capability
+of our approach, compared to LLM-only baselines that leverage
+chain-of-thought reasoning strategies.
+
+</div>
+
+</details>
+
+## Large Language Models Amplify Human Biases in Moral Decision-Making
+
+Cheung, V., Maier, M., & Lieder, F. (2024). **Large Language Models
+Amplify Human Biases in Moral Decision-Making** (https://osf.io/3kvjd/).
+https://doi.org/10.31234/osf.io/aj46b
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+As large language models (LLMs) become more widely used, people
+increasingly rely on them to make or advise on moral decisions. Some
+researchers even propose using LLMs as participants in psychology
+experiments. It is therefore important to understand how well LLMs make
+moral decisions and how they compare to humans. We investigated this
+question in realistic moral dilemmas using prompts where GPT-4, Llama 3,
+and Claude 3 give advice and where they emulate a research participant.
+In Study 1, we compared responses from LLMs to a representative US
+sample (N = 285) for 22 dilemmas: social dilemmas that pitted
+self-interest against the greater good, and moral dilemmas that pitted
+utilitarian cost-benefit reasoning against deontological rules. In
+social dilemmas, LLMs were more altruistic than participants. In moral
+dilemmas, LLMs exhibited stronger omission bias than participants: they
+usually endorsed inaction over action. In Study 2 (N = 490,
+preregistered), we replicated this omission bias and document an
+additional bias: unlike humans, LLMs (except GPT-4o) tended to answer
+“no” in moral dilemmas, whereby the phrasing of the question influences
+the decision even when physical action remains the same. Our findings
+show that LLM moral decision-making amplifies human biases and
+introduces potentially problematic biases.Cheung
+
+</div>
+
+</details>
+
+![Figure from Cheung et al. (2024)](images/Cheung_24_img.png)
+
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0" line-spacing="2">
 
@@ -810,6 +942,14 @@ Chen, Y., Liu, T. X., Shan, Y., & Zhong, S. (2023). The emergence of
 economic rationality of GPT. *Proceedings of the National Academy of
 Sciences*, *120*(51), e2316205120.
 <https://doi.org/10.1073/pnas.2316205120>
+
+</div>
+
+<div id="ref-cheungLargeLanguageModels2024" class="csl-entry">
+
+Cheung, V., Maier, M., & Lieder, F. (2024). *Large Language Models
+Amplify Human Biases in Moral Decision-Making*.
+<https://doi.org/10.31234/osf.io/aj46b>
 
 </div>
 
