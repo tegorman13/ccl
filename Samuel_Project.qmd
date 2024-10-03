@@ -92,6 +92,44 @@ Click on one of the tasks to activate, then use the arrow keys to control the ca
 
 ## Tasks used in Other Studes
 
+
+
+### Structuring Knowledge with Cognitive Maps and Cognitive Graphs. 
+
+Peer, M., Brunec, I. K., Newcombe, N. S., & Epstein, R. A. (2021). **Structuring Knowledge with Cognitive Maps and Cognitive Graphs.** Trends in Cognitive Sciences, 25(1), 37–54. https://doi.org/10.1016/j.tics.2020.10.004
+
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Humans and animals use mental representations of the spatial structure of the
+world to navigate. The classical view is that these representations take the
+form of Euclidean cognitive maps, but alternative theories suggest that they
+are cognitive graphs consisting of locations connected by paths. We review
+evidence suggesting that both map-like and graph-like representations exist in
+the mind/brain that rely on partially overlapping neural systems. Maps and
+graphs can operate simultaneously or separately, and they may be applied to
+both spatial and nonspatial knowledge. By providing structural frameworks for
+complex information, cognitive maps and cognitive graphs may provide fundamental organizing schemata that allow us to navigate in physical, social, and
+conceptual spaces.
+</div>
+</details>
+
+
+::: {#fig-peer layout-ncol=1}
+
+![](images/peer1.png)
+
+![](images/peer2.png)
+
+![](images/peer3.png)
+
+Figures from @peerStructuringKnowledgeCognitive2021
+:::
+
+
+---
+
 ### Wormholes in virtual space: From cognitive maps to cognitive graphs
 
 Warren, W. H., Rothman, D. B., Schnapp, B. H., & Ericson, J. D. (2017). **Wormholes in virtual space: From cognitive maps to cognitive graphs.** Cognition, 166, 152–163. https://doi.org/10.1016/j.cognition.2017.05.020
@@ -185,3 +223,15 @@ Mugan, U., & MacIver, M. A. (2020). **Spatial planning with long visual range be
 [code repository](https://github.com/MacIver-Lab/plangame) \
 
 ![Figure from @muganSpatialPlanningLong2020 ](images/Mugan_drive1.png)
+
+
+---
+
+### Pattern-Driven Navigation in 2D Multiscale Visualizations with Scalable Insets.
+
+Lekschas, F., Behrisch, M., Bach, B., Kerpedjiev, P., Gehlenborg, N., & Pfister, H. (2020). **Pattern-Driven Navigation in 2D Multiscale Visualizations with Scalable Insets.** IEEE Transactions on Visualization and Computer Graphics, 26(1), 611–621. IEEE Transactions on Visualization and Computer Graphics. https://doi.org/10.1109/TVCG.2019.2934555
+
+[link to code on github](https://github.com/flekschas/higlass-scalable-insets)
+
+
+![Figure from @lekschasPatternDrivenNavigation2D2020](images/Lekschas.png)
