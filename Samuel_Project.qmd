@@ -330,3 +330,42 @@ Navigation is essential to life, and it is cognitively complex, drawing on abili
 
 Figures from @baeWayfindingPairsComparing2024
 :::
+
+---
+
+### Individual and collective foraging in autonomous search agents with human intervention
+
+
+Schloesser, D. S., Hollenbeck, D., & Kello, C. T. (2021). **Individual and collective foraging in autonomous search agents with human intervention.** Scientific Reports, 11(1), Article 1. https://doi.org/10.1038/s41598-021-87717-7
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Humans and other complex organisms exhibit intelligent behaviors as individual agents and as groups of coordinated agents. They can switch between independent and collective modes of behavior, and flexible switching can be advantageous for adapting to ongoing changes in conditions. In the present study, we investigated the flexibility between independent and collective modes of behavior in a simulated social foraging task designed to benefit from both modes: distancing among ten foraging agents promoted faster detection of resources, whereas flocking promoted faster consumption. There was a tradeoff between faster detection versus faster consumption, but both factors contributed to foraging success. Results showed that group foraging performance among simulated agents was enhanced by loose coupling that balanced distancing and flocking among agents and enabled them to fluidly switch among a variety of groupings. We also examined the effects of more sophisticated cognitive capacities by studying how human players improve performance when they control one of the search agents. Results showed that human intervention further enhanced group performance with loosely coupled agents, and human foragers performed better when coordinating with loosely coupled agents. Humans players adapted their balance of independent versus collective search modes in response to the dynamics of simulated agents, thereby demonstrating the importance of adaptive flexibility in social foraging.
+</div>
+</details>
+
+
+::: {#fig-bae layout-ncol=2}
+
+![](images/Kello1.png)
+
+![](images/Kello2.png)
+
+
+Figures from @schloesserIndividualCollectiveForaging2021
+:::
+
+----
+
+\
+
+Alharbi, A. H., Khafaga, D. S., El-kenawy, E.-S. M., Eid, M. M., Ibrahim, A., Abualigah, L., Khodadadi, N., & Abdelhamid, A. A. (2024). **Optimizing electric vehicle paths to charging stations using parallel greylag goose algorithm and Restricted Boltzmann Machines.** Frontiers in Energy Research, 12. https://doi.org/10.3389/fenrg.2024.1401330
+
+
+
+Garg, K., Kello, C. T., & Smaldino, P. E. (2022). **Individual exploration and selective social learning: Balancing exploration–exploitation trade-offs in collective foraging.** Journal of The Royal Society Interface, 19(189), 20210915. https://doi.org/10.1098/rsif.2021.0915
+
+
+
+Mezey, D., Deffner, D., Kurvers, R. H. J. M., & Romanczuk, P. (2024). **Visual social information use in collective foraging.** PLOS Computational Biology, 20(5), e1012087. https://doi.org/10.1371/journal.pcbi.1012087
