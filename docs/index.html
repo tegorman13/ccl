@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Thomas E. Gorman">
-<meta name="dcterms.date" content="2024-10-01">
+<meta name="dcterms.date" content="2024-10-04">
 
 <title>CCL Projects</title>
 <style>
@@ -32,6 +32,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,7 +70,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-sample-listings .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-sample-listings'] = new List('listing-sample-listings', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="Assets/Style/calloutTG.css">
 </head>
@@ -166,7 +226,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Samuel_Project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Samuel</span></a>
+ <span class="menu-text">Samuel’s Project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -214,7 +274,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 1, 2024</p>
+      <p class="date">October 4, 2024</p>
     </div>
   </div>
   
@@ -229,7 +289,143 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-grid" id="listing-sample-listings">
+<div class="list grid quarto-listing-cols-2">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1727711178283" data-listing-reading-time-sort="5" data-listing-word-count-sort="998">
+<a href="./tms.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="images/Bienefeld_23_img.png" style="height: 500px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Transactive Memory Systems
+</h5>
+<div class="card-text listing-description">
+Bienefeld, N., Kolbe, M., Camen, G., Huser, D., &amp; Buehler, P. K. (2023). Human-AI teaming: Leveraging transactive memory and speaking up for enhanced team effectiveness.…
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+Thomas E. Gorman
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1727934527676" data-listing-reading-time-sort="14" data-listing-word-count-sort="2716">
+<a href="./Samuel_Project.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="images/peer1.png" style="height: 500px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Samuel’s Project
+</h5>
+<div class="card-text listing-description">
+Click on one of the tasks to activate, then use the arrow keys to control the car
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+Thomas E. Gorman
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1727714257086" data-listing-reading-time-sort="9" data-listing-word-count-sort="1706">
+<a href="./chapter_structure.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 500px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Possible Chapter Structures
+</h5>
+<div class="card-text listing-description">
+Brainstorming chapter structures with the help of various AI assistants:
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+Thomas E. Gorman
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="3" data-listing-date-sort="1728014400000" data-listing-file-modified-sort="1728075111939" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3774">
+<a href="./ai_gd.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="images/marjieh_24_img.png" alt="Figure from Marjieh et al. (2024)" style="height: 500px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Literature Notes
+</h5>
+<div class="card-text listing-description">
+Marjieh, R., Gokhale, A., Bullo, F., &amp; Griffiths, T. L. (2024). <strong>Task Allocation in Teams as a Multi-Armed Bandit.</strong> https://cocosci.princeton.edu/papers/marjieh2024task.pdf
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Thomas E. Gorman
+</div>
+<div class="listing-date">
+Oct 4, 2024
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="4" data-listing-date-sort="1728014400000" data-listing-file-modified-sort="1728074987617" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="24" data-listing-word-count-sort="4739">
+<a href="./ai_decision.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="images/Bucina1.png" alt="Figure from Buçinca et al. (2021)" style="height: 500px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Individual decision lit
+</h5>
+<div class="card-text listing-description">
+Buçinca, Z., Malaya, M. B., &amp; Gajos, K. Z. (2021). <strong>To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-assisted Decision-making.</strong> Proceedings…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Thomas E. Gorman
+</div>
+<div class="listing-date">
+Oct 4, 2024
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="5" data-listing-date-sort="1728014400000" data-listing-file-modified-sort="1727665402306" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1545">
+<a href="./Driving.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 500px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Driving Lit
+</h5>
+<div class="card-text listing-description">
+Basu, C., &amp; Singhal, M. (n.d.). Trust Dynamics in Human Autonomous Vehicle Interaction: A Review of Trust Models.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Thomas E. Gorman
+</div>
+<div class="listing-date">
+Oct 4, 2024
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

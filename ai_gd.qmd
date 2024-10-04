@@ -351,3 +351,20 @@ In the rapidly evolving landscape of artificial intelligence (AI), the collabora
 </details>
 
 ![Table from @vatsSurveyHumanAITeaming2024](images/Vats_24_img.png)
+
+
+
+---
+
+## Conversational Agent Dynamics with Minority Opinion and Cognitive Conflict in Small-Group Decision-Making.
+
+Nishida, Y., Shimojo, S., & Hayashi, Y. (2024). Conversational Agent Dynamics with Minority Opinion and Cognitive Conflict in Small-Group Decision-Making. Japanese Psychological Research. https://doi.org/10.1111/jpr.12552
+
+<details class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+This study investigated the impact of group discussions with text-based conversational agents on risk-taking decision-making, which has been under-researched. We also focused on the influence of opinion patterns presented by the agents during discussions and attitudes toward these agents. Through an online experiment, 430 participants read a decision-seeking scenario and expressed the degree of risk they were willing to take. After viewing the text-based opinions of six agents and having a discussion with the agents, participants expressed the degree of risk they were willing to take for the same scenario. The result showed that participants' risk-taking decisions shifted toward the agents' group opinions, regardless of whether the agents' opinions tended to be risky or cautious. Additionally, when the agents' group opinions were more risk-biased and included a minority opinion, a significant association existed between the degree of the participants' shift to a riskier decision and their positive attitudes toward the agents. The agents' group opinions guided participants toward both risky and cautious decisions, and participants' attitudes toward the agents were associated with their decision-making, albeit to a limited extent.
+</div>
+</details>
+
+![Figure from @nishidaConversationalAgentDynamics](images/Nishida.png)

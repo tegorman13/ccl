@@ -1,7 +1,10 @@
 # Individual decision lit
 Thomas E. Gorman
-2024-10-01
+2024-10-04
 
+- [To Trust or to Think: Cognitive Forcing Functions Can Reduce
+  Overreliance on AI in AI-assisted
+  Decision-making](#to-trust-or-to-think-cognitive-forcing-functions-can-reduce-overreliance-on-ai-in-ai-assisted-decision-making)
 - [(Ir)rationality and cognitive biases in large language
   models.](#irrationality-and-cognitive-biases-in-large-language-models)
 - [Human-like intuitive behavior and reasoning biases emerged in large
@@ -50,6 +53,53 @@ Thomas E. Gorman
   Decision-making](#cognitive-llms-towards-integrating-cognitive-architectures-and-large-language-models-for-manufacturing-decision-making)
 - [Large Language Models Amplify Human Biases in Moral
   Decision-Making](#large-language-models-amplify-human-biases-in-moral-decision-making)
+
+## To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-assisted Decision-making
+
+Buçinca, Z., Malaya, M. B., & Gajos, K. Z. (2021). **To Trust or to
+Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in
+AI-assisted Decision-making.** Proceedings of the ACM on Human-Computer
+Interaction, 5(CSCW1), 1–21. https://doi.org/10.1145/3449287
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+People supported by AI-powered decision support tools frequently
+overrely on the AI: they accept an AI’s suggestion even when that
+suggestion is wrong. Adding explanations to the AI decisions does not
+appear to reduce the overreliance and some studies suggest that it might
+even increase it. Informed by the dual-process theory of cognition, we
+posit that people rarely engage analytically with each individual AI
+recommendation and explanation, and instead develop general heuristics
+about whether and when to follow the AI suggestions. Building on prior
+research on medical decision-making, we designed three cognitive forcing
+interventions to compel people to engage more thoughtfully with the
+AI-generated explanations. We conducted an experiment (N=199), in which
+we compared our three cognitive forcing designs to two simple
+explainable AI approaches and to a no-AI baseline. The results
+demonstrate that cognitive forcing significantly reduced overreliance
+compared to the simple explainable AI approaches. However, there was a
+trade-off: people assigned the least favorable subjective ratings to the
+designs that reduced the overreliance the most. To audit our work for
+intervention-generated inequalities, we investigated whether our
+interventions benefited equally people with different levels of Need for
+Cognition (i.e., motivation to engage in effortful mental activities).
+Our results show that, on average, cognitive forcing interventions
+benefited participants higher in Need for Cognition more. Our research
+suggests that human cognitive motivation moderates the effectiveness of
+explainable AI solutions.
+
+</div>
+
+</details>
+
+![Figure from Buçinca et al. (2021)](images/Bucina1.png)
 
 ## (Ir)rationality and cognitive biases in large language models.
 
@@ -933,6 +983,16 @@ language models. *Journal of Experimental Psychology: General*,
 Binz, M., & Schulz, E. (2023). Using cognitive psychology to understand
 GPT-3. *Proceedings of the National Academy of Sciences*, *120*(6),
 e2218523120. <https://doi.org/10.1073/pnas.2218523120>
+
+</div>
+
+<div id="ref-bucincaTrustThinkCognitive2021" class="csl-entry">
+
+Buçinca, Z., Malaya, M. B., & Gajos, K. Z. (2021). To Trust or to Think:
+Cognitive Forcing Functions Can Reduce Overreliance on AI in
+<span class="nocase">AI-assisted Decision-making</span>. *Proceedings of
+the ACM on Human-Computer Interaction*, *5*(CSCW1), 1–21.
+<https://doi.org/10.1145/3449287>
 
 </div>
 

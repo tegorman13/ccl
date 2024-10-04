@@ -16,4 +16,12 @@ format:
       margin-width: 170px
       gutter-width: 1.5rem
     self-contained: false
+listing:
+  id: sample-listings
+  type: grid #default
+  grid-columns: 2
+  sort:
+    - "date desc"
+    - "title desc"
+  image-height: 500px
 ---
