@@ -53,6 +53,10 @@ Thomas E. Gorman
   Decision-making](#cognitive-llms-towards-integrating-cognitive-architectures-and-large-language-models-for-manufacturing-decision-making)
 - [Large Language Models Amplify Human Biases in Moral
   Decision-Making](#large-language-models-amplify-human-biases-in-moral-decision-making)
+- [Large Language Model Recall Uncertainty is Modulated by the Fan
+  Effect.](#large-language-model-recall-uncertainty-is-modulated-by-the-fan-effect)
+- [Accuracy-Time Tradeoffs in AI-Assisted Decision Making under Time
+  Pressure.](#accuracy-time-tradeoffs-in-ai-assisted-decision-making-under-time-pressure)
 
 ## To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-assisted Decision-making
 
@@ -959,13 +963,72 @@ additional bias: unlike humans, LLMs (except GPT-4o) tended to answer
 “no” in moral dilemmas, whereby the phrasing of the question influences
 the decision even when physical action remains the same. Our findings
 show that LLM moral decision-making amplifies human biases and
-introduces potentially problematic biases.Cheung
+introduces potentially problematic biases.
 
 </div>
 
 </details>
 
 ![Figure from Cheung et al. (2024)](images/Cheung_24_img.png)
+
+## Large Language Model Recall Uncertainty is Modulated by the Fan Effect.
+
+Roberts, J., Moore, K., Pham, T., Ewaleifoh, O., & Fisher, D. (2024).
+**Large Language Model Recall Uncertainty is Modulated by the Fan
+Effect.**
+
+![Figure from Roberts et al. (2024)](images/Roberts1.png)
+
+------------------------------------------------------------------------
+
+## Accuracy-Time Tradeoffs in AI-Assisted Decision Making under Time Pressure.
+
+Swaroop, S., Buçinca, Z., Gajos, K. Z., & Doshi-Velez, F. (2024).
+**Accuracy-Time Tradeoffs in AI-Assisted Decision Making under Time
+Pressure.** Proceedings of the 29th International Conference on
+Intelligent User Interfaces, 138–154.
+https://doi.org/10.1145/3640543.3645206
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+In settings where users both need high accuracy and are timepressured,
+such as doctors working in emergency rooms, we want to provide AI
+assistance that both increases decision accuracy and reduces
+decision-making time. Current literature focusses on how users interact
+with AI assistance when there is no time pressure, finding that
+different AI assistances have different benefits: some can reduce time
+taken while increasing overreliance on AI, while others do the opposite.
+The precise benefit can depend on both the user and task. In
+time-pressured scenarios, adapting when we show AI assistance is
+especially important: relying on the AI assistance can save time, and
+can therefore be beneficial when the AI is likely to be right. We would
+ideally adapt what AI assistance we show depending on various properties
+(of the task and of the user) in order to best trade off accuracy and
+time. We introduce a study where users have to answer a series of logic
+puzzles. We find that time pressure affects how users use different AI
+assistances, making some assistances more beneficial than others when
+compared to notime-pressure settings. We also find that a user’s
+overreliance rate is a key predictor of their behaviour: overreliers and
+not-overreliers use different AI assistance types differently. We find
+marginal correlations between a user’s overreliance rate (which is
+related to the user’s trust in AI recommendations) and their personality
+traits (Big Five Personality traits). Overall, our work suggests that AI
+assistances have different accuracy-time tradeoffs when people are under
+time pressure compared to no time pressure, and we explore how we might
+adapt AI assistances in this setting.
+
+</div>
+
+</details>
+
+![Figure from Swaroop et al. (2024)](images/Swaroop1.png)
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0" line-spacing="2">
@@ -1096,6 +1159,14 @@ of the ACM on Human-Computer Interaction*, *6*(CSCW1), 1–22.
 
 </div>
 
+<div id="ref-robertsLargeLanguageModel2024" class="csl-entry">
+
+Roberts, J., Moore, K., Pham, T., Ewaleifoh, O., & Fisher, D. (2024).
+*Large Language Model Recall Uncertainty is Modulated by the Fan
+Effect*.
+
+</div>
+
 <div id="ref-stadlerCognitiveEaseCost2024" class="csl-entry">
 
 Stadler, M., Bannert, M., & Sailer, M. (2024). Cognitive ease at a cost:
@@ -1111,6 +1182,17 @@ Suri, G., Slater, L. R., Ziaee, A., & Nguyen, M. (2024). Do large
 language models show decision heuristics similar to humans? A case study
 using GPT-35. *Journal of Experimental Psychology: General*, *153*(4),
 1066–1075. <https://doi.org/10.1037/xge0001547>
+
+</div>
+
+<div id="ref-swaroopAccuracyTimeTradeoffsAIAssisted2024"
+class="csl-entry">
+
+Swaroop, S., Buçinca, Z., Gajos, K. Z., & Doshi-Velez, F. (2024).
+Accuracy-Time Tradeoffs in AI-Assisted Decision Making under Time
+Pressure. *Proceedings of the 29th International Conference on
+Intelligent User Interfaces*, 138–154.
+<https://doi.org/10.1145/3640543.3645206>
 
 </div>
 

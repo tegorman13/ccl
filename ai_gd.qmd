@@ -147,6 +147,39 @@ Collective intelligence underpins the success of groups, organizations, markets 
 
 \
 
+## Towards Human-AI Deliberation: Design and Evaluation of LLM-Empowered Deliberative AI for AI-Assisted Decision-Making
+
+Ma, S., Chen, Q., Wang, X., Zheng, C., Peng, Z., Yin, M., & Ma, X. (2024). **Towards Human-AI Deliberation: Design and Evaluation of LLM-Empowered Deliberative AI for AI-Assisted Decision-Making** (arXiv:2403.16812). arXiv. http://arxiv.org/abs/2403.16812
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+In AI-assisted decision-making, humans often passively review AI’s suggestion and decide whether to accept or reject it as a whole. In such a paradigm, humans are found to rarely trigger analytical thinking and face difficulties in communicating the nuances of conflicting opinions to the AI when disagreements occur. To tackle this challenge, we propose Human-AI Deliberation, a novel framework to promote human reflection and discussion on conflicting human-AI opinions in decision-making. Based on theories in human deliberation, this framework engages humans and AI in dimension-level opinion elicitation, deliberative discussion, and decision updates. To empower AI with deliberative capabilities, we designed Deliberative AI, which leverages large language models (LLMs) as a bridge between humans and domain-specific models to enable flexible conversational interactions and faithful information provision. An exploratory evaluation on a graduate admissions task shows that Deliberative AI outperforms conventional explainable AI (XAI) assistants in improving humans’ appropriate reliance and task performance. Based on a mixed-methods analysis of participant behavior, perception, user experience, and open-ended feedback, we draw implications for future AI-assisted decision tool design.
+</div>
+</details>
+
+
+::: {#fig-ma layout-ncol=1}
+![](images/Ma_Ming1.png)
+
+![](images/Ma_Ming2.png)
+
+![](images/Ma_Ming3.png)
+
+![](images/Ma_Ming4.png)
+
+![](images/Ma_Ming5a.png)
+
+![](images/Ma_Ming5b.png)
+
+Figure from @maHumanAIDeliberationDesign2024
+:::
+
+
+
+
+
+
 ## Enhancing AI-Assisted Group Decision Making through LLM-Powered Devil’s Advocate.
 
 Chiang, C.-W., Lu, Z., Li, Z., & Yin, M. (2024). **Enhancing AI-Assisted Group Decision Making through LLM-Powered Devil’s Advocate.** Proceedings of the 29th International Conference on Intelligent User Interfaces, 103–119. https://doi.org/10.1145/3640543.3645199
@@ -358,7 +391,7 @@ In the rapidly evolving landscape of artificial intelligence (AI), the collabora
 
 ## Conversational Agent Dynamics with Minority Opinion and Cognitive Conflict in Small-Group Decision-Making.
 
-Nishida, Y., Shimojo, S., & Hayashi, Y. (2024). Conversational Agent Dynamics with Minority Opinion and Cognitive Conflict in Small-Group Decision-Making. Japanese Psychological Research. https://doi.org/10.1111/jpr.12552
+Nishida, Y., Shimojo, S., & Hayashi, Y. (2024). **Conversational Agent Dynamics with Minority Opinion and Cognitive Conflict in Small-Group Decision-Making.** Japanese Psychological Research. https://doi.org/10.1111/jpr.12552
 
 <details class="relevant-callout">
 <summary>Abstract</summary>
