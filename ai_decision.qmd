@@ -393,3 +393,38 @@ In settings where users both need high accuracy and are timepressured, such as d
 </details>
 
 ![Figure from @swaroopAccuracyTimeTradeoffsAIAssisted2024](images/Swaroop1.png)
+
+
+
+## The LLM Effect: Are Humans Truly Using LLMs, or Are They Being Influenced By Them Instead?
+
+Choi, A. S., Akter, S. S., Singh, J. P., & Anastasopoulos, A. (2024). **The LLM Effect: Are Humans Truly Using LLMs, or Are They Being Influenced By Them Instead?** (arXiv:2410.04699). arXiv. http://arxiv.org/abs/2410.04699
+
+
+<details class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Large Language Models (LLMs) have shown capabilities close to human performance in various analytical tasks, leading researchers to use them for time and labor-intensive analyses. However, their capability to handle highly specialized and open-ended tasks in domains like policy studies remains in question. This paper investigates the efficiency and accuracy of LLMs in specialized tasks through a structured user study focusing on Human-LLM partnership. The study, conducted in two stages-Topic Discovery and Topic Assignment-integrates LLMs with expert annotators to observe the impact of LLM suggestions on what is usually human-only analysis. Results indicate that LLM-generated topic lists have significant overlap with human generated topic lists, with minor hiccups in missing document-specific topics. However, LLM suggestions may significantly improve task completion speed, but at the same time introduce anchoring bias, potentially affecting the depth and nuance of the analysis, raising a critical question about the trade-off between increased efficiency and the risk of biased analysis.
+</div>
+</details>
+
+
+![Figure from @choiLLMEffectAre2024 ](images/choi1.png)
+
+
+
+## Mutual Theory of Mind in Human-AI Collaboration: An Empirical Study with LLM-driven AI Agents in a Real-time Shared Workspace Task
+
+
+Zhang, S., Wang, X., Zhang, W., Chen, Y., Gao, L., Wang, D., Zhang, W., Wang, X., & Wen, Y. (2024). **Mutual Theory of Mind in Human-AI Collaboration: An Empirical Study with LLM-driven AI Agents in a Real-time Shared Workspace Task** (arXiv:2409.08811). arXiv. http://arxiv.org/abs/2409.08811
+
+
+<details class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Theory of Mind (ToM) significantly impacts human collaboration and communication as a crucial capability to understand others. When AI agents with ToM capability collaborate with humans, Mutual Theory of Mind (MToM) arises in such human-AI teams (HATs). The MToM process, which involves interactive communication and ToM-based strategy adjustment, affects the team's performance and collaboration process. To explore the MToM process, we conducted a mixed-design experiment using a large language model-driven AI agent with ToM and communication modules in a real-time shared-workspace task. We find that the agent's ToM capability does not significantly impact team performance but enhances human understanding of the agent and the feeling of being understood. Most participants in our study believe verbal communication increases human burden, and the results show that bidirectional communication leads to lower HAT performance. We discuss the results' implications for designing AI agents that collaborate with humans in real-time shared workspace tasks.
+</div>
+</details>
+
+
+![Figure from @zhangMutualTheoryMind2024](images/zhang_tom1.png)

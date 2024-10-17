@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tegorman13.github.io/ccl/tms.html</loc>
-    <lastmod>2024-09-30T15:46:18.283Z</lastmod>
+    <lastmod>2024-10-17T05:56:32.182Z</lastmod>
   </url>
   <url>
     <loc>https://tegorman13.github.io/ccl/chapter_structure.html</loc>
@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://tegorman13.github.io/ccl/ai_decision.html</loc>
-    <lastmod>2024-10-04T20:56:32.501Z</lastmod>
+    <lastmod>2024-10-17T04:37:19.653Z</lastmod>
   </url>
   <url>
     <loc>https://tegorman13.github.io/ccl/Driving.html</loc>
@@ -22,10 +22,14 @@
   </url>
   <url>
     <loc>https://tegorman13.github.io/ccl/ai_gd.html</loc>
-    <lastmod>2024-10-04T21:14:20.748Z</lastmod>
+    <lastmod>2024-10-17T05:10:53.867Z</lastmod>
   </url>
   <url>
     <loc>https://tegorman13.github.io/ccl/index.html</loc>
     <lastmod>2024-10-04T20:52:34.233Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/ccl/llm_energy.html</loc>
+    <lastmod>2024-10-17T05:57:21.931Z</lastmod>
   </url>
 </urlset>

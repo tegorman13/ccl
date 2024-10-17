@@ -36,11 +36,12 @@ website:
       #- index.qmd
       #- text: "---"
       - text: "---"
-      - section: "AI Group Decision Making"
+      - section: "LLM Literature"
         contents:
         - ai_gd.qmd
-        - chapter_structure.qmd
+       ## - chapter_structure.qmd
         - ai_decision.qmd
+        - llm_energy.qmd
       - text: "---"
       - section: "Misc"
         contents:

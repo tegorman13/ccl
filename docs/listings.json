@@ -2,11 +2,12 @@
   {
     "listing": "/index.html",
     "items": [
-      "/tms.html",
       "/Samuel_Project.html",
       "/chapter_structure.html",
-      "/ai_gd.html",
+      "/tms.html",
+      "/llm_energy.html",
       "/ai_decision.html",
+      "/ai_gd.html",
       "/Driving.html"
     ]
   }

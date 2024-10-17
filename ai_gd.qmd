@@ -1,5 +1,5 @@
 ---
-title: "Literature Notes"
+title: "Group Decision Lit"
 author:
 - name: Thomas E. Gorman
   url: https://tegorman13.github.io/
@@ -400,4 +400,62 @@ This study investigated the impact of group discussions with text-based conversa
 </div>
 </details>
 
-![Figure from @nishidaConversationalAgentDynamics](images/Nishida.png)
+![Figure from @nishidaConversationalAgentDynamics2024](images/Nishida.png)
+
+
+
+
+## A Taxonomy for Human-LLM Interaction Modes: An Initial Exploration
+
+Gao, J., Gebreegziabher, S. A., Choo, K. T. W., Li, T. J.-J., Perrault, S. T., & Malone, T. W. (2024). **A Taxonomy for Human-LLM Interaction Modes: An Initial Exploration.** Extended Abstracts of the CHI Conference on Human Factors in Computing Systems, 1–11. https://doi.org/10.1145/3613905.3650786
+
+<details class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+With ChatGPT's release, conversational prompting has become the most popular form of human-LLM interaction. However, its effectiveness is limited for more complex tasks involving reasoning, creativity, and iteration. Through a systematic analysis of HCI papers published since 2021, we identified four key phases in the human-LLM interaction flow - planning, facilitating, iterating, and testing - to precisely understand the dynamics of this process. Additionally, we have developed a taxonomy of four primary interaction modes: Mode 1: Standard Prompting, Mode 2: User Interface, Mode 3: Context-based, and Mode 4: Agent Facilitator. This taxonomy was further enriched using the "5W1H" guideline method, which involved a detailed examination of definitions, participant roles (Who), the phases that happened (When), human objectives and LLM abilities (What), and the mechanics of each interaction mode (How). We anticipate this taxonomy will contribute to the future design and evaluation of human-LLM interaction.
+</div>
+</details>
+
+
+
+
+::: {#fig-gao layout-ncol=2}
+
+![](images/Gao1.png)
+
+![](images/Gao2.png)
+
+![](images/Gao3.png)
+
+![](images/Gao4.png)
+
+
+
+@gaoTaxonomyHumanLLMInteraction2024
+:::
+
+## Talk2Care: An LLM-based Voice Assistant for Communication between Healthcare Providers and Older Adults.
+
+Yang, Z., Xu, X., Yao, B., Rogers, E., Zhang, S., Intille, S., Shara, N., Gao, G. G., & Wang, D. (2024). **Talk2Care: An LLM-based Voice Assistant for Communication between Healthcare Providers and Older Adults.** Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 8(2), 1–35. https://doi.org/10.1145/3659625
+
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Despite the plethora of telehealth applications to assist home-based older adults and healthcare providers, basic messaging and phone calls are still the most common communication methods, which suffer from limited availability, information loss, and process inefficiencies. One promising solution to facilitate patient-provider communication is to leverage large language models (LLMs) with their powerful natural conversation and summarization capability. However, there is a limited understanding of LLMs' role during the communication. We first conducted two interview studies with both older adults (N=10) and healthcare providers (N=9) to understand their needs and opportunities for LLMs in patient-provider asynchronous communication. Based on the insights, we built an LLM-powered communication system, Talk2Care, and designed interactive components for both groups: (1) For older adults, we leveraged the convenience and accessibility of voice assistants (VAs) and built an LLM-powered conversational interface for effective information collection. (2) For health providers, we built an LLM-based dashboard to summarize and present important health information based on older adults' conversations with the VA. We further conducted two user studies with older adults and providers to evaluate the usability of the system. The results showed that Talk2Care could facilitate the communication process, enrich the health information collected from older adults, and considerably save providers' efforts and time. We envision our work as an initial exploration of LLMs' capability in the intersection of healthcare and interpersonal communication.
+</div>
+</details>
+
+
+
+::: {#fig-Yang layout-ncol=2}
+
+![](images/yang1.png)
+
+![](images/yang2.png)
+
+![](images/yang3.png)
+
+@yangTalk2CareLLMbasedVoice2024
+:::
+

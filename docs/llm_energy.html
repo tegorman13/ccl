@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Thomas E. Gorman">
+<meta name="dcterms.date" content="2024-10-17">
+
+<title>LLM Energy – CCL Projects</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-018089954d508eae8a473f0b7f0491f0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d7fd99ce397c84aec22c96c1554796da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="Assets/Style/calloutTG.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ai_gd.html">LLM Literature</a></li><li class="breadcrumb-item"><a href="./llm_energy.html">LLM Energy</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">CCL Projects</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/tegorman13/ccl" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">LLM Literature</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ai_gd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Group Decision Lit</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ai_decision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Individual decision lit</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./llm_energy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">LLM Energy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Misc</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transactive Memory Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Samuel_Project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Samuel’s Project</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Driving.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Driving Lit</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="llm_energy.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li><li><a href="llm_energy_notes.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ai_gd.html">LLM Literature</a></li><li class="breadcrumb-item"><a href="./llm_energy.html">LLM Energy</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">LLM Energy</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://tegorman13.github.io/">Thomas E. Gorman</a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://web.ics.purdue.edu/~treimer/">
+            Communication and Cognition Lab, Purdue University, USA
+            </a>
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 17, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="https://tegorman13.github.io/ccl/llm_energy.html">https://tegorman13.github.io/ccl/llm_energy.html</a></p>
+<section id="sasha-creative-goal-oriented-reasoning-in-smart-homes-with-large-language-models." class="level2">
+<h2 class="anchored" data-anchor-id="sasha-creative-goal-oriented-reasoning-in-smart-homes-with-large-language-models.">Sasha: Creative Goal-Oriented Reasoning in Smart Homes with Large Language Models.</h2>
+<p>King, E., Yu, H., Lee, S., &amp; Julien, C. (2024). <strong>Sasha: Creative Goal-Oriented Reasoning in Smart Homes with Large Language Models.</strong> Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 8(1), 1–38. https://doi.org/10.1145/3643505</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Smart home assistants function best when user commands are direct and well-specified—e.g., “turn on the kitchen light”—or when a hard-coded routine specifies the response. In more natural communication, however, human speech is unconstrained, often describing goals (e.g., “make it cozy in here” or “help me save energy”) rather than indicating specific target devices and actions to take on those devices. Current systems fail to understand these under-specified commands since they cannot reason about devices and settings as they relate to human situations. We introduce large language models (LLMs) to this problem space, exploring their use for controlling devices and creating automation routines in response to under-specified user commands in smart homes. We empirically study the baseline quality and failure modes of LLM-created action plans with a survey of age-diverse users. We find that LLMs can reason creatively to achieve challenging goals, but they experience patterns of failure that diminish their usefulness. We address these gaps with Sasha, a smarter smart home assistant. Sasha responds to loosely-constrained commands like “make it cozy” or “help me sleep better” by executing plans to achieve user goals—e.g., setting a mood with available devices, or devising automation routines. We implement and evaluate Sasha in a hands-on user study, showing the capabilities and limitations of LLM-driven smart homes when faced with unconstrained user-generated scenarios.</p>
+</div>
+</details>
+<div id="fig-king" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-king-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/King1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Figure from @kingSashaCreativeGoalOriented2024"><img src="images/King1.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/King2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;1: Figure from @kingSashaCreativeGoalOriented2024"><img src="images/King2.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/King3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;1: Figure from @kingSashaCreativeGoalOriented2024"><img src="images/King3.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/King4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;1: Figure from @kingSashaCreativeGoalOriented2024"><img src="images/King4.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/King5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;1: Figure from @kingSashaCreativeGoalOriented2024"><img src="images/King5.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/King6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;1: Figure from @kingSashaCreativeGoalOriented2024"><img src="images/King6.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-king-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Figure from <span class="citation" data-cites="kingSashaCreativeGoalOriented2024">King, Yu, Lee, et al. (<a href="#ref-kingSashaCreativeGoalOriented2024" role="doc-biblioref">2024</a>)</span>
+</figcaption>
+</figure>
+</div>
+<hr>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="thoughtful-things-building-human-centric-smart-devices-with-small-language-models" class="level2">
+<h2 class="anchored" data-anchor-id="thoughtful-things-building-human-centric-smart-devices-with-small-language-models">Thoughtful Things: Building Human-Centric Smart Devices with Small Language Models</h2>
+<p>King, E., Yu, H., Vartak, S., Jacob, J., Lee, S., &amp; Julien, C. (2024). <strong>Thoughtful Things: Building Human-Centric Smart Devices with Small Language Models</strong> (arXiv:2405.03821). arXiv. http://arxiv.org/abs/2405.03821</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Everyday devices like light bulbs and kitchen appliances are now embedded with so many features and automated behaviors that they have become complicated to actually use. While such “smart” capabilities can better support users’ goals, the task of learning the “ins and outs” of different devices is daunting. Voice assistants aim to solve this problem by providing a natural language interface to devices, yet such assistants cannot understand loosely-constrained commands, they lack the ability to reason about and explain devices’ behaviors to users, and they rely on connectivity to intrusive cloud infrastructure. Toward addressing these issues, we propose thoughtful things: devices that leverage lightweight, on-device language models to take actions and explain their behaviors in response to unconstrained user commands. We propose an end-to-end framework that leverages formal modeling, automated training data synthesis, and generative language models to create devices that are both capable and thoughtful in the presence of unconstrained user goals and inquiries. Our framework requires no labeled data and can be deployed on-device, with no cloud dependency. We implement two thoughtful things (a lamp and a thermostat) and deploy them on real hardware, evaluating their practical performance.</p>
+</div>
+</details>
+<div id="fig-king2" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-king2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/king_tt1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;2: Figure from @kingThoughtfulThingsBuilding2024"><img src="images/king_tt1.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/king_tt2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;2: Figure from @kingThoughtfulThingsBuilding2024"><img src="images/king_tt2.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/king_tt3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;2: Figure from @kingThoughtfulThingsBuilding2024"><img src="images/king_tt3.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/king_tt4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;2: Figure from @kingThoughtfulThingsBuilding2024"><img src="images/king_tt4.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/king_tt5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;2: Figure from @kingThoughtfulThingsBuilding2024"><img src="images/king_tt5.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/king_tt6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;2: Figure from @kingThoughtfulThingsBuilding2024"><img src="images/king_tt6.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-king2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Figure from <span class="citation" data-cites="kingThoughtfulThingsBuilding2024">King, Yu, Vartak, et al. (<a href="#ref-kingThoughtfulThingsBuilding2024" role="doc-biblioref">2024</a>)</span>
+</figcaption>
+</figure>
+</div>
+<hr>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="designing-home-automation-routines-using-an-llm-based-chatbot." class="level2">
+<h2 class="anchored" data-anchor-id="designing-home-automation-routines-using-an-llm-based-chatbot.">Designing Home Automation Routines Using an LLM-Based Chatbot.</h2>
+<p>Giudici, M., Padalino, L., Paolino, G., Paratici, I., Pascu, A. I., &amp; Garzotto, F. (2024). <strong>Designing Home Automation Routines Using an LLM-Based Chatbot.</strong> Designs, 8(3), Article 3. https://doi.org/10.3390/designs8030043</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Without any more delay, individuals are urged to adopt more sustainable behaviors to fight climate change. New digital systems mixed with engaging and gamification mechanisms could play an important role in achieving such an objective. In particular, Conversational Agents, like Smart Home Assistants, are a promising tool that encourage sustainable behaviors within household settings. In recent years, large language models (LLMs) have shown great potential in enhancing the capabilities of such assistants, making them more effective in interacting with users. We present the design and implementation of GreenIFTTT, an application empowered by GPT4 to create and control home automation routines. The agent helps users understand which energy consumption optimization routines could be created and applied to make their home appliances more environmentally sustainable. We performed an exploratory study (Italy, December 2023) with N = 13 participants to test our application’s usability and UX. The results suggest that GreenIFTTT is a usable, engaging, easy, and supportive tool, providing insight into new perspectives and usage of LLMs to create more environmentally sustainable home automation.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Giudici1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure from @giudiciDesigningHomeAutomation2024"><img src="images/Giudici1.png" class="img-fluid figure-img" alt="Figure from Giudici et al. (2024)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="giudiciDesigningHomeAutomation2024">Giudici et al. (<a href="#ref-giudiciDesigningHomeAutomation2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+<hr>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="enhancing-smart-home-interaction-through-multimodal-command-disambiguation." class="level2">
+<h2 class="anchored" data-anchor-id="enhancing-smart-home-interaction-through-multimodal-command-disambiguation.">Enhancing smart home interaction through multimodal command disambiguation.</h2>
+<p>Calò, T., &amp; De Russis, L. (2024). <strong>Enhancing smart home interaction through multimodal command disambiguation.</strong> Personal and Ubiquitous Computing. https://doi.org/10.1007/s00779-024-01827-3</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Smart speakers are entering our homes and enriching the connected ecosystem already present in them. Home inhabitants can use those to execute relatively simple commands, e.g., turning a lamp on. Their capabilities to interpret more complex and ambiguous commands (e.g., make this room warmer) are limited, if not absent. Large language models (LLMs) can offer creative and viable solutions to enable a practical and user-acceptable interpretation of such ambiguous commands. This paper introduces an interactive disambiguation approach that integrates visual and textual cues with natural language commands. After contextualizing the approach with a use case, we test it in an experiment where users are prompted to select the appropriate cue (an image or a textual description) to clarify ambiguous commands, thereby refining the accuracy of the system’s interpretations. Outcomes from the study indicate that the disambiguation system produces responses well-aligned with user intentions, and that participants found the textual descriptions slightly more effective. Finally, interviews reveal heightened satisfaction with the smart-home system when engaging with the proposed disambiguation approach.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Calo1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure from @caloEnhancingSmartHome2024"><img src="images/Calo1.png" class="img-fluid figure-img" alt="Figure from Calò &amp; De Russis (2024)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="caloEnhancingSmartHome2024">Calò &amp; De Russis (<a href="#ref-caloEnhancingSmartHome2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+<hr>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="save-it-for-the-hot-day-an-llm-empowered-visual-analytics-system-for-heat-risk-management" class="level2">
+<h2 class="anchored" data-anchor-id="save-it-for-the-hot-day-an-llm-empowered-visual-analytics-system-for-heat-risk-management">Save It for the “Hot” Day: An LLM-Empowered Visual Analytics System for Heat Risk Management</h2>
+<p>Li, H., Kam-Kwai, W., Luo, Y., Chen, J., Liu, C., Zhang, Y., Lau, A. K. H., Qu, H., &amp; Liu, D. (2024). <strong>Save It for the “Hot” Day: An LLM-Empowered Visual Analytics System for Heat Risk Management</strong> (arXiv:2406.03317). arXiv. http://arxiv.org/abs/2406.03317</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>The escalating frequency and intensity of heat-related climate events, particularly heatwaves, emphasize the pressing need for advanced heat risk management strategies. Current approaches, primarily relying on numerical models, face challenges in spatial-temporal resolution and in capturing the dynamic interplay of environmental, social, and behavioral factors affecting heat risks. This has led to difficulties in translating risk assessments into effective mitigation actions. Recognizing these problems, we introduce a novel approach leveraging the burgeoning capabilities of Large Language Models (LLMs) to extract rich and contextual insights from news reports. We hence propose an LLM-empowered visual analytics system, Havior, that integrates the precise, data-driven insights of numerical models with nuanced news report information. This hybrid approach enables a more comprehensive assessment of heat risks and better identification, assessment, and mitigation of heat-related threats. The system incorporates novel visualization designs, such as “thermoglyph” and news glyph, enhancing intuitive understanding and analysis of heat risks. The integration of LLM-based techniques also enables advanced information retrieval and semantic knowledge extraction that can be guided by experts’ analytics needs. Our case studies on two cities that faced significant heatwave events and interviews with five experts have demonstrated the usefulness of our system in providing in-depth and actionable insights for heat risk management.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Li1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure from @liItHotDay2024"><img src="images/Li1.png" class="img-fluid figure-img" alt="Figure from Li et al. (2024)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="liItHotDay2024">Li et al. (<a href="#ref-liItHotDay2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="follow-me-ai-energy-efficient-user-interaction-with-smart-environments" class="level2">
+<h2 class="anchored" data-anchor-id="follow-me-ai-energy-efficient-user-interaction-with-smart-environments">Follow-Me AI: Energy-Efficient User Interaction with Smart Environments</h2>
+<p>Saleh, A., Donta, P. K., Morabito, R., Motlagh, N. H., &amp; Lovén, L. (2024). <strong>Follow-Me AI: Energy-Efficient User Interaction with Smart Environments</strong> (arXiv:2404.12486). arXiv. http://arxiv.org/abs/2404.12486</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>This article introduces Follow-Me AI, a concept designed to enhance user interactions with smart environments, optimize energy use, and provide better control over data captured by these environments. Through AI agents that accompany users, Follow-Me AI negotiates data management based on user consent, aligns environmental controls as well as user communication and computes resources available in the environment with user preferences, and predicts user behavior to proactively adjust the smart environment. The manuscript illustrates this concept with a detailed example of Follow-Me AI in a smart campus setting, detailing the interactions with the building’s management system for optimal comfort and efficiency. Finally, this article looks into the challenges and opportunities related to Follow-Me AI.</p>
+</div>
+</details>
+<div id="fig-saleh" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-saleh-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Saleh1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;3: Figure from @salehFollowMeAIEnergyEfficient2024"><img src="images/Saleh1.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Saleh2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;3: Figure from @salehFollowMeAIEnergyEfficient2024"><img src="images/Saleh2.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Saleh3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;3: Figure from @salehFollowMeAIEnergyEfficient2024"><img src="images/Saleh3.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Saleh4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure&nbsp;3: Figure from @salehFollowMeAIEnergyEfficient2024"><img src="images/Saleh4.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-saleh-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Figure from <span class="citation" data-cites="salehFollowMeAIEnergyEfficient2024">Saleh et al. (<a href="#ref-salehFollowMeAIEnergyEfficient2024" role="doc-biblioref">2024</a>)</span>
+</figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="an-llm-based-digital-twin-for-optimizing-human-in-the-loop-systems" class="level2">
+<h2 class="anchored" data-anchor-id="an-llm-based-digital-twin-for-optimizing-human-in-the-loop-systems">An LLM-Based Digital Twin for Optimizing Human-in-the Loop Systems</h2>
+<p>Yang, H., Siew, M., &amp; Joe-Wong, C. (2024). <strong>An LLM-Based Digital Twin for Optimizing Human-in-the Loop Systems</strong> (arXiv:2403.16809). arXiv. http://arxiv.org/abs/2403.16809</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>The increasing prevalence of Cyber-Physical Systems and the Internet of Things (CPS-IoT) applications and Foundation Models are enabling new applications that leverage real-time control of the environment. For example, real-time control of Heating, Ventilation and Air-Conditioning (HVAC) systems can reduce its usage when not needed for the comfort of human occupants, hence reducing energy consumption. Collecting realtime feedback on human preferences in such human-in-the-loop (HITL) systems, however, is difficult in practice. We propose the use of large language models (LLMs) to deal with the challenges of dynamic environments and difficult-to-obtain data in CPS optimization. In this paper, we present a case study that employs LLM agents to mimic the behaviors and thermal preferences of various population groups (e.g.&nbsp;young families, the elderly) in a shopping mall. The aggregated thermal preferences are integrated into an agent-in-the-loop based reinforcement learning algorithm AitL-RL, which employs the LLM as a dynamic simulation of the physical environment to learn how to balance between energy savings and occupant comfort. Our results show that LLMs are capable of simulating complex population movements within large open spaces. Besides, AitL-RLdemonstrates superior performance compared to the popular existing policy of set point control, suggesting that adaptive and personalized decision-making is critical for efficient optimization in CPS-IoT applications. Through this case study, we demonstrate the potential of integrating advanced Foundation Models like LLMs into CPS-IoT to enhance system adaptability and efficiency. The project’s code can be found on our GitHub repository.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/yang_twin1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="Figure from @yangLLMBasedDigitalTwin2024"><img src="images/yang_twin1.png" class="img-fluid figure-img" alt="Figure from Yang et al. (2024)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="yangLLMBasedDigitalTwin2024">Yang et al. (<a href="#ref-yangLLMBasedDigitalTwin2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="can-private-llm-agents-synthesize-household-energy-consumption-data" class="level2">
+<h2 class="anchored" data-anchor-id="can-private-llm-agents-synthesize-household-energy-consumption-data">Can Private LLM Agents Synthesize Household Energy Consumption Data?</h2>
+<p>Almashor, M., &amp; Miyashita, Y. (2024). <strong>Can Private LLM Agents Synthesize Household Energy Consumption Data?</strong> Proceedings of the 15th ACM International Conference on Future and Sustainable Energy Systems, 664–668. https://doi.org/10.1145/3632775.3661993</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Reproducible science requires easy access to data, especially with the rise of data-driven and increasingly complex models used within energy research. Too often however, the data to reconstruct and verify purported solutions in publications is hidden due to some combination of commercial, legal, and sensitivity issues. This early work presents our initial efforts to leverage the recent advancements in Large Language Models (LLMs) to create usable and shareable energy datasets. In particular, we’re utilising their mimicry of human behaviors, with the goal of extracting and exploring synthetic energy data through the simulation of LLM agents capable of interacting with and executing actions in controlled environments. We also analyse and visualise publicly available data in an attempt to create realistic but not quite exact copies of the originals. Our early results show some promise, with outputs that resemble the twin peak curves for household energy consumption. The hope is that our generalised approach can be used to easily replicate usable and realistic copies of otherwise secret or sensitive data.</p>
+</div>
+</details>
+<p><span class="citation" data-cites="almashorCanPrivateLLM2024">Almashor &amp; Miyashita (<a href="#ref-almashorCanPrivateLLM2024" role="doc-biblioref">2024</a>)</span></p>
+</section>
+<section id="prompt-gaming-a-pilot-study-on-llm-evaluating-agent-in-a-meaningful-energy-game." class="level2">
+<h2 class="anchored" data-anchor-id="prompt-gaming-a-pilot-study-on-llm-evaluating-agent-in-a-meaningful-energy-game.">Prompt-Gaming: A Pilot Study on LLM-Evaluating Agent in a Meaningful Energy Game.</h2>
+<p>Isaza-Giraldo, A., Bala, P., Campos, P. F., &amp; Pereira, L. (2024). Prompt-Gaming: A Pilot Study on LLM-Evaluating Agent in a Meaningful Energy Game. Extended Abstracts of the 2024 CHI Conference on Human Factors in Computing Systems, 1–12. https://doi.org/10.1145/3613905.3650774</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Building on previous work on incorporating large language models (LLM) in gaming, we investigate the possibility of implementing LLM as evaluating agents of open-ended challenges in serious games and its potential to facilitate a meaningful experience for the player. We contribute with a sustainability game prototype in a single natural language prompt about energy communities and we tested it with 13 participants inside ChatGPT-3.5. Two participants were already aware of energy communities before the game, and eight of the remaining 11 gained valuable knowledge about the specific topic. Comparing ChatGPT-3.5 evaluations of players’ interaction with an expert’s assessment, ChatGPT-3.5 correctly evaluated 81% of player’s answers. Our results are encouraging and show the potential of using LLMs as mediating agents in educational games, while also allowing easy prototyping of games through natural language prompts.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Giraldo1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Figure from @isaza-giraldoPromptGamingPilotStudy2024"><img src="images/Giraldo1.png" class="img-fluid figure-img" alt="Figure from Isaza-Giraldo et al. (2024)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="isaza-giraldoPromptGamingPilotStudy2024">Isaza-Giraldo et al. (<a href="#ref-isaza-giraldoPromptGamingPilotStudy2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="evaluation-of-large-language-models-llms-on-the-mastery-of-knowledge-and-skills-in-the-heating-ventilation-and-air-conditioning-hvac-industry." class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-of-large-language-models-llms-on-the-mastery-of-knowledge-and-skills-in-the-heating-ventilation-and-air-conditioning-hvac-industry.">Evaluation of large language models (LLMs) on the mastery of knowledge and skills in the heating, ventilation and air conditioning (HVAC) industry.</h2>
+<p>Lu, J., Tian, X., Zhang, C., Zhao, Y., Zhang, J., Zhang, W., Feng, C., He, J., Wang, J., &amp; He, F. (2024). <strong>Evaluation of large language models (LLMs) on the mastery of knowledge and skills in the heating, ventilation and air conditioning (HVAC) industry.</strong> Energy and Built Environment. https://doi.org/10.1016/j.enbenv.2024.03.010</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Large language models (LLMs) have shown human-level capabilities in solving various complex tasks. However, it is still unknown whether state-of-the-art LLMs master sufficient knowledge related to heating, ventilation and air conditioning (HVAC) systems. It will be inspiring if LLMs can think and learn like professionals in the HVAC industry. Hence, this study investigates the performance of LLMs on mastering the knowledge and skills related to the HVAC industry by letting them take the ASHRAE Certified HVAC Designer examination, an authoritative examination in the HVAC industry. Three key knowledge capabilities are explored: recall, analysis and application. Twelve representative LLMs are tested such as GPT-3.5, GPT-4 and LLaMA. According to the results, GPT-4 passes the ASHRAE Certified HVAC Designer examination with scores from 74 to 78, which is higher than about half of human examinees. Besides, GPT-3.5 passes the examination twice out of five times. It demonstrates that some LLMs such as GPT-4 and GPT-3.5 have great potential to assist or replace humans in designing and operating HVAC systems. However, they still make some mistakes sometimes due to the lack of knowledge, poor reasoning capabilities and unsatisfactory equation calculation abilities. Accordingly, four future research directions are proposed to reveal how to utilize and improve LLMs in the HVAC industry: teaching LLMs to use design tools or software in the HVAC industry, enabling LLMs to read and analyze the operational data from HVAC systems, developing tailored corpuses for the HVAC industry, and assessing the performance of LLMs in real-world HVAC design and operation scenarios.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Lu1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Figure from @luEvaluationLargeLanguage2024"><img src="images/Lu1.png" class="img-fluid figure-img" alt="Figure from Lu et al. (2024)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="luEvaluationLargeLanguage2024">Lu et al. (<a href="#ref-luEvaluationLargeLanguage2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="domain-specific-large-language-models-for-fault-diagnosis-of-heating-ventilation-and-air-conditioning-systems-by-labeled-data-supervised-fine-tuning." class="level2">
+<h2 class="anchored" data-anchor-id="domain-specific-large-language-models-for-fault-diagnosis-of-heating-ventilation-and-air-conditioning-systems-by-labeled-data-supervised-fine-tuning.">Domain-specific large language models for fault diagnosis of heating, ventilation, and air conditioning systems by labeled-data-supervised fine-tuning.</h2>
+<p>Zhang, J., Zhang, C., Lu, J., &amp; Zhao, Y. (2025). <strong>Domain-specific large language models for fault diagnosis of heating, ventilation, and air conditioning systems by labeled-data-supervised fine-tuning.</strong> Applied Energy, 377, 124378. https://doi.org/10.1016/j.apenergy.2024.124378</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Large language models (LLMs) have exhibited great potential in fault diagnosis of heating, ventilation, and air conditioning systems. However, the fault diagnosis accuracy of LLMs is still unsatisfactory, due to the lack of effective diagnosis accuracy enhancement methods for LLMs. To fill this gap, this study proposes a LLM fine-tuning method supervised by data with fault and fault-free labels to enhance the fault diagnosis accuracy of LLMs. This method designs a LLM self-correction strategy to automatically generate a fine-tuning dataset based on the labeled data. The generated fine-tuning dataset is applied to fine-tune a LLM. Moreover, a data augmentation-based approach is put forward to adaptively update the fine-tuning dataset for iteratively developing a high-performance fine-tuned LLM. The proposed method is utilized to fine-tune the GPT-3.5 model using the air handling unit (AHU) fault dataset from the RP-1312 project. The results show that the diagnosis accuracy of the GPT-3.5 model is increased from 29.5 % to 100.0 % after model fine-tuning. Compared with the GPT-4 model, the fine-tuned GPT-3.5 model achieves a 31.1 % higher average diagnosis accuracy. The fine-tuned GPT-3.5 model is also applied to diagnose faults in two AHUs from another open-source dataset to verify the generalization ability of this model. The two AHUs have different system structures and sensor configurations compared to the AHU in the RP-1312 dataset, and this dataset is not utilized to fine-tune the GPT-3.5 model. The average diagnosis accuracy of the GPT-3.5 model is increased from 46.0 % to 99.1 % and from 38.8 % to 98.9 % for the faults in the two AHUs, respectively, after model fine-tuning. Furthermore, the proposed method is verified using two fault datasets from a variable air volume box and a chiller plant system. After fine-tuning the GPT-3.5 model using the two datasets, the average diagnosis accuracy of this model is increased from 33.0 % to 98.3 % for variable air volume box faults and from 36.0 % to 99.1 % for chiller plant system faults. This study provides an effective solution to the development of domain-specific LLMs for this domain.</p>
+</div>
+</details>
+<p><span class="citation" data-cites="zhangDomainspecificLargeLanguage2025">Zhang et al. (<a href="#ref-zhangDomainspecificLargeLanguage2025" role="doc-biblioref">2025</a>)</span></p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="game-of-llms-discovering-structural-constructs-in-activities-using-large-language-models." class="level2">
+<h2 class="anchored" data-anchor-id="game-of-llms-discovering-structural-constructs-in-activities-using-large-language-models.">Game of LLMs: Discovering Structural Constructs in Activities using Large Language Models.</h2>
+<p>Hiremath, S. K., &amp; Plötz, T. (2024). <strong>Game of LLMs: Discovering Structural Constructs in Activities using Large Language Models.</strong> Companion of the 2024 on ACM International Joint Conference on Pervasive and Ubiquitous Computing, 487–492. https://doi.org/10.1145/3675094.3678444</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Human Activity Recognition is a time-series analysis problem. A popular analysis procedure used by the community assumes an optimal window length to design recognition pipelines. However, in the scenario of smart homes, where activities are of varying duration and frequency, the assumption of a constant sized window does not hold. Additionally, previous works have shown these activities to be made up of building blocks. We focus on identifying these underlying building blocks–structural constructs, with the use of large language models. Identifying these constructs can be beneficial especially in recognizing short-duration and infrequent activities, which current systems cannot recognize. We also propose the development of an activity recognition procedure that uses these building blocks to model activities, thus helping the downstream task of activity monitoring in smart homes.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Hiremath.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23" title="Figure from @hiremathGameLLMsDiscovering2024"><img src="images/Hiremath.png" class="img-fluid figure-img" alt="Figure from Hiremath &amp; Plötz (2024)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="hiremathGameLLMsDiscovering2024">Hiremath &amp; Plötz (<a href="#ref-hiremathGameLLMsDiscovering2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="llm-based-open-domain-integrated-task-and-knowledge-assistants-with-programmable-policies" class="level2">
+<h2 class="anchored" data-anchor-id="llm-based-open-domain-integrated-task-and-knowledge-assistants-with-programmable-policies">LLM-Based Open-Domain Integrated Task and Knowledge Assistants with Programmable Policies</h2>
+<p>Joshi, H., Liu, S., Chen, J., Weigle, R., &amp; Lam, M. S. (2024). <strong>LLM-Based Open-Domain Integrated Task and Knowledge Assistants with Programmable Policies</strong> (arXiv:2407.05674). arXiv. http://arxiv.org/abs/2407.05674</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>Programming LLM-based knowledge and task assistants that faithfully conform to developer-provided policies is challenging. These agents must retrieve and provide consistent, accurate, and relevant information to address user’s queries and needs. Yet such agents generate unfounded responses (“hallucinate”). Traditional dialogue trees can only handle a limited number of conversation flows, making them inherently brittle. To this end, we present KITA - a programmable framework for creating task-oriented conversational agents that are designed to handle complex user interactions. Unlike LLMs, KITA provides reliable grounded responses, with controllable agent policies through its expressive specification, KITA Worksheet. In contrast to dialog trees, it is resilient to diverse user queries, helpful with knowledge sources, and offers ease of programming policies through its declarative paradigm. Through a real-user study involving 62 participants, we show that KITA beats the GPT-4 with function calling baseline by 26.1, 22.5, and 52.4 points on execution accuracy, dialogue act accuracy, and goal completion rate, respectively. We also release 22 real-user conversations with KITA manually corrected to ensure accuracy.</p>
+</div>
+</details>
+<p><span class="citation" data-cites="joshiLLMBasedOpenDomainIntegrated2024">Joshi et al. (<a href="#ref-joshiLLMBasedOpenDomainIntegrated2024" role="doc-biblioref">2024</a>)</span></p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="large-language-models-are-zero-shot-recognizers-for-activities-of-daily-living" class="level2">
+<h2 class="anchored" data-anchor-id="large-language-models-are-zero-shot-recognizers-for-activities-of-daily-living">Large Language Models are Zero-Shot Recognizers for Activities of Daily Living</h2>
+<p>Civitarese, G., Fiori, M., Choudhary, P., &amp; Bettini, C. (2024). <strong>Large Language Models are Zero-Shot Recognizers for Activities of Daily Living</strong> (arXiv:2407.01238). arXiv. http://arxiv.org/abs/2407.01238</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>The sensor-based recognition of Activities of Daily Living (ADLs) in smart home environments enables several applications in the areas of energy management, safety, well-being, and healthcare. ADLs recognition is typically based on deep learning methods requiring large datasets to be trained. Recently, several studies proved that Large Language Models (LLMs) effectively capture common-sense knowledge about human activities. However, the effectiveness of LLMs for ADLs recognition in smart home environments still deserves to be investigated. In this work, we propose ADL-LLM, a novel LLM-based ADLs recognition system. ADLLLM transforms raw sensor data into textual representations, that are processed by an LLM to perform zero-shot ADLs recognition. Moreover, in the scenario where a small labeled dataset is available, ADL-LLM can also be empowered with few-shot prompting. We evaluated ADL-LLM on two public datasets, showing its effectiveness in this domain.</p>
+</div>
+</details>
+<div id="fig-Civitarese" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Civitarese-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Civitarese1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24" title="Figure&nbsp;4: Figures from @civitareseLargeLanguageModels2024"><img src="images/Civitarese1.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Civitarese2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25" title="Figure&nbsp;4: Figures from @civitareseLargeLanguageModels2024"><img src="images/Civitarese2.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Civitarese-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Figures from <span class="citation" data-cites="civitareseLargeLanguageModels2024">Civitarese et al. (<a href="#ref-civitareseLargeLanguageModels2024" role="doc-biblioref">2024</a>)</span>
+</figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="large-language-models-for-power-scheduling-a-user-centric-approach" class="level2">
+<h2 class="anchored" data-anchor-id="large-language-models-for-power-scheduling-a-user-centric-approach">Large Language Models for Power Scheduling: A User-Centric Approach</h2>
+<p>Mongaillard, T., Lasaulce, S., Hicheur, O., Zhang, C., Bariah, L., Varma, V. S., Zou, H., Zhao, Q., &amp; Debbah, M. (2024). <strong>Large Language Models for Power Scheduling: A User-Centric Approach</strong> (arXiv:2407.00476). arXiv. http://arxiv.org/abs/2407.00476</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>While traditional optimization and scheduling schemes are designed to meet fixed, predefined system requirements, future systems are moving toward user-driven approaches and personalized services, aiming to achieve high quality-of-experience (QoE) and flexibility. This challenge is particularly pronounced in wireless and digitalized energy networks, where users’ requirements have largely not been taken into consideration due to the lack of a common language between users and machines. The emergence of powerful large language models (LLMs) marks a radical departure from traditional system-centric methods into more advanced user-centric approaches by providing a natural communication interface between users and devices. In this paper, for the first time, we introduce a novel architecture for resource scheduling problems by constructing three LLM agents to convert an arbitrary user’s voice request (VRQ) into a resource allocation vector. Specifically, we design an LLM intent recognition agent to translate the request into an optimization problem (OP), an LLM OP parameter identification agent, and an LLM OP solving agent. To evaluate system performance, we construct a database of typical VRQs in the context of electric vehicle (EV) charging. As a proof of concept, we primarily use Llama 3 8B. Through testing with different prompt engineering scenarios, the obtained results demonstrate the efficiency of the proposed architecture. The conducted performance analysis allows key insights to be extracted. For instance, having a larger set of candidate OPs to model the real-world problem might degrade the final performance because of a higher recognition/OP classification noise level. All results and codes are open source.</p>
+</div>
+</details>
+<div id="fig-mongaillard" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mongaillard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Mongaillard1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26" title="Figure&nbsp;5: Figures from @mongaillardLargeLanguageModels2024"><img src="images/Mongaillard1.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Mongaillard2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27" title="Figure&nbsp;5: Figures from @mongaillardLargeLanguageModels2024"><img src="images/Mongaillard2.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mongaillard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Figures from <span class="citation" data-cites="mongaillardLargeLanguageModels2024">Mongaillard et al. (<a href="#ref-mongaillardLargeLanguageModels2024" role="doc-biblioref">2024</a>)</span>
+</figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="a-recommendation-system-for-prosumers-based-on-large-language-models." class="level2">
+<h2 class="anchored" data-anchor-id="a-recommendation-system-for-prosumers-based-on-large-language-models.">A Recommendation System for Prosumers Based on Large Language Models.</h2>
+<p>Oprea, S.-V., &amp; Bâra, A. (2024). <strong>A Recommendation System for Prosumers Based on Large Language Models.</strong> Sensors, 24(11), Article 11. https://doi.org/10.3390/s24113530</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>As modern technologies, particularly home assistant devices and sensors, become more integrated into our daily lives, they are also making their way into the domain of energy management within our homes. Homeowners, now acting as prosumers, have access to detailed information at 15-min or even 5-min intervals, including weather forecasts, outputs from renewable energy source (RES)-based systems, appliance schedules and the current energy balance, which details any deficits or surpluses along with their quantities and the predicted prices on the local energy market (LEM). The goal for these prosumers is to reduce costs while ensuring their home’s comfort levels are maintained. However, given the complexity and the rapid decision-making required in managing this information, the need for a supportive system is evident. This is particularly true given the routine nature of these decisions, highlighting the potential for a system that provides personalized recommendations to optimize energy consumption, whether that involves adjusting the load or engaging in transactions with the LEM. In this context, we propose a recommendation system powered by large language models (LLMs), Scikit-llm and zero-shot classifiers, designed to evaluate specific scenarios and offer tailored advice for prosumers based on the available data at any given moment. Two scenarios for a prosumer of 5.9 kW are assessed using candidate labels, such as Decrease, Increase, Sell and Buy. A comparison with a content-based filtering system is provided considering the performance metrics that are relevant for prosumers.</p>
+</div>
+</details>
+<p><span class="citation" data-cites="opreaRecommendationSystemProsumers2024">Oprea &amp; Bâra (<a href="#ref-opreaRecommendationSystemProsumers2024" role="doc-biblioref">2024</a>)</span></p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="a-conversational-agent-for-creating-automations-exploiting-large-language-models.-personal-and-ubiquitous-computing." class="level2">
+<h2 class="anchored" data-anchor-id="a-conversational-agent-for-creating-automations-exploiting-large-language-models.-personal-and-ubiquitous-computing.">A conversational agent for creating automations exploiting large language models. Personal and Ubiquitous Computing.</h2>
+<p>Gallo, S., Paternò, F., &amp; Malizia, A. (2024). <strong>A conversational agent for creating automations exploiting large language models. Personal and Ubiquitous Computing.</strong> https://doi.org/10.1007/s00779-024-01825-5</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>The proliferation of sensors and smart Internet of Things (IoT) devices in our everyday environments is reshaping our interactions with everyday objects. This change underlines the need to empower non-expert users to easily configure the behaviour of these devices to align with their preferences and habits. At the same time, recent advances in generative transformers, such as ChatGPT, have opened up new possibilities in a variety of natural language processing tasks, enhancing reasoning capabilities and conversational interactions. This paper presents RuleBot +  + , a conversational agent that exploits GPT-4 to assist the user in the creation and modification of trigger-action automations through natural language. After an introduction to motivations and related work, we present the design and implementation of RuleBot +  + and report the results of the user test in which users interacted with our solution and Home Assistant, one of the most used open-source tools for managing smart environments.</p>
+</div>
+</details>
+<div id="fig-gallo" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gallo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Gallo1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28" title="Figure&nbsp;6: Figures from @galloConversationalAgentCreating2024"><img src="images/Gallo1.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Gallo2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29" title="Figure&nbsp;6: Figures from @galloConversationalAgentCreating2024"><img src="images/Gallo2.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gallo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Figures from <span class="citation" data-cites="galloConversationalAgentCreating2024">Gallo et al. (<a href="#ref-galloConversationalAgentCreating2024" role="doc-biblioref">2024</a>)</span>
+</figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="a-human-on-the-loop-optimization-autoformalism-approach-for-sustainability" class="level2">
+<h2 class="anchored" data-anchor-id="a-human-on-the-loop-optimization-autoformalism-approach-for-sustainability">A Human-on-the-Loop Optimization Autoformalism Approach for Sustainability</h2>
+<p>Jin, M., Sel, B., Hardeep, F., &amp; Yin, W. (2023). <strong>A Human-on-the-Loop Optimization Autoformalism Approach for Sustainability</strong> (arXiv:2308.10380). arXiv. http://arxiv.org/abs/2308.10380</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>This paper outlines a natural conversational approach to solving personalized energy-related problems using large language models (LLMs). We focus on customizable optimization problems that necessitate repeated solving with slight variations in modeling and are user-specific, hence posing a challenge to devising a one-size-fits-all model. We put forward a strategy that augments an LLM with an optimization solver, enhancing its proficiency in understanding and responding to user specifications and preferences while providing nonlinear reasoning capabilities. Our approach pioneers the novel concept of human-guided optimization autoformalism, translating a natural language task specification automatically into an optimization instance. This enables LLMs to analyze, explain, and tackle a variety of instance-specific energy-related problems, pushing beyond the limits of current prompt-based techniques. Our research encompasses various commonplace tasks in the energy sector, from electric vehicle charging and Heating, Ventilation, and Air Conditioning (HVAC) control to long-term planning problems such as cost-benefit evaluations for installing rooftop solar photovoltaics (PVs) or heat pumps. This pilot study marks an essential stride towards the context-based formulation of optimization using LLMs, with the potential to democratize optimization processes. As a result, stakeholders are empowered to optimize their energy consumption, promoting sustainable energy practices customized to personal needs and preferences.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Jin1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="Figure from @jinHumanLoopOptimizationAutoformalism2023"><img src="images/Jin1.png" class="img-fluid figure-img" alt="Figure from Jin et al. (2023)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="jinHumanLoopOptimizationAutoformalism2023">Jin et al. (<a href="#ref-jinHumanLoopOptimizationAutoformalism2023" role="doc-biblioref">2023</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="references" class="level2">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-almashorCanPrivateLLM2024" class="csl-entry" role="listitem">
+Almashor, M., &amp; Miyashita, Y. (2024). <em>Can <span>Private LLM Agents Synthesize Household Energy Consumption Data</span>?</em>
+</div>
+<div id="ref-caloEnhancingSmartHome2024" class="csl-entry" role="listitem">
+Calò, T., &amp; De Russis, L. (2024). Enhancing smart home interaction through multimodal command disambiguation. <em>Personal and Ubiquitous Computing</em>. <a href="https://doi.org/10.1007/s00779-024-01827-3">https://doi.org/10.1007/s00779-024-01827-3</a>
+</div>
+<div id="ref-civitareseLargeLanguageModels2024" class="csl-entry" role="listitem">
+Civitarese, G., Fiori, M., Choudhary, P., &amp; Bettini, C. (2024). <em>Large <span>Language Models</span> are <span>Zero-Shot Recognizers</span> for <span>Activities</span> of <span>Daily Living</span></em> (arXiv:2407.01238). arXiv. <a href="https://arxiv.org/abs/2407.01238">https://arxiv.org/abs/2407.01238</a>
+</div>
+<div id="ref-galloConversationalAgentCreating2024" class="csl-entry" role="listitem">
+Gallo, S., Paternò, F., &amp; Malizia, A. (2024). A conversational agent for creating automations exploiting large language models. <em>Personal and Ubiquitous Computing</em>. <a href="https://doi.org/10.1007/s00779-024-01825-5">https://doi.org/10.1007/s00779-024-01825-5</a>
+</div>
+<div id="ref-giudiciDesigningHomeAutomation2024" class="csl-entry" role="listitem">
+Giudici, M., Padalino, L., Paolino, G., Paratici, I., Pascu, A. I., &amp; Garzotto, F. (2024). Designing <span>Home Automation Routines Using</span> an <span>LLM-Based Chatbot</span>. <em>Designs</em>, <em>8</em>(3), 43. <a href="https://doi.org/10.3390/designs8030043">https://doi.org/10.3390/designs8030043</a>
+</div>
+<div id="ref-hiremathGameLLMsDiscovering2024" class="csl-entry" role="listitem">
+Hiremath, S. K., &amp; Plötz, T. (2024). Game of <span>LLMs</span>: <span>Discovering Structural Constructs</span> in <span>Activities</span> using <span>Large Language Models</span>. <em>Companion of the 2024 on <span>ACM International Joint Conference</span> on <span>Pervasive</span> and <span>Ubiquitous Computing</span></em>, 487–492. <a href="https://doi.org/10.1145/3675094.3678444">https://doi.org/10.1145/3675094.3678444</a>
+</div>
+<div id="ref-isaza-giraldoPromptGamingPilotStudy2024" class="csl-entry" role="listitem">
+Isaza-Giraldo, A., Bala, P., Campos, P. F., &amp; Pereira, L. (2024). Prompt-<span>Gaming</span>: <span>A Pilot Study</span> on <span>LLM-Evaluating Agent</span> in a <span>Meaningful Energy Game</span>. <em>Extended <span>Abstracts</span> of the <span>CHI Conference</span> on <span>Human Factors</span> in <span>Computing Systems</span></em>, 1–12. <a href="https://doi.org/10.1145/3613905.3650774">https://doi.org/10.1145/3613905.3650774</a>
+</div>
+<div id="ref-jinHumanLoopOptimizationAutoformalism2023" class="csl-entry" role="listitem">
+Jin, M., Sel, B., Hardeep, F., &amp; Yin, W. (2023). <em>A <span class="nocase">Human-on-the-Loop Optimization Autoformalism Approach</span> for <span>Sustainability</span></em> (arXiv:2308.10380). arXiv. <a href="https://arxiv.org/abs/2308.10380">https://arxiv.org/abs/2308.10380</a>
+</div>
+<div id="ref-joshiLLMBasedOpenDomainIntegrated2024" class="csl-entry" role="listitem">
+Joshi, H., Liu, S., Chen, J., Weigle, R., &amp; Lam, M. S. (2024). <em><span>LLM-Based Open-Domain Integrated Task</span> and <span>Knowledge Assistants</span> with <span>Programmable Policies</span></em> (arXiv:2407.05674). arXiv. <a href="https://arxiv.org/abs/2407.05674">https://arxiv.org/abs/2407.05674</a>
+</div>
+<div id="ref-kingSashaCreativeGoalOriented2024" class="csl-entry" role="listitem">
+King, E., Yu, H., Lee, S., &amp; Julien, C. (2024). Sasha: <span>Creative Goal-Oriented Reasoning</span> in <span>Smart Homes</span> with <span>Large Language Models</span>. <em>Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies</em>, <em>8</em>(1), 1–38. <a href="https://doi.org/10.1145/3643505">https://doi.org/10.1145/3643505</a>
+</div>
+<div id="ref-kingThoughtfulThingsBuilding2024" class="csl-entry" role="listitem">
+King, E., Yu, H., Vartak, S., Jacob, J., Lee, S., &amp; Julien, C. (2024). <em>Thoughtful <span>Things</span>: <span>Building Human-Centric Smart Devices</span> with <span>Small Language Models</span></em> (arXiv:2405.03821). arXiv. <a href="https://arxiv.org/abs/2405.03821">https://arxiv.org/abs/2405.03821</a>
+</div>
+<div id="ref-liItHotDay2024" class="csl-entry" role="listitem">
+Li, H., Kam-Kwai, W., Luo, Y., Chen, J., Liu, C., Zhang, Y., Lau, A. K. H., Qu, H., &amp; Liu, D. (2024). <em>Save <span>It</span> for the "<span>Hot</span>" <span>Day</span>: <span>An LLM-Empowered Visual Analytics System</span> for <span>Heat Risk Management</span></em> (arXiv:2406.03317). arXiv. <a href="https://arxiv.org/abs/2406.03317">https://arxiv.org/abs/2406.03317</a>
+</div>
+<div id="ref-luEvaluationLargeLanguage2024" class="csl-entry" role="listitem">
+Lu, J., Tian, X., Zhang, C., Zhao, Y., Zhang, J., Zhang, W., Feng, C., He, J., Wang, J., &amp; He, F. (2024). Evaluation of large language models (<span>LLMs</span>) on the mastery of knowledge and skills in the heating, ventilation and air conditioning (<span>HVAC</span>) industry. <em>Energy and Built Environment</em>. <a href="https://doi.org/10.1016/j.enbenv.2024.03.010">https://doi.org/10.1016/j.enbenv.2024.03.010</a>
+</div>
+<div id="ref-mongaillardLargeLanguageModels2024" class="csl-entry" role="listitem">
+Mongaillard, T., Lasaulce, S., Hicheur, O., Zhang, C., Bariah, L., Varma, V. S., Zou, H., Zhao, Q., &amp; Debbah, M. (2024). <em>Large <span>Language Models</span> for <span>Power Scheduling</span>: <span>A User-Centric Approach</span></em> (arXiv:2407.00476). arXiv. <a href="https://arxiv.org/abs/2407.00476">https://arxiv.org/abs/2407.00476</a>
+</div>
+<div id="ref-opreaRecommendationSystemProsumers2024" class="csl-entry" role="listitem">
+Oprea, S.-V., &amp; Bâra, A. (2024). A <span>Recommendation System</span> for <span>Prosumers Based</span> on <span>Large Language Models</span>. <em>Sensors</em>, <em>24</em>(11), 3530. <a href="https://doi.org/10.3390/s24113530">https://doi.org/10.3390/s24113530</a>
+</div>
+<div id="ref-salehFollowMeAIEnergyEfficient2024" class="csl-entry" role="listitem">
+Saleh, A., Donta, P. K., Morabito, R., Motlagh, N. H., &amp; Lovén, L. (2024). <em>Follow-<span>Me AI</span>: <span>Energy-Efficient User Interaction</span> with <span>Smart Environments</span></em> (arXiv:2404.12486). arXiv. <a href="https://arxiv.org/abs/2404.12486">https://arxiv.org/abs/2404.12486</a>
+</div>
+<div id="ref-yangLLMBasedDigitalTwin2024" class="csl-entry" role="listitem">
+Yang, H., Siew, M., &amp; Joe-Wong, C. (2024). <em>An <span>LLM-Based Digital Twin</span> for <span class="nocase">Optimizing Human-in-the Loop Systems</span></em> (arXiv:2403.16809). arXiv. <a href="https://arxiv.org/abs/2403.16809">https://arxiv.org/abs/2403.16809</a>
+</div>
+<div id="ref-zhangDomainspecificLargeLanguage2025" class="csl-entry" role="listitem">
+Zhang, J., Zhang, C., Lu, J., &amp; Zhao, Y. (2025). Domain-specific large language models for fault diagnosis of heating, ventilation, and air conditioning systems by labeled-data-supervised fine-tuning. <em>Applied Energy</em>, <em>377</em>, 124378. <a href="https://doi.org/10.1016/j.apenergy.2024.124378">https://doi.org/10.1016/j.apenergy.2024.124378</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/tegorman13\.github\.io\/ccl");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
