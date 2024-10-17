@@ -24,6 +24,8 @@ format:
 ---
 
 
+[https://tegorman13.github.io/ccl/tms.html](https://tegorman13.github.io/ccl/tms.html)
+
 
 
 ## Human-AI teaming: Leveraging transactive memory and speaking up for enhanced team effectiveness.

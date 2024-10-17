@@ -2,11 +2,13 @@
 Thomas E. Gorman
 2024-10-17
 
+<https://tegorman13.github.io/ccl/tms.html>
+
 ## Human-AI teaming: Leveraging transactive memory and speaking up for enhanced team effectiveness.
 
 Bienefeld, N., Kolbe, M., Camen, G., Huser, D., & Buehler, P. K. (2023).
-Human-AI teaming: Leveraging transactive memory and speaking up for
-enhanced team effectiveness. Frontiers in Psychology, 14.
+**Human-AI teaming: Leveraging transactive memory and speaking up for
+enhanced team effectiveness.** Frontiers in Psychology, 14.
 https://doi.org/10.3389/fpsyg.2023.1208019
 
 <details open class="relevant-callout">
