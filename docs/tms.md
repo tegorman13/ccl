@@ -1,6 +1,6 @@
 # Transactive Memory Systems
 Thomas E. Gorman
-2024-10-17
+2024-10-31
 
 <https://tegorman13.github.io/ccl/tms.html>
 
@@ -196,6 +196,45 @@ teams.
 
 ![Figure from Marjieh et al. (2024)](images/marjieh_24_img.png)
 
+## Bridging the Gulf of Envisioning: Cognitive Design Challenges in LLM Interfaces
+
+Subramonyam, H., Pea, R., Pondoc, C. L., Agrawala, M., & Seifert, C.
+(2024). **Bridging the Gulf of Envisioning: Cognitive Design Challenges
+in LLM Interfaces** (arXiv:2309.14459; Version 2). arXiv.
+http://arxiv.org/abs/2309.14459
+
+<details class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Large language models (LLMs) exhibit dynamic capabilities and appear to
+comprehend complex and ambiguous natural language prompts. However,
+calibrating LLM interactions is challenging for interface designers and
+end-users alike. A central issue is our limited grasp of how human
+cognitive processes begin with a goal and form intentions for executing
+actions, a blindspot even in established interaction models such as
+Norman’s gulfs of execution and evaluation. To address this gap, we
+theorize how end-users ‘envision’ translating their goals into clear
+intentions and craft prompts to obtain the desired LLM response. We
+define a process of Envisioning by highlighting three misalignments: (1)
+knowing whether LLMs can accomplish the task, (2) how to instruct the
+LLM to do the task, and (3) how to evaluate the success of the LLM’s
+output in meeting the goal. Finally, we make recommendations to narrow
+the envisioning gulf in human-LLM interactions.
+
+</div>
+
+</details>
+
+![Figure from Subramonyam et al. (2024)](images/Subramonyam1.jpg)
+
+## Misc Papers
+
 Argote, L., & Ren, Y. (2012). Transactive Memory Systems: A
 Microfoundation of Dynamic Capabilities. Journal of Management Studies,
 49(8), 1375–1382. https://doi.org/10.1111/j.1467-6486.2012.01077.x
@@ -275,6 +314,15 @@ Learn and Think with People* (arXiv:2408.03943). arXiv.
 
 Marjieh, R., Gokhale, A., Bullo, F., & Griffiths, T. L. (2024). *Task
 Allocation in Teams as a Multi-Armed Bandit*.
+
+</div>
+
+<div id="ref-subramonyamBridgingGulfEnvisioning2024" class="csl-entry">
+
+Subramonyam, H., Pea, R., Pondoc, C. L., Agrawala, M., & Seifert, C.
+(2024). *Bridging the Gulf of Envisioning: Cognitive Design Challenges
+in LLM Interfaces* (arXiv:2309.14459). arXiv.
+<https://arxiv.org/abs/2309.14459>
 
 </div>
 
