@@ -1,6 +1,6 @@
 # Individual decision lit
 Thomas E. Gorman
-2024-10-04
+2024-10-31
 
 - [To Trust or to Think: Cognitive Forcing Functions Can Reduce
   Overreliance on AI in AI-assisted
@@ -57,6 +57,19 @@ Thomas E. Gorman
   Effect.](#large-language-model-recall-uncertainty-is-modulated-by-the-fan-effect)
 - [Accuracy-Time Tradeoffs in AI-Assisted Decision Making under Time
   Pressure.](#accuracy-time-tradeoffs-in-ai-assisted-decision-making-under-time-pressure)
+- [The LLM Effect: Are Humans Truly Using LLMs, or Are They Being
+  Influenced By Them
+  Instead?](#the-llm-effect-are-humans-truly-using-llms-or-are-they-being-influenced-by-them-instead)
+- [Mutual Theory of Mind in Human-AI Collaboration: An Empirical Study
+  with LLM-driven AI Agents in a Real-time Shared Workspace
+  Task](#mutual-theory-of-mind-in-human-ai-collaboration-an-empirical-study-with-llm-driven-ai-agents-in-a-real-time-shared-workspace-task)
+- [Bridging the Gulf of Envisioning: Cognitive Design Challenges in LLM
+  Interfaces](#bridging-the-gulf-of-envisioning-cognitive-design-challenges-in-llm-interfaces)
+- [Learning To Guide Human Decision Makers With Vision-Language
+  Models](#learning-to-guide-human-decision-makers-with-vision-language-models)
+- [How does Value Similarity affect Human Reliance in AI-Assisted
+  Ethical Decision
+  Making?](#how-does-value-similarity-affect-human-reliance-in-ai-assisted-ethical-decision-making)
 
 ## To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-assisted Decision-making
 
@@ -1030,8 +1043,221 @@ adapt AI assistances in this setting.
 
 ![Figure from Swaroop et al. (2024)](images/Swaroop1.png)
 
+## The LLM Effect: Are Humans Truly Using LLMs, or Are They Being Influenced By Them Instead?
+
+Choi, A. S., Akter, S. S., Singh, J. P., & Anastasopoulos, A. (2024).
+**The LLM Effect: Are Humans Truly Using LLMs, or Are They Being
+Influenced By Them Instead?** (arXiv:2410.04699). arXiv.
+http://arxiv.org/abs/2410.04699
+
+<details class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Large Language Models (LLMs) have shown capabilities close to human
+performance in various analytical tasks, leading researchers to use them
+for time and labor-intensive analyses. However, their capability to
+handle highly specialized and open-ended tasks in domains like policy
+studies remains in question. This paper investigates the efficiency and
+accuracy of LLMs in specialized tasks through a structured user study
+focusing on Human-LLM partnership. The study, conducted in two
+stages-Topic Discovery and Topic Assignment-integrates LLMs with expert
+annotators to observe the impact of LLM suggestions on what is usually
+human-only analysis. Results indicate that LLM-generated topic lists
+have significant overlap with human generated topic lists, with minor
+hiccups in missing document-specific topics. However, LLM suggestions
+may significantly improve task completion speed, but at the same time
+introduce anchoring bias, potentially affecting the depth and nuance of
+the analysis, raising a critical question about the trade-off between
+increased efficiency and the risk of biased analysis.
+
+</div>
+
+</details>
+
+![Figure from Choi et al. (2024)](images/choi1.png)
+
+## Mutual Theory of Mind in Human-AI Collaboration: An Empirical Study with LLM-driven AI Agents in a Real-time Shared Workspace Task
+
+Zhang, S., Wang, X., Zhang, W., Chen, Y., Gao, L., Wang, D., Zhang, W.,
+Wang, X., & Wen, Y. (2024). **Mutual Theory of Mind in Human-AI
+Collaboration: An Empirical Study with LLM-driven AI Agents in a
+Real-time Shared Workspace Task** (arXiv:2409.08811). arXiv.
+http://arxiv.org/abs/2409.08811
+
+<details class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Theory of Mind (ToM) significantly impacts human collaboration and
+communication as a crucial capability to understand others. When AI
+agents with ToM capability collaborate with humans, Mutual Theory of
+Mind (MToM) arises in such human-AI teams (HATs). The MToM process,
+which involves interactive communication and ToM-based strategy
+adjustment, affects the team’s performance and collaboration process. To
+explore the MToM process, we conducted a mixed-design experiment using a
+large language model-driven AI agent with ToM and communication modules
+in a real-time shared-workspace task. We find that the agent’s ToM
+capability does not significantly impact team performance but enhances
+human understanding of the agent and the feeling of being understood.
+Most participants in our study believe verbal communication increases
+human burden, and the results show that bidirectional communication
+leads to lower HAT performance. We discuss the results’ implications for
+designing AI agents that collaborate with humans in real-time shared
+workspace tasks.
+
+</div>
+
+</details>
+
+![Figure from Zhang et al. (2024)](images/zhang_tom1.png)
+
+## Bridging the Gulf of Envisioning: Cognitive Design Challenges in LLM Interfaces
+
+Subramonyam, H., Pea, R., Pondoc, C. L., Agrawala, M., & Seifert, C.
+(2024). **Bridging the Gulf of Envisioning: Cognitive Design Challenges
+in LLM Interfaces** (arXiv:2309.14459; Version 2). arXiv.
+http://arxiv.org/abs/2309.14459
+
+<details class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Large language models (LLMs) exhibit dynamic capabilities and appear to
+comprehend complex and ambiguous natural language prompts. However,
+calibrating LLM interactions is challenging for interface designers and
+end-users alike. A central issue is our limited grasp of how human
+cognitive processes begin with a goal and form intentions for executing
+actions, a blindspot even in established interaction models such as
+Norman’s gulfs of execution and evaluation. To address this gap, we
+theorize how end-users ‘envision’ translating their goals into clear
+intentions and craft prompts to obtain the desired LLM response. We
+define a process of Envisioning by highlighting three misalignments: (1)
+knowing whether LLMs can accomplish the task, (2) how to instruct the
+LLM to do the task, and (3) how to evaluate the success of the LLM’s
+output in meeting the goal. Finally, we make recommendations to narrow
+the envisioning gulf in human-LLM interactions.
+
+</div>
+
+</details>
+
+![Figure from Subramonyam et al. (2024)](images/Subramonyam1.jpg)
+
+## Learning To Guide Human Decision Makers With Vision-Language Models
+
+Banerjee, D., Teso, S., Sayin, B., & Passerini, A. (2024). **Learning To
+Guide Human Decision Makers With Vision-Language Models**
+(arXiv:2403.16501). arXiv. http://arxiv.org/abs/2403.16501
+
+<details class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+There is increasing interest in developing AIs for assisting human
+decision-making in high-stakes tasks, such as medical diagnosis, for the
+purpose of improving decision quality and reducing cognitive strain.
+Mainstream approaches team up an expert with a machine learning model to
+which safer decisions are offloaded, thus letting the former focus on
+cases that demand their attention. his separation of responsibilities
+setup, however, is inadequate for high-stakes scenarios. On the one
+hand, the expert may end up over-relying on the machine’s decisions due
+to anchoring bias, thus losing the human oversight that is increasingly
+being required by regulatory agencies to ensure trustworthy AI. On the
+other hand, the expert is left entirely unassisted on the (typically
+hardest) decisions on which the model abstained. As a remedy, we
+introduce learning to guide (LTG), an alternative framework in which -
+rather than taking control from the human expert - the machine provides
+guidance useful for decision making, and the human is entirely
+responsible for coming up with a decision. In order to ensure guidance
+is interpretable} and task-specific, we develop SLOG, an approach for
+turning any vision-language model into a capable generator of textual
+guidance by leveraging a modicum of human feedback. Our empirical
+evaluation highlights the promise of on a challenging, real-world
+medical diagnosis task.
+
+</div>
+
+</details>
+
+<div id="fig-banerjee">
+
+![](images/Banerjee1.jpg)
+
+![](images/Banerjee2.jpg)
+
+Figure 5: Figures from Banerjee et al. (2024)
+
+</div>
+
+## How does Value Similarity affect Human Reliance in AI-Assisted Ethical Decision Making?
+
+Narayanan, S., Yu, G., Ho, C.-J., & Yin, M. (2023). How does Value
+Similarity affect Human Reliance in AI-Assisted Ethical Decision Making?
+Proceedings of the 2023 AAAI/ACM Conference on AI, Ethics, and Society,
+49–57. https://doi.org/10.1145/3600211.3604709
+
+<details class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+This paper explores the impact of value similarity between humans and AI
+on human reliance in the context of AI-assisted ethical decision-making.
+Using kidney allocation as a case study, we conducted a randomized
+human-subject experiment where workers were presented with ethical
+dilemmas in various conditions, including no AI recommendations,
+recommendations from a similar AI, and recommendations from a dissimilar
+AI. We found that recommendations provided by a dissimilar AI had a
+higher overall effect on human decisions than recommendations from a
+similar AI. However, when humans and AI disagreed, participants were
+more likely to change their decisions when provided with recommendations
+from a similar AI. The effect was not due to humans’ perceptions of the
+AI being similar, but rather due to the AI displaying similar ethical
+values through its recommendations. We also conduct a preliminary
+analysis on the relationship between value similarity and trust, and
+potential shifts in ethical preferences at the population-level.
+
+</div>
+
+</details>
+
+![Figure from Narayanan et al. (2023)](images/Narayanan1.png)
+
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0" line-spacing="2">
+
+<div id="ref-banerjeeLearningGuideHuman2024" class="csl-entry">
+
+Banerjee, D., Teso, S., Sayin, B., & Passerini, A. (2024). *Learning To
+Guide Human Decision Makers With Vision-Language Models*
+(arXiv:2403.16501). arXiv. <https://arxiv.org/abs/2403.16501>
+
+</div>
 
 <div id="ref-bhatiaExploringVariabilityRisk2024" class="csl-entry">
 
@@ -1073,6 +1299,15 @@ Sciences*, *120*(51), e2316205120.
 Cheung, V., Maier, M., & Lieder, F. (2024). *Large Language Models
 Amplify Human Biases in Moral Decision-Making*.
 <https://doi.org/10.31234/osf.io/aj46b>
+
+</div>
+
+<div id="ref-choiLLMEffectAre2024" class="csl-entry">
+
+Choi, A. S., Akter, S. S., Singh, J. P., & Anastasopoulos, A. (2024).
+*The LLM Effect: Are Humans Truly Using LLMs, or Are They Being
+Influenced By Them Instead?* (arXiv:2410.04699). arXiv.
+<https://arxiv.org/abs/2410.04699>
 
 </div>
 
@@ -1130,6 +1365,15 @@ the National Academy of Sciences*, *121*(9), e2313925121.
 
 </div>
 
+<div id="ref-narayananHowDoesValue2023" class="csl-entry">
+
+Narayanan, S., Yu, G., Ho, C.-J., & Yin, M. (2023). How does Value
+Similarity affect Human Reliance in AI-Assisted Ethical Decision Making?
+*Proceedings of the 2023 AAAI/ACM Conference on AI, Ethics, and
+Society*, 49–57. <https://doi.org/10.1145/3600211.3604709>
+
+</div>
+
 <div id="ref-nguyenHumanBiasAI2024" class="csl-entry">
 
 Nguyen, J. (2024). Human Bias in AI Models? Anchoring Effects and
@@ -1173,6 +1417,15 @@ Stadler, M., Bannert, M., & Sailer, M. (2024). Cognitive ease at a cost:
 LLMs reduce mental effort but compromise depth in student scientific
 inquiry. *Computers in Human Behavior*, *160*, 108386.
 <https://doi.org/10.1016/j.chb.2024.108386>
+
+</div>
+
+<div id="ref-subramonyamBridgingGulfEnvisioning2024" class="csl-entry">
+
+Subramonyam, H., Pea, R., Pondoc, C. L., Agrawala, M., & Seifert, C.
+(2024). *Bridging the Gulf of Envisioning: Cognitive Design Challenges
+in LLM Interfaces* (arXiv:2309.14459). arXiv.
+<https://arxiv.org/abs/2309.14459>
 
 </div>
 
@@ -1220,6 +1473,17 @@ Behavior*, *144*, 107714. <https://doi.org/10.1016/j.chb.2023.107714>
 Yax, N., Anlló, H., & Palminteri, S. (2024). Studying and improving
 reasoning in humans and machines. *Communications Psychology*, *2*(1),
 1–16. <https://doi.org/10.1038/s44271-024-00091-8>
+
+</div>
+
+<div id="ref-zhangMutualTheoryMind2024" class="csl-entry">
+
+Zhang, S., Wang, X., Zhang, W., Chen, Y., Gao, L., Wang, D., Zhang, W.,
+Wang, X., & Wen, Y. (2024). *Mutual Theory of Mind in Human-AI
+Collaboration: An Empirical Study with <span class="nocase">LLM-driven
+AI Agents</span> in a <span class="nocase">Real-time Shared Workspace
+Task</span>* (arXiv:2409.08811). arXiv.
+<https://arxiv.org/abs/2409.08811>
 
 </div>
 

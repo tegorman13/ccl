@@ -44,3 +44,8 @@ _freeze/*
 .vscode/*
 rsconnect/*
 _extensions/*
+
+
+node_modules/*
+package-lock.json
+package.json

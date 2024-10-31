@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Ciudad - Vías y Energía</title>
+    <style>
+        /* Estilo general del cuerpo */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        /* Contenedor de la barra de energía */
+        h1 {
+            font-size: 24px; /* Tamaño de fuente */
+            color: #333; /* Color del texto */
+            margin-bottom: 10px; /* Espaciado debajo del título */
+        }
+
+        .energy-bar-container {
+            width: 500px;
+            height: 30px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            border: 2px solid black;
+        }
+
+        /* Barra de energía (variable) */
+        .energy-bar {
+            height: 100%;
+            width: 100%; /* Comienza llena */
+            background-color: #FFFF00; /* Verde */
+            transition: width 0.2s;
+        }
+
+        /* Mapa principal */
+        .map {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            background-color: #e0e0e0;
+            border: 2px solid black;
+        }
+
+        /* Carreteras generales */
+        .road {
+            position: absolute;
+            background-color: #808080;
+        }
+
+        /* Calles verticales */
+        .vertical-road {
+            width: 30px;
+            height: 500px;
+        }
+
+        .vertical-road-1 { left: 115px; top: 0; }
+        .vertical-road-2 { left: 235px; top: 0; }
+        .vertical-road-3 { left: 355px; top: 0; }
+        .vertical-road-4 { left: 0px; top: 0; }
+        .vertical-road-5 { left: 470px; top: 0; }
+
+        /* Calles horizontales */
+        .horizontal-road {
+            width: 500px;
+            height: 30px;
+        }
+
+        .horizontal-road-1 { top: 115px; left: 0; }
+        .horizontal-road-2 { top: 235px; left: 0; }
+        .horizontal-road-3 { top: 355px; left: 0; }
+        .horizontal-road-4 { top: 0px; left: 0; }
+        .horizontal-road-5 { top: 470px; left: 0; }
+
+        /* Vía de acceso desde la izquierda */
+        .entry-road {
+            width: 100px;
+            height: 30px;
+            top: 235px;
+            left: -100px;
+            background-color: #4CAF50;
+        }
+
+        /* Vía de salida hacia la derecha */
+        .exit-road {
+            width: 100px;
+            height: 30px;
+            top: 235px;
+            left: 500px;
+            background-color: #FF5722;
+        }
+
+        /* Estilo del coche */
+        #car {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: blue;
+            border-radius: 5px;
+            top: 235px; /* Misma altura que la vía de entrada */
+            left: 0px;  /* Inicio de la vía de entrada */
+        }
+
+        /* Estilo de las estaciones de carga */
+        .station {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: yellow;
+            border-radius: 50%;
+        }
+
+        /* Estilo para el indicador de dinero */
+        .money-indicator {
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Estilo para el cartel de precio de la estación */
+        .price-tag {
+            position: absolute;
+            background-color: #fff; /* Fondo blanco */
+            border: 1px solid #333; /* Borde oscuro */
+            padding: 2px 5px; /* Espaciado interno */
+            font-size: 12px; /* Tamaño de fuente */
+            color: #333; /* Color del texto */
+            transform: translate(-50%, -100%); /* Centrar el cartel sobre la estación */
+            white-space: nowrap; /* Evitar que el texto se divida */
+        }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Energy Level</h1> <!-- Título sobre la barra de energía -->
+    <div class="energy-bar-container">
+        <div class="energy-bar" id="energy-bar"></div>
+    </div>
+    <div class="money-indicator" id="money-indicator">Dinero: $100</div> <!-- Indicador de dinero -->
+
+    <div class="map" id="map">
+        <!-- Calles verticales (cuadrícula interna) -->
+        <div class="road vertical-road vertical-road-1"></div>
+        <div class="road vertical-road vertical-road-2"></div>
+        <div class="road vertical-road vertical-road-3"></div>
+        <div class="road vertical-road vertical-road-4"></div>
+        <div class="road vertical-road vertical-road-5"></div>
+
+        <!-- Calles horizontales (cuadrícula interna) -->
+        <div class="road horizontal-road horizontal-road-1"></div>
+        <div class="road horizontal-road horizontal-road-2"></div>
+        <div class="road horizontal-road horizontal-road-3"></div>
+        <div class="road horizontal-road horizontal-road-4"></div>
+        <div class="road horizontal-road horizontal-road-5"></div>
+
+        <!-- Vía de acceso (izquierda) -->
+        <div class="road entry-road" id="entry-road"></div>
+
+        <!-- Vía de salida (derecha) -->
+        <div class="road exit-road" id="exit-road"></div>
+
+        <!-- Coche -->
+        <div id="car"></div>
+    </div>
+
+    <script>
+
+
+const socket = io();
+        let playerId;
+        let players = new Map();
+
+        // Variables iniciales (will be set when receiving game state)
+        let carPositionX;
+        let carPositionY;
+        let energy = 100;
+        let money = 100;
+        const mapSize = 500;
+        const energyBar = document.getElementById('energy-bar');
+        const moneyIndicator = document.getElementById('money-indicator');
+        const map = document.getElementById('map');
+
+        // Handle initial game state
+        socket.on('gameState', (data) => {
+            playerId = data.playerId;
+            const currentPlayer = data.players.find(p => p.id === playerId);
+            
+            // Set initial position from server
+            carPositionX = currentPlayer.positionX;
+            carPositionY = currentPlayer.positionY;
+            
+            // Create all players including self
+            data.players.forEach(player => {
+                createPlayerCar(player);
+                players.set(player.id, player);
+            });
+            
+            createChargingStations(data.stations);
+        });
+
+        function createPlayerCar(player) {
+            const playerCar = document.createElement('div');
+            playerCar.id = `car-${player.id}`;
+            playerCar.className = 'car';
+            playerCar.style.position = 'absolute';
+            playerCar.style.width = '30px';
+            playerCar.style.height = '30px';
+            playerCar.style.borderRadius = '5px';
+            playerCar.style.left = player.positionX + "px";
+            playerCar.style.top = player.positionY + "px";
+            playerCar.style.backgroundColor = player.color;
+            map.appendChild(playerCar);
+        }
+
+        // Handle new player joining
+        socket.on('playerJoined', (player) => {
+            createPlayerCar(player);
+            players.set(player.id, player);
+        });
+
+        // Handle player movement
+        socket.on('playerMoved', (data) => {
+            const playerCar = document.getElementById(`car-${data.id}`);
+            if (playerCar) {
+                playerCar.style.left = data.positionX + "px";
+                playerCar.style.top = data.positionY + "px";
+                if (players.has(data.id)) {
+                    const player = players.get(data.id);
+                    player.energy = data.energy;
+                }
+            }
+        });
+
+        // Modified moveCar function to handle both X and Y movement
+        const moveCar = (direction) => {
+            if (energy > 0) {
+                let moved = false;
+                
+                switch(direction) {
+                    case 'right':
+                        if (carPositionX < mapSize - 30) {
+                            carPositionX += 5;
+                            moved = true;
+                        }
+                        break;
+                    case 'left':
+                        if (carPositionX > 0) {
+                            carPositionX -= 5;
+                            moved = true;
+                        }
+                        break;
+                    case 'up':
+                        if (carPositionY > 0) {
+                            carPositionY -= 5;
+                            moved = true;
+                        }
+                        break;
+                    case 'down':
+                        if (carPositionY < mapSize - 30) {
+                            carPositionY += 5;
+                            moved = true;
+                        }
+                        break;
+                }
+
+                if (moved) {
+                    reduceEnergy();
+                    const playerCar = document.getElementById(`car-${playerId}`);
+                    if (playerCar) {
+                        playerCar.style.left = carPositionX + "px";
+                        playerCar.style.top = carPositionY + "px";
+                    }
+                    checkCollision();
+                    
+                    socket.emit('movePlayer', {
+                        positionX: carPositionX,
+                        positionY: carPositionY,
+                        energy: energy
+                    });
+                }
+            } else {
+                alert("¡Tu energía se ha agotado! Recarga en una estación.");
+            }
+        };
+
+        // Update keyboard controls to handle all directions
+        window.addEventListener('keydown', (event) => {
+            switch(event.key) {
+                case 'ArrowRight':
+                    moveCar('right');
+                    break;
+                case 'ArrowLeft':
+                    moveCar('left');
+                    break;
+                case 'ArrowUp':
+                    moveCar('up');
+                    break;
+                case 'ArrowDown':
+                    moveCar('down');
+                    break;
+            }
+        });
+        // Modified checkCollision function
+        const checkCollision = () => {
+            // Previous collision detection code remains the same
+            // Add emission to server when charging
+            socket.emit('charge', {
+                energy: energy,
+                money: money
+            });
+        };
+
+
+
+        // Reducir energía con el movimiento
+        const reduceEnergy = () => {
+            if (energy > 0) {
+                energy -= 5;
+                energyBar.style.width = energy + "%";
+            }
+        };
+
+        // Crear estaciones de carga en posiciones fijas
+        const createChargingStations = () => {
+            const fixedPositions = [
+                { top: 8, left: 338, cost: 20 },
+                { top: 479, left: 183, cost: 30 },
+                { top: 123, left: 124, cost: 15 },
+                { top: 300, left: 243, cost: 25 },
+                { top: 185, left: 479, cost: 10 },
+            ];
+
+            fixedPositions.forEach(pos => {
+                const station = document.createElement('div');
+                station.className = 'station';
+                station.style.top = pos.top + "px";
+                station.style.left = pos.left + "px";
+                station.dataset.cost = pos.cost; // Asignar costo a la estación
+                map.appendChild(station);
+
+                // Crear el cartel de precio
+                const priceTag = document.createElement('div');
+                priceTag.className = 'price-tag';
+                priceTag.textContent = `$${pos.cost}`; // Mostrar costo
+                priceTag.style.top = (pos.top - 15) + "px"; // Posicionar arriba de la estación
+                priceTag.style.left = (pos.left + 5) + "px"; // Posicionar ligeramente a la derecha
+                map.appendChild(priceTag);
+            });
+        };
+
+        // Crear estaciones de carga
+        createChargingStations();
+    </script>
+</body>
+</html>

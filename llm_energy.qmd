@@ -27,8 +27,6 @@ format:
 [https://tegorman13.github.io/ccl/llm_energy.html](https://tegorman13.github.io/ccl/llm_energy.html)
 
 
-
-
 ## Sasha: Creative Goal-Oriented Reasoning in Smart Homes with Large Language Models.
 
 King, E., Yu, H., Lee, S., & Julien, C. (2024). **Sasha: Creative Goal-Oriented Reasoning in Smart Homes with Large Language Models.** Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 8(1), 1–38. https://doi.org/10.1145/3643505

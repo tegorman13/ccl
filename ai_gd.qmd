@@ -22,6 +22,30 @@ format:
 # Relevant Papers
 
 
+## AI can help humans find common ground in democratic deliberation.
+
+Tessler, M. H., Bakker, M. A., Jarrett, D., Sheahan, H., Chadwick, M. J., Koster, R., Evans, G., Campbell-Gillingham, L., Collins, T., Parkes, D. C., Botvinick, M., & Summerfield, C. (2024). **AI can help humans find common ground in democratic deliberation.** Science, 386(6719), eadq2852. https://doi.org/10.1126/science.adq2852
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Finding agreement through a free exchange of views is often difficult. Collective deliberation can be slow, difficult to scale, and unequally attentive to different voices. In this study, we trained an artificial intelligence (AI) to mediate human deliberation. Using participants’ personal opinions and critiques, the AI mediator iteratively generates and refines statements that express common ground among the group on social or political issues. Participants (N = 5734) preferred AI-generated statements to those written by human mediators, rating them as more informative, clear, and unbiased. Discussants often updated their views after the deliberation, converging on a shared perspective. Text embeddings revealed that successful group statements incorporated dissenting voices while respecting the majority position. These findings were replicated in a virtual citizens’ assembly involving a demographically representative sample of the UK population.
+</div>
+</details>
+
+
+::: {#fig-tessler}
+
+![](images/tessler1.png)
+
+![](images/tessler2.png)
+
+Figures from @tesslerAICanHelp2024
+
+:::
+
+
+
 ## Task Allocation in Teams as a Multi-Armed Bandit.
 
 Marjieh, R., Gokhale, A., Bullo, F., & Griffiths, T. L. (2024). **Task Allocation in Teams as a Multi-Armed Bandit.** https://cocosci.princeton.edu/papers/marjieh2024task.pdf
