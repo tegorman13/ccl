@@ -1600,5 +1600,49 @@
       "LLM Literature",
       "Individual decision lit"
     ]
+  },
+  {
+    "objectID": "ai_decision.html#determinants-of-llm-assisted-decision-making",
+    "href": "ai_decision.html#determinants-of-llm-assisted-decision-making",
+    "title": "Individual decision lit",
+    "section": "Determinants of LLM-assisted Decision-Making",
+    "text": "Determinants of LLM-assisted Decision-Making\nEigner, E., & Händler, T. (2024). Determinants of LLM-assisted Decision-Making (arXiv:2402.17385). arXiv. http://arxiv.org/abs/2402.17385\n\n\nAbstract\n\n\nDecision-making is a fundamental capability in everyday life. Large Language Models (LLMs) provide multifaceted support in enhancing human decision-making processes. However, understanding the influencing factors of LLM-assisted decision-making is crucial for enabling individuals to utilize LLM-provided advantages and minimize associated risks in order to make more informed and better decisions. This study presents the results of a comprehensive literature analysis, providing a structural overview and detailed analysis of determinants impacting decision-making with LLM support. In particular, we explore the effects of technological aspects of LLMs, including transparency and prompt engineering, psychological factors such as emotions and decision-making styles, as well as decision specific determinants such as task difficulty and accountability. In addition, the impact of the determinants on the decision-making process is illustrated via multiple application scenarios. Drawing from our analysis, we develop a dependency framework that systematizes possible interactions in terms of reciprocal interdependencies between these determinants. Our research reveals that, due to the multifaceted interactions with various determinants, factors such as trust in or reliance on LLMs, the user’s mental model, and the characteristics of information processing are identified as significant aspects influencing LLM-assisted decision-making processes. Our findings can be seen as crucial for improving decision quality in human-AI collaboration, empowering both users and organizations, and designing more effective LLM interfaces. Additionally, our work provides a foundation for future empirical investigations on the determinants of decision-making assisted by LLMs.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 6: Figures from Eigner & Händler (2024)",
+    "crumbs": [
+      "LLM Literature",
+      "Individual decision lit"
+    ]
+  },
+  {
+    "objectID": "ai_decision.html#a-taxonomy-of-human-and-ml-strengths-in-decision-making-to-investigate-human-ml-complementarity.",
+    "href": "ai_decision.html#a-taxonomy-of-human-and-ml-strengths-in-decision-making-to-investigate-human-ml-complementarity.",
+    "title": "Individual decision lit",
+    "section": "A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity.",
+    "text": "A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity.\nRastogi, C., Leqi, L., Holstein, K., & Heidari, H. (2023). A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity. Proceedings of the AAAI Conference on Human Computation and Crowdsourcing, 11, 127–139. https://doi.org/10.1609/hcomp.v11i1.27554\n\n\nAbstract\n\n\nHybrid human-ML systems increasingly make consequential decisions in a wide range of domains. These systems are often introduced with the expectation that the combined human-ML system will achieve complementary performance, that is, the combined decision-making system will be an improvement compared with either decision-making agent in isolation. However, empirical results have been mixed, and existing research rarely articulates the sources and mechanisms by which complementary performance is expected to arise. Our goal in this work is to provide conceptual tools to advance the way researchers reason and communicate about human-ML complementarity. Drawing upon prior literature in human psychology, machine learning, and human-computer interaction, we propose a taxonomy characterizing distinct ways in which human and ML-based decision-making can differ. In doing so, we conceptually map potential mechanisms by which combining human and ML decision-making may yield complementary performance, developing a language for the research community to reason about design of hybrid systems in any decision-making domain. To illustrate how our taxonomy can be used to investigate complementarity, we provide a mathematical aggregation framework to examine enabling conditions for complementarity. Through synthetic simulations, we demonstrate how this framework can be used to explore specific aspects of our taxonomy and shed light on the optimal mechanisms for combining human-ML judgments.\n\n\nRastogi et al. (2023)",
+    "crumbs": [
+      "LLM Literature",
+      "Individual decision lit"
+    ]
+  },
+  {
+    "objectID": "ai_decision.html#take-caution-in-using-llms-as-human-surrogates-scylla-ex-machina",
+    "href": "ai_decision.html#take-caution-in-using-llms-as-human-surrogates-scylla-ex-machina",
+    "title": "Individual decision lit",
+    "section": "Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina",
+    "text": "Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina\nGao, Y., Lee, D., Burtch, G., & Fazelpour, S. (2024). Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina (No. arXiv:2410.19599). arXiv. http://arxiv.org/abs/2410.19599\n\n\nAbstract\n\n\nHuman decision-making is filled with a variety of paradoxes demonstrating deviations from rationality principles. Do state-of-the-art artificial intelligence (AI) models also manifest these paradoxes when making decisions? As a case study, in this work we investigate whether GPT-4, a recently released state-of-the-art language model, would show two well-known paradoxes in human decision-making: the Allais paradox and the Ellsberg paradox. We demonstrate that GPT-4 succeeds in the two variants of the Allais paradox (the common-consequence effect and the common-ratio effect) but fails in the case of the Ellsberg paradox. We also show that providing GPT-4 with high-level normative principles allows it to succeed in the Ellsberg paradox, thus elevating GPT-4’s decision-making rationality. We discuss the implications of our work for AI rationality enhancement and AI-assisted decision-making.\n\n\n\n\n\nFigure from Gao et al. (2024)",
+    "crumbs": [
+      "LLM Literature",
+      "Individual decision lit"
+    ]
+  },
+  {
+    "objectID": "ai_decision.html#towards-a-science-of-human-ai-decision-making-an-overview-of-design-space-in-empirical-human-subject-studies.",
+    "href": "ai_decision.html#towards-a-science-of-human-ai-decision-making-an-overview-of-design-space-in-empirical-human-subject-studies.",
+    "title": "Individual decision lit",
+    "section": "Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies.",
+    "text": "Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies.\nLai, V., Chen, C., Smith-Renner, A., Liao, Q. V., & Tan, C. (2023). Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies. 2023 ACM Conference on Fairness, Accountability, and Transparency, 1369–1385. https://doi.org/10.1145/3593013.3594087\n\n\nAbstract\n\n\nAI systems are adopted in numerous domains due to their increas- ingly strong predictive performance. However, in high-stakes domains such as criminal justice and healthcare, full automation is often not desirable due to safety, ethical, and legal concerns, yet fully manual approaches can be inaccurate and time-consuming. As a result, there is growing interest in the research community to augment human decision making with AI assistance. Besides developing AI technologies for this purpose, the emerging field of human-AI decision making must embrace empirical approaches to form a foundational understanding of how humans interact and work with AI to make decisions. To invite and help structure research efforts towards a science of understanding and improving human-AI decision making, we survey recent literature of empirical human-subject studies on this topic. We summarize the study design choices made in over 100 papers in three important aspects: (1) decision tasks, (2) AI assistance elements, and (3) evaluation metrics. For each aspect, we summarize current trends, discuss gaps in current practices of the field, and make a list of recommendations for future research. Our work highlights the need to develop com- mon frameworks to account for the design and research spaces of human-AI decision making, so that researchers can make rigorous choices in study design, and the research community can build on each other’s work and produce generalizable scientific knowledge. We also hope this work will serve as a bridge for HCI and AI communities to work together to mutually shape the empirical science and computational technologies for human-AI decision making.\n\n\n\n\n\nFigure from Lai et al. (2023)",
+    "crumbs": [
+      "LLM Literature",
+      "Individual decision lit"
+    ]
   }
 ]
