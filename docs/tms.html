@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Thomas E. Gorman">
-<meta name="dcterms.date" content="2024-10-31">
+<meta name="dcterms.date" content="2024-11-05">
 
 <title>Transactive Memory Systems – CCL Projects</title>
 <style>
@@ -60,7 +60,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b857913ff6f9ed5206609f7b47505e0f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-29f71986bfdb98847d3932762ebabacd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -210,7 +210,20 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tms.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li><li><a href="tms_notes.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#human-ai-teaming-leveraging-transactive-memory-and-speaking-up-for-enhanced-team-effectiveness." id="toc-human-ai-teaming-leveraging-transactive-memory-and-speaking-up-for-enhanced-team-effectiveness." class="nav-link active" data-scroll-target="#human-ai-teaming-leveraging-transactive-memory-and-speaking-up-for-enhanced-team-effectiveness.">Human-AI teaming: Leveraging transactive memory and speaking up for enhanced team effectiveness.</a></li>
+  <li><a href="#communication-in-transactive-memory-systems-a-review-and-multidimensional-network-perspective" id="toc-communication-in-transactive-memory-systems-a-review-and-multidimensional-network-perspective" class="nav-link" data-scroll-target="#communication-in-transactive-memory-systems-a-review-and-multidimensional-network-perspective">Communication in Transactive Memory Systems: A Review and Multidimensional Network Perspective</a></li>
+  <li><a href="#alignment-transactive-memory-and-collective-cognitive-systems" id="toc-alignment-transactive-memory-and-collective-cognitive-systems" class="nav-link" data-scroll-target="#alignment-transactive-memory-and-collective-cognitive-systems">Alignment, Transactive Memory, and Collective Cognitive Systems</a></li>
+  <li><a href="#building-machines-that-learn-and-think-with-people" id="toc-building-machines-that-learn-and-think-with-people" class="nav-link" data-scroll-target="#building-machines-that-learn-and-think-with-people">Building Machines that Learn and Think with People</a></li>
+  <li><a href="#task-allocation-in-teams-as-a-multi-armed-bandit." id="toc-task-allocation-in-teams-as-a-multi-armed-bandit." class="nav-link" data-scroll-target="#task-allocation-in-teams-as-a-multi-armed-bandit.">Task Allocation in Teams as a Multi-Armed Bandit.</a></li>
+  <li><a href="#bridging-the-gulf-of-envisioning-cognitive-design-challenges-in-llm-interfaces" id="toc-bridging-the-gulf-of-envisioning-cognitive-design-challenges-in-llm-interfaces" class="nav-link" data-scroll-target="#bridging-the-gulf-of-envisioning-cognitive-design-challenges-in-llm-interfaces">Bridging the Gulf of Envisioning: Cognitive Design Challenges in LLM Interfaces</a></li>
+  <li><a href="#misc-papers" id="toc-misc-papers" class="nav-link" data-scroll-target="#misc-papers">Misc Papers</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tms.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li><li><a href="tms.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="tms_notes.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -228,11 +241,6 @@ div.csl-indent {
     <p class="author"><a href="https://tegorman13.github.io/">Thomas E. Gorman</a> </p>
   </div>
   <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            <a href="https://web.ics.purdue.edu/~treimer/">
-            Communication and Cognition Lab, Purdue University, USA
-            </a>
-          </p>
       </div>
   </div>
 
@@ -242,7 +250,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 31, 2024</p>
+      <p class="date">November 5, 2024</p>
     </div>
   </div>
   
@@ -302,20 +310,32 @@ Research on linguistic interaction suggests that two or more individuals can som
 </section>
 <section id="building-machines-that-learn-and-think-with-people" class="level2">
 <h2 class="anchored" data-anchor-id="building-machines-that-learn-and-think-with-people">Building Machines that Learn and Think with People</h2>
-<p>Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee, M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A., Tenenbaum, J. B., &amp; Griffiths, T. L. (2024). <strong>Building Machines that Learn and Think with People</strong> (arXiv:2408.03943). arXiv. http://arxiv.org/abs/2408.03943</p>
+<p>Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee, M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A., Tenenbaum, J. B., &amp; Griffiths, T. L. (2024). <strong>Building machines that learn and think with people.</strong> Nature Human Behaviour, 8(10), 1851–1863. https://doi.org/10.1038/s41562-024-01991-9</p>
 <details open="" class="relevant-callout">
 <summary>
 Abstract
 </summary>
 <div>
-What do we want from machine intelligence? We envision machines that are not just tools for thought, but partners in thought: reasonable, insightful, knowledgeable, reliable, and trustworthy systems that think with us. Current artificial intelligence (AI) systems satisfy some of these criteria, some of the time. In this Perspective, we show how the science of collaborative cognition can be put to work to engineer systems that really can be called “thought partners,” systems built to meet our expectations and complement our limitations. We lay out several modes of collaborative thought in which humans and AI thought partners can engage and propose desiderata for human-compatible thought partnerships. Drawing on motifs from computational cognitive science, we motivate an alternative scaling path for the design of thought partners and ecosystems around their use through a Bayesian lens, whereby the partners we construct actively build and reason over models of the human and world.
-<p></p>
+<p>What do we want from machine intelligence? We envision machines that are not just tools for thought, but partners in thought: reasonable, insightful, knowledgeable, reliable, and trustworthy systems that think with us. Current artificial intelligence (AI) systems satisfy some of these criteria, some of the time. In this Perspective, we show how the science of collaborative cognition can be put to work to engineer systems that really can be called “thought partners,” systems built to meet our expectations and complement our limitations. We lay out several modes of collaborative thought in which humans and AI thought partners can engage and propose desiderata for human-compatible thought partnerships. Drawing on motifs from computational cognitive science, we motivate an alternative scaling path for the design of thought partners and ecosystems around their use through a Bayesian lens, whereby the partners we construct actively build and reason over models of the human and world.</p>
 </div>
 </details>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="images/Collins_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure from @collinsBuildingMachinesThat2024"><img src="images/Collins_24_img.png" class="img-fluid figure-img" alt="Figure from Collins et al. (2024)"></a></p>
-<figcaption>Figure from <span class="citation" data-cites="collinsBuildingMachinesThat2024">Collins et al. (<a href="#ref-collinsBuildingMachinesThat2024" role="doc-biblioref">2024</a>)</span></figcaption>
+<div id="fig-collins" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-collins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Collins_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;1: Figures from @collinsBuildingMachinesThat2024a"><img src="images/Collins_24_img.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="images/Collins2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;1: Figures from @collinsBuildingMachinesThat2024a"><img src="images/Collins2.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-collins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Figures from <span class="citation" data-cites="collinsBuildingMachinesThat2024a">Collins et al. (<a href="#ref-collinsBuildingMachinesThat2024a" role="doc-biblioref">2024</a>)</span>
+</figcaption>
 </figure>
 </div>
 </section>
@@ -332,7 +352,7 @@ Abstract
 </details>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/marjieh_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure from @marjiehTaskAllocationTeams2024"><img src="images/marjieh_24_img.png" class="img-fluid figure-img" alt="Figure from Marjieh et al. (2024)"></a></p>
+<p><a href="images/marjieh_24_img.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure from @marjiehTaskAllocationTeams2024"><img src="images/marjieh_24_img.png" class="img-fluid figure-img" alt="Figure from Marjieh et al. (2024)"></a></p>
 <figcaption>Figure from <span class="citation" data-cites="marjiehTaskAllocationTeams2024">Marjieh et al. (<a href="#ref-marjiehTaskAllocationTeams2024" role="doc-biblioref">2024</a>)</span></figcaption>
 </figure>
 </div>
@@ -350,7 +370,7 @@ Abstract
 </details>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Subramonyam1.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure from @subramonyamBridgingGulfEnvisioning2024"><img src="images/Subramonyam1.jpg" class="img-fluid figure-img" alt="Figure from Subramonyam et al. (2024)"></a></p>
+<p><a href="images/Subramonyam1.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure from @subramonyamBridgingGulfEnvisioning2024"><img src="images/Subramonyam1.jpg" class="img-fluid figure-img" alt="Figure from Subramonyam et al. (2024)"></a></p>
 <figcaption>Figure from <span class="citation" data-cites="subramonyamBridgingGulfEnvisioning2024">Subramonyam et al. (<a href="#ref-subramonyamBridgingGulfEnvisioning2024" role="doc-biblioref">2024</a>)</span></figcaption>
 </figure>
 </div>
@@ -378,8 +398,8 @@ Abstract
 <div id="ref-bienefeldHumanAITeamingLeveraging2023" class="csl-entry" role="listitem">
 Bienefeld, N., Kolbe, M., Camen, G., Huser, D., &amp; Buehler, P. K. (2023). Human-<span>AI</span> teaming: Leveraging transactive memory and speaking up for enhanced team effectiveness. <em>Frontiers in Psychology</em>, <em>14</em>. <a href="https://doi.org/10.3389/fpsyg.2023.1208019">https://doi.org/10.3389/fpsyg.2023.1208019</a>
 </div>
-<div id="ref-collinsBuildingMachinesThat2024" class="csl-entry" role="listitem">
-Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee, M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A., Tenenbaum, J. B., &amp; Griffiths, T. L. (2024). <em>Building <span>Machines</span> that <span>Learn</span> and <span>Think</span> with <span>People</span></em> (arXiv:2408.03943). arXiv. <a href="https://arxiv.org/abs/2408.03943">https://arxiv.org/abs/2408.03943</a>
+<div id="ref-collinsBuildingMachinesThat2024a" class="csl-entry" role="listitem">
+Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee, M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A., Tenenbaum, J. B., &amp; Griffiths, T. L. (2024). Building machines that learn and think with people. <em>Nature Human Behaviour</em>, <em>8</em>(10), 1851–1863. <a href="https://doi.org/10.1038/s41562-024-01991-9">https://doi.org/10.1038/s41562-024-01991-9</a>
 </div>
 <div id="ref-marjiehTaskAllocationTeams2024" class="csl-entry" role="listitem">
 Marjieh, R., Gokhale, A., Bullo, F., &amp; Griffiths, T. L. (2024). <em>Task <span>Allocation</span> in <span>Teams</span> as a <span>Multi-Armed Bandit</span></em>.

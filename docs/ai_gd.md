@@ -1,54 +1,53 @@
-# Literature Notes
-Thomas E. Gorman
-2024-10-01
+# Group Decision Lit
 
-- [Relevant Papers](#relevant-papers)
-  - [Task Allocation in Teams as a Multi-Armed
-    Bandit.](#task-allocation-in-teams-as-a-multi-armed-bandit)
-  - [Human-AI teaming: Leveraging transactive memory and speaking up for
-    enhanced team
-    effectiveness.](#human-ai-teaming-leveraging-transactive-memory-and-speaking-up-for-enhanced-team-effectiveness)
-  - [Large language models empowered agent-based modeling and
-    simulation: A survey and
-    perspectives.](#large-language-models-empowered-agent-based-modeling-and-simulation-a-survey-and-perspectives)
-  - [Building Machines that Learn and Think with
-    People](#building-machines-that-learn-and-think-with-people)
-  - [Large Language Models for Collective Problem-Solving: Insights into
-    Group Consensus
-    Decision-Making](#large-language-models-for-collective-problem-solving-insights-into-group-consensus-decision-making)
-  - [Exploring collaborative decision-making: A quasi-experimental study
-    of human and Generative AI
-    interaction.](#exploring-collaborative-decision-making-a-quasi-experimental-study-of-human-and-generative-ai-interaction)
-  - [How large language models can reshape collective
-    intelligence](#how-large-language-models-can-reshape-collective-intelligence)
-  - [Enhancing AI-Assisted Group Decision Making through LLM-Powered
-    Devil’s
-    Advocate.](#enhancing-ai-assisted-group-decision-making-through-llm-powered-devils-advocate)
-  - [The Wisdom of Partisan Crowds: Comparing Collective Intelligence in
-    Humans and LLM-based
-    Agents](#the-wisdom-of-partisan-crowds-comparing-collective-intelligence-in-humans-and-llm-based-agents)
-  - [Collective Innovation in Groups of Large Language
-    Models.](#collective-innovation-in-groups-of-large-language-models)
-  - [Evaluating LLM Agent Group Dynamics against Human Group Dynamics: A
-    Case Study on Wisdom of Partisan
-    Crowds](#evaluating-llm-agent-group-dynamics-against-human-group-dynamics-a-case-study-on-wisdom-of-partisan-crowds)
-  - [Exploring Collaboration Mechanisms for LLM Agents: A Social
-    Psychology
-    View](#exploring-collaboration-mechanisms-for-llm-agents-a-social-psychology-view)
-  - [LLM-Deliberation: Evaluating LLMs with Interactive Multi-Agent
-    Negotiation
-    Games.](#llm-deliberation-evaluating-llms-with-interactive-multi-agent-negotiation-games)
-  - [LLM Voting: Human Choices and AI Collective Decision
-    Making](#llm-voting-human-choices-and-ai-collective-decision-making)
-  - [Embodied LLM Agents Learn to Cooperate in Organized
-    Teams](#embodied-llm-agents-learn-to-cooperate-in-organized-teams)
-  - [Measuring Latent Trust Patterns in Large Language Models in the
-    Context of Human-AI
-    Teaming](#measuring-latent-trust-patterns-in-large-language-models-in-the-context-of-human-ai-teaming)
-  - [A Survey on Human-AI Teaming with Large Pre-Trained
-    Models](#a-survey-on-human-ai-teaming-with-large-pre-trained-models)
 
 # Relevant Papers
+
+## AI can help humans find common ground in democratic deliberation.
+
+Tessler, M. H., Bakker, M. A., Jarrett, D., Sheahan, H., Chadwick, M.
+J., Koster, R., Evans, G., Campbell-Gillingham, L., Collins, T., Parkes,
+D. C., Botvinick, M., & Summerfield, C. (2024). **AI can help humans
+find common ground in democratic deliberation.** Science, 386(6719),
+eadq2852. https://doi.org/10.1126/science.adq2852
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Finding agreement through a free exchange of views is often difficult.
+Collective deliberation can be slow, difficult to scale, and unequally
+attentive to different voices. In this study, we trained an artificial
+intelligence (AI) to mediate human deliberation. Using participants’
+personal opinions and critiques, the AI mediator iteratively generates
+and refines statements that express common ground among the group on
+social or political issues. Participants (N = 5734) preferred
+AI-generated statements to those written by human mediators, rating them
+as more informative, clear, and unbiased. Discussants often updated
+their views after the deliberation, converging on a shared perspective.
+Text embeddings revealed that successful group statements incorporated
+dissenting voices while respecting the majority position. These findings
+were replicated in a virtual citizens’ assembly involving a
+demographically representative sample of the UK population.
+
+</div>
+
+</details>
+
+<div id="fig-tessler">
+
+![](images/tessler1.png)
+
+![](images/tessler2.png)
+
+Figure 1: Figures from Tessler et al. (2024)
+
+</div>
 
 ## Task Allocation in Teams as a Multi-Armed Bandit.
 
@@ -137,8 +136,8 @@ human-AI team training in healthcare and beyond.
 ## Large language models empowered agent-based modeling and simulation: A survey and perspectives.
 
 Gao, C., Lan, X., Li, N., Yuan, Y., Ding, J., Zhou, Z., Xu, F., & Li, Y.
-(2024). Large language models empowered agent-based modeling and
-simulation: A survey and perspectives. Humanities and Social Sciences
+(2024). **Large language models empowered agent-based modeling and
+simulation: A survey and perspectives.** Humanities and Social Sciences
 Communications, 11(1), 1–24. https://doi.org/10.1057/s41599-024-03611-3
 
 <details open class="relevant-callout">
@@ -177,15 +176,15 @@ https://github.com/tsinghua-fib-lab/LLM-Agent-Based-Modeling-and-Simulation.
 
 </details>
 
-![Figure from Gao et al. (2024)](images/Gao_24_img.png)
+![Figure from C. Gao et al. (2024)](images/Gao_24_img.png)
 
 ## Building Machines that Learn and Think with People
 
 Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee,
 M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A.,
-Tenenbaum, J. B., & Griffiths, T. L. (2024). **Building Machines that
-Learn and Think with People** (arXiv:2408.03943). arXiv.
-http://arxiv.org/abs/2408.03943
+Tenenbaum, J. B., & Griffiths, T. L. (2024). **Building machines that
+learn and think with people.** Nature Human Behaviour, 8(10), 1851–1863.
+https://doi.org/10.1038/s41562-024-01991-9
 
 <details open class="relevant-callout">
 
@@ -217,7 +216,17 @@ and world.
 
 </details>
 
-![Figure from Collins et al. (2024)](images/Collins_24_img.png)
+<div id="fig-collins">
+
+![](images/Collins_24_img.png)
+
+![](images/Collins2.png)
+
+![](images/Collins3.png)
+
+Figure 2: Figures from Collins et al. (2024)
+
+</div>
 
   
 
@@ -267,15 +276,15 @@ agents.
 
 ![](images/du_24_img2.png)
 
-Figure 1: Figure from Du et al. (2024)
+Figure 3: Figure from Du et al. (2024)
 
 </div>
 
 ## Exploring collaborative decision-making: A quasi-experimental study of human and Generative AI interaction.
 
-Hao, X., Demir, E., & Eyers, D. (2024). Exploring collaborative
+Hao, X., Demir, E., & Eyers, D. (2024). **Exploring collaborative
 decision-making: A quasi-experimental study of human and Generative AI
-interaction. Technology in Society, 78, 102662.
+interaction.** Technology in Society, 78, 102662.
 https://doi.org/10.1016/j.techsoc.2024.102662
 
 <details class="relevant-callout">
@@ -361,6 +370,64 @@ humans’ ability to collectively tackle complex problems.
 ![Burton et al. (2024)](images/Burton_24_img.png)
 
   
+
+## Towards Human-AI Deliberation: Design and Evaluation of LLM-Empowered Deliberative AI for AI-Assisted Decision-Making
+
+Ma, S., Chen, Q., Wang, X., Zheng, C., Peng, Z., Yin, M., & Ma, X.
+(2024). **Towards Human-AI Deliberation: Design and Evaluation of
+LLM-Empowered Deliberative AI for AI-Assisted Decision-Making**
+(arXiv:2403.16812). arXiv. http://arxiv.org/abs/2403.16812
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+In AI-assisted decision-making, humans often passively review AI’s
+suggestion and decide whether to accept or reject it as a whole. In such
+a paradigm, humans are found to rarely trigger analytical thinking and
+face difficulties in communicating the nuances of conflicting opinions
+to the AI when disagreements occur. To tackle this challenge, we propose
+Human-AI Deliberation, a novel framework to promote human reflection and
+discussion on conflicting human-AI opinions in decision-making. Based on
+theories in human deliberation, this framework engages humans and AI in
+dimension-level opinion elicitation, deliberative discussion, and
+decision updates. To empower AI with deliberative capabilities, we
+designed Deliberative AI, which leverages large language models (LLMs)
+as a bridge between humans and domain-specific models to enable flexible
+conversational interactions and faithful information provision. An
+exploratory evaluation on a graduate admissions task shows that
+Deliberative AI outperforms conventional explainable AI (XAI) assistants
+in improving humans’ appropriate reliance and task performance. Based on
+a mixed-methods analysis of participant behavior, perception, user
+experience, and open-ended feedback, we draw implications for future
+AI-assisted decision tool design.
+
+</div>
+
+</details>
+
+<div id="fig-ma">
+
+![](images/Ma_Ming1.png)
+
+![](images/Ma_Ming2.png)
+
+![](images/Ma_Ming3.png)
+
+![](images/Ma_Ming4.png)
+
+![](images/Ma_Ming5a.png)
+
+![](images/Ma_Ming5b.png)
+
+Figure 4: Figure from Ma et al. (2024)
+
+</div>
 
 ## Enhancing AI-Assisted Group Decision Making through LLM-Powered Devil’s Advocate.
 
@@ -646,7 +713,7 @@ need for cautious integration of LLMs into democratic processes.
 
 </details>
 
-![Yang et al. (2024)](images/Yang_24_img.png)
+![J. C. Yang et al. (2024)](images/Yang_24_img.png)
 
 ## Embodied LLM Agents Learn to Cooperate in Organized Teams
 
@@ -730,7 +797,7 @@ large language models as research tools.
 
 ![](images/Koehl_23_img2.png)
 
-Figure 2: Koehl & Vangsness (2023)
+Figure 5: Koehl & Vangsness (2023)
 
 </div>
 
@@ -775,6 +842,162 @@ research and societal benefit.
 </details>
 
 ![Table from Vats et al. (2024)](images/Vats_24_img.png)
+
+------------------------------------------------------------------------
+
+## Conversational Agent Dynamics with Minority Opinion and Cognitive Conflict in Small-Group Decision-Making.
+
+Nishida, Y., Shimojo, S., & Hayashi, Y. (2024). **Conversational Agent
+Dynamics with Minority Opinion and Cognitive Conflict in Small-Group
+Decision-Making.** Japanese Psychological Research.
+https://doi.org/10.1111/jpr.12552
+
+<details class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+This study investigated the impact of group discussions with text-based
+conversational agents on risk-taking decision-making, which has been
+under-researched. We also focused on the influence of opinion patterns
+presented by the agents during discussions and attitudes toward these
+agents. Through an online experiment, 430 participants read a
+decision-seeking scenario and expressed the degree of risk they were
+willing to take. After viewing the text-based opinions of six agents and
+having a discussion with the agents, participants expressed the degree
+of risk they were willing to take for the same scenario. The result
+showed that participants’ risk-taking decisions shifted toward the
+agents’ group opinions, regardless of whether the agents’ opinions
+tended to be risky or cautious. Additionally, when the agents’ group
+opinions were more risk-biased and included a minority opinion, a
+significant association existed between the degree of the participants’
+shift to a riskier decision and their positive attitudes toward the
+agents. The agents’ group opinions guided participants toward both risky
+and cautious decisions, and participants’ attitudes toward the agents
+were associated with their decision-making, albeit to a limited extent.
+
+</div>
+
+</details>
+
+![Figure from Nishida et al. (2024)](images/Nishida.png)
+
+## A Taxonomy for Human-LLM Interaction Modes: An Initial Exploration
+
+Gao, J., Gebreegziabher, S. A., Choo, K. T. W., Li, T. J.-J., Perrault,
+S. T., & Malone, T. W. (2024). **A Taxonomy for Human-LLM Interaction
+Modes: An Initial Exploration.** Extended Abstracts of the CHI
+Conference on Human Factors in Computing Systems, 1–11.
+https://doi.org/10.1145/3613905.3650786
+
+<details class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+With ChatGPT’s release, conversational prompting has become the most
+popular form of human-LLM interaction. However, its effectiveness is
+limited for more complex tasks involving reasoning, creativity, and
+iteration. Through a systematic analysis of HCI papers published since
+2021, we identified four key phases in the human-LLM interaction flow -
+planning, facilitating, iterating, and testing - to precisely understand
+the dynamics of this process. Additionally, we have developed a taxonomy
+of four primary interaction modes: Mode 1: Standard Prompting, Mode 2:
+User Interface, Mode 3: Context-based, and Mode 4: Agent Facilitator.
+This taxonomy was further enriched using the “5W1H” guideline method,
+which involved a detailed examination of definitions, participant roles
+(Who), the phases that happened (When), human objectives and LLM
+abilities (What), and the mechanics of each interaction mode (How). We
+anticipate this taxonomy will contribute to the future design and
+evaluation of human-LLM interaction.
+
+</div>
+
+</details>
+
+<div id="fig-gao">
+
+![](images/Gao1.png)
+
+![](images/Gao2.png)
+
+![](images/Gao3.png)
+
+![](images/Gao4.png)
+
+Figure 6: J. Gao et al. (2024)
+
+</div>
+
+## Talk2Care: An LLM-based Voice Assistant for Communication between Healthcare Providers and Older Adults.
+
+Yang, Z., Xu, X., Yao, B., Rogers, E., Zhang, S., Intille, S., Shara,
+N., Gao, G. G., & Wang, D. (2024). **Talk2Care: An LLM-based Voice
+Assistant for Communication between Healthcare Providers and Older
+Adults.** Proceedings of the ACM on Interactive, Mobile, Wearable and
+Ubiquitous Technologies, 8(2), 1–35. https://doi.org/10.1145/3659625
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Despite the plethora of telehealth applications to assist home-based
+older adults and healthcare providers, basic messaging and phone calls
+are still the most common communication methods, which suffer from
+limited availability, information loss, and process inefficiencies. One
+promising solution to facilitate patient-provider communication is to
+leverage large language models (LLMs) with their powerful natural
+conversation and summarization capability. However, there is a limited
+understanding of LLMs’ role during the communication. We first conducted
+two interview studies with both older adults (N=10) and healthcare
+providers (N=9) to understand their needs and opportunities for LLMs in
+patient-provider asynchronous communication. Based on the insights, we
+built an LLM-powered communication system, Talk2Care, and designed
+interactive components for both groups: (1) For older adults, we
+leveraged the convenience and accessibility of voice assistants (VAs)
+and built an LLM-powered conversational interface for effective
+information collection. (2) For health providers, we built an LLM-based
+dashboard to summarize and present important health information based on
+older adults’ conversations with the VA. We further conducted two user
+studies with older adults and providers to evaluate the usability of the
+system. The results showed that Talk2Care could facilitate the
+communication process, enrich the health information collected from
+older adults, and considerably save providers’ efforts and time. We
+envision our work as an initial exploration of LLMs’ capability in the
+intersection of healthcare and interpersonal communication.
+
+</div>
+
+</details>
+
+<div id="fig-yang">
+
+![](images/yang1.png)
+
+![](images/yang2.png)
+
+![](images/yang3.png)
+
+Figure 7: Figures from Z. Yang et al. (2024)
+
+</div>
+
+<br>
+
+# References
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0" line-spacing="2">
@@ -837,13 +1060,13 @@ Partisan Crowds* (arXiv:2311.09665). arXiv.
 
 </div>
 
-<div id="ref-collinsBuildingMachinesThat2024" class="csl-entry">
+<div id="ref-collinsBuildingMachinesThat2024a" class="csl-entry">
 
 Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee,
 M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A.,
-Tenenbaum, J. B., & Griffiths, T. L. (2024). *Building Machines that
-Learn and Think with People* (arXiv:2408.03943). arXiv.
-<https://arxiv.org/abs/2408.03943>
+Tenenbaum, J. B., & Griffiths, T. L. (2024). Building machines that
+learn and think with people. *Nature Human Behaviour*, *8*(10),
+1851–1863. <https://doi.org/10.1038/s41562-024-01991-9>
 
 </div>
 
@@ -862,6 +1085,16 @@ Gao, C., Lan, X., Li, N., Yuan, Y., Ding, J., Zhou, Z., Xu, F., & Li, Y.
 simulation: A survey and perspectives. *Humanities and Social Sciences
 Communications*, *11*(1), 1–24.
 <https://doi.org/10.1057/s41599-024-03611-3>
+
+</div>
+
+<div id="ref-gaoTaxonomyHumanLLMInteraction2024" class="csl-entry">
+
+Gao, J., Gebreegziabher, S. A., Choo, K. T. W., Li, T. J.-J., Perrault,
+S. T., & Malone, T. W. (2024). A Taxonomy for Human-LLM Interaction
+Modes: An Initial Exploration. *Extended Abstracts of the CHI Conference
+on Human Factors in Computing Systems*, 1–11.
+<https://doi.org/10.1145/3613905.3650786>
 
 </div>
 
@@ -893,10 +1126,28 @@ of the Human Factors and Ergonomics Society Annual Meeting*, *67*.
 
 </div>
 
+<div id="ref-maHumanAIDeliberationDesign2024" class="csl-entry">
+
+Ma, S., Chen, Q., Wang, X., Zheng, C., Peng, Z., Yin, M., & Ma, X.
+(2024). *Towards Human-AI Deliberation: Design and Evaluation of
+LLM-Empowered Deliberative AI for AI-Assisted Decision-Making*
+(arXiv:2403.16812). arXiv. <https://arxiv.org/abs/2403.16812>
+
+</div>
+
 <div id="ref-marjiehTaskAllocationTeams2024" class="csl-entry">
 
 Marjieh, R., Gokhale, A., Bullo, F., & Griffiths, T. L. (2024). *Task
 Allocation in Teams as a Multi-Armed Bandit*.
+
+</div>
+
+<div id="ref-nishidaConversationalAgentDynamics2024" class="csl-entry">
+
+Nishida, Y., Shimojo, S., & Hayashi, Y. (2024). Conversational Agent
+Dynamics with Minority Opinion and Cognitive Conflict in Small-Group
+Decision-Making. *Japanese Psychological Research*.
+<https://doi.org/10.1111/jpr.12552>
 
 </div>
 
@@ -906,6 +1157,16 @@ Nisioti, E., Risi, S., Momennejad, I., Oudeyer, P.-Y., & Moulin-Frier,
 C. (2024, July). Collective Innovation in Groups of Large Language
 Models. *ALIFE 2024: Proceedings of the 2024 Artificial Life
 Conference*. <https://doi.org/10.1162/isal_a_00730>
+
+</div>
+
+<div id="ref-tesslerAICanHelp2024" class="csl-entry">
+
+Tessler, M. H., Bakker, M. A., Jarrett, D., Sheahan, H., Chadwick, M.
+J., Koster, R., Evans, G., Campbell-Gillingham, L., Collins, T., Parkes,
+D. C., Botvinick, M., & Summerfield, C. (2024). AI can help humans find
+common ground in democratic deliberation. *Science*, *386*(6719),
+eadq2852. <https://doi.org/10.1126/science.adq2852>
 
 </div>
 
@@ -925,6 +1186,17 @@ Teaming with Large Pre-Trained Models* (arXiv:2403.04931). arXiv.
 Yang, J. C., Dailisan, D., Korecki, M., Hausladen, C. I., & Helbing, D.
 (2024). *LLM Voting: Human Choices and AI Collective Decision Making*
 (arXiv:2402.01766). arXiv. <https://arxiv.org/abs/2402.01766>
+
+</div>
+
+<div id="ref-yangTalk2CareLLMbasedVoice2024" class="csl-entry">
+
+Yang, Z., Xu, X., Yao, B., Rogers, E., Zhang, S., Intille, S., Shara,
+N., Gao, G. G., & Wang, D. (2024). Talk2Care: <span class="nocase">An
+LLM-based Voice Assistant</span> for Communication between Healthcare
+Providers and Older Adults. *Proceedings of the ACM on Interactive,
+Mobile, Wearable and Ubiquitous Technologies*, *8*(2), 1–35.
+<https://doi.org/10.1145/3659625>
 
 </div>
 

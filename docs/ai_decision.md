@@ -1,75 +1,5 @@
 # Individual decision lit
-Thomas E. Gorman
-2024-10-31
 
-- [To Trust or to Think: Cognitive Forcing Functions Can Reduce
-  Overreliance on AI in AI-assisted
-  Decision-making](#to-trust-or-to-think-cognitive-forcing-functions-can-reduce-overreliance-on-ai-in-ai-assisted-decision-making)
-- [(Ir)rationality and cognitive biases in large language
-  models.](#irrationality-and-cognitive-biases-in-large-language-models)
-- [Human-like intuitive behavior and reasoning biases emerged in large
-  language models but disappeared in
-  ChatGPT](#human-like-intuitive-behavior-and-reasoning-biases-emerged-in-large-language-models-but-disappeared-in-chatgpt)
-- [Using cognitive psychology to understand
-  GPT-3.](#using-cognitive-psychology-to-understand-gpt-3)
-- [Studying and improving reasoning in humans and
-  machines.](#studying-and-improving-reasoning-in-humans-and-machines)
-- [Exploring variability in risk taking with large language
-  models.](#exploring-variability-in-risk-taking-with-large-language-models)
-- [Human Bias in AI Models? Anchoring Effects and Mitigation Strategies
-  in Large Language
-  Models](#human-bias-in-ai-models-anchoring-effects-and-mitigation-strategies-in-large-language-models)
-- [A Turing test of whether AI chatbots are behaviorally similar to
-  humans](#a-turing-test-of-whether-ai-chatbots-are-behaviorally-similar-to-humans)
-- [Deciding Fast and Slow: The Role of Cognitive Biases in AI-assisted
-  Decision-making](#deciding-fast-and-slow-the-role-of-cognitive-biases-in-ai-assisted-decision-making)
-- [Decision control and explanations in human-AI collaboration:
-  Improving user perceptions and
-  compliance](#decision-control-and-explanations-in-human-ai-collaboration-improving-user-perceptions-and-compliance)
-- [Risk and prosocial behavioural cues elicit human-like response
-  patterns from AI
-  chatbots.](#risk-and-prosocial-behavioural-cues-elicit-human-like-response-patterns-from-ai-chatbots)
-- [Do large language models show decision heuristics similar to humans?
-  A case study using
-  GPT-3.5](#do-large-language-models-show-decision-heuristics-similar-to-humans-a-case-study-using-gpt-35)
-- [Can Large Language Models Capture Human
-  Preferences?](#can-large-language-models-capture-human-preferences)
-- [Language models, like humans, show content effects on reasoning
-  tasks](#language-models-like-humans-show-content-effects-on-reasoning-tasks)
-- [The emergence of economic rationality of
-  GPT](#the-emergence-of-economic-rationality-of-gpt)
-- [The potential of generative AI for personalized persuasion at
-  scale.](#the-potential-of-generative-ai-for-personalized-persuasion-at-scale)
-- [Decision-Making Paradoxes in Humans vs Machines: The case of the
-  Allais and Ellsberg
-  Paradoxes.](#decision-making-paradoxes-in-humans-vs-machines-the-case-of-the-allais-and-ellsberg-paradoxes)
-- [Do LLMs Exhibit Human-like Response Biases? A Case Study in Survey
-  Design.](#do-llms-exhibit-human-like-response-biases-a-case-study-in-survey-design)
-- [Cognitive ease at a cost: LLMs reduce mental effort but compromise
-  depth in student scientific
-  inquiry](#cognitive-ease-at-a-cost-llms-reduce-mental-effort-but-compromise-depth-in-student-scientific-inquiry)
-- [Cognitive LLMs: Towards Integrating Cognitive Architectures and Large
-  Language Models for Manufacturing
-  Decision-making](#cognitive-llms-towards-integrating-cognitive-architectures-and-large-language-models-for-manufacturing-decision-making)
-- [Large Language Models Amplify Human Biases in Moral
-  Decision-Making](#large-language-models-amplify-human-biases-in-moral-decision-making)
-- [Large Language Model Recall Uncertainty is Modulated by the Fan
-  Effect.](#large-language-model-recall-uncertainty-is-modulated-by-the-fan-effect)
-- [Accuracy-Time Tradeoffs in AI-Assisted Decision Making under Time
-  Pressure.](#accuracy-time-tradeoffs-in-ai-assisted-decision-making-under-time-pressure)
-- [The LLM Effect: Are Humans Truly Using LLMs, or Are They Being
-  Influenced By Them
-  Instead?](#the-llm-effect-are-humans-truly-using-llms-or-are-they-being-influenced-by-them-instead)
-- [Mutual Theory of Mind in Human-AI Collaboration: An Empirical Study
-  with LLM-driven AI Agents in a Real-time Shared Workspace
-  Task](#mutual-theory-of-mind-in-human-ai-collaboration-an-empirical-study-with-llm-driven-ai-agents-in-a-real-time-shared-workspace-task)
-- [Bridging the Gulf of Envisioning: Cognitive Design Challenges in LLM
-  Interfaces](#bridging-the-gulf-of-envisioning-cognitive-design-challenges-in-llm-interfaces)
-- [Learning To Guide Human Decision Makers With Vision-Language
-  Models](#learning-to-guide-human-decision-makers-with-vision-language-models)
-- [How does Value Similarity affect Human Reliance in AI-Assisted
-  Ethical Decision
-  Making?](#how-does-value-similarity-affect-human-reliance-in-ai-assisted-ethical-decision-making)
 
 ## To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-assisted Decision-making
 
@@ -1193,7 +1123,7 @@ responsible for coming up with a decision. In order to ensure guidance
 is interpretable} and task-specific, we develop SLOG, an approach for
 turning any vision-language model into a capable generator of textual
 guidance by leveraging a modicum of human feedback. Our empirical
-evaluation highlights the promise of on a challenging, real-world
+evaluation highlights the promise of SLOG on a challenging, real-world
 medical diagnosis task.
 
 </div>
@@ -1212,10 +1142,10 @@ Figure 5: Figures from Banerjee et al. (2024)
 
 ## How does Value Similarity affect Human Reliance in AI-Assisted Ethical Decision Making?
 
-Narayanan, S., Yu, G., Ho, C.-J., & Yin, M. (2023). How does Value
-Similarity affect Human Reliance in AI-Assisted Ethical Decision Making?
-Proceedings of the 2023 AAAI/ACM Conference on AI, Ethics, and Society,
-49–57. https://doi.org/10.1145/3600211.3604709
+Narayanan, S., Yu, G., Ho, C.-J., & Yin, M. (2023). **How does Value
+Similarity affect Human Reliance in AI-Assisted Ethical Decision
+Making?** Proceedings of the 2023 AAAI/ACM Conference on AI, Ethics, and
+Society, 49–57. https://doi.org/10.1145/3600211.3604709
 
 <details class="relevant-callout">
 
@@ -1247,6 +1177,235 @@ potential shifts in ethical preferences at the population-level.
 </details>
 
 ![Figure from Narayanan et al. (2023)](images/Narayanan1.png)
+
+## Determinants of LLM-assisted Decision-Making
+
+Eigner, E., & Händler, T. (2024). **Determinants of LLM-assisted
+Decision-Making** (arXiv:2402.17385). arXiv.
+http://arxiv.org/abs/2402.17385
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Decision-making is a fundamental capability in everyday life. Large
+Language Models (LLMs) provide multifaceted support in enhancing human
+decision-making processes. However, understanding the influencing
+factors of LLM-assisted decision-making is crucial for enabling
+individuals to utilize LLM-provided advantages and minimize associated
+risks in order to make more informed and better decisions. This study
+presents the results of a comprehensive literature analysis, providing a
+structural overview and detailed analysis of determinants impacting
+decision-making with LLM support. In particular, we explore the effects
+of technological aspects of LLMs, including transparency and prompt
+engineering, psychological factors such as emotions and decision-making
+styles, as well as decision specific determinants such as task
+difficulty and accountability. In addition, the impact of the
+determinants on the decision-making process is illustrated via multiple
+application scenarios. Drawing from our analysis, we develop a
+dependency framework that systematizes possible interactions in terms of
+reciprocal interdependencies between these determinants. Our research
+reveals that, due to the multifaceted interactions with various
+determinants, factors such as trust in or reliance on LLMs, the user’s
+mental model, and the characteristics of information processing are
+identified as significant aspects influencing LLM-assisted
+decision-making processes. Our findings can be seen as crucial for
+improving decision quality in human-AI collaboration, empowering both
+users and organizations, and designing more effective LLM interfaces.
+Additionally, our work provides a foundation for future empirical
+investigations on the determinants of decision-making assisted by LLMs.
+
+</div>
+
+</details>
+
+![](images/2024-10-31-10-32-46.png)
+
+![](images/2024-10-31-10-33-22.png)
+
+<div id="fig-eigner">
+
+![](images/2024-10-31-10-34-08.png)
+
+Figure 6: Figures from Eigner & Händler (2024)
+
+</div>
+
+## A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity.
+
+Rastogi, C., Leqi, L., Holstein, K., & Heidari, H. (2023). **A Taxonomy
+of Human and ML Strengths in Decision-Making to Investigate Human-ML
+Complementarity.** Proceedings of the AAAI Conference on Human
+Computation and Crowdsourcing, 11, 127–139.
+https://doi.org/10.1609/hcomp.v11i1.27554
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Hybrid human-ML systems increasingly make consequential decisions in a
+wide range of domains. These systems are often introduced with the
+expectation that the combined human-ML system will achieve complementary
+performance, that is, the combined decision-making system will be an
+improvement compared with either decision-making agent in isolation.
+However, empirical results have been mixed, and existing research rarely
+articulates the sources and mechanisms by which complementary
+performance is expected to arise. Our goal in this work is to provide
+conceptual tools to advance the way researchers reason and communicate
+about human-ML complementarity. Drawing upon prior literature in human
+psychology, machine learning, and human-computer interaction, we propose
+a taxonomy characterizing distinct ways in which human and ML-based
+decision-making can differ. In doing so, we conceptually map potential
+mechanisms by which combining human and ML decision-making may yield
+complementary performance, developing a language for the research
+community to reason about design of hybrid systems in any
+decision-making domain. To illustrate how our taxonomy can be used to
+investigate complementarity, we provide a mathematical aggregation
+framework to examine enabling conditions for complementarity. Through
+synthetic simulations, we demonstrate how this framework can be used to
+explore specific aspects of our taxonomy and shed light on the optimal
+mechanisms for combining human-ML judgments.
+
+</div>
+
+</details>
+
+Rastogi et al. (2023)
+
+## Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina
+
+Gao, Y., Lee, D., Burtch, G., & Fazelpour, S. (2024). **Take Caution in
+Using LLMs as Human Surrogates: Scylla Ex Machina**
+(No. arXiv:2410.19599). arXiv. http://arxiv.org/abs/2410.19599
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Human decision-making is filled with a variety of paradoxes
+demonstrating deviations from rationality principles. Do
+state-of-the-art artificial intelligence (AI) models also manifest these
+paradoxes when making decisions? As a case study, in this work we
+investigate whether GPT-4, a recently released state-of-the-art language
+model, would show two well-known paradoxes in human decision-making: the
+Allais paradox and the Ellsberg paradox. We demonstrate that GPT-4
+succeeds in the two variants of the Allais paradox (the
+common-consequence effect and the common-ratio effect) but fails in the
+case of the Ellsberg paradox. We also show that providing GPT-4 with
+high-level normative principles allows it to succeed in the Ellsberg
+paradox, thus elevating GPT-4’s decision-making rationality. We discuss
+the implications of our work for AI rationality enhancement and
+AI-assisted decision-making.
+
+</div>
+
+</details>
+
+![Figure from Gao et al. (2024)](images/Gao_Lee1.png)
+
+## Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies.
+
+Lai, V., Chen, C., Smith-Renner, A., Liao, Q. V., & Tan, C. (2023).
+**Towards a Science of Human-AI Decision Making: An Overview of Design
+Space in Empirical Human-Subject Studies.** 2023 ACM Conference on
+Fairness, Accountability, and Transparency, 1369–1385.
+https://doi.org/10.1145/3593013.3594087
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+AI systems are adopted in numerous domains due to their increas- ingly
+strong predictive performance. However, in high-stakes domains such as
+criminal justice and healthcare, full automation is often not desirable
+due to safety, ethical, and legal concerns, yet fully manual approaches
+can be inaccurate and time-consuming. As a result, there is growing
+interest in the research community to augment human decision making with
+AI assistance. Besides developing AI technologies for this purpose, the
+emerging field of human-AI decision making must embrace empirical
+approaches to form a foundational understanding of how humans interact
+and work with AI to make decisions. To invite and help structure
+research efforts towards a science of understanding and improving
+human-AI decision making, we survey recent literature of empirical
+human-subject studies on this topic. We summarize the study design
+choices made in over 100 papers in three important aspects: (1) decision
+tasks, (2) AI assistance elements, and (3) evaluation metrics. For each
+aspect, we summarize current trends, discuss gaps in current practices
+of the field, and make a list of recommendations for future research.
+Our work highlights the need to develop com- mon frameworks to account
+for the design and research spaces of human-AI decision making, so that
+researchers can make rigorous choices in study design, and the research
+community can build on each other’s work and produce generalizable
+scientific knowledge. We also hope this work will serve as a bridge for
+HCI and AI communities to work together to mutually shape the empirical
+science and computational technologies for human-AI decision making.
+
+</div>
+
+</details>
+
+![Figure from Lai et al. (2023)](images/Lai1.png)
+
+## Towards a computational model of responsibility judgments in sequential human-AI collaboration
+
+Tsirtsis, S., Gomez Rodriguez, M., & Gerstenberg, T. (2024). **Towards a
+computational model of responsibility judgments in sequential human-AI
+collaboration.** In Proceedings of the Annual Meeting of the Cognitive
+Science Society (Vol. 46). https://osf.io/preprints/psyarxiv/m4yad
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+When a human and an AI agent collaborate to complete a task and
+something goes wrong, who is responsible? Prior work has developed
+theories to describe how people assign responsibility to individuals in
+teams. However, there has been little work studying the cognitive
+processes that underlie responsibility judgments in human-AI
+collaborations, especially for tasks comprising a sequence of
+interdependent actions. In this work, we take a step towards filling
+this gap. Using semi-autonomous driving as a paradigm, we develop an
+environment that simulates stylized cases of human-AI collaboration
+using a generative model of agent behavior. We propose a model of
+responsibility that considers how unexpected an agent’s action was, and
+what would have happened had they acted differently. We test the model’s
+predictions empirically and find that in addition to action expectations
+and counterfactual considerations, participants’ responsibility
+judgments are also affected by how much each agent actually contributed
+to the outcome.
+
+</div>
+
+</details>
+
+![Figure from Tsirtsis et al. (2024)](images/Tsirtsis_drive1.png)
+
+## References
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0" line-spacing="2">
@@ -1311,6 +1470,23 @@ Influenced By Them Instead?* (arXiv:2410.04699). arXiv.
 
 </div>
 
+<div id="ref-eignerDeterminantsLLMassistedDecisionMaking2024"
+class="csl-entry">
+
+Eigner, E., & Händler, T. (2024). *Determinants of
+<span class="nocase">LLM-assisted Decision-Making</span>*
+(arXiv:2402.17385). arXiv. <https://arxiv.org/abs/2402.17385>
+
+</div>
+
+<div id="ref-gaoTakeCautionUsing2024" class="csl-entry">
+
+Gao, Y., Lee, D., Burtch, G., & Fazelpour, S. (2024). *Take Caution in
+Using LLMs as Human Surrogates: Scylla Ex Machina* (arXiv:2410.19599).
+arXiv. <https://arxiv.org/abs/2410.19599>
+
+</div>
+
 <div id="ref-goliCanLargeLanguage2024" class="csl-entry">
 
 Goli, A., & Singh, A. (2024). Can Large Language Models Capture Human
@@ -1326,6 +1502,16 @@ Hagendorff, T., Fabi, S., & Kosinski, M. (2023). Human-like intuitive
 behavior and reasoning biases emerged in large language models but
 disappeared in ChatGPT. *Nature Computational Science*, *3*(10),
 833–838. <https://doi.org/10.1038/s43588-023-00527-x>
+
+</div>
+
+<div id="ref-laiScienceHumanAIDecision2023" class="csl-entry">
+
+Lai, V., Chen, C., Smith-Renner, A., Liao, Q. V., & Tan, C. (2023).
+Towards a Science of Human-AI Decision Making: An Overview of Design
+Space in Empirical Human-Subject Studies. *2023 ACM Conference on
+Fairness, Accountability, and Transparency*, 1369–1385.
+<https://doi.org/10.1145/3593013.3594087>
 
 </div>
 
@@ -1393,6 +1579,16 @@ Society*, *46*.
 
 </div>
 
+<div id="ref-rastogiTaxonomyHumanML2023" class="csl-entry">
+
+Rastogi, C., Leqi, L., Holstein, K., & Heidari, H. (2023). A Taxonomy of
+Human and ML Strengths in Decision-Making to Investigate Human-ML
+Complementarity. *Proceedings of the AAAI Conference on Human
+Computation and Crowdsourcing*, *11*, 127–139.
+<https://doi.org/10.1609/hcomp.v11i1.27554>
+
+</div>
+
 <div id="ref-rastogiDecidingFastSlow2022" class="csl-entry">
 
 Rastogi, C., Zhang, Y., Wei, D., Varshney, K. R., Dhurandhar, A., &
@@ -1456,6 +1652,15 @@ Tjuatja, L., Chen, V., Wu, T., Talwalkwar, A., & Neubig, G. (2024). Do
 Case Study in Survey Design. *Transactions of the Association for
 Computational Linguistics*, *12*, 1011–1026.
 <https://doi.org/10.1162/tacl_a_00685>
+
+</div>
+
+<div id="ref-tsirtsisComputationalModelResponsibility2024"
+class="csl-entry">
+
+Tsirtsis, S., Rodriguez, M. G., & Gerstenberg, T. (2024). *Towards a
+computational model of responsibility judgments in sequential human-AI
+collaboration*. <https://doi.org/10.31234/osf.io/m4yad>
 
 </div>
 

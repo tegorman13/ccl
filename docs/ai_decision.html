@@ -246,8 +246,10 @@ div.csl-indent {
   <li><a href="#a-taxonomy-of-human-and-ml-strengths-in-decision-making-to-investigate-human-ml-complementarity." id="toc-a-taxonomy-of-human-and-ml-strengths-in-decision-making-to-investigate-human-ml-complementarity." class="nav-link" data-scroll-target="#a-taxonomy-of-human-and-ml-strengths-in-decision-making-to-investigate-human-ml-complementarity.">A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity.</a></li>
   <li><a href="#take-caution-in-using-llms-as-human-surrogates-scylla-ex-machina" id="toc-take-caution-in-using-llms-as-human-surrogates-scylla-ex-machina" class="nav-link" data-scroll-target="#take-caution-in-using-llms-as-human-surrogates-scylla-ex-machina">Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina</a></li>
   <li><a href="#towards-a-science-of-human-ai-decision-making-an-overview-of-design-space-in-empirical-human-subject-studies." id="toc-towards-a-science-of-human-ai-decision-making-an-overview-of-design-space-in-empirical-human-subject-studies." class="nav-link" data-scroll-target="#towards-a-science-of-human-ai-decision-making-an-overview-of-design-space-in-empirical-human-subject-studies.">Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies.</a></li>
+  <li><a href="#towards-a-computational-model-of-responsibility-judgments-in-sequential-human-ai-collaboration" id="toc-towards-a-computational-model-of-responsibility-judgments-in-sequential-human-ai-collaboration" class="nav-link" data-scroll-target="#towards-a-computational-model-of-responsibility-judgments-in-sequential-human-ai-collaboration">Towards a computational model of responsibility judgments in sequential human-AI collaboration</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ai_decision.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li><li><a href="indiv_ai_lit_notes.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ai_decision.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li><li><a href="ai_decision.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="indiv_ai_lit_notes.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -266,11 +268,6 @@ div.csl-indent {
     <p class="author"><a href="https://tegorman13.github.io/">Thomas E. Gorman</a> </p>
   </div>
   <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            <a href="https://web.ics.purdue.edu/~treimer/">
-            Communication and Cognition Lab, Purdue University, USA
-            </a>
-          </p>
       </div>
   </div>
 
@@ -784,7 +781,7 @@ Abstract
 Abstract
 </summary>
 <div>
-<p>There is increasing interest in developing AIs for assisting human decision-making in high-stakes tasks, such as medical diagnosis, for the purpose of improving decision quality and reducing cognitive strain. Mainstream approaches team up an expert with a machine learning model to which safer decisions are offloaded, thus letting the former focus on cases that demand their attention. his separation of responsibilities setup, however, is inadequate for high-stakes scenarios. On the one hand, the expert may end up over-relying on the machine’s decisions due to anchoring bias, thus losing the human oversight that is increasingly being required by regulatory agencies to ensure trustworthy AI. On the other hand, the expert is left entirely unassisted on the (typically hardest) decisions on which the model abstained. As a remedy, we introduce learning to guide (LTG), an alternative framework in which - rather than taking control from the human expert - the machine provides guidance useful for decision making, and the human is entirely responsible for coming up with a decision. In order to ensure guidance is interpretable} and task-specific, we develop SLOG, an approach for turning any vision-language model into a capable generator of textual guidance by leveraging a modicum of human feedback. Our empirical evaluation highlights the promise of on a challenging, real-world medical diagnosis task.</p>
+<p>There is increasing interest in developing AIs for assisting human decision-making in high-stakes tasks, such as medical diagnosis, for the purpose of improving decision quality and reducing cognitive strain. Mainstream approaches team up an expert with a machine learning model to which safer decisions are offloaded, thus letting the former focus on cases that demand their attention. his separation of responsibilities setup, however, is inadequate for high-stakes scenarios. On the one hand, the expert may end up over-relying on the machine’s decisions due to anchoring bias, thus losing the human oversight that is increasingly being required by regulatory agencies to ensure trustworthy AI. On the other hand, the expert is left entirely unassisted on the (typically hardest) decisions on which the model abstained. As a remedy, we introduce learning to guide (LTG), an alternative framework in which - rather than taking control from the human expert - the machine provides guidance useful for decision making, and the human is entirely responsible for coming up with a decision. In order to ensure guidance is interpretable} and task-specific, we develop SLOG, an approach for turning any vision-language model into a capable generator of textual guidance by leveraging a modicum of human feedback. Our empirical evaluation highlights the promise of SLOG on a challenging, real-world medical diagnosis task.</p>
 </div>
 </details>
 <div id="fig-banerjee" class="quarto-layout-panel">
@@ -834,22 +831,14 @@ Abstract
 <p>Decision-making is a fundamental capability in everyday life. Large Language Models (LLMs) provide multifaceted support in enhancing human decision-making processes. However, understanding the influencing factors of LLM-assisted decision-making is crucial for enabling individuals to utilize LLM-provided advantages and minimize associated risks in order to make more informed and better decisions. This study presents the results of a comprehensive literature analysis, providing a structural overview and detailed analysis of determinants impacting decision-making with LLM support. In particular, we explore the effects of technological aspects of LLMs, including transparency and prompt engineering, psychological factors such as emotions and decision-making styles, as well as decision specific determinants such as task difficulty and accountability. In addition, the impact of the determinants on the decision-making process is illustrated via multiple application scenarios. Drawing from our analysis, we develop a dependency framework that systematizes possible interactions in terms of reciprocal interdependencies between these determinants. Our research reveals that, due to the multifaceted interactions with various determinants, factors such as trust in or reliance on LLMs, the user’s mental model, and the characteristics of information processing are identified as significant aspects influencing LLM-assisted decision-making processes. Our findings can be seen as crucial for improving decision quality in human-AI collaboration, empowering both users and organizations, and designing more effective LLM interfaces. Additionally, our work provides a foundation for future empirical investigations on the determinants of decision-making assisted by LLMs.</p>
 </div>
 </details>
+<p><a href="images/2024-10-31-10-32-46.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img src="images/2024-10-31-10-32-46.png" class="img-fluid"></a></p>
+<p><a href="images/2024-10-31-10-33-22.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img src="images/2024-10-31-10-33-22.png" class="img-fluid"></a></p>
 <div id="fig-eigner" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-eigner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<p><a href="images/2024-10-31-10-32-46.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="Figure&nbsp;6: Figures from @eignerDeterminantsLLMassistedDecisionMaking2024"><img src="images/2024-10-31-10-32-46.png" class="img-fluid figure-img"></a></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<p><a href="images/2024-10-31-10-33-22.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31" title="Figure&nbsp;6: Figures from @eignerDeterminantsLLMassistedDecisionMaking2024"><img src="images/2024-10-31-10-33-22.png" class="img-fluid figure-img"></a></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<p><a href="images/2024-10-31-10-34-08.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32" title="Figure&nbsp;6: Figures from @eignerDeterminantsLLMassistedDecisionMaking2024"><img src="images/2024-10-31-10-34-08.png" class="img-fluid figure-img"></a></p>
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<a href="images/2024-10-31-10-34-08.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32" title="Figure&nbsp;6: Figures from @eignerDeterminantsLLMassistedDecisionMaking2024"><img src="images/2024-10-31-10-34-08.png" class="img-fluid figure-img"></a>
 </div>
 </div>
 </div>
@@ -861,7 +850,7 @@ Figure&nbsp;6: Figures from <span class="citation" data-cites="eignerDeterminant
 </section>
 <section id="a-taxonomy-of-human-and-ml-strengths-in-decision-making-to-investigate-human-ml-complementarity." class="level2">
 <h2 class="anchored" data-anchor-id="a-taxonomy-of-human-and-ml-strengths-in-decision-making-to-investigate-human-ml-complementarity.">A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity.</h2>
-<p>Rastogi, C., Leqi, L., Holstein, K., &amp; Heidari, H. (2023). A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity. Proceedings of the AAAI Conference on Human Computation and Crowdsourcing, 11, 127–139. https://doi.org/10.1609/hcomp.v11i1.27554</p>
+<p>Rastogi, C., Leqi, L., Holstein, K., &amp; Heidari, H. (2023). <strong>A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity.</strong> Proceedings of the AAAI Conference on Human Computation and Crowdsourcing, 11, 127–139. https://doi.org/10.1609/hcomp.v11i1.27554</p>
 <details open="" class="relevant-callout">
 <summary>
 Abstract
@@ -874,7 +863,7 @@ Abstract
 </section>
 <section id="take-caution-in-using-llms-as-human-surrogates-scylla-ex-machina" class="level2">
 <h2 class="anchored" data-anchor-id="take-caution-in-using-llms-as-human-surrogates-scylla-ex-machina">Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina</h2>
-<p>Gao, Y., Lee, D., Burtch, G., &amp; Fazelpour, S. (2024). Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina (No.&nbsp;arXiv:2410.19599). arXiv. http://arxiv.org/abs/2410.19599</p>
+<p>Gao, Y., Lee, D., Burtch, G., &amp; Fazelpour, S. (2024). <strong>Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina</strong> (No.&nbsp;arXiv:2410.19599). arXiv. http://arxiv.org/abs/2410.19599</p>
 <details open="" class="relevant-callout">
 <summary>
 Abstract
@@ -892,7 +881,7 @@ Abstract
 </section>
 <section id="towards-a-science-of-human-ai-decision-making-an-overview-of-design-space-in-empirical-human-subject-studies." class="level2">
 <h2 class="anchored" data-anchor-id="towards-a-science-of-human-ai-decision-making-an-overview-of-design-space-in-empirical-human-subject-studies.">Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies.</h2>
-<p>Lai, V., Chen, C., Smith-Renner, A., Liao, Q. V., &amp; Tan, C. (2023). Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies. 2023 ACM Conference on Fairness, Accountability, and Transparency, 1369–1385. https://doi.org/10.1145/3593013.3594087</p>
+<p>Lai, V., Chen, C., Smith-Renner, A., Liao, Q. V., &amp; Tan, C. (2023). <strong>Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies.</strong> 2023 ACM Conference on Fairness, Accountability, and Transparency, 1369–1385. https://doi.org/10.1145/3593013.3594087</p>
 <details open="" class="relevant-callout">
 <summary>
 Abstract
@@ -907,12 +896,28 @@ Abstract
 <figcaption>Figure from <span class="citation" data-cites="laiScienceHumanAIDecision2023">Lai et al. (<a href="#ref-laiScienceHumanAIDecision2023" role="doc-biblioref">2023</a>)</span></figcaption>
 </figure>
 </div>
-
-
-
 </section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<section id="towards-a-computational-model-of-responsibility-judgments-in-sequential-human-ai-collaboration" class="level2">
+<h2 class="anchored" data-anchor-id="towards-a-computational-model-of-responsibility-judgments-in-sequential-human-ai-collaboration">Towards a computational model of responsibility judgments in sequential human-AI collaboration</h2>
+<p>Tsirtsis, S., Gomez Rodriguez, M., &amp; Gerstenberg, T. (2024). <strong>Towards a computational model of responsibility judgments in sequential human-AI collaboration.</strong> In Proceedings of the Annual Meeting of the Cognitive Science Society (Vol. 46). https://osf.io/preprints/psyarxiv/m4yad</p>
+<details open="" class="relevant-callout">
+<summary>
+Abstract
+</summary>
+<div>
+<p>When a human and an AI agent collaborate to complete a task and something goes wrong, who is responsible? Prior work has developed theories to describe how people assign responsibility to individuals in teams. However, there has been little work studying the cognitive processes that underlie responsibility judgments in human-AI collaborations, especially for tasks comprising a sequence of interdependent actions. In this work, we take a step towards filling this gap. Using semi-autonomous driving as a paradigm, we develop an environment that simulates stylized cases of human-AI collaboration using a generative model of agent behavior. We propose a model of responsibility that considers how unexpected an agent’s action was, and what would have happened had they acted differently. We test the model’s predictions empirically and find that in addition to action expectations and counterfactual considerations, participants’ responsibility judgments are also affected by how much each agent actually contributed to the outcome.</p>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Tsirtsis_drive1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-35" title="Figure from @tsirtsisComputationalModelResponsibility2024"><img src="images/Tsirtsis_drive1.png" class="img-fluid figure-img" alt="Figure from Tsirtsis et al. (2024)"></a></p>
+<figcaption>Figure from <span class="citation" data-cites="tsirtsisComputationalModelResponsibility2024">Tsirtsis et al. (<a href="#ref-tsirtsisComputationalModelResponsibility2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-banerjeeLearningGuideHuman2024" class="csl-entry" role="listitem">
 Banerjee, D., Teso, S., Sayin, B., &amp; Passerini, A. (2024). <em>Learning <span>To Guide Human Decision Makers With Vision-Language Models</span></em> (arXiv:2403.16501). arXiv. <a href="https://arxiv.org/abs/2403.16501">https://arxiv.org/abs/2403.16501</a>
 </div>
@@ -994,6 +999,9 @@ Swaroop, S., Buçinca, Z., Gajos, K. Z., &amp; Doshi-Velez, F. (2024). Accuracy-
 <div id="ref-tjuatjaLLMsExhibitHumanlike2024" class="csl-entry" role="listitem">
 Tjuatja, L., Chen, V., Wu, T., Talwalkwar, A., &amp; Neubig, G. (2024). Do <span class="nocase">LLMs Exhibit Human-like Response Biases</span>? <span>A Case Study</span> in <span>Survey Design</span>. <em>Transactions of the Association for Computational Linguistics</em>, <em>12</em>, 1011–1026. <a href="https://doi.org/10.1162/tacl_a_00685">https://doi.org/10.1162/tacl_a_00685</a>
 </div>
+<div id="ref-tsirtsisComputationalModelResponsibility2024" class="csl-entry" role="listitem">
+Tsirtsis, S., Rodriguez, M. G., &amp; Gerstenberg, T. (2024). <em>Towards a computational model of responsibility judgments in sequential human-<span>AI</span> collaboration</em>. <a href="https://doi.org/10.31234/osf.io/m4yad">https://doi.org/10.31234/osf.io/m4yad</a>
+</div>
 <div id="ref-westphalDecisionControlExplanations2023" class="csl-entry" role="listitem">
 Westphal, M., Vössing, M., Satzger, G., Yom-Tov, G. B., &amp; Rafaeli, A. (2023). Decision control and explanations in human-<span>AI</span> collaboration: <span>Improving</span> user perceptions and compliance. <em>Computers in Human Behavior</em>, <em>144</em>, 107714. <a href="https://doi.org/10.1016/j.chb.2023.107714">https://doi.org/10.1016/j.chb.2023.107714</a>
 </div>
@@ -1006,7 +1014,12 @@ Zhang, S., Wang, X., Zhang, W., Chen, Y., Gao, L., Wang, D., Zhang, W., Wang, X.
 <div id="ref-zhaoRiskProsocialBehavioural2024" class="csl-entry" role="listitem">
 Zhao, Y., Huang, Z., Seligman, M., &amp; Peng, K. (2024). Risk and prosocial behavioural cues elicit human-like response patterns from <span>AI</span> chatbots. <em>Scientific Reports</em>, <em>14</em>(1), 7095. <a href="https://doi.org/10.1038/s41598-024-55949-y">https://doi.org/10.1038/s41598-024-55949-y</a>
 </div>
-</div></section></div></main> <!-- /main -->
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -1,6 +1,5 @@
 # Transactive Memory Systems
-Thomas E. Gorman
-2024-10-31
+
 
 <https://tegorman13.github.io/ccl/tms.html>
 
@@ -118,9 +117,9 @@ systems, especially in the context of small-group human interaction.
 
 Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee,
 M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A.,
-Tenenbaum, J. B., & Griffiths, T. L. (2024). **Building Machines that
-Learn and Think with People** (arXiv:2408.03943). arXiv.
-http://arxiv.org/abs/2408.03943
+Tenenbaum, J. B., & Griffiths, T. L. (2024). **Building machines that
+learn and think with people.** Nature Human Behaviour, 8(10), 1851–1863.
+https://doi.org/10.1038/s41562-024-01991-9
 
 <details open class="relevant-callout">
 
@@ -146,13 +145,20 @@ motivate an alternative scaling path for the design of thought partners
 and ecosystems around their use through a Bayesian lens, whereby the
 partners we construct actively build and reason over models of the human
 and world.
-</p>
 
 </div>
 
 </details>
 
-![Figure from Collins et al. (2024)](images/Collins_24_img.png)
+<div id="fig-collins">
+
+![](images/Collins_24_img.png)
+
+![](images/Collins2.png)
+
+Figure 1: Figures from Collins et al. (2024)
+
+</div>
 
 ## Task Allocation in Teams as a Multi-Armed Bandit.
 
@@ -300,13 +306,13 @@ enhanced team effectiveness. *Frontiers in Psychology*, *14*.
 
 </div>
 
-<div id="ref-collinsBuildingMachinesThat2024" class="csl-entry">
+<div id="ref-collinsBuildingMachinesThat2024a" class="csl-entry">
 
 Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee,
 M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A.,
-Tenenbaum, J. B., & Griffiths, T. L. (2024). *Building Machines that
-Learn and Think with People* (arXiv:2408.03943). arXiv.
-<https://arxiv.org/abs/2408.03943>
+Tenenbaum, J. B., & Griffiths, T. L. (2024). Building machines that
+learn and think with people. *Nature Human Behaviour*, *8*(10),
+1851–1863. <https://doi.org/10.1038/s41562-024-01991-9>
 
 </div>
 

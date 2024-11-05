@@ -1,17 +1,29 @@
 ---
 title: "Individual decision lit"
-author:
-- name: Thomas E. Gorman
-  url: https://tegorman13.github.io/
-  affiliations: 
-  - name:  Communication and Cognition Lab, Purdue University, USA
-    affiliation-url: https://web.ics.purdue.edu/~treimer/
-date: today
-toc: true
-lightbox: true
 format:
-  html: default
+  html: 
+    author:
+    - name: Thomas E. Gorman
+      url: https://tegorman13.github.io/
+    affiliations: 
+    - name:  Communication and Cognition Lab, Purdue University, USA
+      affiliation-url: https://web.ics.purdue.edu/~treimer/
+    date: today
+    toc: true
+    lightbox: true
   gfm: default
+  pdf: 
+    documentclass: article
+    papersize: letter
+    toc: false
+    fontsize: 11pt
+    linestretch: 1.5
+    geometry:
+      - top=.5in     
+      - bottom=.5in  
+      - left=.5in    
+      - right=.5in  
+      - heightrounded
   docx:
     prefer-html: true
     output-file: "indiv_ai_lit_notes.docx"
@@ -79,6 +91,7 @@ We design a battery of semantic illusions and cognitive reflection tests, aimed 
 ![](images/Hagendorff_23_img3.png)
 
 Figures from @hagendorffHumanlikeIntuitiveBehavior2023
+
 :::
 
 
@@ -459,7 +472,7 @@ Banerjee, D., Teso, S., Sayin, B., & Passerini, A. (2024). **Learning To Guide H
 <details class="relevant-callout">
 <summary>Abstract</summary>
 <div>
-There is increasing interest in developing AIs for assisting human decision-making in high-stakes tasks, such as medical diagnosis, for the purpose of improving decision quality and reducing cognitive strain. Mainstream approaches team up an expert with a machine learning model to which safer decisions are offloaded, thus letting the former focus on cases that demand their attention. his separation of responsibilities setup, however, is inadequate for high-stakes scenarios. On the one hand, the expert may end up over-relying on the machine's decisions due to anchoring bias, thus losing the human oversight that is increasingly being required by regulatory agencies to ensure trustworthy AI. On the other hand, the expert is left entirely unassisted on the (typically hardest) decisions on which the model abstained. As a remedy, we introduce learning to guide (LTG), an alternative framework in which - rather than taking control from the human expert - the machine provides guidance useful for decision making, and the human is entirely responsible for coming up with a decision. In order to ensure guidance is interpretable} and task-specific, we develop SLOG, an approach for turning any vision-language model into a capable generator of textual guidance by leveraging a modicum of human feedback. Our empirical evaluation highlights the promise of \method on a challenging, real-world medical diagnosis task.
+There is increasing interest in developing AIs for assisting human decision-making in high-stakes tasks, such as medical diagnosis, for the purpose of improving decision quality and reducing cognitive strain. Mainstream approaches team up an expert with a machine learning model to which safer decisions are offloaded, thus letting the former focus on cases that demand their attention. his separation of responsibilities setup, however, is inadequate for high-stakes scenarios. On the one hand, the expert may end up over-relying on the machine's decisions due to anchoring bias, thus losing the human oversight that is increasingly being required by regulatory agencies to ensure trustworthy AI. On the other hand, the expert is left entirely unassisted on the (typically hardest) decisions on which the model abstained. As a remedy, we introduce learning to guide (LTG), an alternative framework in which - rather than taking control from the human expert - the machine provides guidance useful for decision making, and the human is entirely responsible for coming up with a decision. In order to ensure guidance is interpretable} and task-specific, we develop SLOG, an approach for turning any vision-language model into a capable generator of textual guidance by leveraging a modicum of human feedback. Our empirical evaluation highlights the promise of SLOG on a challenging, real-world medical diagnosis task.
 </div>
 </details>
 
@@ -503,10 +516,11 @@ Decision-making is a fundamental capability in everyday life. Large Language Mod
 </div>
 </details>
 
-::: {#fig-eigner layout-ncol=1}
 ![](images/2024-10-31-10-32-46.png)
 
 ![](images/2024-10-31-10-33-22.png)
+
+::: {#fig-eigner layout-ncol=1}
 
 ![](images/2024-10-31-10-34-08.png)
 
@@ -518,7 +532,7 @@ Figures from @eignerDeterminantsLLMassistedDecisionMaking2024
 
 ## A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity.
 
-Rastogi, C., Leqi, L., Holstein, K., & Heidari, H. (2023). A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity. Proceedings of the AAAI Conference on Human Computation and Crowdsourcing, 11, 127–139. https://doi.org/10.1609/hcomp.v11i1.27554
+Rastogi, C., Leqi, L., Holstein, K., & Heidari, H. (2023). **A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity.** Proceedings of the AAAI Conference on Human Computation and Crowdsourcing, 11, 127–139. https://doi.org/10.1609/hcomp.v11i1.27554
 
 
 <details open class="relevant-callout">
@@ -532,7 +546,7 @@ Hybrid human-ML systems increasingly make consequential decisions in a wide rang
 
 ## Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina
 
-Gao, Y., Lee, D., Burtch, G., & Fazelpour, S. (2024). Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina (No. arXiv:2410.19599). arXiv. http://arxiv.org/abs/2410.19599
+Gao, Y., Lee, D., Burtch, G., & Fazelpour, S. (2024). **Take Caution in Using LLMs as Human Surrogates: Scylla Ex Machina** (No. arXiv:2410.19599). arXiv. http://arxiv.org/abs/2410.19599
 
 
 <details open class="relevant-callout">
@@ -548,7 +562,7 @@ Human decision-making is filled with a variety of paradoxes demonstrating deviat
 
 ## Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies.
 
-Lai, V., Chen, C., Smith-Renner, A., Liao, Q. V., & Tan, C. (2023). Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies. 2023 ACM Conference on Fairness, Accountability, and Transparency, 1369–1385. https://doi.org/10.1145/3593013.3594087
+Lai, V., Chen, C., Smith-Renner, A., Liao, Q. V., & Tan, C. (2023). **Towards a Science of Human-AI Decision Making: An Overview of Design Space in Empirical Human-Subject Studies.** 2023 ACM Conference on Fairness, Accountability, and Transparency, 1369–1385. https://doi.org/10.1145/3593013.3594087
 
 
 <details open class="relevant-callout">
@@ -560,3 +574,26 @@ AI systems are adopted in numerous domains due to their increas- ingly strong pr
 
 
 ![Figure from @laiScienceHumanAIDecision2023](images/Lai1.png)
+
+
+
+
+## Towards a computational model of responsibility judgments in sequential human-AI collaboration
+
+Tsirtsis, S., Gomez Rodriguez, M., & Gerstenberg, T. (2024). **Towards a computational model of responsibility judgments in sequential human-AI collaboration.** In Proceedings of the Annual Meeting of the Cognitive Science Society (Vol. 46). https://osf.io/preprints/psyarxiv/m4yad
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+When a human and an AI agent collaborate to complete a task and something goes wrong, who is responsible? Prior work has developed theories to describe how people assign responsibility to individuals in teams. However, there has been little work studying the cognitive processes that underlie responsibility judgments in human-AI collaborations, especially for tasks comprising a sequence of interdependent actions. In this work, we take a step towards filling this gap. Using semi-autonomous driving as a paradigm, we develop an environment that simulates stylized cases of human-AI collaboration using a generative model of agent behavior. We propose a model of responsibility that considers how unexpected an agent’s action was, and what would have happened had they acted differently. We test the model’s predictions empirically and find that in addition to action expectations and counterfactual considerations, participants’ responsibility judgments are also affected by how much each agent actually contributed to the outcome.
+</div>
+</details>
+
+
+![Figure from @tsirtsisComputationalModelResponsibility2024](images/Tsirtsis_drive1.png)
+
+
+## References
+
+::: {#refs}
+:::

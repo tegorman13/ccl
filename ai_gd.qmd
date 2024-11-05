@@ -1,17 +1,29 @@
 ---
 title: "Group Decision Lit"
-author:
-- name: Thomas E. Gorman
-  url: https://tegorman13.github.io/
-  affiliations: 
-  - name:  Communication and Cognition Lab, Purdue University, USA
-    affiliation-url: https://web.ics.purdue.edu/~treimer/
-date: today
-toc: true
-lightbox: true
 format:
-  html: default
+  html: 
+    author:
+    - name: Thomas E. Gorman
+      url: https://tegorman13.github.io/
+    affiliations: 
+    - name:  Communication and Cognition Lab, Purdue University, USA
+      affiliation-url: https://web.ics.purdue.edu/~treimer/
+    date: today
+    toc: true
+    lightbox: true
   gfm: default
+  pdf: 
+    documentclass: article
+    papersize: letter
+    toc: false
+    fontsize: 11pt
+    linestretch: 1.5
+    geometry:
+      - top=.5in     
+      - bottom=.5in  
+      - left=.5in    
+      - right=.5in  
+      - heightrounded
   docx:
     prefer-html: true
     output-file: "gd_ai_lit_notes.docx"
@@ -82,7 +94,7 @@ In this prospective observational study, we investigate the role of transactive 
 
 ## Large language models empowered agent-based modeling and simulation: A survey and perspectives. 
 
-Gao, C., Lan, X., Li, N., Yuan, Y., Ding, J., Zhou, Z., Xu, F., & Li, Y. (2024). Large language models empowered agent-based modeling and simulation: A survey and perspectives. Humanities and Social Sciences Communications, 11(1), 1–24. https://doi.org/10.1057/s41599-024-03611-3
+Gao, C., Lan, X., Li, N., Yuan, Y., Ding, J., Zhou, Z., Xu, F., & Li, Y. (2024). **Large language models empowered agent-based modeling and simulation: A survey and perspectives.** Humanities and Social Sciences Communications, 11(1), 1–24. https://doi.org/10.1057/s41599-024-03611-3
 
 <details open class="relevant-callout">
 <summary>Abstract</summary>
@@ -96,7 +108,8 @@ Agent-based modeling and simulation have evolved as a powerful tool for modeling
 
 ## Building Machines that Learn and Think with People
 
-Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee, M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A., Tenenbaum, J. B., & Griffiths, T. L. (2024). **Building Machines that Learn and Think with People** (arXiv:2408.03943). arXiv. http://arxiv.org/abs/2408.03943
+Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee, M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A., Tenenbaum, J. B., & Griffiths, T. L. (2024). **Building machines that learn and think with people.** Nature Human Behaviour, 8(10), 1851–1863. https://doi.org/10.1038/s41562-024-01991-9
+
 
 <details open class="relevant-callout">
 <summary>Abstract</summary>
@@ -105,7 +118,20 @@ What do we want from machine intelligence? We envision machines that are not jus
 </div>
 </details>
 
-![Figure from @collinsBuildingMachinesThat2024](images/Collins_24_img.png)
+
+
+::: {#fig-collins layout-ncol=1}
+
+![](images/Collins_24_img.png)
+
+![](images/Collins2.png)
+
+![](images/Collins3.png)
+
+
+Figures from @collinsBuildingMachinesThat2024a
+
+:::
 
 
 \
@@ -136,7 +162,7 @@ Figure from @duLargeLanguageModels2024
 
 ## Exploring collaborative decision-making: A quasi-experimental study of human and Generative AI interaction.
 
-Hao, X., Demir, E., & Eyers, D. (2024). Exploring collaborative decision-making: A quasi-experimental study of human and Generative AI interaction. Technology in Society, 78, 102662. https://doi.org/10.1016/j.techsoc.2024.102662
+Hao, X., Demir, E., & Eyers, D. (2024). **Exploring collaborative decision-making: A quasi-experimental study of human and Generative AI interaction.** Technology in Society, 78, 102662. https://doi.org/10.1016/j.techsoc.2024.102662
 
 <details class="relevant-callout">
 <summary>Abstract</summary>
@@ -212,32 +238,9 @@ Chiang, C.-W., Lu, Z., Li, Z., & Yin, M. (2024). **Enhancing AI-Assisted Group D
 <details class="relevant-callout">
 <summary>Abstract</summary>
 <div>
-Group decision making plays a crucial role in our complex and
-interconnected world. The rise of AI technologies has the potential
-to provide data-driven insights to facilitate group decision making,
-although it is found that groups do not always utilize AI assistance
-appropriately. In this paper, we aim to examine whether and how
-the introduction of a devil’s advocate in the AI-assisted group deci-
-sion making processes could help groups better utilize AI assistance
-and change the perceptions of group processes during decision
-making. Inspired by the exceptional conversational capabilities ex-
-hibited by modern large language models (LLMs), we design four
-different styles of devil’s advocate powered by LLMs, varying their
-interactivity (i.e., interactive vs. non-interactive) and their target of
-objection (i.e., challenge the AI recommendation or the majority
-opinion within the group). Through a randomized human-subject
-experiment, we find evidence suggesting that LLM-powered devil’s
-advocates that argue against the AI model’s decision recommenda-
-tion have the potential to promote groups’ appropriate reliance on
-AI. Meanwhile, the introduction of LLM-powered devil’s advocate
-usually does not lead to substantial increases in people’s perceived
-workload for completing the group decision making tasks, while
-interactive LLM-powered devil’s advocates are perceived as more
-collaborating and of higher quality. We conclude by discussing the
-practical implications of our findings.
+Group decision making plays a crucial role in our complex and interconnected world. The rise of AI technologies has the potential to provide data-driven insights to facilitate group decision making, although it is found that groups do not always utilize AI assistance appropriately. In this paper, we aim to examine whether and how the introduction of a devil’s advocate in the AI-assisted group deci- sion making processes could help groups better utilize AI assistance and change the perceptions of group processes during decision making. Inspired by the exceptional conversational capabilities ex- hibited by modern large language models (LLMs), we design four different styles of devil’s advocate powered by LLMs, varying their interactivity (i.e., interactive vs. non-interactive) and their target of objection (i.e., challenge the AI recommendation or the majority opinion within the group). Through a randomized human-subject experiment, we find evidence suggesting that LLM-powered devil’s advocates that argue against the AI model’s decision recommenda- tion have the potential to promote groups’ appropriate reliance on AI. Meanwhile, the introduction of LLM-powered devil’s advocate usually does not lead to substantial increases in people’s perceived workload for completing the group decision making tasks, while interactive LLM-powered devil’s advocates are perceived as more collaborating and of higher quality. We conclude by discussing the practical implications of our findings.
 </div>
 </details>
-
 
 ![Figure from @chiangEnhancingAIAssistedGroup2024](images/chiang_24_img.png)
 
@@ -413,6 +416,37 @@ In the rapidly evolving landscape of artificial intelligence (AI), the collabora
 
 ---
 
+## Talk2Care: An LLM-based Voice Assistant for Communication between Healthcare Providers and Older Adults.
+
+Yang, Z., Xu, X., Yao, B., Rogers, E., Zhang, S., Intille, S., Shara, N., Gao, G. G., & Wang, D. (2024). **Talk2Care: An LLM-based Voice Assistant for Communication between Healthcare Providers and Older Adults.** Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 8(2), 1–35. https://doi.org/10.1145/3659625
+
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Despite the plethora of telehealth applications to assist home-based older adults and healthcare providers, basic messaging and phone calls are still the most common communication methods, which suffer from limited availability, information loss, and process inefficiencies. One promising solution to facilitate patient-provider communication is to leverage large language models (LLMs) with their powerful natural conversation and summarization capability. However, there is a limited understanding of LLMs' role during the communication. We first conducted two interview studies with both older adults (N=10) and healthcare providers (N=9) to understand their needs and opportunities for LLMs in patient-provider asynchronous communication. Based on the insights, we built an LLM-powered communication system, Talk2Care, and designed interactive components for both groups: (1) For older adults, we leveraged the convenience and accessibility of voice assistants (VAs) and built an LLM-powered conversational interface for effective information collection. (2) For health providers, we built an LLM-based dashboard to summarize and present important health information based on older adults' conversations with the VA. We further conducted two user studies with older adults and providers to evaluate the usability of the system. The results showed that Talk2Care could facilitate the communication process, enrich the health information collected from older adults, and considerably save providers' efforts and time. We envision our work as an initial exploration of LLMs' capability in the intersection of healthcare and interpersonal communication.
+</div>
+</details>
+
+
+![](images/yang1.png)
+
+![](images/yang2.png)
+
+::: {#fig-yang layout-ncol=1}
+
+![](images/yang3.png)
+
+Figures from @yangTalk2CareLLMbasedVoice2024
+
+:::
+
+---
+
+
+
+
+
 ## Conversational Agent Dynamics with Minority Opinion and Cognitive Conflict in Small-Group Decision-Making.
 
 Nishida, Y., Shimojo, S., & Hayashi, Y. (2024). **Conversational Agent Dynamics with Minority Opinion and Cognitive Conflict in Small-Group Decision-Making.** Japanese Psychological Research. https://doi.org/10.1111/jpr.12552
@@ -440,9 +474,6 @@ With ChatGPT's release, conversational prompting has become the most popular for
 </div>
 </details>
 
-
-
-
 ::: {#fig-gao layout-ncol=2}
 
 ![](images/Gao1.png)
@@ -455,31 +486,16 @@ With ChatGPT's release, conversational prompting has become the most popular for
 
 
 
-@gaoTaxonomyHumanLLMInteraction2024
+Figures from @gaoTaxonomyHumanLLMInteraction2024
 :::
 
-## Talk2Care: An LLM-based Voice Assistant for Communication between Healthcare Providers and Older Adults.
-
-Yang, Z., Xu, X., Yao, B., Rogers, E., Zhang, S., Intille, S., Shara, N., Gao, G. G., & Wang, D. (2024). **Talk2Care: An LLM-based Voice Assistant for Communication between Healthcare Providers and Older Adults.** Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 8(2), 1–35. https://doi.org/10.1145/3659625
 
 
-<details open class="relevant-callout">
-<summary>Abstract</summary>
-<div>
-Despite the plethora of telehealth applications to assist home-based older adults and healthcare providers, basic messaging and phone calls are still the most common communication methods, which suffer from limited availability, information loss, and process inefficiencies. One promising solution to facilitate patient-provider communication is to leverage large language models (LLMs) with their powerful natural conversation and summarization capability. However, there is a limited understanding of LLMs' role during the communication. We first conducted two interview studies with both older adults (N=10) and healthcare providers (N=9) to understand their needs and opportunities for LLMs in patient-provider asynchronous communication. Based on the insights, we built an LLM-powered communication system, Talk2Care, and designed interactive components for both groups: (1) For older adults, we leveraged the convenience and accessibility of voice assistants (VAs) and built an LLM-powered conversational interface for effective information collection. (2) For health providers, we built an LLM-based dashboard to summarize and present important health information based on older adults' conversations with the VA. We further conducted two user studies with older adults and providers to evaluate the usability of the system. The results showed that Talk2Care could facilitate the communication process, enrich the health information collected from older adults, and considerably save providers' efforts and time. We envision our work as an initial exploration of LLMs' capability in the intersection of healthcare and interpersonal communication.
-</div>
-</details>
+{{< pagebreak >}}
 
 
 
-::: {#fig-Yang layout-ncol=2}
+## References
 
-![](images/yang1.png)
-
-![](images/yang2.png)
-
-![](images/yang3.png)
-
-@yangTalk2CareLLMbasedVoice2024
+::: {#refs}
 :::
-

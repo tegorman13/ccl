@@ -1,22 +1,29 @@
 ---
 title: "Transactive Memory Systems"
-author:
-- name: Thomas E. Gorman
-  url: https://tegorman13.github.io/
-  affiliations: 
-  - name:  Communication and Cognition Lab, Purdue University, USA
-    affiliation-url: https://web.ics.purdue.edu/~treimer/
-date: today
-toc: false
-lightbox: true
 format:
   html: 
-    grid:
-      sidebar-width: 220px
-      body-width: 1200px
-      margin-width: 170px
-      gutter-width: 1.0rem
+    author:
+    - name: Thomas E. Gorman
+      url: https://tegorman13.github.io/
+    affiliations: 
+    - name:  Communication and Cognition Lab, Purdue University, USA
+      affiliation-url: https://web.ics.purdue.edu/~treimer/
+    date: today
+    toc: true
+    lightbox: true
   gfm: default
+  pdf: 
+    documentclass: article
+    papersize: letter
+    toc: false
+    fontsize: 11pt
+    linestretch: 1.5
+    geometry:
+      - top=.5in     
+      - bottom=.5in  
+      - left=.5in    
+      - right=.5in  
+      - heightrounded
   docx:
     prefer-html: true
     output-file: "tms_notes.docx"
@@ -74,16 +81,23 @@ Research on linguistic interaction suggests that two or more individuals can som
 
 ## Building Machines that Learn and Think with People
 
-Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee, M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A., Tenenbaum, J. B., & Griffiths, T. L. (2024). **Building Machines that Learn and Think with People** (arXiv:2408.03943). arXiv. http://arxiv.org/abs/2408.03943
+Collins, K. M., Sucholutsky, I., Bhatt, U., Chandra, K., Wong, L., Lee, M., Zhang, C. E., Zhi-Xuan, T., Ho, M., Mansinghka, V., Weller, A., Tenenbaum, J. B., & Griffiths, T. L. (2024). **Building machines that learn and think with people.** Nature Human Behaviour, 8(10), 1851–1863. https://doi.org/10.1038/s41562-024-01991-9
 
 <details open class="relevant-callout">
 <summary>Abstract</summary>
 <div>
-What do we want from machine intelligence? We envision machines that are not just tools for thought, but partners in thought: reasonable, insightful, knowledgeable, reliable, and trustworthy systems that think with us. Current artificial intelligence (AI) systems satisfy some of these criteria, some of the time. In this Perspective, we show how the science of collaborative cognition can be put to work to engineer systems that really can be called “thought partners,” systems built to meet our expectations and complement our limitations. We lay out several modes of collaborative thought in which humans and AI thought partners can engage and propose desiderata for human-compatible thought partnerships. Drawing on motifs from computational cognitive science, we motivate an alternative scaling path for the design of thought partners and ecosystems around their use through a Bayesian lens, whereby the partners we construct actively build and reason over models of the human and world.</p>
+What do we want from machine intelligence? We envision machines that are not just tools for thought, but partners in thought: reasonable, insightful, knowledgeable, reliable, and trustworthy systems that think with us. Current artificial intelligence (AI) systems satisfy some of these criteria, some of the time. In this Perspective, we show how the science of collaborative cognition can be put to work to engineer systems that really can be called “thought partners,” systems built to meet our expectations and complement our limitations. We lay out several modes of collaborative thought in which humans and AI thought partners can engage and propose desiderata for human-compatible thought partnerships. Drawing on motifs from computational cognitive science, we motivate an alternative scaling path for the design of thought partners and ecosystems around their use through a Bayesian lens, whereby the partners we construct actively build and reason over models of the human and world.
 </div>
 </details>
 
-![Figure from @collinsBuildingMachinesThat2024](images/Collins_24_img.png)
+::: {#fig-collins layout-ncol=1}
+
+![](images/Collins_24_img.png)
+
+![](images/Collins2.png)
+
+Figures from @collinsBuildingMachinesThat2024a
+:::
 
 
 ## Task Allocation in Teams as a Multi-Armed Bandit.
@@ -105,11 +119,7 @@ Humans rely on efficient distribution of resources to transcend the abilities of
 ## Bridging the Gulf of Envisioning: Cognitive Design Challenges in LLM Interfaces
 
 
-
-
 Subramonyam, H., Pea, R., Pondoc, C. L., Agrawala, M., & Seifert, C. (2024). **Bridging the Gulf of Envisioning: Cognitive Design Challenges in LLM Interfaces** (arXiv:2309.14459; Version 2). arXiv. http://arxiv.org/abs/2309.14459
-
-
 
 <details class="relevant-callout">
 <summary>Abstract</summary>
@@ -122,8 +132,11 @@ Large language models (LLMs) exhibit dynamic capabilities and appear to comprehe
 
 
 
-## Misc Papers
 
+
+
+
+## Misc Papers
 
 
 Argote, L., & Ren, Y. (2012). Transactive Memory Systems: A Microfoundation of Dynamic Capabilities. Journal of Management Studies, 49(8), 1375–1382. https://doi.org/10.1111/j.1467-6486.2012.01077.x
