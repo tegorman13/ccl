@@ -1,5 +1,5 @@
 ---
-title: "LLM Energy"
+title: "LLM Energy Lit Highlights"
 format:
   html: 
     author:
@@ -8,7 +8,7 @@ format:
     affiliations: 
     - name:  Communication and Cognition Lab, Purdue University, USA
       affiliation-url: https://web.ics.purdue.edu/~treimer/
-    date: today
+    #date: today
     toc: true
     lightbox: true
   gfm: default
@@ -26,13 +26,15 @@ format:
       - heightrounded
   docx:
     prefer-html: true
-    output-file: "llm_energy_notes.docx"
+    output-file: "llm_energy_lit_highlights.docx"
     toc: false
 ---
 
+<br>
 
-[https://tegorman13.github.io/ccl/llm_energy.html](https://tegorman13.github.io/ccl/llm_energy.html)
+[link to html version: https://tegorman13.github.io/ccl/llm_energy.html](https://tegorman13.github.io/ccl/llm_energy.html)
 
+<br><br>
 
 ## Sasha: Creative Goal-Oriented Reasoning in Smart Homes with Large Language Models.
 
@@ -46,8 +48,6 @@ Smart home assistants function best when user commands are direct and well-speci
 </div>
 </details>
 
-::: {#fig-king layout-ncol=1}
-
 ![](images/King1.png)
 
 ![](images/King2.png)
@@ -55,6 +55,8 @@ Smart home assistants function best when user commands are direct and well-speci
 ![](images/King3.png)
 
 ![](images/King4.png)
+
+::: {#fig-king layout-ncol=1}
 
 ![](images/King5.png)
 
@@ -80,8 +82,6 @@ Everyday devices like light bulbs and kitchen appliances are now embedded with s
 </details>
 
 
-::: {#fig-king2 layout-ncol=1}
-
 ![](images/king_tt1.png)
 
 ![](images/king_tt2.png)
@@ -89,6 +89,8 @@ Everyday devices like light bulbs and kitchen appliances are now embedded with s
 ![](images/king_tt3.png)
 
 ![](images/king_tt4.png)
+
+::: {#fig-king2 layout-ncol=1}
 
 ![](images/king_tt5.png)
 
@@ -113,11 +115,46 @@ Without any more delay, individuals are urged to adopt more sustainable behavior
 </details>
 
 
-![Figure from @giudiciDesigningHomeAutomation2024](images/Giudici1.png)
+![Figure from @giudiciDesigningHomeAutomation2024](images/Giudici1.png){width=85%}
 
 ----
 
 {{< pagebreak >}}
+
+
+## AIoT Smart Home via Autonomous LLM Agents.
+
+Rivkin, D., Hogan, F., Feriani, A., Konar, A., Sigal, A., Liu, X., & Dudek, G. (2024). **AIoT Smart Home via Autonomous LLM Agents.** IEEE Internet of Things Journal, 1–1. IEEE Internet of Things Journal. https://doi.org/10.1109/JIOT.2024.3471904
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+The common-sense reasoning abilities and vast general knowledge of Large Language Models (LLMs) make them a natural fit for interpreting user requests in a smart home assistant context. LLMs, however, lack specific knowledge about the user and their home, which limits their potential impact. SAGE (Smart Home Agent with Grounded Execution), overcomes these and other limitations by using a scheme in which a user request triggers an LLM-controlled sequence of discrete actions. These actions can be used to retrieve information, interact with the user, or manipulate device states. SAGE controls this process through a dynamically constructed tree of LLM prompts, which help it decide which action to take next, whether an action was successful, and when to terminate the process. The SAGE action set augments an LLM’s capabilities to support some of the most critical requirements for a smart home assistant. These include: flexible and scalable user preference management (“Is my team playing tonight?”), access to any smart device’s full functionality without device-specific code via API reading (“Turn down the screen brightness on my dryer”), persistent device state monitoring (“Remind me to throw out the milk when I open the fridge”), natural device references using only a photo of the room (“Turn on the lamp on the dresser”), and more. We introduce a benchmark of 50 new and challenging smart home tasks where SAGE achieves a 76% success rate, significantly outperforming existing LLM-enabled baselines (30% success rate).
+</div>
+</details>
+
+
+![Figure from @rivkinAIoTSmartHome2024](images/rivkin1.png)
+
+
+{{< pagebreak >}}
+
+
+## Leveraging Large Language Models for enhanced personalised user experience in Smart Homes 
+
+Rey-Jouanchicot, J., Bottaro, A., Campo, E., Bouraoui, J.-L., Vigouroux, N., & Vella, F. (2024). **Leveraging Large Language Models for enhanced personalised user experience in Smart Homes** (No. arXiv:2407.12024). arXiv. http://arxiv.org/abs/2407.12024
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Smart home automation systems aim to improve the comfort and convenience of users in their living environment. However, adapting automation to user needs remains a challenge. Indeed, many systems still rely on hand-crafted routines for each smart object.This paper presents an original smart home architecture leveraging Large Language Models (LLMs) and user preferences to push the boundaries of personalisation and intuitiveness in the home environment.This article explores a human-centred approach that uses the general knowledge provided by LLMs to learn and facilitate interactions with the environment.The advantages of the proposed model are demonstrated on a set of scenarios, as well as a comparative analysis with various LLM implementations. Some metrics are assessed to determine the system's ability to maintain comfort, safety, and user preferences. The paper details the approach to real-world implementation and evaluation.The proposed approach of using preferences shows up to 52.3% increase in average grade, and with an average processing time reduced by 35.6% on Starling 7B Alpha LLM. In addition, performance is 26.4% better than the results of the larger models without preferences, with processing time almost 20 times faster.
+</div>
+</details>
+
+![Figure from @rey-jouanchicotLeveragingLargeLanguage2024](images/rey1.png)
+
+{{< pagebreak >}}
+
 
 
 ## Enhancing smart home interaction through multimodal command disambiguation. 
@@ -136,6 +173,42 @@ Smart speakers are entering our homes and enriching the connected ecosystem alre
 ----
 
 {{< pagebreak >}}
+
+
+
+## A Human-on-the-Loop Optimization Autoformalism Approach for Sustainability 
+
+Jin, M., Sel, B., Hardeep, F., & Yin, W. (2023). **A Human-on-the-Loop Optimization Autoformalism Approach for Sustainability** (arXiv:2308.10380). arXiv. http://arxiv.org/abs/2308.10380
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+This paper outlines a natural conversational approach to solving personalized energy-related problems using large language models (LLMs). We focus on customizable optimization problems that necessitate repeated solving with slight variations in modeling and are user-specific, hence posing a challenge to devising a one-size-fits-all model. We put forward a strategy that augments an LLM with an optimization solver, enhancing its proficiency in understanding and responding to user specifications and preferences while providing nonlinear reasoning capabilities. Our approach pioneers the novel concept of human-guided optimization autoformalism, translating a natural language task specification automatically into an optimization instance. This enables LLMs to analyze, explain, and tackle a variety of instance-specific energy-related problems, pushing beyond the limits of current prompt-based techniques. Our research encompasses various commonplace tasks in the energy sector, from electric vehicle charging and Heating, Ventilation, and Air Conditioning (HVAC) control to long-term planning problems such as cost-benefit evaluations for installing rooftop solar photovoltaics (PVs) or heat pumps. This pilot study marks an essential stride towards the context-based formulation of optimization using LLMs, with the potential to democratize optimization processes. As a result, stakeholders are empowered to optimize their energy consumption, promoting sustainable energy practices customized to personal needs and preferences.
+</div>
+</details>
+
+![Figure from @jinHumanLoopOptimizationAutoformalism2023](images/Jin1.png)
+
+
+{{< pagebreak >}}
+
+
+## Harmony: A Home Agent for Responsive Management and Action Optimization with a Locally Deployed Large Language Model 
+
+Yin, Z., Zhang, M., & Kawahara, D. (2024). **Harmony: A Home Agent for Responsive Management and Action Optimization with a Locally Deployed Large Language Model** (No. arXiv:2410.14252). arXiv. http://arxiv.org/abs/2410.14252
+
+<details open class="relevant-callout">
+<summary>Abstract</summary>
+<div>
+Since the launch of GPT-3.5, intelligent home assistant technology based on large language models (LLMs) has made significant progress. These intelligent home assistant frameworks, such as those based on high-performance LLMs like GPT-4, have greatly expanded their functional range and application scenarios by computing on the cloud, enriching user experience and diversification. In order to optimize the privacy and economy of data processing while maintaining the powerful functions of LLMs, we propose Harmony, a smart home assistant framework that uses a locally deployable small-scale LLM. Based on Llama3-8b, an open LLM that can be easily deployed on a consumer-grade PC, Harmony does not send any data to the internet during operation, ensuring local computation and privacy secured. Harmony based on Llama3-8b achieved competitive performance on our benchmark tests with the framework used in related work with GPT-4. In addition to solving the issues mentioned above, Harmony can also take actions according to the user and home status, even if the user does not issue a command. For example, when the user wants to wake up later than normal on the weekend, Harmony would open the curtains only when the user gets up or prepare the room when the user comes home without requiring user commands.
+</div>
+</details>
+
+![Figure from @yinHarmonyHomeAgent2024](images/yin1.png)
+
+{{< pagebreak >}}
+
+
 
 ## Save It for the “Hot” Day: An LLM-Empowered Visual Analytics System for Heat Risk Management
 
@@ -163,11 +236,12 @@ This article introduces Follow-Me AI, a concept designed to enhance user interac
 </div>
 </details>
 
-::: {#fig-saleh layout-ncol=1}
 
 ![](images/Saleh1.png)
 
 ![](images/Saleh2.png)
+
+::: {#fig-saleh layout-ncol=1}
 
 ![](images/Saleh3.png)
 
@@ -284,7 +358,6 @@ Human Activity Recognition is a time-series analysis problem. A popular analysis
 
 Joshi, H., Liu, S., Chen, J., Weigle, R., & Lam, M. S. (2024). **LLM-Based Open-Domain Integrated Task and Knowledge Assistants with Programmable Policies** (arXiv:2407.05674). arXiv. http://arxiv.org/abs/2407.05674
 
-
 <details open class="relevant-callout">
 <summary>Abstract</summary>
 <div>
@@ -307,7 +380,6 @@ Civitarese, G., Fiori, M., Choudhary, P., & Bettini, C. (2024). **Large Language
 The sensor-based recognition of Activities of Daily Living (ADLs) in smart home environments enables several applications in the areas of energy management, safety, well-being, and healthcare. ADLs recognition is typically based on deep learning methods requiring large datasets to be trained. Recently, several studies proved that Large Language Models (LLMs) effectively capture common-sense knowledge about human activities. However, the effectiveness of LLMs for ADLs recognition in smart home environments still deserves to be investigated. In this work, we propose ADL-LLM, a novel LLM-based ADLs recognition system. ADLLLM transforms raw sensor data into textual representations, that are processed by an LLM to perform zero-shot ADLs recognition. Moreover, in the scenario where a small labeled dataset is available, ADL-LLM can also be empowered with few-shot prompting. We evaluated ADL-LLM on two public datasets, showing its effectiveness in this domain.
 </div>
 </details>
-
 
 ::: {#fig-Civitarese layout-ncol=1}
 
@@ -385,18 +457,6 @@ Figures from @galloConversationalAgentCreating2024
 
 {{< pagebreak >}}
 
-## A Human-on-the-Loop Optimization Autoformalism Approach for Sustainability 
-
-Jin, M., Sel, B., Hardeep, F., & Yin, W. (2023). **A Human-on-the-Loop Optimization Autoformalism Approach for Sustainability** (arXiv:2308.10380). arXiv. http://arxiv.org/abs/2308.10380
-
-<details open class="relevant-callout">
-<summary>Abstract</summary>
-<div>
-This paper outlines a natural conversational approach to solving personalized energy-related problems using large language models (LLMs). We focus on customizable optimization problems that necessitate repeated solving with slight variations in modeling and are user-specific, hence posing a challenge to devising a one-size-fits-all model. We put forward a strategy that augments an LLM with an optimization solver, enhancing its proficiency in understanding and responding to user specifications and preferences while providing nonlinear reasoning capabilities. Our approach pioneers the novel concept of human-guided optimization autoformalism, translating a natural language task specification automatically into an optimization instance. This enables LLMs to analyze, explain, and tackle a variety of instance-specific energy-related problems, pushing beyond the limits of current prompt-based techniques. Our research encompasses various commonplace tasks in the energy sector, from electric vehicle charging and Heating, Ventilation, and Air Conditioning (HVAC) control to long-term planning problems such as cost-benefit evaluations for installing rooftop solar photovoltaics (PVs) or heat pumps. This pilot study marks an essential stride towards the context-based formulation of optimization using LLMs, with the potential to democratize optimization processes. As a result, stakeholders are empowered to optimize their energy consumption, promoting sustainable energy practices customized to personal needs and preferences.
-</div>
-</details>
-
-![Figure from @jinHumanLoopOptimizationAutoformalism2023](images/Jin1.png)
 
 
 

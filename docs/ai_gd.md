@@ -845,6 +845,66 @@ research and societal benefit.
 
 ------------------------------------------------------------------------
 
+## Talk2Care: An LLM-based Voice Assistant for Communication between Healthcare Providers and Older Adults.
+
+Yang, Z., Xu, X., Yao, B., Rogers, E., Zhang, S., Intille, S., Shara,
+N., Gao, G. G., & Wang, D. (2024). **Talk2Care: An LLM-based Voice
+Assistant for Communication between Healthcare Providers and Older
+Adults.** Proceedings of the ACM on Interactive, Mobile, Wearable and
+Ubiquitous Technologies, 8(2), 1–35. https://doi.org/10.1145/3659625
+
+<details open class="relevant-callout">
+
+<summary>
+
+Abstract
+</summary>
+
+<div>
+
+Despite the plethora of telehealth applications to assist home-based
+older adults and healthcare providers, basic messaging and phone calls
+are still the most common communication methods, which suffer from
+limited availability, information loss, and process inefficiencies. One
+promising solution to facilitate patient-provider communication is to
+leverage large language models (LLMs) with their powerful natural
+conversation and summarization capability. However, there is a limited
+understanding of LLMs’ role during the communication. We first conducted
+two interview studies with both older adults (N=10) and healthcare
+providers (N=9) to understand their needs and opportunities for LLMs in
+patient-provider asynchronous communication. Based on the insights, we
+built an LLM-powered communication system, Talk2Care, and designed
+interactive components for both groups: (1) For older adults, we
+leveraged the convenience and accessibility of voice assistants (VAs)
+and built an LLM-powered conversational interface for effective
+information collection. (2) For health providers, we built an LLM-based
+dashboard to summarize and present important health information based on
+older adults’ conversations with the VA. We further conducted two user
+studies with older adults and providers to evaluate the usability of the
+system. The results showed that Talk2Care could facilitate the
+communication process, enrich the health information collected from
+older adults, and considerably save providers’ efforts and time. We
+envision our work as an initial exploration of LLMs’ capability in the
+intersection of healthcare and interpersonal communication.
+
+</div>
+
+</details>
+
+![](images/yang1.png)
+
+![](images/yang2.png)
+
+<div id="fig-yang">
+
+![](images/yang3.png)
+
+Figure 6: Figures from Z. Yang et al. (2024)
+
+</div>
+
+------------------------------------------------------------------------
+
 ## Conversational Agent Dynamics with Minority Opinion and Cognitive Conflict in Small-Group Decision-Making.
 
 Nishida, Y., Shimojo, S., & Hayashi, Y. (2024). **Conversational Agent
@@ -933,71 +993,13 @@ evaluation of human-LLM interaction.
 
 ![](images/Gao4.png)
 
-Figure 6: J. Gao et al. (2024)
+Figure 7: Figures from J. Gao et al. (2024)
 
 </div>
 
-## Talk2Care: An LLM-based Voice Assistant for Communication between Healthcare Providers and Older Adults.
+
 
-Yang, Z., Xu, X., Yao, B., Rogers, E., Zhang, S., Intille, S., Shara,
-N., Gao, G. G., & Wang, D. (2024). **Talk2Care: An LLM-based Voice
-Assistant for Communication between Healthcare Providers and Older
-Adults.** Proceedings of the ACM on Interactive, Mobile, Wearable and
-Ubiquitous Technologies, 8(2), 1–35. https://doi.org/10.1145/3659625
-
-<details open class="relevant-callout">
-
-<summary>
-
-Abstract
-</summary>
-
-<div>
-
-Despite the plethora of telehealth applications to assist home-based
-older adults and healthcare providers, basic messaging and phone calls
-are still the most common communication methods, which suffer from
-limited availability, information loss, and process inefficiencies. One
-promising solution to facilitate patient-provider communication is to
-leverage large language models (LLMs) with their powerful natural
-conversation and summarization capability. However, there is a limited
-understanding of LLMs’ role during the communication. We first conducted
-two interview studies with both older adults (N=10) and healthcare
-providers (N=9) to understand their needs and opportunities for LLMs in
-patient-provider asynchronous communication. Based on the insights, we
-built an LLM-powered communication system, Talk2Care, and designed
-interactive components for both groups: (1) For older adults, we
-leveraged the convenience and accessibility of voice assistants (VAs)
-and built an LLM-powered conversational interface for effective
-information collection. (2) For health providers, we built an LLM-based
-dashboard to summarize and present important health information based on
-older adults’ conversations with the VA. We further conducted two user
-studies with older adults and providers to evaluate the usability of the
-system. The results showed that Talk2Care could facilitate the
-communication process, enrich the health information collected from
-older adults, and considerably save providers’ efforts and time. We
-envision our work as an initial exploration of LLMs’ capability in the
-intersection of healthcare and interpersonal communication.
-
-</div>
-
-</details>
-
-<div id="fig-yang">
-
-![](images/yang1.png)
-
-![](images/yang2.png)
-
-![](images/yang3.png)
-
-Figure 7: Figures from Z. Yang et al. (2024)
-
-</div>
-
-<br>
-
-# References
+## References
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0" line-spacing="2">
