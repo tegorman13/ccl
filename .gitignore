@@ -19,7 +19,7 @@
 *.canvas
 *.vdoc.r
 *.here
-
+~$*
 
 # r created files
 *.rproj

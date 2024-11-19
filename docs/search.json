@@ -377,8 +377,8 @@
     "objectID": "Samuel_Project.html#original",
     "href": "Samuel_Project.html#original",
     "title": "Samuel’s Project",
-    "section": "",
-    "text": "Sam’s original mockup",
+    "section": "Original",
+    "text": "Original\n\n\n\n\nSam’s original mockup",
     "crumbs": [
       "Misc",
       "Samuel's Project"
@@ -631,7 +631,7 @@
     "href": "index.html",
     "title": "CCL Projects",
     "section": "",
-    "text": "Transactive Memory Systems\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSamuel’s Project\n\n\n\n\n\n\nThomas E. Gorman\n\n\n\n\n\n\n\n\n\n\n\n\nPossible Chapter Structures\n\n\n\n\n\n\nThomas E. Gorman\n\n\n\n\n\n\n\n\n\n\n\n\nLLM Energy Lit Highlights\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInteractive AI Lit\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIndividual decision lit\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGroup Decision Lit\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDriving Lit\n\n\n\n\n\n\nThomas E. Gorman\n\n\nNov 6, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Transactive Memory Systems\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSamuel’s Project\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPossible Chapter Structures\n\n\n\n\n\n\nThomas E. Gorman\n\n\n\n\n\n\n\n\n\n\n\n\nLLM Energy Lit Highlights\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInteractive AI Lit\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIndividual decision lit\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGroup Decision Lit\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDriving Lit\n\n\n\n\n\n\nThomas E. Gorman\n\n\nNov 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "ai_decision.html#accuracy-time-tradeoffs-in-ai-assisted-decision-making-under-time-pressure.",
@@ -2006,6 +2006,127 @@
     "crumbs": [
       "LLM Literature",
       "LLM Energy Lit Highlights"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#complexity",
+    "href": "Samuel_Project.html#complexity",
+    "title": "Samuel’s Project",
+    "section": "Complexity",
+    "text": "Complexity\n\nTask complexity moderates group synergy.\nAlmaatouq, A., Alsobay, M., Yin, M., & Watts, D. J. (2021). Task complexity moderates group synergy. Proceedings of the National Academy of Sciences, 118(36). https://doi.org/10.1073/pnas.2101062118\n\n\nAbstract\n\n\nComplexity—defined in terms of the number of components and the nature of the interdependencies between them—is clearly a relevant feature of all tasks that groups perform. Yet the role that task complexity plays in determining group performance remains poorly understood, in part because no clear language exists to express complexity in a way that allows for straightforward comparisons across tasks. Here we avoid this analytical difficulty by identifying a class of tasks for which complexity can be varied systematically while keeping all other elements of the task unchanged. We then test the effects of task complexity in a preregistered two-phase experiment in which 1,200 individuals were evaluated on a series of tasks of varying complexity (phase 1) and then randomly assigned to solve similar tasks either in interacting groups or as independent individuals (phase 2). We find that interacting groups are as fast as the fastest individual and more efficient than the most efficient individual for complex tasks but not for simpler ones. Leveraging our highly granular digital data, we define and precisely measure group process losses and synergistic gains and show that the balance between the two switches signs at intermediate values of task complexity. Finally, we find that interacting groups generate more solutions more rapidly and explore the solution space more broadly than independent problem solvers, finding higher-quality solutions than all but the highest-scoring individuals.\n\n\n\n\n\nFigure from Almaatouq et al. (2021)\n\n\n\n\n\nThe interaction between map complexity and crowd movement on navigation decisions in virtual reality.\nZhao, H., Thrash, T., Grossrieder, A., Kapadia, M., Moussaïd, M., Hölscher, C., & Schinazi, V. R. (2020). The interaction between map complexity and crowd movement on navigation decisions in virtual reality. Royal Society Open Science, 7(3), 191523. https://doi.org/10.1098/rsos.191523\n\n\nAbstract\n\n\nA carefully designed map can reduce pedestrians’ cognitive load during wayfinding and may be an especially useful navigation aid in crowded public environments. In the present paper, we report three studies that investigated the effects of map complexity and crowd movement on wayfinding time, accuracy and hesitation using both online and laboratory-based networked virtual reality (VR) platforms. In the online study, we found that simple map designs led to shorter decision times and higher accuracy compared to complex map designs. In the networked VR set-up, we found that co-present participants made very few errors. In the final VR study, we replayed the traces of participants’ avatars from the second study so that they indicated a different direction than the maps. In this scenario, we found an interaction between map design and crowd movement in terms of decision time and the distributions of locations at which participants hesitated. Together, these findings can help the designers of maps for public spaces account for the movements of real crowds.\n\n\n\n\n\nFigure from Zhao et al. (2020)\n\n\n\n\n\nTask Complexity and Performance in Individuals and Groups Without Communication.\nGulati, A., Nguyen, T. N., & Gonzalez, C. (2021). Task Complexity and Performance in Individuals and Groups Without Communication. AAAI Fall Symposium. Cham: Springer Nature Switzerland, 8.\n\n\nAbstract\n\n\nWhile groups where members communicate with each other may perform better than groups without communication, there are multiple scenarios where communication between group members is not possible. Our work analyses the impact of task complexity on individuals and groups of different sizes while solving a goal-seeking navigation task without communication. Our major goal is to determine the effect of task complexity on performance and whether agents in a group are able to coordinate to perform the task more effectively despite the lack of communication. We developed a cognitive model of each individual agent that performs the task. We compare the performance of this agent with individual human performance, who worked on the same task. We observe that the cognitive agent is able to replicate the general behavioral trends observed in humans. Using this cognitive model, we generate groups of different sizes where individual agents work in the same goal-seeking task independently and without communication. First, we observe that increasing task complexity by design does not necessarily lead to worse performance in individuals and groups. We also observe that larger groups perform better than smaller groups and individuals alone. However, individual agents within a group perform worse than an agent working on the task alone. This effect is not the result of agents within a group covering less ground in the task compared to individuals alone. Rather, it is an effect resulting from the overlap of the agents within a group. Importantly, agents learn to reduce their overlap and improve their performance without explicit communication. These results can inform the design of AI agents in humanmachine teams.\n\n\nGulati et al. (2021)\n\n\n\nEnvironmental memory boosts group formation of clueless individuals.\nDias, C. S., Trivedi, M., Volpe, G., Araújo, N. A. M., & Volpe, G. (2023). Environmental memory boosts group formation of clueless individuals. Nature Communications, 14(1), 7324. https://doi.org/10.1038/s41467-023-43099-0\n\n\nAbstract\n\n\nThe formation of groups of interacting individuals improves performance and fitness in many decentralised systems, from micro-organisms to social insects, from robotic swarms to artificial intelligence algorithms. Often, group formation and high-level coordination in these systems emerge from individuals with limited information-processing capabilities implementing low-level rules of communication to signal to each other. Here, we show that, even in a community of clueless individuals incapable of processing information and communicating, a dynamic environment can coordinate group formation by transiently storing memory of the earlier passage of individuals. Our results identify a new mechanism of indirect coordination via shared memory that is primarily promoted and reinforced by dynamic environmental factors, thus overshadowing the need for any form of explicit signalling between individuals. We expect this pathway to group formation to be relevant for understanding and controlling self-organisation and collective decision making in both living and artificial active matter in real-life environments.",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#uncertainty",
+    "href": "Samuel_Project.html#uncertainty",
+    "title": "Samuel’s Project",
+    "section": "Uncertainty",
+    "text": "Uncertainty\n\n\nFlexible social inference facilitates targeted social learning when rewards are not observable.\nHawkins, R. D., Berdahl, A. M., Pentland, A. ‘Sandy,’ Tenenbaum, J. B., Goodman, N. D., & Krafft, P. M. (2023). Flexible social inference facilitates targeted social learning when rewards are not observable. Nature Human Behaviour, 7(10), 1767–1776. https://doi.org/10.1038/s41562-023-01682-x\n\n\nAbstract\n\n\nGroups coordinate more effectively when individuals are able to learn from others’ successes. But acquiring such knowledge is not always easy, especially in real-world environments where success is hidden from public view. We suggest that social inference capacities may help bridge this gap, allowing individuals to update their beliefs about others’ underlying knowledge and success from observable trajectories of behaviour. We compared our social inference model against simpler heuristics in three studies of human behaviour in a collective-sensing task. Experiment 1 demonstrated that average performance improved as a function of group size at a rate greater than predicted by heuristic models. Experiment 2 introduced artificial agents to evaluate how individuals selectively rely on social information. Experiment 3 generalized these findings to a more complex reward landscape. Taken together, our findings provide insight into the relationship between individual social cognition and the flexibility of collective behaviour.\n\n\n\n\n\nFigure from Hawkins et al. (2023)\n\n\n\nTump, A. N., Wu, C. M., Bouhlel, I., & Goldstone, R. L. (2019). The Evolutionary Dynamics of Cooperation in Collective Search [Preprint]. http://biorxiv.org/lookup/doi/10.1101/538447\n\n\nAbstract\n\n\nHow does cooperation arise in an evolutionary context? We approach this problem using a collective search paradigm where interactions are dynamic and there is competition for rewards. Using evolutionary simulations, we ﬁnd that the unconditional sharing of information can be an evolutionary advantageous strategy without the need for conditional strategies or explicit reciprocation. Shared information acts as a recruitment signal and facilitates the formation of a self-organized group. Thus, the improved search efﬁciency of the collective bestows byproduct beneﬁts onto the original sharer. A key mechanism is a visibility radius, where individuals have unconditional access to information about neighbors within a limited distance. Our results show that for a variety of initial conditions—including populations initially devoid of prosocial individuals—and across both static and dynamic ﬁtness landscapes, we ﬁnd strong selection pressure to evolve unconditional sharing.\n\n\n\n\n\nSpatial planning with long visual range benefits escape from visual predators in complex naturalistic environments.\nMugan, U., & MacIver, M. A. (2020). Spatial planning with long visual range benefits escape from visual predators in complex naturalistic environments. Nature Communications, 11(1), 3057. https://doi.org/10.1038/s41467-020-16102-1\nlive task demo\ncode repository\n\n\n\nAbstract\n\n\nIt is uncontroversial that land animals have more elaborated cognitive abilities than their aquatic counterparts such as fish. Yet there is no apparent a-priori reason for this. A key cognitive faculty is planning. We show that in visually guided predator-prey interactions, planning provides a significant advantage, but only on land. During animal evolution, the water-to-land transition resulted in a massive increase in visual range. Simulations of behavior identify a specific type of terrestrial habitat, clustered open and closed areas (savanna-like), where the advantage of planning peaks. Our computational experiments demonstrate how this patchy terrestrial structure, in combination with enhanced visual range, can reveal and hide agents as a function of their movement and create a selective benefit for imagining, evaluating, and selecting among possible future scenarios—in short, for planning. The vertebrate invasion of land may have been an important step in their cognitive evolution.\n\n\n\n\n\nFigure from Mugan & MacIver (2020)\n\n\n\n\n\nThe form of uncertainty affects selection for social learning.\nTurner, M. A., Moya, C., Smaldino, P. E., & Jones, J. H. (2023). The form of uncertainty affects selection for social learning. Evolutionary Human Sciences, 5, e20. https://doi.org/10.1017/ehs.2023.11\n\n\nAbstract\n\n\nSocial learning is a critical adaptation for dealing with different forms of variability. Uncertainty is a severe form of variability where the space of possible decisions or probabilities of associated outcomes are unknown. We identified four theoretically important sources of uncertainty: temporal environmental variability; payoff ambiguity; selection-set size; and effective lifespan. When these combine, it is nearly impossible to fully learn about the environment. We develop an evolutionary agent-based model to test how each form of uncertainty affects the evolution of social learning. Agents perform one of several behaviours, modelled as a multi-armed bandit, to acquire payoffs. All agents learn about behavioural payoffs individually through an adaptive behaviour-choice model that uses a softmax decision rule. Use of vertical and oblique payoff-biased social learning evolved to serve as a scaffold for adaptive individual learning – they are not opposite strategies. Different types of uncertainty had varying effects. Temporal environmental variability suppressed social learning, whereas larger selection-set size promoted social learning, even when the environment changed frequently. Payoff ambiguity and lifespan interacted with other uncertainty parameters. This study begins to explain how social learning can predominate despite highly variable real-world environments when effective individual learning helps individuals recover from learning outdated social information.",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#social-influence",
+    "href": "Samuel_Project.html#social-influence",
+    "title": "Samuel’s Project",
+    "section": "Social Influence",
+    "text": "Social Influence\n\nVisual-spatial dynamics drive adaptive social learning in immersive environments\nWu, C. M., Deffner, D., Kahl, B., Meder, B., Ho, M. H., & Kurvers, R. H. J. M. (2023). Visual-spatial dynamics drive adaptive social learning in immersive environments [Preprint]. https://doi.org/10.1101/2023.06.28.546887\n\n\nAbstract\n\n\nHumans are uniquely capable social learners. Our capacity to learn from others across short and long timescales is a driving force behind the success of our species. Yet there are seemingly maladaptive patterns of human social learning, characterized by both overreliance and underreliance on social information. Recent advances in animal research have incorporated rich visual and spatial dynamics to study social learning in ecological contexts, showing how simple mechanisms can give rise to intelligent group dynamics. However, similar techniques have yet to be translated into human research, which additionally requires integrating the sophistication of human individual and social learning mechanisms. Thus, it is still largely unknown how humans dynamically adapt social learning strategies to different environments and how group dynamics emerge under realistic conditions. Here, we use a collective foraging experiment in an immersive Minecraft environment to provide unique insights into how visual-spatial interactions give rise to adaptive, specialized, and selective social learning. Our analyses show how groups adapt to the demands of the environment through specialization of learning strategies rather than homogeneity and through the adaptive deployment of selective imitation rather than indiscriminate copying. We test these mechanisms using computational modeling, providing a deeper understanding of the cognitive mechanisms that dynamically inﬂuence social decision-making in ecological contexts. All results are compared against an asocial baseline, allowing us to specify specialization and selective attention as uniquely social phenomena, which provide the adaptive foundations of human social learning.\n\n\n\n\n\nFigure from Wu et al. (2023)\n\n\n\n\n\nSpecialization and selective social attention establishes the balance between individual and social learning.\nWu, C. M., Ho, M. K., Kahl, B., Leuker, C., Meder, B., & Kurvers, R. H. J. M. (2021). Specialization and selective social attention establishes the balance between individual and social learning. Proceedings of the 43rd Annual Conference of the Cognitive Science Society, 1921–1927. https://doi.org/10.1101/2021.02.03.429553\n\n\nAbstract\n\n\nA key question individuals face in any social learning environment is when to innovate alone and when to imitate others. Previous simulation results have found that the best performing groups exhibit an intermediate balance, yet it is still largely unknown how individuals collectively negotiate this balance. We use an immersive collective foraging experiment, implemented in the Minecraft game engine, facilitating unprecedented access to spatial trajectories and visual ﬁeld data. The virtual environment imposes a limited ﬁeld of view, creating a natural trade-off between allocating visual attention towards individual innovation or to look towards peers for social imitation. By analyzing foraging patterns, social interactions (visual and spatial), and social inﬂuence, we shine new light on how groups collectively adapt to the ﬂuctuating demands of the environment through specialization and selective imitation, rather than homogeneity and indiscriminate copying of others.\n\n\n\n\n\nCollective incentives reduce over-exploitation of social information in unconstrained human groups.\nDeffner, D., Mezey, D., Kahl, B., Schakowski, A., Romanczuk, P., Wu, C. M., & Kurvers, R. H. J. M. (2024). Collective incentives reduce over-exploitation of social information in unconstrained human groups. Nature Communications, 15(1), 2683. https://doi.org/10.1038/s41467-024-47010-3\n\n\nAbstract\n\n\nCollective dynamics emerge from countless individual decisions. Yet, we poorly understand the processes governing dynamically-interacting individuals in human collectives under realistic conditions. We present a naturalistic immersive-reality experiment where groups of participants searched for rewards in different environments, studying how individuals weigh personal and social information and how this shapes individual and collective outcomes. Capturing high-resolution visual-spatial data, behavioral analyses revealed individual-level gains—but group-level losses—of high social information use and spatial proximity in environments with concentrated (vs. distributed) resources. Incentivizing participants at the group (vs. individual) level facilitated adaptation to concentrated environments, buffering apparently excessive scrounging. To infer discrete choices from unconstrained interactions and uncover the underlying decision mechanisms, we developed an unsupervised Social Hidden Markov Decision model. Computational results showed that participants were more sensitive to social information in concentrated environments frequently switching to a social relocation state where they approach successful group members. Group-level incentives reduced participants’ overall responsiveness to social information and promoted higher selectivity over time. Finally, mapping group-level spatio-temporal dynamics through time-lagged regressions revealed a collective exploration-exploitation trade-off across different timescales. Our study unravels the processes linking individual-level strategies to emerging collective dynamics, and provides tools to investigate decision-making in freely-interacting collectives.\n\n\n\n\n\nFigure from Deffner et al. (2024)\n\n\n\n\n\nInsights about the common generative rule underlying an information foraging task can be facilitated via collective search.\nNaito, A., Katahira, K., & Kameda, T. (2022). Insights about the common generative rule underlying an information foraging task can be facilitated via collective search. Scientific Reports, 12(1), 8047.\n\n\nAbstract\n\n\nSocial learning is beneficial for efficient information search in unfamiliar environments (“within-task” learning). In the real world, however, possible search spaces are often so large that decision makers are incapable of covering all options, even if they pool their information collectively. One strategy to handle such overload is developing generalizable knowledge that extends to multiple related environments (“across-task” learning). However, it is unknown whether and how social information may facilitate such across-task learning. Here, we investigated participants’ social learning processes across multiple laboratory foraging sessions in spatially correlated reward landscapes that were generated according to a common rule. The results showed that paired participants were able to improve efficiency in information search across sessions more than solo participants. Computational analysis of participants’ choice-behaviors revealed that such improvement across sessions was related to better understanding of the common generative rule. Rule understanding was correlated within a pair, suggesting that social interaction is a key to the improvement of across-task learning.\n\n\n\n\n\nFigure from Naito et al. (2022)\n\n\n\n\n\nIndividualism versus collective movement during travel.\nDoherty, C. T. M., & Laidre, M. E. (2022). Individualism versus collective movement during travel. Scientific Reports, 12(1), 7508. https://doi.org/10.1038/s41598-022-11469-1\n\n\nAbstract\n\n\nCollective movement may emerge if coordinating one’s movement with others produces a greater benefit to oneself than can be achieved alone. Experimentally, the capacity to manoeuvre simulated groups in the wild could enable powerful tests of the impact of collective movement on individual decisions. Yet such experiments are currently lacking due to the inherent difficulty of controlling whole collectives. Here we used a novel technique of experimentally simulating the movement of collectives of social hermit crabs (Coenobita compressus) in the wild. Using large architectural arrays of shells dragged across the beach, we generated synchronous collective movement and systematically varied the simulated collective’s travel direction as well as the context (i.e., danger level). With drone video from above, we then tested whether focal individuals were biased in their movement by the collective. We found that, despite considerable engagement with the collective, individuals’ direction was not significantly biased. Instead, individuals expressed substantial variability across all stimulus directions and contexts. Notably, individuals typically achieved shorter displacements in the presence of the collective versus in the presence of the control stimulus, suggesting an impact of traffic. The absence of a directional bias in individual movement due to the collective suggests that social hermit crabs are individualists, which move with a high level of opportunistic independence, likely thanks to the personal architecture and armour they carry in the form of a protective shell. Future studies can manipulate this level of armour to test its role in autonomy of movement, including the consequences of shell architecture for social decisions. Our novel experimental approach can be used to ask many further questions about how and why collective and individual movement interact.\n\n\n\n\n\nBeyond the individual: A social foraging framework to study decisions in groups.\nGarg, K., Deng, W., & Mobbs, D. (2024). Beyond the individual: A social foraging framework to study decisions in groups. OSF. https://doi.org/10.31219/osf.io/rmqyb\n\n\nAbstract\n\n\nA key goal of the behavioral sciences is to understand how agents decide between rewarding, hazardous, and conflicting options. Foraging theory, which is rooted in ecology and evolutionary theory, has helped advance this pursuit but has largely been limited to the study of the individual. In this Perspective, we extend beyond an individual. We propose social foraging as a promising avenue to study social decisions, or decisions within a social context. Recent research has already applied similar paradigms to study social behavior in naturalistic conditions. We synthesize the key socio-cognitive elements involved in social foraging that can be further studied through foraging paradigms. We then propose a social foraging framework that distinguishes between the asocial and social components involved in the decision-making process and describes their integration. Our framework bridges research across disciplines to provide a promising new avenue for the study of social behavior by linking decisions across different scales, from individuals to collectives.\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Figures from Garg et al. (2024)",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#alt-2",
+    "href": "Samuel_Project.html#alt-2",
+    "title": "Samuel’s Project",
+    "section": "Alt 2",
+    "text": "Alt 2",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#alt-2---larger",
+    "href": "Samuel_Project.html#alt-2---larger",
+    "title": "Samuel’s Project",
+    "section": "Alt 2 - larger",
+    "text": "Alt 2 - larger",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#alt-2b",
+    "href": "Samuel_Project.html#alt-2b",
+    "title": "Samuel’s Project",
+    "section": "Alt 2b",
+    "text": "Alt 2b",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#alt-2c",
+    "href": "Samuel_Project.html#alt-2c",
+    "title": "Samuel’s Project",
+    "section": "Alt 2c",
+    "text": "Alt 2c",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#alt-3",
+    "href": "Samuel_Project.html#alt-3",
+    "title": "Samuel’s Project",
+    "section": "Alt 3",
+    "text": "Alt 3",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#alt-3b",
+    "href": "Samuel_Project.html#alt-3b",
+    "title": "Samuel’s Project",
+    "section": "Alt 3b",
+    "text": "Alt 3b",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#alt-3c",
+    "href": "Samuel_Project.html#alt-3c",
+    "title": "Samuel’s Project",
+    "section": "Alt 3c",
+    "text": "Alt 3c",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
+    ]
+  },
+  {
+    "objectID": "Samuel_Project.html#peters-talks-on-foraging",
+    "href": "Samuel_Project.html#peters-talks-on-foraging",
+    "title": "Samuel’s Project",
+    "section": "Peter’s Talks on Foraging",
+    "text": "Peter’s Talks on Foraging",
+    "crumbs": [
+      "Misc",
+      "Samuel's Project"
     ]
   }
 ]
