@@ -589,7 +589,7 @@ Mezey, D., Deffner, D., Kurvers, R. H. J. M., & Romanczuk, P. (2024). **Visual s
 
 :::: {.content-visible when-format="html"}
 
-# Task Brainstorming
+# Task
 
 Click on one of the tasks to activate, then use the arrow keys to control the car
 
