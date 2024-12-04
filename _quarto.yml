@@ -11,6 +11,7 @@ project:
 
   resources: 
     - "Assets/car.png"
+    - "car.png"
     #- "Manuscript/Assets/"
 
 

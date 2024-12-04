@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EV Charging Station Selection</title>
+<style>
+body { font-family: sans-serif; }
+#map { width: 600px; height: 400px; border: 1px solid black; position: relative; }
+.station { position: absolute; width: 20px; height: 20px; border-radius: 50%; background-color: gray; cursor: pointer; }
+.station.available { background-color: green; }
+.station.occupied { background-color: red; }
+.car { 
+  position: absolute; 
+  width: 30px; 
+  height: 30px; 
+  background-image: url('car.png'); /* Provide the path to your car icon image */
+  background-size: contain; 
+  background-repeat: no-repeat; 
+}
+#info { margin-top: 20px; }
+#social-info { margin-top: 10px; }
+.grid-line {
+  position: absolute;
+  background-color: #ccc;
+}
+.horizontal-line {
+  width: 100%;
+  height: 1px;
+}
+.vertical-line {
+  width: 1px;
+  height: 100%;
+}
+.road {
+  position: absolute;
+  background-color: #ddd;
+  border: 1px solid #aaa;
+}
+.car, .station {
+  z-index: 10;
+}
+#controls {
+  width: 200px;
+  float: left;
+  margin-right: 20px;
+}
+#map-container {
+  float: left;
+}
+.bot-car {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  border-radius: 3px;
+  z-index: 10;
+}
+/* Existing styles */
+.car.highlight {
+  animation: highlight 0.5s ease-in-out;
+}
+
+@keyframes highlight {
+  0% { box-shadow: 0 0 10px 5px yellow; }
+  100% { box-shadow: 0 0 0 0 yellow; }
+}
+#data-preview {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+#data-preview table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#data-preview th, #data-preview td {
+  border: 1px solid #ccc;
+  padding: 5px;
+  text-align: left;
+}
+#data-preview th {
+  background-color: #f9f9f9;
+  position: sticky;
+  top: 0;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between grid and preview */
+}
+
+.task-grid {
+  width: 100%;
+}
+
+.data-preview {
+  width: 100%;
+}
+</style>
+</head>
+<body>
+
+<h1>EV Charging Station Selection</h1>
+
+<!-- Add Experimenter Controls Sidebar -->
+<div id="controls">
+  <h2>Experimenter Controls</h2>
+  <label for="num-stations">Number of Stations:</label>
+  <input type="range" id="num-stations" min="1" max="20" value="5">
+  <span id="num-stations-value">5</span>
+  <br>
+  <label for="map-complexity">Map Complexity:</label>
+  <input type="range" id="map-complexity" min="1" max="5" value="1">
+  <span id="map-complexity-value">1</span>
+  <br>
+  <label for="num-bots">Number of Bot Cars:</label>
+  <input type="range" id="num-bots" min="0" max="10" value="3">
+  <span id="num-bots-value">3</span>
+  <br>
+  <button id="apply-settings">Apply Settings</button>
+</div>
+
+<!-- Adjust map container -->
+<div id="map-container">
+  <div id="map"></div>
+</div>
+
+<div id="info">
+  <p>Battery: <span id="battery">100</span>%</p>
+  <p>Time: <span id="time">0</span> minutes</p>
+  <button id="next-round">Next Round</button> 
+</div>
+
+<div id="social-info">
+  <p id="recommendation"></p> 
+</div>
+
+<!-- Add the Download Data button -->
+<button id="download-data">Download Data</button>
+
+<!-- Add the Data Preview console -->
+<div class="container">
+  <div class="task-grid">
+  </div>
+</div>
+
+<!-- Move data-preview underneath the task grid -->
+<div class="data-preview">
+  <div id="data-preview">
+    <table>
+      <thead>
+        <tr id="data-preview-headers"></tr>
+      </thead>
+      <tbody id="data-preview-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const map = document.getElementById('map');
+const batteryDisplay = document.getElementById('battery');
+const timeDisplay = document.getElementById('time');
+const recommendationDisplay = document.getElementById('recommendation');
+const nextRoundButton = document.getElementById('next-round');
+
+let battery = 100;
+let time = 0;
+let stations = [];
+let carPosition = { x: 0, y: 0 }; // Initial car position
+let mapComplexity = "simple"; // or "complex"
+let socialInfluence = "none"; // or "majority" or "prestige"
+let currentRound = 1;
+const maxRounds = 5; // Example - adjust as needed
+const gridSize = 50;
+let roadMap = [];
+
+// Experimenter Controls
+const numStationsSlider = document.getElementById('num-stations');
+const mapComplexitySlider = document.getElementById('map-complexity');
+const numStationsValue = document.getElementById('num-stations-value');
+const mapComplexityValue = document.getElementById('map-complexity-value');
+const applySettingsButton = document.getElementById('apply-settings');
+
+numStationsSlider.addEventListener('input', () => {
+  numStationsValue.textContent = numStationsSlider.value;
+});
+
+mapComplexitySlider.addEventListener('input', () => {
+  mapComplexityValue.textContent = mapComplexitySlider.value;
+});
+
+applySettingsButton.addEventListener('click', () => {
+  numStations = parseInt(numStationsSlider.value);
+  mapComplexityLevel = parseInt(mapComplexitySlider.value);
+  numBots = parseInt(numBotsSlider.value);
+  initializeRound();
+});
+
+let numStations = 5; // Default value
+let mapComplexityLevel = 1; // Default value (1=simple, higher numbers=more complex)
+
+// Add new variables for bot cars
+let botCars = [];
+let numBots = 2; // Default value
+const botCarUpdateInterval = 1000; // Bot cars move every 1 second
+
+// Add to the experimenter controls section
+const numBotsSlider = document.getElementById('num-bots');
+const numBotsValue = document.getElementById('num-bots-value');
+
+numBotsSlider.addEventListener('input', () => {
+  numBotsValue.textContent = numBotsSlider.value;
+});
+
+// Function to generate stations based on map complexity
+function generateStations() {
+  const stations = [];
+  const gridCellsX = roadMap[0].length;
+  const gridCellsY = roadMap.length;
+
+  let attempts = 0;
+  const maxAttempts = numStations * 10;
+
+  for (let i = 0; i < numStations; i++) {
+    let gridX, gridY;
+
+    // Find a road cell to place the station
+    do {
+      gridX = Math.floor(Math.random() * gridCellsX);
+      gridY = Math.floor(Math.random() * gridCellsY);
+      attempts++;
+      if (attempts > maxAttempts) {
+        console.warn('Could not place all stations on roads.');
+        break;
+      }
+    } while (roadMap[gridY][gridX] !== 1);
+
+    const station = {
+      id: i + 1,
+      x: gridX * gridSize,
+      y: gridY * gridSize,
+      available: Math.random() < 0.7 ? 1 : 0
+    };
+    stations.push(station);
+  }
+  return stations;
+}
+
+    function generateRoadNetwork() {
+  const gridCellsX = Math.floor(map.offsetWidth / gridSize);
+  const gridCellsY = Math.floor(map.offsetHeight / gridSize);
+  roadMap = [];
+
+  // Initialize roadMap with zeros
+  for (let y = 0; y < gridCellsY; y++) {
+    roadMap[y] = [];
+    for (let x = 0; x < gridCellsX; x++) {
+      roadMap[y][x] = 0;
+    }
+  }
+
+  // Start from car position
+  const carGridX = Math.floor(carPosition.x / gridSize);
+  const carGridY = Math.floor(carPosition.y / gridSize);
+
+  const stack = [];
+  const visited = [];
+
+  for (let y = 0; y < gridCellsY; y++) {
+    visited[y] = [];
+    for (let x = 0; x < gridCellsX; x++) {
+      visited[y][x] = false;
+    }
+  }
+
+  stack.push({ x: carGridX, y: carGridY });
+  visited[carGridY][carGridX] = true;
+  roadMap[carGridY][carGridX] = 1;
+
+  while (stack.length > 0) {
+    const current = stack.pop();
+
+    const directions = [
+      { dx: 0, dy: -1 }, // up
+      { dx: 0, dy: 1 },  // down
+      { dx: -1, dy: 0 }, // left
+      { dx: 1, dy: 0 }   // right
+    ];
+
+    // Randomize directions to create randomness
+    directions.sort(() => Math.random() - 0.5);
+
+    for (let dir of directions) {
+      const nx = current.x + dir.dx;
+      const ny = current.y + dir.dy;
+
+      if (nx >= 0 && nx < gridCellsX && ny >= 0 && ny < gridCellsY && !visited[ny][nx]) {
+        visited[ny][nx] = true;
+
+        // Decide whether to create a road in this direction
+        if (Math.random() < 0.7) { // Adjust this probability for road density
+          roadMap[ny][nx] = 1;
+          stack.push({ x: nx, y: ny });
+        }
+      }
+    }
+  }
+}
+
+
+
+function createBranch(x, y, maxBranches) {
+  let branches = 0;
+  const directions = ['up', 'down', 'left', 'right'];
+  while (branches < maxBranches) {
+    let dir = directions[Math.floor(Math.random() * directions.length)];
+    let length = 5 + Math.floor(Math.random() * 10);
+
+    let bx = x;
+    let by = y;
+
+    for (let i = 0; i < length; i++) {
+      if (bx >= 0 && bx < roadMap[0].length && by >= 0 && by < roadMap.length) {
+        roadMap[by][bx] = 1;
+
+        // Move in the branch direction
+        if (dir === 'up') by--;
+        else if (dir === 'down') by++;
+        else if (dir === 'left') bx--;
+        else if (dir === 'right') bx++;
+      }
+    }
+    branches++;
+  }
+}
+
+function connectRoadNetwork() {
+  // Simple method to ensure all road cells are connected
+  // For more complex maps, consider implementing a proper connectivity check
+  for (let y = 1; y < roadMap.length - 1; y++) {
+    for (let x = 1; x < roadMap[0].length - 1; x++) {
+      if (roadMap[y][x] === 1) continue;
+
+      const neighbors = [
+        roadMap[y - 1][x],
+        roadMap[y + 1][x],
+        roadMap[y][x - 1],
+        roadMap[y][x + 1]
+      ];
+      if (neighbors.filter(n => n === 1).length >= 3) {
+        roadMap[y][x] = 1;
+      }
+    }
+  }
+}
+
+function initializeRound() {
+  battery = 100;
+  time = 0;
+  updateDisplay();
+
+  // Set car position randomly
+  let carGridX = Math.floor(Math.random() * Math.floor(map.offsetWidth / gridSize));
+  let carGridY = Math.floor(Math.random() * Math.floor(map.offsetHeight / gridSize));
+  carPosition = {
+    x: carGridX * gridSize,
+    y: carGridY * gridSize
+  };
+
+  // Generate the road network
+  generateRoadNetwork();
+
+  // Ensure the car starts on a road
+  if (roadMap[carGridY][carGridX] !== 1) {
+    roadMap[carGridY][carGridX] = 1;
+  }
+
+  // Generate stations on road cells
+  stations = generateStations();
+
+  // Display social influence information (if applicable)
+  if (socialInfluence !== "none") {
+    displaySocialInformation();
+  }
+
+  initializeBotCars();
+
+  // Start bot movement interval
+  if (window.botInterval) clearInterval(window.botInterval);
+  window.botInterval = setInterval(moveBotCars, botCarUpdateInterval);
+  drawMap();
+}
+
+function initializeBotCars() {
+  botCars = [];
+  const gridCellsX = roadMap[0].length;
+  const gridCellsY = roadMap.length;
+
+  for (let i = 0; i < numBots; i++) {
+    let gridX, gridY;
+
+    // Find a road cell to place the bot
+    do {
+      gridX = Math.floor(Math.random() * gridCellsX);
+      gridY = Math.floor(Math.random() * gridCellsY);
+    } while (roadMap[gridY][gridX] !== 1);
+
+    botCars.push({
+      id: i,
+      x: gridX * gridSize,
+      y: gridY * gridSize,
+      battery: 70 + Math.random() * 30, // Start with 70-100% battery
+      targetStation: null
+    });
+  }
+}
+function moveBotCars() {
+  botCars.forEach(bot => {
+    const previousPosition = { x: bot.x, y: bot.y };
+
+    if (bot.battery < 30 && !bot.targetStation) {
+      // Find nearest available station
+      bot.targetStation = findNearestAvailableStation(bot);
+    }
+
+    if (bot.targetStation) {
+      // Move towards target station
+      const gridX = Math.floor(bot.x / gridSize);
+      const gridY = Math.floor(bot.y / gridSize);
+      const targetGridX = Math.floor(bot.targetStation.x / gridSize);
+      const targetGridY = Math.floor(bot.targetStation.y / gridSize);
+
+      // Simple pathfinding along grid
+      if (gridX !== targetGridX && roadMap[gridY][gridX + Math.sign(targetGridX - gridX)] === 1) {
+        bot.x += Math.sign(targetGridX - gridX) * gridSize;
+      } else if (gridY !== targetGridY && roadMap[gridY + Math.sign(targetGridY - gridY)][gridX] === 1) {
+        bot.y += Math.sign(targetGridY - gridY) * gridSize;
+      }
+
+      // Check if arrived at station
+      if (gridX === targetGridX && gridY === targetGridY) {
+        bot.battery = 100;
+        bot.targetStation = null;
+      }
+    } else {
+      // Random movement
+      const directions = [
+        { dx: 0, dy: -1 }, // up
+        { dx: 0, dy: 1 },  // down
+        { dx: -1, dy: 0 }, // left
+        { dx: 1, dy: 0 }   // right
+      ];
+
+      const validMoves = directions.filter(dir => {
+        const newGridX = Math.floor((bot.x + dir.dx * gridSize) / gridSize);
+        const newGridY = Math.floor((bot.y + dir.dy * gridSize) / gridSize);
+        return newGridX >= 0 && newGridY >= 0 && 
+               newGridY < roadMap.length && newGridX < roadMap[0].length &&
+               roadMap[newGridY][newGridX] === 1;
+      });
+
+      if (validMoves.length > 0) {
+        const move = validMoves[Math.floor(Math.random() * validMoves.length)];
+        bot.x += move.dx * gridSize;
+        bot.y += move.dy * gridSize;
+        bot.battery -= 0.5;
+      }
+    }
+
+    // Check if bot has moved
+    if (bot.x !== previousPosition.x || bot.y !== previousPosition.y) {
+      // Log bot movement
+      dataLog.push({
+        type: 'bot_move',
+        timestamp: getCurrentTimestamp(),
+        time: time,
+        botId: bot.id,
+        position: { x: bot.x, y: bot.y },
+        battery: bot.battery,
+        cellType: getCellType(bot.x, bot.y)
+      });
+
+      // Update data preview
+      updateDataPreview();
+    }
+
+    // Check if bot has charged
+    if (bot.battery === 100 && bot.targetStation) {
+      dataLog.push({
+        type: 'bot_charged',
+        timestamp: getCurrentTimestamp(),
+        time: time,
+        botId: bot.id,
+        stationId: bot.targetStation.id,
+        cellType: getCellType(bot.targetStation.x, bot.targetStation.y)
+      });
+
+      // Update data preview
+      updateDataPreview();
+
+      bot.targetStation = null; // Reset target station after charging
+    }
+  });
+  drawMap();
+}
+
+function findNearestAvailableStation(bot) {
+  return stations
+    .filter(s => s.available > 0)
+    .reduce((nearest, station) => {
+      const distance = Math.abs(station.x - bot.x) + Math.abs(station.y - bot.y);
+      if (!nearest || distance < nearest.distance) {
+        return { station, distance };
+      }
+      return nearest;
+    }, null)?.station;
+}
+
+function displaySocialInformation() {
+  // Example for majority influence:
+  if (socialInfluence === "majority") {
+    const chosenStation = stations[Math.floor(Math.random() * stations.length)]; // Placeholder - replace with actual majority logic
+    recommendationDisplay.textContent = `80% of previous users chose station ${chosenStation.id}.`;
+  } 
+  // ... Add logic for other types of social influence (prestige, etc.)
+}
+
+function drawMap() {
+  // Clear map
+  map.innerHTML = '';
+
+  // Draw roads
+  drawRoads();
+
+  // Draw grid
+  drawGrid();
+
+  // Draw stations
+  stations.forEach(station => {
+    const stationDiv = document.createElement('div');
+    stationDiv.classList.add('station');
+    stationDiv.classList.add(station.available > 0 ? 'available' : 'occupied');
+    stationDiv.style.left = station.x + 'px';
+    stationDiv.style.top = station.y + 'px';
+    stationDiv.setAttribute('data-id', station.id); // Add this line
+    stationDiv.addEventListener('click', () => chooseStation(station)); // Handle station clicks
+    map.appendChild(stationDiv);
+  });
+
+   // Draw car
+   const carDiv = document.createElement('div');
+   carDiv.classList.add('car');
+  // Calculate offsets to center the car
+  const carWidth = 30; // As defined in CSS
+  const carHeight = 30;
+  const offsetX = (gridSize - carWidth) / 2;
+  const offsetY = (gridSize - carHeight) / 2;
+
+  carDiv.style.left = (carPosition.x + offsetX) + 'px';
+  carDiv.style.top = (carPosition.y + offsetY) + 'px';
+  map.appendChild(carDiv);
+   // Draw bot cars
+   botCars.forEach(bot => {
+    const botDiv = document.createElement('div');
+    botDiv.classList.add('bot-car');
+    botDiv.style.left = bot.x + 'px';
+    botDiv.style.top = bot.y + 'px';
+    map.appendChild(botDiv);
+  });
+}
+
+function drawRoads() {
+  for (let y = 0; y < roadMap.length; y++) {
+    for (let x = 0; x < roadMap[0].length; x++) {
+      if (roadMap[y][x] === 1) {
+        const roadDiv = document.createElement('div');
+        roadDiv.classList.add('road');
+        roadDiv.style.left = x * gridSize + 'px';
+        roadDiv.style.top = y * gridSize + 'px';
+        roadDiv.style.width = gridSize + 'px';
+        roadDiv.style.height = gridSize + 'px';
+        map.appendChild(roadDiv);
+      }
+    }
+  }
+}
+
+function drawGrid() {
+  const gridSize = 50; // Size of each grid cell
+  const mapWidth = map.offsetWidth;
+  const mapHeight = map.offsetHeight;
+
+  // Draw horizontal lines
+  for (let y = 0; y <= mapHeight; y += gridSize) {
+    const hLine = document.createElement('div');
+    hLine.classList.add('grid-line', 'horizontal-line');
+    hLine.style.top = y + 'px';
+    map.appendChild(hLine);
+  }
+
+  // Draw vertical lines
+  for (let x = 0; x <= mapWidth; x += gridSize) {
+    const vLine = document.createElement('div');
+    vLine.classList.add('grid-line', 'vertical-line');
+    vLine.style.left = x + 'px';
+    map.appendChild(vLine);
+  }
+}
+
+function chooseStation(station) {
+  // Calculate grid-based (Manhattan) distance
+  const dx = Math.abs(station.x - carPosition.x);
+  const dy = Math.abs(station.y - carPosition.y);
+  const distance = dx + dy;
+
+  // Simulate travel time (e.g., 1 minute per grid cell)
+  const travelTime = Math.round(distance / 50);
+  time += travelTime;
+
+  // Update battery level (e.g., 1% battery per grid cell)
+  const batteryUsage = Math.round(distance / 50);
+  battery -= batteryUsage;
+  if (battery < 0) battery = 0;
+  updateDisplay();
+
+  // Check if station is available
+  if (station.available > 0) {
+    // Simulate charging
+    time += 30; // Charging takes 30 minutes
+    battery = 100; // Battery fully charged
+    updateDisplay();
+    alert(`You have arrived at station ${station.id} and charged your car.`);
+    // Record participant choice if needed
+    nextRoundButton.disabled = false; // Allow proceeding to next round
+
+    // Log station selection
+    dataLog.push({
+      type: 'station_selected',
+      timestamp: getCurrentTimestamp(),
+      time: time,
+      battery: battery,
+      stationId: station.id,
+      stationPosition: { x: station.x, y: station.y },
+      cellType: getCellType(station.x, station.y)
+    });
+
+    // Update data preview
+    updateDataPreview();
+  } else {
+    alert(`Station ${station.id} is occupied. Please choose another station.`);
+  }
+}
+
+// Add event listener for key presses
+document.addEventListener('keydown', handleKeyPress);
+
+function handleKeyPress(event) {
+  let moved = false;
+  let newX = carPosition.x;
+  let newY = carPosition.y;
+  const gridX = Math.floor(carPosition.x / gridSize);
+  const gridY = Math.floor(carPosition.y / gridSize);
+
+  switch(event.key) {
+    case 'ArrowUp':
+    case 'w':
+      if (gridY > 0 && roadMap[gridY - 1][gridX] === 1) {
+        newY -= gridSize;
+        moved = true;
+      }
+      break;
+    case 'ArrowDown':
+    case 's':
+      if (gridY < roadMap.length - 1 && roadMap[gridY + 1][gridX] === 1) {
+        newY += gridSize;
+        moved = true;
+      }
+      break;
+    case 'ArrowLeft':
+    case 'a':
+      if (gridX > 0 && roadMap[gridY][gridX - 1] === 1) {
+        newX -= gridSize;
+        moved = true;
+      }
+      break;
+    case 'ArrowRight':
+    case 'd':
+      if (gridX < roadMap[0].length - 1 && roadMap[gridY][gridX + 1] === 1) {
+        newX += gridSize;
+        moved = true;
+      }
+      break;
+  }
+
+  if (moved) {
+    carPosition.x = newX;
+    carPosition.y = newY;
+    // Update battery and time
+    battery -= 1;
+    time += 1;
+    updateDisplay();
+    drawMap();
+    checkForStation();
+
+    // Log the movement
+    dataLog.push({
+      type: 'user_move',
+      timestamp: getCurrentTimestamp(),
+      time: time,
+      battery: battery,
+      position: { x: carPosition.x, y: carPosition.y },
+      keyPressed: event.key,
+      cellType: getCellType(carPosition.x, carPosition.y)
+    });
+
+    // Update data preview
+    updateDataPreview();
+  }
+}
+
+function checkForStation() {
+  const carGridX = Math.floor(carPosition.x / gridSize);
+  const carGridY = Math.floor(carPosition.y / gridSize);
+
+  stations.forEach(station => {
+    const stationGridX = Math.floor(station.x / gridSize);
+    const stationGridY = Math.floor(station.y / gridSize);
+
+    if (stationGridX === carGridX && stationGridY === carGridY) {
+      if (station.available > 0) {
+        // Increase battery level
+        battery = Math.min(100, battery + 20);
+        updateDisplay();
+
+        // Highlight the car
+        const carDiv = document.querySelector('.car');
+        carDiv.classList.add('highlight');
+        setTimeout(() => carDiv.classList.remove('highlight'), 500);
+
+        // Change station color to red
+        const stationDiv = document.querySelector(`.station[data-id='${station.id}']`);
+        stationDiv.classList.remove('available');
+        stationDiv.classList.add('occupied');
+
+        // Log successful charging
+        dataLog.push({
+          type: 'station_charged',
+          timestamp: getCurrentTimestamp(),
+          time: time,
+          battery: battery,
+          stationId: station.id,
+          cellType: getCellType(station.x, station.y)
+        });
+
+        // Mark station as used
+        station.available = 0;
+
+        // Update data preview
+        updateDataPreview();
+      } else {
+        // Log occupied station attempt
+        dataLog.push({
+          type: 'station_occupied',
+          timestamp: getCurrentTimestamp(),
+          time: time,
+          battery: battery,
+          stationId: station.id,
+          cellType: getCellType(station.x, station.y)
+        });
+
+        // Update data preview
+        updateDataPreview();
+      }
+    }
+  });
+}
+
+// Function to update displayed information
+function updateDisplay() {
+    batteryDisplay.textContent = battery;
+    timeDisplay.textContent = time;
+}
+
+// Experiment conditions - example, set these using your chosen method (e.g., query parameters, server-side variables)
+// mapComplexity = ... 
+// socialInfluence = ...
+
+initializeRound(); // Initialize the first round
+
+
+nextRoundButton.addEventListener('click', () => {  // Next round logic
+    if (window.botInterval) clearInterval(window.botInterval);
+    currentRound++;
+    if (currentRound <= maxRounds) {
+        initializeRound();
+    } else {
+        alert("Experiment completed! Thank you.");
+        // Add your data saving or submission logic here
+    }
+});
+
+let dataLog = [];
+
+// Function to get the current timestamp
+function getCurrentTimestamp() {
+  return new Date().toISOString();
+}
+
+// Function to get the type of cell the agent is on
+function getCellType(x, y) {
+  const gridX = Math.floor(x / gridSize);
+  const gridY = Math.floor(y / gridSize);
+
+  // Check if the cell is a station
+  for (const station of stations) {
+    const stationGridX = Math.floor(station.x / gridSize);
+    const stationGridY = Math.floor(station.y / gridSize);
+    if (stationGridX === gridX && stationGridY === gridY) {
+      return 'station';
+    }
+  }
+
+  // Check if the cell is a road
+  if (roadMap[gridY] && roadMap[gridY][gridX] === 1) {
+    return 'road';
+  }
+
+  return 'empty';
+}
+
+// Function to update the data preview console
+function updateDataPreview() {
+  const previewHeaders = document.getElementById('data-preview-headers');
+  const previewBody = document.getElementById('data-preview-body');
+
+  // Clear existing headers and body
+  previewHeaders.innerHTML = '';
+  previewBody.innerHTML = '';
+
+  if (dataLog.length === 0) return;
+
+  // Get headers
+  const headers = Object.keys(dataLog[0]);
+  headers.forEach(header => {
+    const th = document.createElement('th');
+    th.textContent = header;
+    previewHeaders.appendChild(th);
+  });
+
+  // Get last 10 rows of data
+  const last10Rows = dataLog.slice(-10);
+  last10Rows.forEach(row => {
+    const tr = document.createElement('tr');
+    headers.forEach(header => {
+      const td = document.createElement('td');
+      td.textContent = row[header];
+      tr.appendChild(td);
+    });
+    previewBody.appendChild(tr);
+  });
+}
+
+// Add the download data functionality
+const downloadDataButton = document.getElementById('download-data');
+
+downloadDataButton.addEventListener('click', () => {
+  const csvContent = convertDataLogToCSV(dataLog);
+  downloadCSV(csvContent, 'game_data.csv');
+});
+
+function convertDataLogToCSV(dataLog) {
+  if (dataLog.length === 0) return '';
+
+  // Get headers
+  const headers = Object.keys(dataLog[0]);
+  const csvRows = [headers.join(',')];
+
+  // Convert data to CSV rows
+  dataLog.forEach(entry => {
+    const values = headers.map(header => {
+      const val = entry[header];
+      if (typeof val === 'object') {
+        // Convert objects to JSON strings
+        return `"${JSON.stringify(val).replace(/"/g, '""')}"`;
+      }
+      return `"${String(val).replace(/"/g, '""')}"`;
+    });
+    csvRows.push(values.join(','));
+  });
+
+  return csvRows.join('\n');
+}
+
+function downloadCSV(csvContent, filename) {
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+
+  link.setAttribute('href', url);
+  link.setAttribute('download', filename);
+  link.style.visibility = 'hidden';
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+</script>
+
+</body>
+</html>

@@ -7,6 +7,8 @@ format:
       affiliations: 
       - name:  Communication and Cognition Lab, Purdue University, USA
         affiliation-url: https://web.ics.purdue.edu/~treimer/
+      - name: College of Liberal Arts Research Academy
+        affiliation-url: https://cla.purdue.edu/about/college-initiatives/research-academy/
       url: https://tegorman13.github.io/
     #date: today
     toc: true

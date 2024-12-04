@@ -644,6 +644,24 @@ outdated social information.
 
 ------------------------------------------------------------------------
 
+https://www.youtube.com/watch?v=vIyFGM5p40w&ab_channel=GuillaumeInstitutdessciencescognitives
+
+https://www.youtube.com/watch?v=HiqdleY6rFg&ab_channel=MINDSummerSchool
+
+https://www.youtube.com/watch?v=t18gU5kvDFg&ab_channel=CogSci%3AInterdisciplinaryStudyoftheMind
+
+https://www.youtube.com/watch?v=Yih7YD8nikU&ab_channel=InstituteforPure%26AppliedMathematics%28IPAM%29
+
+https://www.youtube.com/watch?v=lrviTiJLoqE&ab_channel=MaxPlanckInstituteforHumanDevelopment
+
+https://www.youtube.com/watch?v=jbhWE8NxaOk&ab_channel=AugmentedIntelligenceWorkshop
+
+https://www.youtube.com/watch?v=fgGkTlF8hXc&ab_channel=sethfrey
+
+https://www.youtube.com/watch?v=lPVQe_kTm28&ab_channel=CogSci%3AInterdisciplinaryStudyoftheMind
+
+------------------------------------------------------------------------
+
 # Tasks used in Other Studes
 
 ### Structuring Knowledge with Cognitive Maps and Cognitive Graphs.

@@ -7,6 +7,8 @@ format:
       affiliations: 
       - name:  Communication and Cognition Lab, Purdue University, USA
         affiliation-url: https://web.ics.purdue.edu/~treimer/
+      - name: College of Liberal Arts Research Academy
+        affiliation-url: https://cla.purdue.edu/about/college-initiatives/research-academy/
       url: https://tegorman13.github.io/
     date: today
     toc: true
@@ -303,6 +305,28 @@ Social learning is a critical adaptation for dealing with different forms of var
 ------
 
 
+https://www.youtube.com/watch?v=vIyFGM5p40w&ab_channel=GuillaumeInstitutdessciencescognitives
+
+https://www.youtube.com/watch?v=HiqdleY6rFg&ab_channel=MINDSummerSchool
+
+
+https://www.youtube.com/watch?v=t18gU5kvDFg&ab_channel=CogSci%3AInterdisciplinaryStudyoftheMind
+
+https://www.youtube.com/watch?v=Yih7YD8nikU&ab_channel=InstituteforPure%26AppliedMathematics%28IPAM%29
+
+
+https://www.youtube.com/watch?v=lrviTiJLoqE&ab_channel=MaxPlanckInstituteforHumanDevelopment
+
+https://www.youtube.com/watch?v=jbhWE8NxaOk&ab_channel=AugmentedIntelligenceWorkshop
+
+
+https://www.youtube.com/watch?v=fgGkTlF8hXc&ab_channel=sethfrey
+
+https://www.youtube.com/watch?v=lPVQe_kTm28&ab_channel=CogSci%3AInterdisciplinaryStudyoftheMind
+
+---------
+
+
 # Tasks used in Other Studes
 
 ### Structuring Knowledge with Cognitive Maps and Cognitive Graphs.
@@ -569,7 +593,17 @@ Mezey, D., Deffner, D., Kurvers, R. H. J. M., & Romanczuk, P. (2024). **Visual s
 
 Click on one of the tasks to activate, then use the arrow keys to control the car
 
-## Original
+[Open task in separate window](bot_network1.html)
+
+
+::: column-page
+![](bot_network1.html){width="900" height="1500"}
+:::
+
+
+
+<!-- ## Original
+
 
 ::: column-page-right
 ![Sam's original mockup](task1.html){width="600" height="550"}
@@ -616,6 +650,9 @@ Click on one of the tasks to activate, then use the arrow keys to control the ca
 ::: column-page-right
 ![](task3c.html){width="800" height="700"}
 :::
+ -->
+
+
 
 
 ::::
