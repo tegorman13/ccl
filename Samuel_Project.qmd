@@ -586,8 +586,22 @@ Mezey, D., Deffner, D., Kurvers, R. H. J. M., & Romanczuk, P. (2024). **Visual s
 
 ------------------------------------------------------------------------
 
+\
+
+\
+
+\
+
+\
 
 :::: {.content-visible when-format="html"}
+
+
+
+
+
+
+::: column-page
 
 # Task
 
@@ -595,8 +609,6 @@ Click on one of the tasks to activate, then use the arrow keys to control the ca
 
 [Open task in separate window](bot_network1.html)
 
-
-::: column-page
 ![](bot_network1.html){width="900" height="1500"}
 :::
 
