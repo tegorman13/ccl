@@ -2128,5 +2128,68 @@
       "Misc",
       "Samuel's Project"
     ]
+  },
+  {
+    "objectID": "scm_documentation.html",
+    "href": "scm_documentation.html",
+    "title": "Behavioral Experiment Documentation Report",
+    "section": "",
+    "text": "This document outlines the workings of the JavaScript and HTML code used for a behavioral experiment on social foraging, simulating a scenario where human participants select charging stations for electric vehicles (EVs).\n\n\n\nTask apperance"
+  },
+  {
+    "objectID": "scm_documentation.html#documenting-javascript-and-html-code-for-a-behavioral-experiment-on-social-foraging",
+    "href": "scm_documentation.html#documenting-javascript-and-html-code-for-a-behavioral-experiment-on-social-foraging",
+    "title": "Behavioral Experiment Documentation Report",
+    "section": "",
+    "text": "This document outlines the workings of the JavaScript and HTML code used for a behavioral experiment on social foraging, simulating a scenario where human participants select charging stations for electric vehicles (EVs).\n\n\n\nTask apperance"
+  },
+  {
+    "objectID": "scm_documentation.html#conceptual-framework-and-motivation",
+    "href": "scm_documentation.html#conceptual-framework-and-motivation",
+    "title": "Behavioral Experiment Documentation Report",
+    "section": "1. Conceptual Framework and Motivation",
+    "text": "1. Conceptual Framework and Motivation\n\nProblem Space:\nEfficient allocation of limited resources (e.g., EV charging stations) presents significant challenges, especially with dynamic behavior and decision-making. This project studies human resource allocation decisions through a real-time, interactive online tool.\n\n\nKey Innovations and Advantages:\n\nReal-Time Interaction: WebSockets provide synchronized, multi-user interactions.\nCustomizability: A control panel dynamically adjusts parameters like station count, average prices, and player budgets.\nIntegration: Player behavior and station selection data are stored in a MySQL database for analysis.\n\n\n\nFuture Development Roadmap:\n\nEnhanced visualization of player actions and system states.\nIntegration of machine-learning models for behavior prediction.\nExpanded parameter customization for diverse experimental setups.\n\n\n\n\n\n2. Architecture and Implementation\n\nSystem Architecture:\nThe architecture comprises three main components:\n\nClient-Side Interface (HTML + JavaScript): Manages user interaction and displays the simulation using a dynamic game map.\nServer-Side Logic (Node.js + WebSocket): Manages connections, synchronizes game states, relays updates, and handles admin parameter changes.\nDatabase Layer (MySQL): Records player positions for post-experiment analysis.\n\n\n\n\n\n\n\nflowchart TD\n    Start([Start: Player or Admin interaction])\n    AdminParameters[\"Admin updates parameters via control panel\"]\n    SocketConnect[\"Player connects via Socket.IO\"]\n    ServerLogic[\"Server handles connection and updates game state\"]\n    DBQuery[\"Server logs positions in MySQL database\"]\n    GameStateEmit[\"Server sends updated game state to players\"]\n    UIUpdate[\"Client UI updates with new data\"]\n    ResetGame[\"Game reset event triggered by Admin or Player\"]\n    AdminServerUpdate[\"Admin updates parameters on server\"]\n    DatabaseSave[\"Admin parameters saved in JSON file\"]\n\n    Start --&gt;|Admin Input| AdminParameters\n    Start --&gt;|Player Connection| SocketConnect\n    AdminParameters --&gt;|Sends API Request| AdminServerUpdate\n    AdminServerUpdate --&gt; DatabaseSave\n    SocketConnect --&gt; ServerLogic\n    ServerLogic --&gt;|Database Logging| DBQuery\n    ServerLogic --&gt;|Real-time updates| GameStateEmit\n    DBQuery --&gt;|Feedback to server| ServerLogic\n    GameStateEmit --&gt; UIUpdate\n    ResetGame --&gt;|Emit Reset Event| ServerLogic\n    ServerLogic --&gt;|Sends Reset State| GameStateEmit\n\n\n\n\nFigure 1: example diagram 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nG\n\n\n\nUser\n\nUser\n\n\n\nClient\n\nHTML + JS\nClient\n\n\n\nUser-&gt;Client\n\n\nInput actions\n\n\n\nServer\n\nNode.js\nServer\n\n\n\nClient-&gt;Server\n\n\nSends actions\nvia WebSocket\n\n\n\nServer-&gt;Client\n\n\nBroadcasts\nupdated game state\n\n\n\nDatabase\n\n\nMySQL\nDatabase\n\n\n\nServer-&gt;Database\n\n\nLogs player\nactions\n\n\n\n\n\n\nFigure 2: example diagram 2\n\n\n\n\n\nData Flow:\n\nClient connects to server via Socket.IO.\nServer sends initial game state (players, stations).\nClient renders the game.\nPlayer interacts (moves to a station).\nClient sends player’s action to the server.\nServer updates game state and broadcasts changes to all clients.\nClients update displays.\nPlayer positions are periodically saved to MySQL.\n\nKey Data Structures:\n\ngameState (Server): Holds game state (players, stations).\n\n\n\nscript.js\n\nconst gameState = {\n    players: new Map(), // Map of players and their attributes\n    stations: [\n        { top: 8, left: 338, cost: 20 },\n        { top: 479, left: 183, cost: 30 },\n        ...\n    ],\n};\n\n\nPlayer Attributes:\n\nPosition (x, y)\nEnergy and monetary budgets\nAssigned colors for visual distinction\n\n\n\nadminParameters (Client & Server): JSON with configurable parameters (station count, mean price, budget, download speed, station size)."
+  },
+  {
+    "objectID": "scm_documentation.html#key-functions-and-their-purpose",
+    "href": "scm_documentation.html#key-functions-and-their-purpose",
+    "title": "Behavioral Experiment Documentation Report",
+    "section": "3. Key Functions and Their Purpose",
+    "text": "3. Key Functions and Their Purpose\n\n\nscript.js\n\nconst setInitialParameters = async () =&gt; { ... }\n\nPurpose: Retrieves initial game parameters from the server or defaults. Sets initial admin panel slider values.\n\n\nscript.js\n\nupdateButton.addEventListener('click', () =&gt; { ... });\n\n\nPurpose: Sends updated parameters from the admin panel to the server.\n\n\nserver.js\n\nconst insertPlayerPosition = async (playerId, positionX, positionY) =&gt; { ... }\n\nPurpose: Records player position in the MySQL database.\nio.on('connection', (socket) =&gt; { ... });\nPurpose: Handles new player connections, initializes player data, sends initial game state, manages movement/disconnections, and the game reset.\napp.put('/admin-parameters', async (req, res) =&gt; { ... });\nPurpose: Handles and validates incoming admin parameters. Updates AdminParams, saves to admin-data.json and sends parameter information to the players."
+  },
+  {
+    "objectID": "scm_documentation.html#key-features-and-functionality",
+    "href": "scm_documentation.html#key-features-and-functionality",
+    "title": "Behavioral Experiment Documentation Report",
+    "section": "4. Key Features and Functionality",
+    "text": "4. Key Features and Functionality\n\nFeature 1: Synchronized Game State\n\nReal-time Interaction: Socket.IO enables responsive gameplay.\nWhy: Ensures consistent user experience in multi-user settings.\nHow: Employs WebSocket to propagate real-time updates.\n\n\n\n\n 1\n\n\n\n\nserver.js\n\nio.on('connection', (socket) =&gt; {\n    const player = {\n        id: socket.id,\n        positionX: 0,\n        positionY: 235,\n        energy: 100,\n        money: 100,\n        color: getRandomColor(),\n    };\n    gameState.players.set(socket.id, player);\n    io.emit('gameState', gameState);\n});\n\n\n\n\n\n\n\nFeature 2: Dynamic Parameter Control\n\nWhy: Facilitates experiment customization without server restarts.\nHow: Parameters are adjustable via a control panel in the interface.\n\n\n\nindex.html\n\n&lt;label for=\"stationCount\"&gt;Number of Stations:&lt;/label&gt;\n&lt;input type=\"range\" id=\"stationCount\" min=\"1\" max=\"20\" value=\"5\" /&gt;\n\n\n\nFeature 3: Data Logging\n\nWhy: Enables in-depth analysis of participant behavior.\nHow: Logs player positions and actions into a MySQL database.\n\n\n\nserver.js\n\nconst insertPlayerPosition = async (playerId, positionX, positionY) =&gt; {\n    const query = `INSERT INTO player_positions (player_id, position_x, position_y) VALUES (?, ?, ?)`;\n    await mysqlConnection.execute(query, [playerId, positionX, positionY]);\n};\n\n\nAdmin Control Panel (admin.html): Dynamically adjusts parameters.\nData Persistence (MySQL): Stores player data for analysis.\nGame Reset: Allows restarting from initial conditions."
+  },
+  {
+    "objectID": "scm_documentation.html#installation-and-getting-started",
+    "href": "scm_documentation.html#installation-and-getting-started",
+    "title": "Behavioral Experiment Documentation Report",
+    "section": "5. Installation and Getting Started",
+    "text": "5. Installation and Getting Started\n\nInstall dependencies:\n\nnpm install express socket.io mysql2\n\nStart the server:\n\nnode server.js\n\nOpen index.html: In a web browser.\nOpen the Admin Control Panel: http://localhost:3000/admin"
+  },
+  {
+    "objectID": "scm_documentation.html#limitations",
+    "href": "scm_documentation.html#limitations",
+    "title": "Behavioral Experiment Documentation Report",
+    "section": "6. Limitations",
+    "text": "6. Limitations\n\nMatching Algorithms: Currently limited.\nScalability: May require optimizations for large numbers of players.\nGame Logic: Requires more detailed implementation of energy, charging, and monetary mechanics."
+  },
+  {
+    "objectID": "scm_documentation.html#conclusion",
+    "href": "scm_documentation.html#conclusion",
+    "title": "Behavioral Experiment Documentation Report",
+    "section": "7. Conclusion",
+    "text": "7. Conclusion\nThis documentation outlines the structure and operation of the experiment software. Future work will focus on scalability, user experience, and integration with advanced analytics."
+  },
+  {
+    "objectID": "scm_documentation.html#appendix",
+    "href": "scm_documentation.html#appendix",
+    "title": "Behavioral Experiment Documentation Report",
+    "section": "Appendix",
+    "text": "Appendix\n\n\n\n 2: Full server.js code.\n\n\nimport express from 'express';\nimport http from 'http';\nimport { Server } from 'socket.io';\nimport path from 'path';\nimport mysql from 'mysql2/promise';\nimport { fileURLToPath } from 'url';\nimport adminData from './admin-data.json' with { type: \"json\" };\nimport { writeFile } from 'fs/promises';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = path.dirname(__filename);\n\nconst app = express();\nconst server = http.createServer(app);\nconst io = new Server(server);\napp.use(express.json())\nlet AdminParams  = adminData;\n// Configuración del puerto\nconst PORT = process.env.PORT || 3000;\n\nconst gameState = {\n    players: new Map(),\n    stations: [\n        { top: 8, left: 338, cost: 20 },\n        { top: 479, left: 183, cost: 30 },\n        { top: 123, left: 124, cost: 15 },\n        { top: 300, left: 243, cost: 25 },\n        { top: 185, left: 479, cost: 10 },\n    ],\n};\n\nlet mysqlConnection;\nconst configureMySQL = async () =&gt; {\n    try {\n        mysqlConnection = await mysql.createConnection({\n            host: 'ec2-3-85-172-100.compute-1.amazonaws.com',\n            user: 'scastrom',\n            database: 'pathTracker',\n            password: 'samuel2024',\n        });\n        console.log('Conexión exitosa a MySQL');\n    } catch (err) {\n        console.error('Error al conectar a MySQL:', err.message);\n    }\n};"
   }
 ]
