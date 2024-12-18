@@ -603,7 +603,23 @@ Mezey, D., Deffner, D., Kurvers, R. H. J. M., & Romanczuk, P. (2024). **Visual s
 
 ::: column-page
 
-# Task
+
+Click on one of the tasks to activate, then use the arrow keys to control the car
+
+[Open task in separate window](flash14.html)
+
+![](flash14.html){width="950" height="1500"}
+
+
+
+
+
+-----------------------------
+
+<br> <br>
+\ 
+
+# Task 2 
 
 Click on one of the tasks to activate, then use the arrow keys to control the car
 

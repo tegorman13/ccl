@@ -25,7 +25,7 @@ website:
   reader-mode: true
   page-navigation: false
   sidebar:
-    style: "docked"
+    #style: "docked"
     border: false
     collapse-level: 2
     pinned: false

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Foraging Task</title>
+    <style>
+        #game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+             position: relative; /* For absolute positioning of minimap */
+        }
+        #grid-container {
+            display: grid;
+            border: 1px solid black;
+             overflow: hidden; /* Hide the overflow */
+        }
+         .grid-cell {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+       .road { background-color: #fff; }
+        .wall { background-color: #333; }
+        .station { background-color: lightgreen; }
+        .agent { background-color: lightblue;color: black; font-weight: bold; }
+         .observational-agent { background-color: orange; }
+        .settings-container{
+          margin-top: 10px;
+           display: flex;
+            flex-wrap: wrap; /* Allow items to wrap to the next row */
+            justify-content: center; /* Center items horizontally */
+            gap: 10px; /* Add some spacing between items */
+               z-index: 20; /* Ensure it's above the minimap */
+        }
+        .setting-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+         .setting-item input[type="range"]{
+            width: 150px;
+        }
+        #minimap-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 1px solid black;
+            z-index: 10; /* Ensure it's above other elements */
+        }
+
+        #minimap {
+            display: grid;
+            border: 1px solid black;
+        }
+
+        .minimap-cell {
+          width: 5px;
+          height: 5px;
+          border: 1px solid #ddd;
+          box-sizing: border-box;
+        }
+         .minimap-road { background-color: #fff; }
+        .minimap-wall { background-color: #333; }
+       .minimap-station { background-color: lightgreen; }
+       .minimap-agent { background-color: lightblue; border: 1px solid black; }
+        .minimap-observational-agent { background-color: orange; }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+         <div id="minimap-container">
+           <div id="minimap"></div>
+        </div>
+        <h1>Social Foraging Task</h1>
+        <div id="score-display">Score: 0</div>
+        <div id="grid-container"></div>
+         <div class="settings-container">
+           <div class="setting-item">
+              <label for="station-density">Station Density:</label>
+              <input type="range" id="station-density" min="1" max="50" value="5">
+             <span id="station-density-value">5</span>
+            </div>
+           <div class="setting-item">
+              <label for="road-complexity">Road Complexity:</label>
+              <input type="range" id="road-complexity" min="1" max="50" value="10">
+               <span id="road-complexity-value">10</span>
+           </div>
+            <div class="setting-item">
+              <label for="grid-size">Grid Size:</label>
+              <input type="range" id="grid-size" min="30" max="100" value="50">
+               <span id="grid-size-value">50</span>
+           </div>
+           <div class="setting-item">
+                <label for="viewport-rows">Viewport Rows:</label>
+                <input type="range" id="viewport-rows" min="5" max="30" value="20">
+                <span id="viewport-rows-value">20</span>
+           </div>
+           <div class="setting-item">
+                <label for="viewport-cols">Viewport Columns:</label>
+                <input type="range" id="viewport-cols" min="5" max="30" value="20">
+                <span id="viewport-cols-value">20</span>
+            </div>
+            <div class="setting-item">
+              <label for="num-agents">Num Agents:</label>
+              <input type="range" id="num-agents" min="0" max="10" value="1">
+               <span id="num-agents-value">1</span>
+           </div>
+            <div class="setting-item">
+              <label for="player-speed">Player Speed:</label>
+              <input type="range" id="player-speed" min="50" max="500" value="400" step="50">
+              <span id="player-speed-value">400</span>
+          </div>
+           <div class="setting-item">
+           <label for="agent-speed">Agent Speed:</label>
+                <input type="range" id="agent-speed" min="100" max="1000" value="500" step="50">
+                 <span id="agent-speed-value">500</span>
+          </div>
+          </div>
+        <button id="reset-button">Reset Map</button>
+    </div>
+    <script>
+       let GRID_SIZE = 50; // Larger logical grid size
+        let VIEWPORT_ROWS = 20; // Size of the visible grid (rows)
+        let VIEWPORT_COLS = 20; // Size of the visible grid (cols)
+        let NUM_STATIONS = 5;
+       let ROAD_COMPLEXITY = 10;
+        let agentPos = { x: Math.floor(GRID_SIZE/2), y: Math.floor(GRID_SIZE/2) }; // player starts in the center
+        let observationalAgentPositions = [];
+         let grid = [];
+       let stations = [];
+        let score = 0;
+       let agentSpeed = 500; // Agent speed in ms
+        let viewport = { x: 0, y: 0 };  // Viewport position on the grid
+        let NUM_AGENTS = 1;
+        let playerSpeed = 200;
+        let playerMovementInterval;
+         const heldKeys = new Set();
+        let agentLastMove = [];
+        let agentMovementInterval;
+
+        const minimapContainer = document.getElementById('minimap-container');
+        const minimap = document.getElementById('minimap');
+
+
+        const scoreDisplay = document.getElementById('score-display');
+        const gridContainer = document.getElementById('grid-container');
+        const resetButton = document.getElementById('reset-button');
+        const stationDensitySlider = document.getElementById('station-density');
+        const stationDensityValue = document.getElementById('station-density-value');
+        const roadComplexitySlider = document.getElementById('road-complexity');
+        const roadComplexityValue = document.getElementById('road-complexity-value');
+       const gridSizeSlider = document.getElementById('grid-size');
+        const gridSizeValue = document.getElementById('grid-size-value');
+        const viewportRowsSlider = document.getElementById('viewport-rows');
+        const viewportRowsValue = document.getElementById('viewport-rows-value');
+        const viewportColsSlider = document.getElementById('viewport-cols');
+        const viewportColsValue = document.getElementById('viewport-cols-value');
+       const numAgentsSlider = document.getElementById('num-agents');
+         const numAgentsValue = document.getElementById('num-agents-value');
+         const agentSpeedSlider = document.getElementById('agent-speed');
+        const agentSpeedValue = document.getElementById('agent-speed-value');
+      const playerSpeedSlider = document.getElementById('player-speed');
+         const playerSpeedValue = document.getElementById('player-speed-value');
+
+
+       function generateGrid(gridSize, roadComplexity, startPoint) {
+            const newGrid = [];
+            for (let x = 0; x < gridSize; x++) {
+                newGrid.push(Array(gridSize).fill('wall'));
+            }
+
+            let currentPos = { ...startPoint }; //start from center
+           newGrid[currentPos.x][currentPos.y] = 'road';
+
+           const roadCells = [currentPos];
+
+           for (let i = 0; i < gridSize * gridSize * roadComplexity / 5; i++) {
+            const directions = [
+                { x: currentPos.x + 1, y: currentPos.y },
+                { x: currentPos.x - 1, y: currentPos.y },
+                { x: currentPos.x, y: currentPos.y + 1 },
+                { x: currentPos.x, y: currentPos.y - 1 }
+            ];
+            const validMoves = directions.filter(
+                (dir) =>
+                    dir.x >= 0 &&
+                    dir.x < gridSize &&
+                    dir.y >= 0 &&
+                    dir.y < gridSize
+            );
+
+              if (validMoves.length === 0) {
+                 break;
+            }
+           const nextMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+           const branchProbability = 0.4  // Probability of branching
+            if(Math.random() < branchProbability || roadCells.length < 2){
+                  currentPos = nextMove;
+               }
+             newGrid[currentPos.x][currentPos.y] = 'road';
+               roadCells.push(currentPos);
+        }
+             // Ensure start point is a road.
+           if (newGrid[startPoint.x][startPoint.y] !== 'road')
+           {
+             newGrid[startPoint.x][startPoint.y] = 'road';
+               roadCells.push(startPoint);
+            }
+
+            return newGrid;
+        }
+
+
+        function placeStations(grid, numStations) {
+            const roadCells = [];
+            for (let x = 0; x < grid.length; x++) {
+                for (let y = 0; y < grid[x].length; y++) {
+                  if (grid[x][y] === 'road')
+                    roadCells.push({x: x, y: y});
+                }
+            }
+
+            if (roadCells.length <= numStations) {
+                return roadCells;
+            }
+
+            const stationLocations = [];
+            while (stationLocations.length < numStations){
+                const index = Math.floor(Math.random() * roadCells.length);
+                stationLocations.push(roadCells.splice(index,1)[0])
+            }
+            return stationLocations;
+        }
+
+
+       function isAccessible(grid, startPoint, stations) {
+            const gridSize = grid.length;
+            const visited = new Set();
+            const queue = [startPoint];
+            visited.add(`${startPoint.x},${startPoint.y}`);
+            const accessibleNodes = new Set()
+
+             while (queue.length > 0) {
+                const {x, y} = queue.shift();
+                accessibleNodes.add(`${x},${y}`)
+                const neighbors = [
+                    {x: x+1, y: y}, {x: x-1, y:y}, {x:x, y:y+1}, {x:x, y:y-1}
+                ]
+
+                for (const neighbor of neighbors){
+                    if (neighbor.x >= 0 && neighbor.x < gridSize &&
+                        neighbor.y >= 0 && neighbor.y < gridSize &&
+                        grid[neighbor.x][neighbor.y] !== 'wall' &&
+                        !visited.has(`${neighbor.x},${neighbor.y}`)){
+                            visited.add(`${neighbor.x},${neighbor.y}`);
+                            queue.push(neighbor)
+
+                        }
+                }
+            }
+            for (const station of stations){
+              if (!accessibleNodes.has(`${station.x},${station.y}`)){
+                  return false
+                }
+            }
+            return true;
+        }
+
+
+        function ensureAccessibility(grid, startPoint, numStations, maxIterations){
+          let stations = [];
+          let i = 0;
+          while (i < maxIterations) {
+            i+=1;
+            const tempGrid = grid.map(row => [...row]) //copy the grid
+            stations = placeStations(tempGrid, numStations);
+            if (isAccessible(tempGrid, startPoint, stations)){
+              return [tempGrid, stations]
+            }
+
+          }
+           return [grid, stations]
+        }
+
+        function updateScore(points) {
+            score += points;
+            scoreDisplay.textContent = `Score: ${score}`;
+        }
+
+          function renderGrid() {
+            gridContainer.innerHTML = ''; // Clear previous grid
+            gridContainer.style.gridTemplateColumns = `repeat(${VIEWPORT_COLS}, 1fr)`;
+            for (let x = 0; x < VIEWPORT_ROWS; x++) {
+                 for (let y = 0; y < VIEWPORT_COLS; y++) {
+                     const gridX = x + viewport.x;
+                    const gridY = y + viewport.y;
+                     const cell = document.createElement('div');
+                     cell.classList.add('grid-cell');
+                    if(gridX === agentPos.x && gridY === agentPos.y){
+                        cell.classList.add('agent');
+                        cell.textContent = 'A';
+                    } else if (observationalAgentPositions.some(agentPos => agentPos.x === gridX && agentPos.y === gridY)){
+                      cell.classList.add('observational-agent');
+                       cell.textContent = 'O';
+                    }
+                    else if (stations.some(station => station.x === gridX && station.y === gridY)) {
+                        cell.classList.add('station');
+                    } else if(grid[gridX][gridY] === 'wall'){
+                        cell.classList.add('wall');
+                   } else {
+                        cell.classList.add('road');
+                    }
+                    gridContainer.appendChild(cell);
+                  }
+               }
+        }
+
+         function noResetRenderGrid(){
+            gridContainer.innerHTML = ''; // Clear previous grid
+            gridContainer.style.gridTemplateColumns = `repeat(${VIEWPORT_COLS}, 1fr)`;
+            for (let x = 0; x < VIEWPORT_ROWS; x++) {
+                 for (let y = 0; y < VIEWPORT_COLS; y++) {
+                     const gridX = x + viewport.x;
+                    const gridY = y + viewport.y;
+                     const cell = document.createElement('div');
+                     cell.classList.add('grid-cell');
+                    if(gridX === agentPos.x && gridY === agentPos.y){
+                        cell.classList.add('agent');
+                        cell.textContent = 'A';
+                    } else if (observationalAgentPositions.some(agentPos => agentPos.x === gridX && agentPos.y === gridY)){
+                      cell.classList.add('observational-agent');
+                        cell.textContent = 'O';
+                    }
+                    else if (stations.some(station => station.x === gridX && station.y === gridY)) {
+                        cell.classList.add('station');
+                    } else if(grid[gridX][gridY] === 'wall'){
+                        cell.classList.add('wall');
+                   } else {
+                        cell.classList.add('road');
+                    }
+                    gridContainer.appendChild(cell);
+                  }
+               }
+         }
+
+     function handleKeyDown(event){
+         if(event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'ArrowLeft' || event.key === 'ArrowRight'){
+                heldKeys.add(event.key);
+            }
+       }
+
+
+    function handleKeyUp(event){
+         if(event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'ArrowLeft' || event.key === 'ArrowRight'){
+            heldKeys.delete(event.key);
+        }
+    }
+
+
+
+       function handleAgentMovement() {
+        let newX = agentPos.x;
+        let newY = agentPos.y;
+
+        if(heldKeys.has('ArrowUp')){
+              newX = agentPos.x - 1
+        }
+          if(heldKeys.has('ArrowDown')){
+              newX = agentPos.x + 1
+        }
+         if(heldKeys.has('ArrowLeft')){
+            newY = agentPos.y -1
+          }
+        if(heldKeys.has('ArrowRight')){
+           newY = agentPos.y + 1;
+        }
+
+
+           if (newX >= 0 && newX < GRID_SIZE && newY >= 0 && newY < GRID_SIZE && grid[newX][newY] !== 'wall') {
+                agentPos.x = newX;
+               agentPos.y = newY;
+
+                // Check for station
+                const stationIndex = stations.findIndex(station => station.x === agentPos.x && station.y === agentPos.y);
+                if(stationIndex !== -1) {
+                    stations.splice(stationIndex,1);
+                    updateScore(10);
+                }
+               updateViewport();
+              renderGrid(); // Re-render
+            }
+
+
+        }
+
+
+       function updateViewport() {
+            // Update viewport to follow player, taking into account different row/column sizes
+            viewport = {
+                x: agentPos.x - Math.floor(VIEWPORT_ROWS / 2),
+                y: agentPos.y - Math.floor(VIEWPORT_COLS / 2)
+            };
+
+            // Ensure the viewport is in bounds
+            viewport.x = Math.max(0, Math.min(viewport.x, GRID_SIZE - VIEWPORT_ROWS));
+            viewport.y = Math.max(0, Math.min(viewport.y, GRID_SIZE - VIEWPORT_COLS));
+        }
+
+
+     function moveObservationalAgent(index) {
+            const currentPos = observationalAgentPositions[index];
+            const lastMove = agentLastMove[index] || { x: 0, y: 0 };
+            const possibleMoves = [];
+
+            const neighbours = [
+                { x: currentPos.x + 1, y: currentPos.y, dir: {x: 1, y:0} },
+                { x: currentPos.x - 1, y: currentPos.y, dir: {x: -1, y:0} },
+                { x: currentPos.x, y: currentPos.y + 1, dir: {x: 0, y:1} },
+                { x: currentPos.x, y: currentPos.y - 1, dir: {x: 0, y:-1} }
+            ];
+
+            let stationNearby = false
+            let closestStation = null;
+            let minDistance = Infinity
+           for (const station of stations){
+                 const distance = Math.abs(currentPos.x - station.x) + Math.abs(currentPos.y-station.y)
+              if(distance < 5){
+                  stationNearby = true;
+                  if (distance < minDistance){
+                      minDistance = distance;
+                     closestStation = station
+                  }
+             }
+           }
+           for (const n of neighbours) {
+                if (n.x >= 0 && n.x < GRID_SIZE && n.y >= 0 && n.y < GRID_SIZE && grid[n.x][n.y] !== 'wall') {
+                    possibleMoves.push(n);
+                }
+            }
+
+            let nextMove = null;
+           if(stationNearby){
+             // Attempt to move towards the station if close
+               const dx = closestStation.x - currentPos.x;
+               const dy = closestStation.y - currentPos.y;
+               const stationDir = {x: Math.sign(dx), y: Math.sign(dy)}
+                  nextMove = possibleMoves.find(move=> move.dir.x === stationDir.x && move.dir.y === stationDir.y);
+                  if(!nextMove){
+                       nextMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)]
+                  }
+           } else {
+           // Favor moving in the same direction if possible
+                nextMove = possibleMoves.find(move => move.dir.x === lastMove.x && move.dir.y === lastMove.y);
+                if (!nextMove) {
+                nextMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+               }
+           }
+
+
+            if (nextMove) {
+                 observationalAgentPositions[index] = {x: nextMove.x, y: nextMove.y};
+                agentLastMove[index] = nextMove.dir
+            }
+            noResetRenderGrid();
+              renderMinimap();
+        }
+
+      function renderMinimap(){
+            minimap.innerHTML = '';
+           minimap.style.gridTemplateColumns = `repeat(${GRID_SIZE}, 1fr)`;
+             const minimapSize = Math.min(GRID_SIZE * 5, 300); // set a max size, to stop overlap
+           minimap.style.width = `${minimapSize}px`
+           minimap.style.height = `${minimapSize}px`
+           for (let x = 0; x < GRID_SIZE; x++){
+               for (let y = 0; y < GRID_SIZE; y++){
+                  const cell = document.createElement('div');
+                  cell.classList.add('minimap-cell')
+                   if(x === agentPos.x && y === agentPos.y){
+                        cell.classList.add('minimap-agent');
+                    }else if (observationalAgentPositions.some(agentPos => agentPos.x === x && agentPos.y === y)){
+                      cell.classList.add('minimap-observational-agent');
+                    }
+                   else if(stations.some(station => station.x === x && station.y === y)){
+                        cell.classList.add('minimap-station');
+                    } else if (grid[x][y] === 'wall'){
+                       cell.classList.add('minimap-wall')
+                   }
+                  else {
+                       cell.classList.add('minimap-road');
+                   }
+                   minimap.appendChild(cell)
+               }
+           }
+      }
+
+
+        function resetGame() {
+            const START_POINT = { x: Math.floor(GRID_SIZE / 2), y: Math.floor(GRID_SIZE / 2) };
+            grid = generateGrid(GRID_SIZE, ROAD_COMPLEXITY, START_POINT);
+            [grid, stations] = ensureAccessibility(grid, START_POINT, NUM_STATIONS, 1000);
+
+              //ensure that agents are on a road
+               const roadCells = [];
+                for (let x = 0; x < grid.length; x++) {
+                    for (let y = 0; y < grid[x].length; y++) {
+                         if (grid[x][y] === 'road') {
+                            roadCells.push({x: x, y: y});
+                            }
+                       }
+                 }
+               agentPos = roadCells[Math.floor(Math.random()*roadCells.length)]
+               observationalAgentPositions = [];
+               agentLastMove = []; // clear the previous directions
+                  for(let i=0; i < NUM_AGENTS; i++){
+                      observationalAgentPositions.push(roadCells[Math.floor(Math.random()*roadCells.length)])
+                        agentLastMove.push({ x: 0, y: 0 });
+                  }
+
+            viewport = {
+                x: agentPos.x - Math.floor(VIEWPORT_ROWS/2),
+                y: agentPos.y - Math.floor(VIEWPORT_COLS/2)
+            };
+            updateViewport(); // Update the viewport after setting agentPos
+            score = 0;
+            updateScore(0);
+            renderGrid();
+             renderMinimap();
+        }
+
+        // Initialize Game
+         function initializeGame(){
+            const START_POINT = { x: Math.floor(GRID_SIZE / 2), y: Math.floor(GRID_SIZE / 2) };
+            grid = generateGrid(GRID_SIZE, ROAD_COMPLEXITY, START_POINT);
+            [grid, stations] = ensureAccessibility(grid, START_POINT, NUM_STATIONS, 1000);
+
+           //ensure that agents are on a road
+               const roadCells = [];
+                for (let x = 0; x < grid.length; x++) {
+                     for (let y = 0; y < grid[x].length; y++) {
+                         if (grid[x][y] === 'road') {
+                            roadCells.push({x: x, y: y});
+                            }
+                       }
+                }
+              agentPos = roadCells[Math.floor(Math.random()*roadCells.length)]
+                observationalAgentPositions = [];
+                agentLastMove = []; // clear the previous directions
+                 for(let i=0; i < NUM_AGENTS; i++){
+                      observationalAgentPositions.push(roadCells[Math.floor(Math.random()*roadCells.length)])
+                        agentLastMove.push({ x: 0, y: 0 });
+                 }
+
+            viewport = {
+                 x: agentPos.x - Math.floor(VIEWPORT_ROWS/2),
+                y: agentPos.y - Math.floor(VIEWPORT_COLS/2)
+            };
+            updateViewport(); // Ensure viewport is updated
+             renderGrid();
+               renderMinimap();
+               clearInterval(playerMovementInterval); // Clear any existing intervals
+           playerMovementInterval =  setInterval(handleAgentMovement, 500 - playerSpeed);
+           clearInterval(agentMovementInterval);
+           agentMovementInterval = setInterval(() => {
+               for(let i = 0; i < observationalAgentPositions.length; i++){
+                   moveObservationalAgent(i);
+               }
+           }, agentSpeed);
+
+         }
+
+        function updateSettings(sliderChanged) {
+            const newNumStations = parseInt(stationDensitySlider.value, 10);
+              const newNumAgents = parseInt(numAgentsSlider.value, 10);
+             NUM_STATIONS = newNumStations;
+           ROAD_COMPLEXITY = parseInt(roadComplexitySlider.value, 10);
+              agentSpeed = 1100 - parseInt(agentSpeedSlider.value, 10); // Invert for correct speed
+            GRID_SIZE = parseInt(gridSizeSlider.value, 10);
+           let newViewPortRows = parseInt(viewportRowsSlider.value, 10);
+           let newViewPortCols = parseInt(viewportColsSlider.value, 10);
+               // Ensure the viewport size does not exceed grid size
+            newViewPortRows = Math.min(newViewPortRows, GRID_SIZE);
+            newViewPortCols = Math.min(newViewPortCols, GRID_SIZE)
+           NUM_AGENTS = newNumAgents;
+           playerSpeed = parseInt(playerSpeedSlider.value, 10);
+
+            stationDensityValue.textContent = NUM_STATIONS;
+           roadComplexityValue.textContent = ROAD_COMPLEXITY;
+          agentSpeedValue.textContent = 1100 - agentSpeed; //revert to the actual speed, for the visual value.
+           gridSizeValue.textContent = GRID_SIZE;
+            viewportRowsValue.textContent = newViewPortRows;
+          viewportColsValue.textContent = newViewPortCols;
+          numAgentsValue.textContent = NUM_AGENTS;
+           playerSpeedValue.textContent = playerSpeed;
+
+
+         if(sliderChanged === 'viewport'){
+               VIEWPORT_ROWS = newViewPortRows;
+               VIEWPORT_COLS = newViewPortCols;
+              updateViewport();
+             noResetRenderGrid()
+          } else if(sliderChanged === 'density'){
+            const roadCells = [];
+                for (let x = 0; x < grid.length; x++) {
+                    for (let y = 0; y < grid[x].length; y++) {
+                         if (grid[x][y] === 'road') {
+                           roadCells.push({x: x, y: y});
+                            }
+                       }
+                   }
+
+                if(roadCells.length <= NUM_STATIONS){
+                  stations = roadCells;
+               }else{
+                  const stationLocations = [];
+                  while (stationLocations.length < NUM_STATIONS){
+                      const index = Math.floor(Math.random() * roadCells.length);
+                      stationLocations.push(roadCells.splice(index,1)[0])
+                   }
+                     stations = stationLocations;
+                  }
+              noResetRenderGrid();
+                renderMinimap();
+          }else if (sliderChanged === 'numAgents'){
+             const roadCells = [];
+                for (let x = 0; x < grid.length; x++) {
+                    for (let y = 0; y < grid[x].length; y++) {
+                        if (grid[x][y] === 'road') {
+                           roadCells.push({x: x, y: y});
+                            }
+                       }
+                  }
+               if(observationalAgentPositions.length < NUM_AGENTS){
+                   const numToAdd = NUM_AGENTS - observationalAgentPositions.length;
+                   for (let i =0; i < numToAdd; i++){
+                     observationalAgentPositions.push(roadCells[Math.floor(Math.random()*roadCells.length)])
+                      agentLastMove.push({ x: 0, y: 0 });
+                    }
+                } else if(observationalAgentPositions.length > NUM_AGENTS){
+                    observationalAgentPositions.splice(NUM_AGENTS);
+                  agentLastMove.splice(NUM_AGENTS)
+                }
+            noResetRenderGrid();
+               renderMinimap();
+           } else if (sliderChanged === 'playerSpeed'){
+                 clearInterval(playerMovementInterval);
+              playerMovementInterval = setInterval(handleAgentMovement, 500-playerSpeed);
+           } else if (sliderChanged === 'agentSpeed'){
+               clearInterval(agentMovementInterval);
+               agentMovementInterval = setInterval(() => {
+                   for(let i = 0; i < observationalAgentPositions.length; i++){
+                       moveObservationalAgent(i);
+                   }
+               }, agentSpeed);
+           }
+            else {
+               resetGame()
+           }
+
+
+        }
+
+        // Event Listeners
+       document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
+        resetButton.addEventListener('click', resetGame);
+        agentSpeedSlider.addEventListener('input', () => updateSettings('agentSpeed'));
+       stationDensitySlider.addEventListener('input', ()=> updateSettings('density'));
+       roadComplexitySlider.addEventListener('input',  ()=> updateSettings('complexity'));
+        agentSpeedSlider.addEventListener('input',  ()=> updateSettings('agentSpeed'));
+      gridSizeSlider.addEventListener('input',  ()=> updateSettings('gridSize'));
+      viewportRowsSlider.addEventListener('input',  ()=> updateSettings('viewport'));
+      viewportColsSlider.addEventListener('input',  ()=> updateSettings('viewport'));
+       numAgentsSlider.addEventListener('input', ()=> updateSettings('numAgents'));
+      playerSpeedSlider.addEventListener('input', ()=> updateSettings('playerSpeed'));
+        // Start the game
+        initializeGame();
+    </script>
+</body>
+</html>
