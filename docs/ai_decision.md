@@ -1619,9 +1619,9 @@ inquiry. *Computers in Human Behavior*, *160*, 108386.
 <div id="ref-subramonyamBridgingGulfEnvisioning2024" class="csl-entry">
 
 Subramonyam, H., Pea, R., Pondoc, C. L., Agrawala, M., & Seifert, C.
-(2024). *Bridging the Gulf of Envisioning: Cognitive Design Challenges
-in LLM Interfaces* (arXiv:2309.14459). arXiv.
-<https://arxiv.org/abs/2309.14459>
+(2024). Bridging the Gulf of Envisioning: Cognitive Design Challenges in
+LLM Interfaces. *Proceedings of the CHI Conference on Human Factors in
+Computing Systems*, 1–19. <https://arxiv.org/abs/2309.14459>
 
 </div>
 

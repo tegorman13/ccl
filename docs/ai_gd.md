@@ -1074,9 +1074,10 @@ learn and think with people. *Nature Human Behaviour*, *8*(10),
 
 <div id="ref-duLargeLanguageModels2024" class="csl-entry">
 
-Du, Y., Rajivan, P., & Gonzalez, C. C. (2024). *Large Language Models
-for Collective Problem-Solving: Insights into Group Consensus
-Decision-Making*.
+Du, Y., Rajivan, P., & Gonzalez, C. C. (2024). Large Language Models for
+Collective Problem-Solving: Insights into Group Consensus
+Decision-Making. *Proceedings of the Annual Meeting of the Cognitive
+Science Society*, *46*.
 
 </div>
 

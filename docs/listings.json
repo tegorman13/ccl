@@ -3,12 +3,14 @@
     "listing": "/index.html",
     "items": [
       "/tms.html",
+      "/tms_llm.html",
       "/Samuel_Project.html",
       "/chapter_structure.html",
       "/llm_energy.html",
       "/ai_interaction.html",
       "/ai_decision.html",
       "/ai_gd.html",
+      "/scm_documentation.html",
       "/Driving.html"
     ]
   }
