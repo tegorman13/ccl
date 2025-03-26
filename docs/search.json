@@ -2197,7 +2197,7 @@
     "href": "tms_llm.html",
     "title": "TMS LLM Task",
     "section": "",
-    "text": "Figure 1: Transactive Memory Simulations",
+    "text": "Figure 1: Simulations of Transactive Memory Systems",
     "crumbs": [
       "LLM Literature",
       "TMS LLM Task"
@@ -2208,7 +2208,7 @@
     "href": "tms_llm.html#simulation-description",
     "title": "TMS LLM Task",
     "section": "Simulation Description",
-    "text": "Simulation Description\nThis web application simulates a basic Transactive Memory System (TMS) within a small team of three agents. TMS refers to the shared understanding within a group about who knows what, who is good at what, and how to access that expertise. This simulation uses Large Language Models (LLMs) via an API to act as the agents, making decisions about task allocation based on their perceived knowledge of their own skills and the skills of their teammates.\nTo begin, enter the key (might be auto-entered) and click “Save” to set up the API connection. Then, configure the simulation settings (Agent Mode, Organizational Prompt, Total Rounds, Prompt History) and run the simulation to observe how different settings impact the team’s performance. You can save and compare multiple simulation runs to analyze the effects of various configurations on the team’s success in completing tasks. Press “Run next step” to proceed through the simulation one round at a time or “Run full simulation” to complete all rounds at once.",
+    "text": "Simulation Description\nThis web application simulates a basic Transactive Memory System (TMS) within a small team of three agents. TMS refers to the shared understanding within a group about who knows what, who is good at what, and how to access that expertise. This simulation uses Large Language Models (LLMs) via an API to act as the agents, making decisions about task allocation based on their perceived knowledge of their own skills and the skills of their teammates.\nTo begin, enter the key (might be auto-entered) and click “Save” to set up the API connection. Then, configure the simulation settings (Agent Mode, Organizational Prompt, Total Rounds, Prompt History) and run the simulation to observe how different settings impact the team’s performance. You can save and compare multiple simulation runs to analyze the effects of various configurations on the team’s success in completing tasks. Press “Run next step” to proceed through the simulation one round at a time or “Run full simulation” to complete all rounds at once.\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: Simulations of Transactive Memory Systems",
     "crumbs": [
       "LLM Literature",
       "TMS LLM Task"

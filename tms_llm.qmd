@@ -27,7 +27,11 @@ image: "images/tms_llm_panel1.png"
 
 ![](images/tms_sim_img1.png){width="360" height="360"}
 
-Transactive Memory Simulations
+![](images/tms_llm_panel3.png){width="360" height="360"}
+
+![](images/tms_llm_panel4.png){width="360" height="360"}
+
+Simulations of Transactive Memory Systems
 
 :::
 
@@ -46,6 +50,18 @@ This web application simulates a basic Transactive Memory System (TMS) within a 
 
 
 To begin, enter the key (might be auto-entered) and click "Save" to set up the API connection. Then, configure the simulation settings (Agent Mode, Organizational Prompt, Total Rounds, Prompt History) and run the simulation to observe how different settings impact the team's performance. You can save and compare multiple simulation runs to analyze the effects of various configurations on the team's success in completing tasks. Press "Run next step" to proceed through the simulation one round at a time or "Run full simulation" to complete all rounds at once.
+
+::: {#fig-tms-llm layout-ncol=2}
+
+![](images/tms_llm_wide_panel1.png){width="400" height="370"}
+
+![](images/tms_llm_wide_panel2.png){width="400" height="370"}
+
+Simulations of Transactive Memory Systems
+:::
+
+
+
 
 ## TMS-LLM Simulation - Try it out! 
 
