@@ -18,13 +18,22 @@ format:
       body-width: 900px
       margin-width: 20px
       gutter-width: .5rem
-image: "images/tms_sim_img1.png"
+image: "images/tms_llm_panel1.png"
 ---
 
+::: {#fig-tms-llm layout-ncol=2}
+
+![](images/tms_llm_panel1.png){width="360" height="360"}
+
+![](images/tms_sim_img1.png){width="360" height="360"}
+
+Transactive Memory Simulations
+
+:::
 
 
 
-![](images/tms_sim_img1.png){width="300" height="300" fig-align="center"}
+
 
 
 
@@ -38,10 +47,12 @@ This web application simulates a basic Transactive Memory System (TMS) within a 
 
 To begin, enter the key (might be auto-entered) and click "Save" to set up the API connection. Then, configure the simulation settings (Agent Mode, Organizational Prompt, Total Rounds, Prompt History) and run the simulation to observe how different settings impact the team's performance. You can save and compare multiple simulation runs to analyze the effects of various configurations on the team's success in completing tasks. Press "Run next step" to proceed through the simulation one round at a time or "Run full simulation" to complete all rounds at once.
 
-## TMS-LLM Simulation
+## TMS-LLM Simulation - Try it out! 
 
-**enter for key below:** sk-4597455063b242e9a43187a32115c04a
+**enter key below:** sk-4597455063b242e9a43187a32115c04a
 
+- Then press save key to start the simulation demo
+- Press the **Run full simulation button** to see the simulation in action
 
 :::: {.content-visible when-format="html"}
 
@@ -49,7 +60,7 @@ To begin, enter the key (might be auto-entered) and click "Save" to set up the A
 
 
 
-[Open task in separate window (provides more space)](php30.html)
+[Open task in separate window (optional - provides more space)](php30.html)
 
 ![](php30.html){width="1300" height="1600"}
 
@@ -63,6 +74,10 @@ To begin, enter the key (might be auto-entered) and click "Save" to set up the A
 
 
 :::: 
+
+
+
+
 
 
 
