@@ -1,0 +1,49 @@
+---
+title: "TMS LLM Task"
+author:
+- name: Thomas E. Gorman
+  url: https://tegorman13.github.io/
+  affiliations: 
+  - name:  Communication and Cognition Lab, Purdue University, USA
+    affiliation-url: https://web.ics.purdue.edu/~treimer/
+format:
+  html: 
+    date: today
+    toc: true
+    lightbox: true
+    sidebar: false
+---
+
+
+
+
+:::: {.content-visible when-format="html"}
+
+
+
+
+
+
+::: column-page
+
+
+
+**enter for key below:** sk-4597455063b242e9a43187a32115c04a
+
+[Open task in separate window](php28.html)
+
+![](php28.html){width="1200" height="1600"}
+
+
+
+
+
+-----------------------------
+
+<br> <br>
+
+
+:::
+
+
+:::: 

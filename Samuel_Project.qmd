@@ -608,7 +608,7 @@ Click on one of the tasks to activate, then use the arrow keys to control the ca
 
 [Open task in separate window](flash14.html)
 
-![](flash14.html){width="950" height="1500"}
+![](flash14.html){width="950" height="1100"}
 
 
 

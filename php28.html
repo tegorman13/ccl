@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMS Simulation Comparison Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f9fafb; }
+        #resultsArea, #storedLogDisplay {
+            white-space: pre-wrap; /* Preserve formatting */
+            background-color: #f3f4f6; /* Slightly lighter gray */
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            height: 350px; /* Adjusted height */
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.9em;
+            border: 1px solid #d1d5db;
+            line-height: 1.4;
+        }
+        #storedLogDisplay { height: 65vh; font-size: 0.85em;} /* Larger modal log */
+        button { transition: background-color 0.2s; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .result-round-header, .log-round-header { font-weight: bold; margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px dashed #9ca3af; }
+        .result-item, .log-item { margin-bottom: 2px; margin-left: 8px;} /* Indent results */
+        #resultsArea > div:last-child .result-round-header { border-bottom: none; } /* Remove border on last round */
+        #storedLogDisplay > div:last-child .log-round-header { border-bottom: none; }
+        .success { color: #16a34a; font-weight: bold; }
+        .failure { color: #dc2626; font-weight: bold; }
+        .confidence-score { font-size: 0.8em; color: #6b7280; }
+        .delegation-info { font-size: 0.8em; color: #4b5563; margin-left: 10px;}
+
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 800px; border-radius: 8px; max-height: 90vh; overflow-y: auto; }
+        .modal-content-large { width: 90%; max-width: 1200px; } /* For wider log modal */
+        .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close-button:hover, .close-button:focus { color: black; text-decoration: none; }
+        #memoryDisplay, #detailedHistoryDisplay, .prompt-textarea { white-space: pre; font-family: monospace; font-size: 0.9em; background-color: #f3f4f6; padding: 10px; border-radius: 4px; max-height: 400px; overflow-y: auto;}
+        #detailedHistoryDisplay pre, #storedLogDisplay pre { background-color: #e5e7eb; padding: 5px; margin-top: 2px; margin-bottom: 8px; border-radius: 3px; white-space: pre-wrap; word-break: break-all; font-size: 0.85em; max-height: 150px; overflow-y: auto; }
+        .history-entry, .log-entry { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed #ccc; }
+        .history-entry:last-child, .log-entry:last-child { border-bottom: none; }
+        select, input[type="number"], textarea {
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem; /* rounded-md */
+            background-color: white;
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.25rem;
+        }
+        input[type="number"] { width: 5em; } /* Specific width for number input */
+        textarea.prompt-textarea { width: 100%; min-height: 150px; font-size: 0.8em; }
+
+        /* Comparison Area Styles */
+        #comparisonSelectorArea { background-color: #eef2ff; border: 1px dashed #a5b4fc; padding: 10px; border-radius: 5px; font-size: 0.9em;}
+        #savedRunsList label { display: block; margin-bottom: 4px; cursor: pointer;}
+        #savedRunsList input { margin-right: 8px; }
+        .run-label-color-box { display: inline-block; width: 12px; height: 12px; margin-right: 5px; border: 1px solid #ccc; vertical-align: middle;}
+        .view-log-button {
+            margin-left: 10px; padding: 1px 5px; font-size: 0.75rem; background-color: #dbeafe; color: #1e40af; border-radius: 3px; border: 1px solid #bfdbfe; cursor: pointer;
+        }
+        .view-log-button:hover { background-color: #bfdbfe; }
+    </style>
+</head>
+<body>
+    <h1 class="text-2xl font-bold text-center text-indigo-700 mb-6">TMS Simulation Comparison Demo</h1>
+
+    <div id="apiSetup" class="bg-white rounded-xl shadow-md p-6 mb-6 max-w-md mx-auto">
+        <h2 class="text-xl font-semibold mb-4">API Key Setup</h2>
+        <div class="mb-4">
+            <label for="apiKeyInput" class="block text-sm font-medium text-gray-700 mb-1">Enter your Purdue API Key:</label>
+            <input type="password" id="apiKeyInput" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter API key">
+        </div>
+        <button id="saveApiKey" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md">
+            Save API Key
+        </button>
+    </div>
+
+    <div id="simulationArea" class="hidden max-w-6xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md p-4 mb-6">
+            <h2 class="font-semibold text-lg mb-3">Settings</h2>
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div>
+                    <span class="text-sm font-medium text-gray-700 mr-3">Agent Mode:</span>
+                    <label class="inline-flex items-center mr-4">
+                        <input type="radio" name="agentMode" value="direct" class="form-radio text-indigo-600" checked>
+                        <span class="ml-2 text-sm">Direct Interactions Only</span>
+                    </label>
+                     <label class="inline-flex items-center mr-4">
+                        <input type="radio" name="agentMode" value="global" class="form-radio text-indigo-600">
+                        <span class="ml-2 text-sm">Observe Everything</span>
+                    </label>
+                     <label class="inline-flex items-center">
+                        <input type="radio" name="agentMode" value="statistical" class="form-radio text-indigo-600">
+                        <span class="ml-2 text-sm">Statistical Memory Only</span>
+                    </label>
+                </div>
+                <div>
+                    <label for="orgInstructionSelect" class="text-sm font-medium text-gray-700 mr-2">Organizational Prompt:</label>
+                    <select id="orgInstructionSelect">
+                        <option value="baseline" selected>Baseline (No extra guidance)</option>
+                        <option value="focus_history">Focus on Best History/Stats</option>
+                        <option value="encourage_delegation">Encourage Delegation</option>
+                        <option value="self_reliant">Self-Reliant Bias</option>
+                    </select>
+                </div>
+                 <div>
+                    <label for="maxRoundsInput" class="text-sm font-medium text-gray-700 mr-2">Total Rounds:</label>
+                    <input type="number" id="maxRoundsInput" value="10" min="1" max="50">
+                </div>
+                 <div id="memoryDepthSetting">
+                    <label for="memoryDepthInput" class="text-sm font-medium text-gray-700 mr-2">Prompt History (Rounds):</label>
+                    <input type="number" id="memoryDepthInput" value="3" min="0" max="10">
+                     <span id="memoryDepthInfo" class="text-xs text-gray-500 ml-1">(Used by Direct/Global modes)</span>
+                </div>
+                <div>
+                    <button id="customizePromptsBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium py-1 px-3 rounded-md">
+                        Customize Agent Prompts...
+                    </button>
+                 </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-4 mb-6 flex justify-between items-center flex-wrap gap-y-3">
+            <div>
+                <h2 class="font-semibold text-lg">Simulation Control</h2>
+                <p class="text-sm text-gray-600" id="simulationStatus">Ready to start</p>
+                <p class="text-sm text-gray-600 mt-1 font-medium" id="scoreDisplay">Total Score: 0</p>
+                <p class="text-xs text-gray-500 mt-1" id="currentOrgInstructionDisplay">Instruction: Baseline</p>
+            </div>
+            <div class="flex items-center space-x-3 flex-wrap gap-y-2">
+                 <div class="flex items-center space-x-2 border-r pr-3 mr-1 border-gray-300">
+                    <span class="text-sm font-medium text-gray-600">Inspect:</span>
+                    <button id="inspectAgent1" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-medium py-1 px-2 rounded" title="Inspect Agent 1">A1</button>
+                    <button id="inspectAgent2" class="bg-green-100 hover:bg-green-200 text-green-800 text-xs font-medium py-1 px-2 rounded" title="Inspect Agent 2">A2</button>
+                    <button id="inspectAgent3" class="bg-pink-100 hover:bg-pink-200 text-pink-800 text-xs font-medium py-1 px-2 rounded" title="Inspect Agent 3">A3</button>
+                </div>
+                 <button id="nextRoundBtn" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md">
+                    Start Round 1
+                </button>
+                 <button id="runAllBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md">
+                    Run All Rounds
+                </button>
+                 <button id="stopBtn" class="hidden bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-md">
+                    Stop Auto Run
+                </button>
+                 <button id="resetBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md">
+                    Reset Current Run
+                </button>
+                 <button id="storeRunBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md" disabled>
+                    Store Run for Comparison
+                </button>
+            </div>
+        </div>
+
+        <div id="loadingIndicator" class="hidden text-center my-4">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-indigo-600 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="text-sm text-gray-600" id="loadingText">Processing...</span>
+        </div>
+
+        <div id="resultsArea" class="bg-white rounded-xl shadow-md p-4 mb-6">
+            No results yet.
+        </div>
+
+        <div id="comparisonSelectorArea" class="mb-6">
+             <h3 class="text-base font-semibold mb-2">Compare Stored Runs (Select to Plot)</h3>
+             <div id="savedRunsList">
+                 <p class="text-sm text-gray-500 italic">No runs stored yet. Complete a simulation and click "Store Run".</p>
+             </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-6">
+            <div class="bg-white rounded-xl shadow-md p-4 relative h-72">
+                <h3 class="text-base font-semibold mb-2 text-center">Cumulative Score</h3>
+                <canvas id="scoreChart"></canvas>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-4 relative h-72">
+                <h3 class="text-base font-semibold mb-2 text-center">Agent Confidence</h3>
+                <canvas id="confidenceChart"></canvas>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-4 relative h-72">
+                <h3 class="text-base font-semibold mb-2 text-center">Delegation Rate (Overall)</h3>
+                <canvas id="delegationChart"></canvas>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-4 relative h-72">
+                <h3 class="text-base font-semibold mb-2 text-center">Correct Assignment Rate</h3>
+                <canvas id="correctDelegationChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div id="memoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('memoryModal')">&times;</span>
+            <h2 id="memoryModalTitle" class="text-xl font-semibold mb-4">Agent Memory</h2>
+            <div id="memoryDisplay"></div>
+            <button id="viewDetailedHistoryBtn" class="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium py-1 px-3 rounded">
+                View Detailed Interaction History
+            </button>
+            <div id="detailedHistoryDisplay" class="mt-4 pt-4 border-t border-gray-300" style="display: none; white-space: normal;">
+                <h3 class="text-lg font-semibold mb-2">Detailed Interaction History</h3>
+                {/* Content will be populated by JavaScript */}
+            </div>
+        </div>
+    </div>
+
+    <div id="promptModal" class="modal">
+        <div class="modal-content modal-content-large">
+             <span class="close-button" onclick="closeModal('promptModal')">&times;</span>
+            <h2 class="text-xl font-semibold mb-4">Customize Agent System Prompts</h2>
+            <p class="text-sm text-gray-600 mb-4">Modify the base system prompt for each agent before starting the run. The organizational guidance and specific task info will be added automatically during the simulation.</p>
+
+            <div id="promptEditorContainer" class="space-y-4">
+                {/* Prompt editors will be added here by JS */}
+            </div>
+
+            <div class="mt-6 flex justify-end space-x-3">
+                 <button id="resetPromptsBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md">
+                    Reset All to Defaults
+                </button>
+                 <button id="savePromptsBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md">
+                    Save and Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="storedLogModal" class="modal">
+        <div class="modal-content modal-content-large">
+             <span class="close-button" onclick="closeModal('storedLogModal')">&times;</span>
+            <h2 id="storedLogModalTitle" class="text-xl font-semibold mb-4">Detailed Simulation Log</h2>
+            <div id="storedLogDisplay">
+                 {/* Content populated by JS */}
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- Configuration ---
+        const config = {
+            purdue_api_key: null,
+            apiUrl: "https://genai.rcac.purdue.edu/api/chat/completions",
+            model: "llama3.2:latest",
+            maxTokens: 20,
+            temperature: 0.1
+        };
+
+        // --- Agent & Task Definitions ---
+        // *** Added defaultSystemPrompt and customSystemPrompt ***
+        const initialAgents = [
+            { id: "Agent 1", skills: { "Math": "Good", "Writing": "Poor", "Logic": "Poor" }, color: "#4338CA", defaultSystemPrompt: null, customSystemPrompt: null }, // Indigo
+            { id: "Agent 2", skills: { "Math": "Poor", "Writing": "Good", "Logic": "Poor" }, color: "#047857", defaultSystemPrompt: null, customSystemPrompt: null }, // Emerald
+            { id: "Agent 3", skills: { "Math": "Poor", "Writing": "Poor", "Logic": "Good" }, color: "#BE185D", defaultSystemPrompt: null, customSystemPrompt: null }  // Pink
+        ];
+        const taskTypes = ["Math", "Writing", "Logic"];
+        const skillSuccessRate = { "Good": 0.9, "Mediocre": 0.5, "Poor": 0.1 };
+        const POINTS_FOR_ALL_SUCCESS = 3;
+
+        // --- Simulation State (Current Run) ---
+        let agents = []; // Holds agent objects for the current run (including activeSystemPrompt)
+        let simulationState = {
+            apiKeySet: false,
+            currentRound: 0,
+            maxRounds: 10,
+            memoryDepth: 3,
+            isRunning: false,
+            isAutoRunning: false,
+            stopRequested: false,
+            resultsLog: [], // Log for CURRENT run { round, results: [{..., systemPrompt}, ...] }
+            agentMode: 'direct',
+            organizationalInstruction: 'baseline',
+            totalScore: 0,
+            roundScores: [],
+            agentConfidenceHistory: {},
+            delegationHistory: [],
+            correctDelegationHistory: [],
+        };
+
+        // --- Comparison State (Stored Runs) ---
+        let savedSimulations = []; // { id, timestamp, settings: {..., agentSystemPrompts:{...}}, performance: {..., agentDecisionHistories:{...}, fullResultsLog:[...]}, color, label }
+        let comparisonColors = [ '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF', '#E56717', '#581845', '#1F618D' ];
+
+        // --- Chart Instances ---
+        let scoreChartInstance = null;
+        let confidenceChartInstance = null;
+        let delegationChartInstance = null;
+        let correctDelegationChartInstance = null;
+
+        // --- DOM Elements ---
+        const apiKeyInput = document.getElementById('apiKeyInput');
+        const saveApiKeyBtn = document.getElementById('saveApiKey');
+        const simulationArea = document.getElementById('simulationArea');
+        const apiSetup = document.getElementById('apiSetup');
+        const memoryDepthSetting = document.getElementById('memoryDepthSetting');
+        const memoryDepthInput = document.getElementById('memoryDepthInput');
+        const memoryDepthInfo = document.getElementById('memoryDepthInfo');
+        const maxRoundsInput = document.getElementById('maxRoundsInput');
+        const orgInstructionSelect = document.getElementById('orgInstructionSelect');
+        const currentOrgInstructionDisplay = document.getElementById('currentOrgInstructionDisplay');
+        const customizePromptsBtn = document.getElementById('customizePromptsBtn'); // New button
+        const nextRoundBtn = document.getElementById('nextRoundBtn');
+        const runAllBtn = document.getElementById('runAllBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const storeRunBtn = document.getElementById('storeRunBtn');
+        const resultsArea = document.getElementById('resultsArea');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const loadingText = document.getElementById('loadingText');
+        const simulationStatus = document.getElementById('simulationStatus');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const memoryModal = document.getElementById('memoryModal');
+        const memoryModalTitle = document.getElementById('memoryModalTitle');
+        const memoryDisplay = document.getElementById('memoryDisplay');
+        const inspectAgent1Btn = document.getElementById('inspectAgent1');
+        const inspectAgent2Btn = document.getElementById('inspectAgent2');
+        const inspectAgent3Btn = document.getElementById('inspectAgent3');
+        const viewDetailedHistoryBtn = document.getElementById('viewDetailedHistoryBtn');
+        const detailedHistoryDisplay = document.getElementById('detailedHistoryDisplay');
+        const comparisonSelectorArea = document.getElementById('comparisonSelectorArea');
+        const savedRunsList = document.getElementById('savedRunsList');
+        // Prompt Modal Elements
+        const promptModal = document.getElementById('promptModal');
+        const promptEditorContainer = document.getElementById('promptEditorContainer');
+        const resetPromptsBtn = document.getElementById('resetPromptsBtn');
+        const savePromptsBtn = document.getElementById('savePromptsBtn');
+        // Stored Log Modal Elements
+        const storedLogModal = document.getElementById('storedLogModal');
+        const storedLogModalTitle = document.getElementById('storedLogModalTitle');
+        const storedLogDisplay = document.getElementById('storedLogDisplay');
+
+
+        // --- Event Listeners ---
+        saveApiKeyBtn.addEventListener('click', () => {
+            const apiKey = apiKeyInput.value.trim();
+            if (apiKey && apiKey.length > 10) {
+                config.purdue_api_key = apiKey;
+                simulationState.apiKeySet = true;
+                apiSetup.classList.add('hidden');
+                simulationArea.classList.remove('hidden');
+                initializeDefaultPrompts(); // Generate defaults now
+                populatePromptEditor(); // Populate editor with defaults
+                resetSimulation(); // Initialize simulation state
+                updateStatus(`API Key set. Ready for Round 1.`);
+                showNotification('API key saved successfully', 'success');
+            } else {
+                showNotification('Please enter a valid API key', 'error');
+            }
+        });
+
+        nextRoundBtn.addEventListener('click', async () => {
+            if (!simulationState.apiKeySet) { showNotification('Please set API key first.', 'error'); return; }
+            if (simulationState.isRunning || simulationState.isAutoRunning) return;
+            if (simulationState.currentRound >= simulationState.maxRounds) { showNotification('Simulation complete.', 'info'); return; }
+
+            simulationState.isRunning = true;
+            disableControls();
+            simulationState.currentRound++;
+            updateStatus(`Running Round ${simulationState.currentRound} of ${simulationState.maxRounds}...`);
+            try {
+                await runRound();
+            } catch (error) {
+                 console.error(`Error during Round ${simulationState.currentRound}:`, error);
+                 showNotification(`Error occurred in Round ${simulationState.currentRound}. Check console.`, 'error');
+            } finally {
+                 simulationState.isRunning = false;
+                 enableControls();
+                 loadingIndicator.classList.add('hidden');
+                 updateStatus(`Round ${simulationState.currentRound} complete. Ready for Round ${simulationState.currentRound + 1}.`);
+                 if (simulationState.currentRound >= simulationState.maxRounds) {
+                     nextRoundBtn.textContent = "Finished";
+                     updateStatus(`Simulation complete after ${simulationState.maxRounds} rounds.`);
+                     showNotification('Simulation complete.', 'info');
+                 } else {
+                     nextRoundBtn.textContent = `Start Round ${simulationState.currentRound + 1}`;
+                 }
+            }
+        });
+
+        runAllBtn.addEventListener('click', async () => {
+            if (!simulationState.apiKeySet) { showNotification('Please set API key first.', 'error'); return; }
+            if (simulationState.isRunning || simulationState.isAutoRunning) return;
+            if (simulationState.currentRound >= simulationState.maxRounds) { showNotification('Simulation already complete.', 'info'); return; }
+
+            simulationState.isAutoRunning = true;
+            simulationState.stopRequested = false;
+            disableControls();
+            stopBtn.classList.remove('hidden');
+
+            while (simulationState.currentRound < simulationState.maxRounds && !simulationState.stopRequested) {
+                simulationState.isRunning = true;
+                simulationState.currentRound++;
+                updateStatus(`Running Round ${simulationState.currentRound} of ${simulationState.maxRounds} (Auto)...`);
+                try {
+                    await runRound();
+                } catch (error) {
+                    console.error("Error during auto-run round:", error);
+                    showNotification(`Error in Round ${simulationState.currentRound}. Stopping auto-run.`, 'error');
+                    simulationState.stopRequested = true;
+                } finally {
+                    simulationState.isRunning = false;
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                }
+            }
+
+            simulationState.isAutoRunning = false;
+            stopBtn.classList.add('hidden');
+            if (simulationState.stopRequested) {
+                updateStatus(`Auto-run stopped at Round ${simulationState.currentRound}.`);
+                showNotification(`Auto-run stopped.`, 'info');
+            } else {
+                updateStatus(`Auto-run complete after ${simulationState.maxRounds} rounds.`);
+                showNotification('Simulation complete.', 'info');
+                nextRoundBtn.textContent = "Finished";
+            }
+            enableControls();
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (simulationState.isAutoRunning) {
+                simulationState.stopRequested = true;
+                updateStatus(`Stopping auto-run after Round ${simulationState.currentRound}...`);
+                stopBtn.disabled = true;
+                stopBtn.textContent = "Stopping...";
+            }
+        });
+
+        resetBtn.addEventListener('click', resetSimulation);
+
+        storeRunBtn.addEventListener('click', () => {
+            if (simulationState.currentRound < simulationState.maxRounds || simulationState.isRunning || simulationState.isAutoRunning) {
+                showNotification('Cannot store run until simulation is complete.', 'warning');
+                return;
+            }
+            if (savedSimulations.length >= comparisonColors.length) {
+                 showNotification(`Cannot store more runs (limit: ${comparisonColors.length}). Reset required to store new runs after limit.`, 'warning');
+                return;
+            }
+
+            try {
+                // Prepare data for storage (using deep copies)
+                const agentSystemPromptsUsed = agents.reduce((acc, agent) => {
+                     acc[agent.id] = agent.activeSystemPrompt;
+                     return acc;
+                 }, {});
+                const agentDecisionHistoriesStored = agents.reduce((acc, agent) => {
+                     acc[agent.id] = JSON.parse(JSON.stringify(agent.decisionHistory));
+                     return acc;
+                 }, {});
+                 const fullResultsLogStored = JSON.parse(JSON.stringify(simulationState.resultsLog));
+
+                const runData = {
+                    id: `run_${Date.now()}`,
+                    timestamp: new Date().toLocaleString(),
+                    settings: {
+                        maxRounds: simulationState.maxRounds,
+                        agentMode: simulationState.agentMode,
+                        memoryDepth: simulationState.agentMode === 'statistical' ? null : simulationState.memoryDepth,
+                        organizationalInstruction: simulationState.organizationalInstruction,
+                        model: config.model,
+                        agentSystemPrompts: agentSystemPromptsUsed // Store the prompts used
+                    },
+                    performance: {
+                        finalScore: simulationState.totalScore,
+                        scoresPerRound: [...simulationState.roundScores],
+                        agentConfidenceHistory: JSON.parse(JSON.stringify(simulationState.agentConfidenceHistory)),
+                        delegationHistory: [...simulationState.delegationHistory],
+                        correctDelegationHistory: [...simulationState.correctDelegationHistory],
+                        agentDecisionHistories: agentDecisionHistoriesStored, // Store detailed history
+                        fullResultsLog: fullResultsLogStored // Store the main results log
+                    },
+                    color: comparisonColors[savedSimulations.length % comparisonColors.length],
+                    label: `Run ${savedSimulations.length + 1}: ${simulationState.agentMode}${simulationState.agentMode !== 'statistical' ? `(d${simulationState.memoryDepth})` : ''}/${simulationState.organizationalInstruction.substring(0,4)}/${simulationState.totalScore}pts`
+                };
+
+                savedSimulations.push(runData);
+                updateSavedRunsDisplay(); // Update the checkboxes UI
+                updateCharts(); // Redraw charts including the newly stored run
+                showNotification(`Run stored as "${runData.label}".`, 'success');
+                storeRunBtn.disabled = true; // Disable after storing this specific run instance
+
+            } catch (error) {
+                 console.error("Error storing run:", error);
+                 showNotification('Failed to store run data. Check console.', 'error');
+            }
+        });
+
+        // Settings Listeners (Mode, Org Prompt, Max Rounds, Memory Depth)
+        document.querySelectorAll('input[name="agentMode"]').forEach(radio => {
+             radio.addEventListener('change', (event) => {
+                 simulationState.agentMode = event.target.value;
+                 const isStatistical = (simulationState.agentMode === 'statistical');
+                 memoryDepthInput.disabled = isStatistical || simulationState.currentRound > 0;
+                 memoryDepthSetting.style.opacity = isStatistical ? 0.5 : 1;
+                 memoryDepthInfo.textContent = isStatistical ? '(Not used by Statistical mode)' : '(Used by Direct/Global modes)';
+                 if (simulationState.currentRound > 0) showNotification('Agent mode changed. Reset current run for change to take full effect.', 'info');
+                 // Update prompts if needed (e.g., default prompt text varies by mode)
+                 initializeDefaultPrompts();
+                 populatePromptEditor();
+                 updateCharts();
+             });
+        });
+        orgInstructionSelect.addEventListener('change', (event) => {
+            simulationState.organizationalInstruction = event.target.value;
+            updateCurrentOrgInstructionDisplay();
+            if (simulationState.currentRound > 0) showNotification('Organizational prompt changed. Reset current run for change to take full effect.', 'info');
+            // Update prompts if needed (e.g., default prompt text varies by instruction)
+            initializeDefaultPrompts();
+            populatePromptEditor();
+            updateCharts();
+        });
+        maxRoundsInput.addEventListener('change', handleMaxRoundsChange);
+        memoryDepthInput.addEventListener('change', () => {
+             if (simulationState.agentMode === 'statistical') return;
+             const depth = parseInt(memoryDepthInput.value);
+             if (!isNaN(depth) && depth >= 0 && depth <= 10) {
+                 simulationState.memoryDepth = depth;
+                 if (simulationState.currentRound > 0) showNotification('Prompt history depth changed. Reset current run or continue with new depth for future rounds.', 'info');
+                 updateCharts();
+             } else {
+                 memoryDepthInput.value = simulationState.memoryDepth;
+                 showNotification('Please enter a history depth between 0 and 10.', 'error');
+             }
+        });
+
+        // Inspect Agent Buttons Listeners
+        inspectAgent1Btn.addEventListener('click', () => showMemory(agents.find(a => a.id === "Agent 1")));
+        inspectAgent2Btn.addEventListener('click', () => showMemory(agents.find(a => a.id === "Agent 2")));
+        inspectAgent3Btn.addEventListener('click', () => showMemory(agents.find(a => a.id === "Agent 3")));
+
+        // Prompt Customization Modal Listeners
+        customizePromptsBtn.addEventListener('click', () => {
+            populatePromptEditor(); // Ensure editor shows current custom/default values
+            promptModal.style.display = 'block';
+        });
+        savePromptsBtn.addEventListener('click', saveCustomPrompts);
+        resetPromptsBtn.addEventListener('click', resetPromptEditorToDefaults);
+
+        // --- Core Simulation Logic ---
+
+        // *** New Function: Generate Default System Prompt Text ***
+        function generateDefaultSystemPrompt(agent, otherAgentIds) {
+            // Note: Org instruction and history/stats are added *dynamically* in getAgentDecisionLLM
+            let baseSystemPrompt = `You are ${agent.id}, part of a team with ${otherAgentIds.join(', ')}. Your goal is successful task completion.
+Your own skills (Good/Mediocre/Poor) are: Math=${agent.skills.Math}, Writing=${agent.skills.Writing}, Logic=${agent.skills.Logic}.`;
+
+            // Add mode-specific context info dynamically in getAgentDecisionLLM
+            // The base prompt stored here doesn't need the dynamic parts yet.
+            return baseSystemPrompt;
+        }
+
+        // *** New Function: Initialize default prompts for all initial agents ***
+        function initializeDefaultPrompts() {
+            initialAgents.forEach(agentDef => {
+                const otherIds = initialAgents.filter(a => a.id !== agentDef.id).map(a => a.id);
+                agentDef.defaultSystemPrompt = generateDefaultSystemPrompt(agentDef, otherIds);
+            });
+        }
+
+        function initializeAgentMemory(agent) {
+            agent.memory = {}; // Statistical memory
+            const agentIds = initialAgents.map(a => a.id);
+            agentIds.push('Self');
+
+            agentIds.forEach(id => {
+                let memorySubjectId = (id === agent.id) ? 'Self' : id;
+                agent.memory[memorySubjectId] = {};
+                taskTypes.forEach(task => {
+                    agent.memory[memorySubjectId][task] = { successes: 0, failures: 0, attempts: 0 };
+                });
+            });
+            agent.decisionHistory = []; // Interaction log for this run
+        }
+
+        async function runRound() {
+            const roundAssignments = assignTasks();
+            const agentDecisions = [];
+            const roundResults = []; // Will store { ..., systemPrompt: usedPrompt }
+
+            // 1. Get Decisions
+            for (const agent of agents) {
+                if (simulationState.stopRequested) break;
+                const assignedTask = roundAssignments[agent.id];
+                loadingText.textContent = `${agent.id} deciding on ${assignedTask}...`;
+
+                // *** Uses agent.activeSystemPrompt set during resetSimulation ***
+                const { decisionTargetId, systemPromptUsed } = await getAgentDecisionLLM(agent, assignedTask);
+
+                const confidence = calculateConfidence(agent, assignedTask, decisionTargetId);
+                agentDecisions.push({
+                    assignedAgentId: agent.id, task: assignedTask,
+                    decision: decisionTargetId,
+                    confidence: confidence,
+                    systemPrompt: systemPromptUsed // Store prompt used for this decision
+                });
+
+                // Store confidence history
+                 if (!simulationState.agentConfidenceHistory[agent.id]) simulationState.agentConfidenceHistory[agent.id] = [];
+                 const existingEntryIndex = simulationState.agentConfidenceHistory[agent.id].findIndex(entry => entry.round === simulationState.currentRound);
+                 if (existingEntryIndex === -1) {
+                     simulationState.agentConfidenceHistory[agent.id].push({ round: simulationState.currentRound, confidence: confidence });
+                 } else {
+                     simulationState.agentConfidenceHistory[agent.id][existingEntryIndex].confidence = confidence;
+                 }
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+
+            if (simulationState.stopRequested) return;
+            loadingText.textContent = `Simulating results...`;
+
+            // 2. Simulate Task Solving
+            for (const decisionData of agentDecisions) {
+                let actualSolver = null;
+                let actualSolverId = '';
+                let finalDecisionDisplay = decisionData.decision;
+
+                if (decisionData.decision === "Self") {
+                    actualSolver = agents.find(a => a.id === decisionData.assignedAgentId);
+                    actualSolverId = actualSolver.id;
+                } else {
+                    actualSolver = agents.find(a => a.id === decisionData.decision);
+                    if (!actualSolver) {
+                        console.warn(`Agent ${decisionData.assignedAgentId} made invalid decision '${decisionData.decision}'. Forcing Self-solve.`);
+                        actualSolver = agents.find(a => a.id === decisionData.assignedAgentId);
+                        actualSolverId = actualSolver.id;
+                        finalDecisionDisplay = `Self (Forced from: ${decisionData.decision})`;
+                    } else {
+                        actualSolverId = actualSolver.id;
+                    }
+                }
+                const skillLevel = actualSolver.skills[decisionData.task];
+                const success = simulateTaskSuccess(skillLevel);
+
+                roundResults.push({
+                    assignedAgent: decisionData.assignedAgentId,
+                    task: decisionData.task,
+                    decision: finalDecisionDisplay,
+                    originalDecision: decisionData.decision,
+                    actualSolver: actualSolverId,
+                    success: success,
+                    confidence: decisionData.confidence,
+                    systemPrompt: decisionData.systemPrompt // Include the prompt used
+                });
+            }
+
+            // 3. Log results for CURRENT run
+            simulationState.resultsLog.push({ round: simulationState.currentRound, results: roundResults });
+
+            // 4. Update Agent Statistical Memories
+            updateMemories(roundResults);
+
+            // 5. Calculate Score and Metrics
+            calculateRoundScore(roundResults);
+            calculateRoundMetrics(roundResults);
+
+            // 6. Display Textual Results & Update Charts
+            displayResults();
+            updateCharts();
+        }
+
+        function assignTasks() {
+             const shuffledTasks = [...taskTypes].sort(() => 0.5 - Math.random());
+             const assignments = {};
+             agents.forEach((agent, index) => {
+                 assignments[agent.id] = shuffledTasks[index % shuffledTasks.length];
+             });
+             return assignments;
+        }
+
+        function escapeHtml(unsafe) {
+            if (typeof unsafe !== 'string') return '';
+            return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        // *** Modified: Uses agent.activeSystemPrompt and returns it ***
+        async function getAgentDecisionLLM(agent, assignedTask) {
+            const otherAgentIds = agents.filter(a => a.id !== agent.id).map(a => a.id);
+            const validResponses = ["Self", ...otherAgentIds];
+            const responseOptionsString = validResponses.map(r => `'${r}'`).join(', ');
+
+            // --- Build Context based on Agent Mode ---
+            let contextContent = ""; // Renamed from promptContent to avoid confusion
+            if (simulationState.agentMode === 'statistical') {
+                contextContent = "Your Observed Statistics (Successes / Attempts):\n";
+                const subjects = Object.keys(agent.memory).sort((a, b) => { if (a === 'Self') return -1; if (b === 'Self') return 1; return a.localeCompare(b); });
+                subjects.forEach(subjectId => {
+                     contextContent += `  ${subjectId}:\n`;
+                     let hasData = false;
+                     taskTypes.forEach(task => {
+                         if (agent.memory[subjectId]?.[task]) {
+                             const { successes, attempts } = agent.memory[subjectId][task];
+                             if (attempts > 0) {
+                                 const successRate = ((successes / attempts) * 100).toFixed(0);
+                                 contextContent += `    - ${task}: ${successes}/${attempts} (${successRate}%)\n`; hasData = true;
+                             }
+                         }
+                     });
+                     if (!hasData) { contextContent += `    (No data recorded)\n`; }
+                });
+                contextContent += "---\n";
+            } else { // Direct/Global Mode
+                const historyDepth = simulationState.memoryDepth;
+                if (historyDepth > 0 && simulationState.resultsLog.length > 0) {
+                    contextContent = "Recent History (Task -> Solver = Result):\n";
+                    const relevantHistoryLog = simulationState.resultsLog.slice(-historyDepth);
+                     relevantHistoryLog.forEach(logEntry => {
+                         contextContent += `--- Round ${logEntry.round} ---\n`;
+                         logEntry.results.forEach(res => {
+                             const wasObserved = simulationState.agentMode === 'global' || agent.id === res.assignedAgent || agent.id === res.actualSolver;
+                             if (wasObserved) {
+                                 contextContent += `  ${res.task} by ${res.actualSolver} = ${res.success ? 'OK' : 'FAIL'}\n`;
+                             }
+                         });
+                     });
+                    contextContent += "---\n";
+                } else if (historyDepth > 0) {
+                    contextContent = "No past rounds recorded.\n---\n";
+                } else {
+                    contextContent = "No past history provided (Memory Depth is 0).\n---\n";
+                }
+            }
+
+            // --- Get Organizational Instruction Text ---
+            const instructionKey = simulationState.organizationalInstruction;
+            let orgInstructionText = "";
+             const contextType = simulationState.agentMode === 'statistical' ? 'statistics' : 'history';
+             const contextInfo = simulationState.agentMode === 'statistical' ? 'success rates' : 'past results';
+            switch (instructionKey) {
+                 case 'focus_history': orgInstructionText = `Decision Guidance: Analyze the ${contextType} carefully. Assign the task to the agent (Self or others) with the best ${contextInfo}. If ${contextType} is unclear or tied, you may choose Self.`; break;
+                 case 'encourage_delegation': orgInstructionText = `Decision Guidance: Analyze the ${contextType}. If another agent seems significantly better suited based on ${contextInfo}, assign the task to them. Otherwise, assign to Self.`; break;
+                 case 'self_reliant': orgInstructionText = `Decision Guidance: Prioritize assigning the task to Self unless the ${contextType} strongly suggest another agent is much better based on ${contextInfo}.`; break;
+                 default: orgInstructionText = `Decision Guidance: Use the ${contextType} (if provided) and your own skills to decide who is best suited for the task (Self or others).`; break; // Baseline
+            }
+
+            // --- Construct Final System Prompt (Using Agent's Specific Base + Dynamic Parts) ---
+            // *** Get the base prompt specific to this agent ***
+            let baseSystemPrompt = agent.activeSystemPrompt; // THIS IS THE KEY CHANGE
+            let systemPrompt = `${baseSystemPrompt}`; // Start with the agent's specific base
+
+            // Add mode-specific clarification
+            if (simulationState.agentMode === 'statistical') {
+                systemPrompt += `\nYou are provided with observed success statistics (Successes / Attempts). These fractions represent observed success rates; use them to estimate the probability of success for each agent on the current task.`;
+            }
+
+            // Add dynamic organizational guidance and response format instructions
+             systemPrompt += `\n${orgInstructionText}`;
+             systemPrompt += `\nRespond ONLY with one of the exact strings: ${responseOptionsString}. Be concise.`;
+
+
+            // --- Construct User Prompt ---
+            const userPrompt = `${contextContent}Current task for you: ${assignedTask}.\nWho should do it? Respond with only one of: ${responseOptionsString}.`;
+
+            // --- Call LLM and Process Response ---
+            let responseContent = '';
+            let cleanedDecision = 'Self'; // Default
+            let historyEntry = null;
+
+            try {
+                loadingText.textContent = `${agent.id} thinking...`;
+                responseContent = await callLLM(systemPrompt, userPrompt);
+
+                let cleanedResponse = responseContent.trim();
+                 if ((cleanedResponse.startsWith("'") && cleanedResponse.endsWith("'")) || (cleanedResponse.startsWith('"') && cleanedResponse.endsWith('"'))) {
+                     cleanedResponse = cleanedResponse.substring(1, cleanedResponse.length - 1);
+                 }
+                 if (cleanedResponse.length > 0 && ['.', ',', '!', '?'].includes(cleanedResponse[cleanedResponse.length - 1])) {
+                      cleanedResponse = cleanedResponse.slice(0, -1);
+                 }
+                 cleanedResponse = cleanedResponse.trim();
+
+                 const lowerCaseCleaned = cleanedResponse.toLowerCase();
+                 let matchedCanonicalResponse = null;
+                 for (const validId of validResponses) {
+                     if (validId.toLowerCase() === lowerCaseCleaned) { matchedCanonicalResponse = validId; break; }
+                 }
+
+                if (matchedCanonicalResponse) {
+                    cleanedDecision = matchedCanonicalResponse;
+                } else {
+                    console.warn(`Invalid response from ${agent.id}: Raw='${responseContent}', Cleaned='${cleanedResponse}'. Defaulting to 'Self'.`);
+                    cleanedDecision = "Self";
+                }
+
+                historyEntry = {
+                    round: simulationState.currentRound, task: assignedTask,
+                    systemPrompt: systemPrompt, userPrompt: userPrompt, // Log the actual prompts used
+                    rawResponse: responseContent, cleanedDecision: cleanedDecision
+                };
+                agent.decisionHistory.push(historyEntry);
+
+            } catch (error) {
+                 console.error(`Error getting decision for ${agent.id}:`, error);
+                 showNotification(`API Error for ${agent.id}. Defaulting to Self. Check console.`, 'error');
+                 cleanedDecision = "Self";
+
+                 historyEntry = {
+                     round: simulationState.currentRound, task: assignedTask,
+                     systemPrompt: systemPrompt, userPrompt: userPrompt,
+                     rawResponse: `**ERROR**: ${error.message}`, cleanedDecision: cleanedDecision
+                 };
+                 if (agent && agent.decisionHistory) { agent.decisionHistory.push(historyEntry); }
+            }
+
+            // *** Return the actual system prompt used along with the decision ***
+            return { decisionTargetId: cleanedDecision, systemPromptUsed: systemPrompt };
+        }
+
+        function calculateConfidence(agent, task, chosenAgentId) {
+            let lookupId = chosenAgentId;
+            if (chosenAgentId === agent.id) lookupId = 'Self';
+            else if (chosenAgentId !== 'Self' && !agents.some(a => a.id === chosenAgentId)) lookupId = 'Self';
+
+            if (!agent.memory || !agent.memory[lookupId] || !agent.memory[lookupId][task]) {
+                 console.warn(`Memory structure error for ${agent.id} calculating confidence for ${lookupId} -> ${task}.`);
+                return 0.5;
+            }
+            const { successes, attempts } = agent.memory[lookupId][task];
+            const confidence = (attempts === 0) ? 0.5 : (successes + 1) / (attempts + 2); // Laplace smoothing
+            return Math.round(confidence * 100) / 100;
+        }
+
+        function simulateTaskSuccess(skillLevel) {
+            const rate = skillSuccessRate[skillLevel] || 0.1;
+            return Math.random() < rate;
+        }
+
+        function updateMemories(roundResults) {
+            agents.forEach(agent => {
+                roundResults.forEach(res => {
+                    const isDirectInteraction = (agent.id === res.assignedAgent || agent.id === res.actualSolver);
+                    const shouldRemember = (simulationState.agentMode === 'global' || simulationState.agentMode === 'statistical' || isDirectInteraction);
+
+                    if (shouldRemember) {
+                        let memorySubjectId = res.actualSolver === agent.id ? 'Self' : res.actualSolver;
+                        if (!agent.memory[memorySubjectId] || !agent.memory[memorySubjectId][res.task]) {
+                            console.error(`CRITICAL: Memory structure missing during update for Agent ${agent.id}, Subject ${memorySubjectId}, Task ${res.task}.`);
+                            return;
+                        }
+                        agent.memory[memorySubjectId][res.task].attempts++;
+                        if (res.success) agent.memory[memorySubjectId][res.task].successes++;
+                        else agent.memory[memorySubjectId][res.task].failures++;
+                    }
+                });
+            });
+        }
+
+        function calculateRoundScore(roundResults) {
+            const allSucceeded = roundResults.every(res => res.success);
+            const scoreThisRound = allSucceeded ? POINTS_FOR_ALL_SUCCESS : 0;
+            simulationState.roundScores.push(scoreThisRound);
+            simulationState.totalScore += scoreThisRound;
+            scoreDisplay.textContent = `Total Score: ${simulationState.totalScore}`;
+        }
+
+        function calculateRoundMetrics(roundResults) {
+            const totalTasks = roundResults.length; if (totalTasks === 0) return;
+            let delegations = 0;
+            let correctAssignments = 0;
+            roundResults.forEach(res => {
+                const decidedTargetId = res.originalDecision;
+                const actualSolverId = res.actualSolver;
+                const task = res.task;
+                if (decidedTargetId !== "Self" && agents.some(a => a.id === decidedTargetId)) delegations++;
+                let bestAgentId = getBestAgentForTask(task);
+                if (actualSolverId === bestAgentId) correctAssignments++;
+            });
+            const overallDelegationRate = totalTasks > 0 ? delegations / totalTasks : 0;
+            const correctAssignmentRate = totalTasks > 0 ? correctAssignments / totalTasks : 0;
+            simulationState.delegationHistory.push({ round: simulationState.currentRound, overallRate: overallDelegationRate });
+            simulationState.correctDelegationHistory.push({ round: simulationState.currentRound, correctRate: correctAssignmentRate });
+        }
+
+        // --- LLM API Call ---
+        async function callLLM(systemPrompt, userPrompt) {
+             if (!config.purdue_api_key) throw new Error("API Key not set");
+             try {
+                 const response = await fetch(config.apiUrl, {
+                     method: "POST",
+                     headers: { "Authorization": `Bearer ${config.purdue_api_key}`, "Content-Type": "application/json" },
+                     body: JSON.stringify({
+                         "model": config.model,
+                         "messages": [ { "role": "system", "content": systemPrompt }, { "role": "user", "content": userPrompt } ],
+                         "max_tokens": config.maxTokens, "temperature": config.temperature,
+                         "stream": false
+                     })
+                 });
+                 if (!response.ok) {
+                     let errorBody = ''; try { errorBody = await response.text(); } catch(e) {}
+                     throw new Error(`API Error: ${response.status} ${response.statusText}. Body: ${errorBody}`);
+                 }
+                 const data = await response.json();
+                 if (!data.choices || data.choices.length === 0 || !data.choices[0].message || !data.choices[0].message.content) {
+                     console.error("Invalid API response structure received:", data);
+                     throw new Error("Invalid API response structure (missing content)");
+                 }
+                 return data.choices[0].message.content.trim();
+             } catch (error) {
+                 console.error("Error calling LLM API:", error);
+                 throw error;
+             }
+        }
+
+        // --- UI Update Functions ---
+        function formatRoundResultsHTML(roundNum, results) {
+            let output = `<div class="result-round-container mb-2">`;
+            output += `<div class="result-round-header">--- Round ${roundNum} ---</div>`;
+            results.forEach(res => {
+                const outcome = res.success ? '<span class="success">Success</span>' : '<span class="failure">Failure</span>';
+                let decisionText = `decided: ${res.decision}`;
+                 if (res.decision !== res.actualSolver && !(res.decision === 'Self' && res.assignedAgent === res.actualSolver) && !res.decision.includes('(Forced from:')) {
+                      decisionText += ` (solved by: ${res.actualSolver})`;
+                 }
+                let confidenceText = ` <span class="confidence-score">(Conf: ${(res.confidence * 100).toFixed(0)}%)</span>`;
+                let bestAgentId = getBestAgentForTask(res.task);
+                let correctnessInfo = res.actualSolver === bestAgentId
+                    ? '<span class="delegation-info success">[Optimal Solver]</span>'
+                    : `<span class="delegation-info failure">[Suboptimal Solver (Best: ${bestAgentId})]</span>`;
+                output += `<div class="result-item">${res.assignedAgent} assigned ${res.task} &rarr; ${decisionText}${confidenceText} &rarr; ${outcome} ${correctnessInfo}</div>`;
+            });
+            output += `</div>`;
+            return output;
+        }
+
+        function getBestAgentForTask(task) {
+             let bestAgentId = null; let highestSkillRate = -1;
+             initialAgents.forEach(agentDef => {
+                 const skillLevel = agentDef.skills[task];
+                 const rate = skillSuccessRate[skillLevel] || 0;
+                 if (rate > highestSkillRate) {
+                     highestSkillRate = rate; bestAgentId = agentDef.id;
+                 } else if (rate === highestSkillRate && bestAgentId !== null) {
+                      // Tie-breaking (consistent lower ID)
+                     const currentBestNum = parseInt(bestAgentId.split(' ')[1]);
+                     const potentialNewBestNum = parseInt(agentDef.id.split(' ')[1]);
+                     if (!isNaN(potentialNewBestNum) && !isNaN(currentBestNum) && potentialNewBestNum < currentBestNum) { bestAgentId = agentDef.id; }
+                     else if (isNaN(currentBestNum) || isNaN(potentialNewBestNum)) { if (agentDef.id < bestAgentId) bestAgentId = agentDef.id; } // Fallback alpha sort
+                 }
+             });
+             return bestAgentId;
+        }
+
+        function displayResults() {
+            if (simulationState.resultsLog.length === 0) {
+                 resultsArea.innerHTML = '<div class="text-gray-500 italic">No results yet.</div>';
+            } else {
+                resultsArea.innerHTML = simulationState.resultsLog
+                    .map(logEntry => formatRoundResultsHTML(logEntry.round, logEntry.results))
+                    .join('');
+                resultsArea.scrollTop = resultsArea.scrollHeight;
+            }
+        }
+
+        // *** Modified: Adds 'View Log' button ***
+        function updateSavedRunsDisplay() {
+             if (savedSimulations.length === 0) {
+                 savedRunsList.innerHTML = '<p class="text-sm text-gray-500 italic">No runs stored yet.</p>';
+             } else {
+                 savedRunsList.innerHTML = '';
+                 savedSimulations.forEach((run) => {
+                     const div = document.createElement('div'); // Use a div to contain label and button
+                     div.className = 'mb-1 flex items-center';
+
+                     const checkboxId = `compare-run-${run.id}`;
+                     const label = document.createElement('label');
+                     label.htmlFor = checkboxId;
+                     label.className = 'inline-flex items-center mr-4'; // Removed bottom margin
+
+                     const checkbox = document.createElement('input');
+                     checkbox.type = 'checkbox'; checkbox.id = checkboxId; checkbox.value = run.id; checkbox.checked = true;
+                     checkbox.className = 'form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out';
+                     checkbox.addEventListener('change', updateCharts);
+
+                     const colorBox = document.createElement('span');
+                     colorBox.className = 'run-label-color-box'; colorBox.style.backgroundColor = run.color;
+
+                     const text = document.createTextNode(` ${run.label}`);
+
+                     label.appendChild(checkbox); label.appendChild(colorBox); label.appendChild(text);
+                     div.appendChild(label); // Add label to div
+
+                    // Add View Log Button
+                     const logButton = document.createElement('button');
+                     logButton.textContent = 'View Log';
+                     logButton.className = 'view-log-button';
+                     logButton.title = `View detailed log for ${run.label}`;
+                     logButton.onclick = () => showStoredRunLog(run.id); // Use closure to pass run.id
+                     div.appendChild(logButton); // Add button to div
+
+                     savedRunsList.appendChild(div); // Add the div containing label and button
+                 });
+             }
+        }
+
+        function updateStatus(message) { simulationStatus.textContent = message; }
+        function updateCurrentOrgInstructionDisplay() {
+            const selectedOption = orgInstructionSelect.options[orgInstructionSelect.selectedIndex];
+            currentOrgInstructionDisplay.textContent = `Instruction: ${selectedOption ? selectedOption.text : 'N/A'}`;
+        }
+        function showNotification(message, type = 'info') {
+            const colors = { 'success': 'bg-green-500', 'error': 'bg-red-500', 'info': 'bg-blue-500', 'warning': 'bg-yellow-500' };
+            const notification = document.createElement('div');
+            notification.className = `fixed top-5 right-5 px-4 py-2 rounded-lg shadow-lg text-white ${colors[type] || colors['info']} transition-opacity duration-300 z-50`;
+            notification.textContent = message; document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => { if (document.body.contains(notification)) document.body.removeChild(notification); }, 300);
+            }, 3000);
+        }
+
+        function disableControls() {
+            nextRoundBtn.disabled = true; runAllBtn.disabled = true; resetBtn.disabled = true; storeRunBtn.disabled = true;
+            inspectAgent1Btn.disabled = true; inspectAgent2Btn.disabled = true; inspectAgent3Btn.disabled = true;
+            maxRoundsInput.disabled = true; memoryDepthInput.disabled = true; orgInstructionSelect.disabled = true;
+            document.querySelectorAll('input[name="agentMode"]').forEach(radio => radio.disabled = true);
+            customizePromptsBtn.disabled = true; // Disable prompt customization during run
+            loadingIndicator.classList.remove('hidden');
+        }
+        function enableControls() {
+             const finished = simulationState.currentRound >= simulationState.maxRounds;
+             const running = simulationState.isRunning || simulationState.isAutoRunning;
+
+             nextRoundBtn.disabled = running || finished;
+             runAllBtn.disabled = running || finished;
+             resetBtn.disabled = running;
+             storeRunBtn.disabled = running || !finished; // Further check needed if already stored
+
+             inspectAgent1Btn.disabled = running; inspectAgent2Btn.disabled = running; inspectAgent3Btn.disabled = running;
+
+             const settingsDisabled = simulationState.currentRound > 0 || running;
+             maxRoundsInput.disabled = settingsDisabled;
+              memoryDepthInput.disabled = settingsDisabled || (simulationState.agentMode === 'statistical');
+              memoryDepthSetting.style.opacity = (settingsDisabled || simulationState.agentMode === 'statistical') ? 0.5 : 1;
+             orgInstructionSelect.disabled = settingsDisabled;
+             document.querySelectorAll('input[name="agentMode"]').forEach(radio => radio.disabled = settingsDisabled);
+             customizePromptsBtn.disabled = settingsDisabled; // Can only customize before start
+
+             if (!running) loadingIndicator.classList.add('hidden');
+
+             stopBtn.disabled = false; stopBtn.textContent = "Stop Auto Run";
+             if (!simulationState.isAutoRunning) stopBtn.classList.add('hidden');
+        }
+
+        function resetSimulation() {
+            // Reset CURRENT Run State
+            simulationState.currentRound = 0; simulationState.isRunning = false; simulationState.isAutoRunning = false; simulationState.stopRequested = false;
+            simulationState.resultsLog = []; simulationState.totalScore = 0; simulationState.roundScores = [];
+            simulationState.agentConfidenceHistory = {}; simulationState.delegationHistory = []; simulationState.correctDelegationHistory = [];
+
+            // Read settings from UI
+            simulationState.agentMode = document.querySelector('input[name="agentMode"]:checked').value;
+            simulationState.organizationalInstruction = orgInstructionSelect.value;
+            handleMaxRoundsChange(false); // Read max rounds without re-initializing charts yet
+             const depth = parseInt(memoryDepthInput.value);
+             simulationState.memoryDepth = (isNaN(depth) || depth < 0 || depth > 10) ? 3 : depth;
+             memoryDepthInput.value = simulationState.memoryDepth;
+
+            // Create fresh agent objects for the NEW run, including their active prompt
+            agents = initialAgents.map(agentDef => {
+                 // Determine the prompt to use: custom if available, otherwise default
+                 const activePrompt = (agentDef.customSystemPrompt && agentDef.customSystemPrompt.trim() !== "")
+                     ? agentDef.customSystemPrompt
+                     : agentDef.defaultSystemPrompt; // Assumes defaultSystemPrompt is initialized
+
+                 return {
+                    ...agentDef, // Copy id, skills, color, prompt definitions
+                    memory: {}, // Clean slate statistical memory
+                    decisionHistory: [], // Clean slate interaction log
+                    activeSystemPrompt: activePrompt // Set the prompt to be used for this run
+                 };
+             });
+             // Initialize memory structure
+            agents.forEach(agent => {
+                initializeAgentMemory(agent);
+                simulationState.agentConfidenceHistory[agent.id] = [];
+            });
+
+            // Reset UI
+            resultsArea.innerHTML = '<div class="text-gray-500 italic">Simulation reset. Start a new run.</div>';
+            nextRoundBtn.textContent = `Start Round 1`;
+            updateStatus(`Ready to start new run (${simulationState.maxRounds} rounds). Stored runs preserved.`);
+            updateCurrentOrgInstructionDisplay();
+            scoreDisplay.textContent = `Total Score: 0`;
+            updateCharts(); // Update charts - clears current run, shows selected saved runs
+            enableControls(); // Enable controls, including settings
+            stopBtn.classList.add('hidden');
+
+            // Update memory depth disabled state
+             const isStatistical = (simulationState.agentMode === 'statistical');
+             memoryDepthInput.disabled = isStatistical;
+             memoryDepthSetting.style.opacity = isStatistical ? 0.5 : 1;
+             memoryDepthInfo.textContent = isStatistical ? '(Not used by Statistical mode)' : '(Used by Direct/Global modes)';
+
+            resetBtn.textContent = 'Reset Current Run';
+            showNotification('Current simulation run reset. Stored runs kept.', 'info');
+        }
+
+        // Modified to optionally skip chart reinitialization
+        function handleMaxRoundsChange(reinitializeCharts = true) {
+            const rounds = parseInt(maxRoundsInput.value);
+            const currentMax = simulationState.maxRounds;
+             if (!isNaN(rounds) && rounds >= 1 && rounds <= 50) {
+                 simulationState.maxRounds = rounds;
+                 if (simulationState.currentRound === 0 && !simulationState.isRunning && !simulationState.isAutoRunning) {
+                     updateStatus(`Ready to start (${simulationState.maxRounds} rounds).`);
+                 } else if (simulationState.currentRound > 0) {
+                     const finished = simulationState.currentRound >= simulationState.maxRounds;
+                     if (finished) {
+                         updateStatus(`Simulation complete after ${simulationState.currentRound} rounds (Max set to ${simulationState.maxRounds}).`);
+                         nextRoundBtn.textContent = "Finished";
+                     } else {
+                          updateStatus(`Round ${simulationState.currentRound} complete. Max rounds set to ${simulationState.maxRounds}. Ready for Round ${simulationState.currentRound + 1}.`);
+                          nextRoundBtn.textContent = `Start Round ${simulationState.currentRound + 1}`;
+                     }
+                     enableControls();
+                 }
+                 if (reinitializeCharts) {
+                     initializeCharts(); // Update scale options
+                     updateCharts(); // Redraw
+                 }
+             } else {
+                 maxRoundsInput.value = currentMax;
+                 showNotification('Please enter a number of rounds between 1 and 50.', 'error');
+             }
+        }
+
+        // --- Memory Inspection Modal ---
+        let currentlyInspectingAgent = null;
+        function showMemory(agent) {
+            currentlyInspectingAgent = agent;
+            if (!agent || !agent.memory) { showNotification('Error inspecting agent memory.', 'error'); return; }
+
+            memoryModalTitle.textContent = `${agent.id} Memory (${simulationState.agentMode} mode, Round ${simulationState.currentRound})`;
+            let memoryString = `Knowledge based on '${simulationState.agentMode}' observation mode.\n\n`;
+            memoryString += `Own Skills (Ground Truth):\n  Math: ${agent.skills.Math}, Writing: ${agent.skills.Writing}, Logic: ${agent.skills.Logic}\n\n`;
+            memoryString += `Perceived Expertise (Successes / Attempts) based on observations:\n`;
+             const subjects = Object.keys(agent.memory).sort((a, b) => { if (a === 'Self') return -1; if (b === 'Self') return 1; return a.localeCompare(b); });
+             subjects.forEach(subjectId => {
+                 memoryString += `  ${subjectId}:\n`;
+                 let hasData = false;
+                  taskTypes.forEach(task => {
+                      if (agent.memory[subjectId]?.[task]) {
+                          const { successes, attempts } = agent.memory[subjectId][task];
+                          if (attempts > 0) {
+                              const successRate = ((successes / attempts) * 100).toFixed(0);
+                              memoryString += `    - ${task}: ${successes} / ${attempts} (${successRate}%)\n`; hasData = true;
+                          }
+                      } else { console.warn(`Missing memory structure: ${agent.id} -> ${subjectId} -> ${task}`); }
+                  });
+                  if (!hasData) { memoryString += `    (No data recorded)\n`; }
+             });
+            memoryDisplay.textContent = memoryString;
+
+            detailedHistoryDisplay.innerHTML = ''; // Clear previous history
+            detailedHistoryDisplay.style.display = 'none';
+            viewDetailedHistoryBtn.textContent = 'View Detailed Interaction History';
+            viewDetailedHistoryBtn.onclick = () => toggleDetailedHistory(currentlyInspectingAgent);
+
+            memoryModal.style.display = "block";
+        }
+        function toggleDetailedHistory(agent) {
+            if (!agent || !agent.decisionHistory) return;
+            if (detailedHistoryDisplay.style.display === 'none') {
+                let historyHTML = '';
+                if (agent.decisionHistory.length === 0) {
+                    historyHTML += '<p class="text-sm text-gray-500 italic">No interactions recorded.</p>';
+                } else {
+                    [...agent.decisionHistory].reverse().forEach(entry => {
+                         historyHTML += `
+                             <div class="history-entry">
+                                 <h4 class="font-semibold text-sm">Round ${entry.round} - Task: ${entry.task}</h4>
+                                 <p class="text-xs mt-1 mb-0 font-medium">System Prompt:</p><pre>${escapeHtml(entry.systemPrompt)}</pre>
+                                 <p class="text-xs mt-1 mb-0 font-medium">User Prompt:</p><pre>${escapeHtml(entry.userPrompt)}</pre>
+                                 <p class="text-xs mt-1 mb-0 font-medium">LLM Raw Response:</p><pre>${escapeHtml(entry.rawResponse)}</pre>
+                                 <p class="text-xs mt-1"><strong>Resulting Decision:</strong> ${escapeHtml(entry.cleanedDecision)}</p>
+                             </div>`;
+                    });
+                }
+                detailedHistoryDisplay.innerHTML = historyHTML;
+                detailedHistoryDisplay.style.display = 'block';
+                viewDetailedHistoryBtn.textContent = 'Hide Detailed Interaction History';
+            } else {
+                detailedHistoryDisplay.style.display = 'none';
+                viewDetailedHistoryBtn.textContent = 'View Detailed Interaction History';
+            }
+        }
+
+        // --- Prompt Customization Modal Logic ---
+        function populatePromptEditor() {
+            promptEditorContainer.innerHTML = ''; // Clear existing
+            initialAgents.forEach(agentDef => {
+                const promptToShow = (agentDef.customSystemPrompt && agentDef.customSystemPrompt.trim() !== '')
+                    ? agentDef.customSystemPrompt
+                    : agentDef.defaultSystemPrompt; // Show default if no custom
+
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <label for="prompt-${agentDef.id}" class="block text-sm font-medium text-gray-700 mb-1">${agentDef.id} System Prompt:</label>
+                    <textarea id="prompt-${agentDef.id}" class="prompt-textarea">${escapeHtml(promptToShow || '')}</textarea>
+                `;
+                promptEditorContainer.appendChild(div);
+            });
+        }
+        function saveCustomPrompts() {
+            let changed = false;
+            initialAgents.forEach(agentDef => {
+                const textarea = document.getElementById(`prompt-${agentDef.id}`);
+                const newPrompt = textarea.value.trim();
+                // Store only if it's different from the default and not empty
+                if (newPrompt !== "" && newPrompt !== agentDef.defaultSystemPrompt) {
+                    if (agentDef.customSystemPrompt !== newPrompt) {
+                        agentDef.customSystemPrompt = newPrompt;
+                        changed = true;
+                    }
+                } else { // If it matches default or is empty, clear the custom prompt
+                     if (agentDef.customSystemPrompt !== null) {
+                         agentDef.customSystemPrompt = null;
+                         changed = true;
+                     }
+                }
+            });
+            if (changed) {
+                 showNotification('Custom prompts saved. Reset the current run to use them.', 'success');
+                 // If the simulation hasn't started, we could potentially update the live agents immediately
+                 // but the current flow requires a reset.
+            }
+            closeModal('promptModal');
+        }
+        function resetPromptEditorToDefaults() {
+            if (confirm("Reset all agent prompts in this editor to their defaults? Any unsaved changes will be lost.")) {
+                initialAgents.forEach(agentDef => {
+                    agentDef.customSystemPrompt = null; // Clear custom setting
+                    const textarea = document.getElementById(`prompt-${agentDef.id}`);
+                    if (textarea) {
+                        textarea.value = agentDef.defaultSystemPrompt || ''; // Set text area to default
+                    }
+                });
+                showNotification('Prompts reset to default in editor. Click "Save and Close" to confirm.', 'info');
+            }
+        }
+
+        // --- Stored Run Log Modal Logic ---
+        // *** New Function: Show Log for Stored Run ***
+        function showStoredRunLog(runId) {
+            const runData = savedSimulations.find(run => run.id === runId);
+            if (!runData) {
+                 showNotification('Could not find data for the selected run.', 'error');
+                 return;
+            }
+
+            storedLogModalTitle.textContent = `Detailed Log for: ${runData.label}`;
+            storedLogDisplay.innerHTML = ''; // Clear previous content
+
+            const fullLog = runData.performance.fullResultsLog || [];
+            const decisionHistories = runData.performance.agentDecisionHistories || {};
+
+            if (fullLog.length === 0) {
+                storedLogDisplay.innerHTML = '<p class="italic text-gray-500">No round results found in the stored log.</p>';
+                storedLogModal.style.display = 'block';
+                return;
+            }
+
+            let logHTML = '';
+            fullLog.forEach(roundEntry => {
+                 logHTML += `<div class="log-round-container mb-4">`;
+                 logHTML += `<div class="log-round-header">--- Round ${roundEntry.round} ---</div>`;
+
+                 roundEntry.results.forEach(res => {
+                     const outcome = res.success ? '<span class="success">Success</span>' : '<span class="failure">Failure</span>';
+                     let decisionText = `decided: ${res.decision}`;
+                     if (res.decision !== res.actualSolver && !(res.decision === 'Self' && res.assignedAgent === res.actualSolver) && !res.decision.includes('(Forced from:')) {
+                         decisionText += ` (solved by: ${res.actualSolver})`;
+                     }
+                     let confidenceText = ` <span class="confidence-score">(Conf: ${(res.confidence * 100).toFixed(0)}%)</span>`;
+
+                     // Find corresponding decision history entry for prompts/raw response
+                     let interactionDetails = null;
+                     const agentHistory = decisionHistories[res.assignedAgent] || [];
+                     // Find the entry for this specific agent, round, and task
+                     interactionDetails = agentHistory.find(hist => hist.round === roundEntry.round && hist.task === res.task);
+
+                     logHTML += `<div class="log-item log-entry">`; // Added log-entry class
+                     logHTML += `<div><strong>${res.assignedAgent}</strong> assigned <strong>${res.task}</strong> &rarr; ${decisionText}${confidenceText} &rarr; ${outcome}</div>`;
+
+                     if (interactionDetails) {
+                         logHTML += `<div class="mt-2 ml-4">`;
+                         logHTML += `<p class="text-xs mt-1 mb-0 font-medium">System Prompt Used:</p><pre>${escapeHtml(interactionDetails.systemPrompt)}</pre>`;
+                         logHTML += `<p class="text-xs mt-1 mb-0 font-medium">User Prompt:</p><pre>${escapeHtml(interactionDetails.userPrompt)}</pre>`;
+                         logHTML += `<p class="text-xs mt-1 mb-0 font-medium">LLM Raw Response:</p><pre>${escapeHtml(interactionDetails.rawResponse)}</pre>`;
+                         logHTML += `</div>`;
+                     } else {
+                         logHTML += `<div class="mt-1 ml-4 text-xs text-gray-500 italic">(Detailed interaction log not found for this entry)</div>`;
+                     }
+                      logHTML += `</div>`; // Close log-item / log-entry
+                 });
+                 logHTML += `</div>`; // Close log-round-container
+            });
+
+            storedLogDisplay.innerHTML = logHTML;
+            storedLogDisplay.scrollTop = 0; // Scroll to top
+            storedLogModal.style.display = 'block';
+        }
+
+        // Generic Close Modal Function
+        function closeModal(modalId) {
+            const modalElement = document.getElementById(modalId);
+            if (modalElement) modalElement.style.display = "none";
+
+            // Specific cleanup if needed
+            if (modalId === 'memoryModal') {
+                currentlyInspectingAgent = null;
+                if(detailedHistoryDisplay) detailedHistoryDisplay.style.display = 'none';
+                if(viewDetailedHistoryBtn) viewDetailedHistoryBtn.textContent = 'View Detailed Interaction History';
+            }
+             if (modalId === 'storedLogModal') {
+                 storedLogDisplay.innerHTML = ''; // Clear content
+             }
+        }
+        // Close modals if clicking outside the content
+        window.onclick = function(event) {
+             if (event.target == memoryModal) closeModal('memoryModal');
+             if (event.target == promptModal) closeModal('promptModal');
+             if (event.target == storedLogModal) closeModal('storedLogModal');
+        }
+
+
+        // --- Charting Functions ---
+        function initializeCharts() {
+            const scoreCtx = document.getElementById('scoreChart').getContext('2d');
+            const confidenceCtx = document.getElementById('confidenceChart').getContext('2d');
+            const delegationCtx = document.getElementById('delegationChart').getContext('2d');
+            const correctDelegationCtx = document.getElementById('correctDelegationChart').getContext('2d');
+            if (scoreChartInstance) scoreChartInstance.destroy();
+            if (confidenceChartInstance) confidenceChartInstance.destroy();
+            if (delegationChartInstance) delegationChartInstance.destroy();
+            if (correctDelegationChartInstance) correctDelegationChartInstance.destroy();
+
+            const suggestedMaxScore = POINTS_FOR_ALL_SUCCESS * simulationState.maxRounds;
+            const lineChartOptions = (yLabel, suggestedMax = null, showYPercent = false) => ({
+                scales: {
+                    y: { beginAtZero: true, max: suggestedMax, title: { display: true, text: yLabel }, ticks: { callback: showYPercent ? value => `${(value * 100).toFixed(0)}%` : undefined } },
+                    x: { title: { display: true, text: 'Round' } }
+                },
+                plugins: { title: { display: false }, legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 }, padding: 10 } }, tooltip: { callbacks: { label: function(context) { let label = context.dataset.label || ''; if (label) { label += ': '; } if (context.parsed.y !== null) { const value = showYPercent ? (context.parsed.y * 100).toFixed(1) + '%' : context.parsed.y.toFixed(2); label += value; } return label; } } } },
+                responsive: true, maintainAspectRatio: false, animation: { duration: 200 }, elements: { point: { radius: 2 } }
+            });
+
+            scoreChartInstance = new Chart(scoreCtx, { type: 'line', data: { labels: [], datasets: [] }, options: lineChartOptions('Cumulative Score', suggestedMaxScore > 0 ? suggestedMaxScore : 10) });
+            confidenceChartInstance = new Chart(confidenceCtx, { type: 'line', data: { labels: [], datasets: [] }, options: lineChartOptions('Avg. Confidence (0-1)', 1.0) });
+            delegationChartInstance = new Chart(delegationCtx, { type: 'line', data: { labels: [], datasets: [] }, options: lineChartOptions('Delegation Rate', 1.0, true) });
+            correctDelegationChartInstance = new Chart(correctDelegationCtx, { type: 'line', data: { labels: [], datasets: [] }, options: lineChartOptions('Correct Assignment Rate', 1.0, true) });
+        }
+
+        function updateCharts() {
+            if (!scoreChartInstance || !confidenceChartInstance || !delegationChartInstance || !correctDelegationChartInstance) {
+                initializeCharts();
+            }
+
+            const selectedRunIds = Array.from(savedRunsList.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+            const savedRunsToDisplay = savedSimulations.filter(run => selectedRunIds.includes(run.id));
+
+            let maxRoundsAcrossRuns = simulationState.currentRound;
+            savedRunsToDisplay.forEach(run => { maxRoundsAcrossRuns = Math.max(maxRoundsAcrossRuns, run.settings.maxRounds); });
+            maxRoundsAcrossRuns = Math.max(maxRoundsAcrossRuns, 1);
+            const labels = Array.from({ length: maxRoundsAcrossRuns }, (_, i) => `R${i + 1}`);
+
+            let currentRunDatasets = { score: null, confidence: [], delegation: null, correctDelegation: null };
+            if (simulationState.currentRound > 0) {
+                const currentRunColor = '#000000';
+                const currentRunLabelBase = `Current (${simulationState.agentMode.substring(0,4)}${simulationState.agentMode !== 'statistical' ? ` d${simulationState.memoryDepth}` : ''}/${simulationState.organizationalInstruction.substring(0,4)})`;
+
+                const cumulativeScoresCurrent = simulationState.roundScores.reduce((acc, score, i) => { acc.push((acc[i - 1] || 0) + score); return acc; }, []);
+                currentRunDatasets.score = { label: `${currentRunLabelBase} - Score`, data: cumulativeScoresCurrent, borderColor: currentRunColor, backgroundColor: currentRunColor + '30', tension: 0.1, fill: false, borderWidth: 2.5, pointRadius: 3 };
+
+                const avgConfidenceCurrent = [];
+                for (let r = 1; r <= simulationState.currentRound; r++) {
+                     let roundConfSum = 0; let agentCount = 0;
+                     agents.forEach(agent => {
+                         const confEntry = (simulationState.agentConfidenceHistory[agent.id] || []).find(entry => entry.round === r);
+                         if (confEntry) { roundConfSum += confEntry.confidence; agentCount++; }
+                     });
+                     avgConfidenceCurrent.push(agentCount > 0 ? roundConfSum / agentCount : null);
+                }
+                currentRunDatasets.confidence = [{ label: `${currentRunLabelBase} - Avg Conf`, data: avgConfidenceCurrent, borderColor: currentRunColor, backgroundColor: currentRunColor + '30', tension: 0.1, fill: false, borderWidth: 2.5, pointRadius: 3, spanGaps: true }];
+
+                currentRunDatasets.delegation = { label: `${currentRunLabelBase} - Deleg Rate`, data: simulationState.delegationHistory.map(h => h.overallRate), borderColor: currentRunColor, backgroundColor: currentRunColor + '30', tension: 0.1, fill: false, borderWidth: 2.5, pointRadius: 3 };
+                currentRunDatasets.correctDelegation = { label: `${currentRunLabelBase} - Correct Assign Rate`, data: simulationState.correctDelegationHistory.map(h => h.correctRate), borderColor: currentRunColor, backgroundColor: currentRunColor + '30', tension: 0.1, fill: false, borderWidth: 2.5, pointRadius: 3 };
+            }
+
+            const savedRunDatasets = savedRunsToDisplay.map(run => {
+                const runLabelBase = run.label; const runColor = run.color;
+                const cumulativeScoresSaved = run.performance.scoresPerRound.reduce((acc, score, i) => { acc.push((acc[i - 1] || 0) + score); return acc; }, []);
+                const scoreData = { label: `${runLabelBase} - Score`, data: cumulativeScoresSaved, borderColor: runColor, backgroundColor: runColor + '1A', tension: 0.1, fill: false, borderWidth: 1.5 };
+
+                const avgConfidenceSaved = [];
+                 for (let r = 1; r <= run.settings.maxRounds; r++) {
+                     let roundConfSum = 0; let agentCount = 0;
+                     initialAgents.forEach(agentDef => {
+                         const confEntry = (run.performance.agentConfidenceHistory[agentDef.id] || []).find(entry => entry.round === r);
+                         if (confEntry) { roundConfSum += confEntry.confidence; agentCount++; }
+                     });
+                     avgConfidenceSaved.push(agentCount > 0 ? roundConfSum / agentCount : null);
+                 }
+                const confidenceData = [{ label: `${runLabelBase} - Avg Conf`, data: avgConfidenceSaved, borderColor: runColor, backgroundColor: runColor + '1A', tension: 0.1, fill: false, borderWidth: 1.5, spanGaps: true }];
+
+                const delegationData = { label: `${runLabelBase} - Deleg Rate`, data: run.performance.delegationHistory.map(h => h.overallRate), borderColor: runColor, backgroundColor: runColor + '1A', tension: 0.1, fill: false, borderWidth: 1.5 };
+                const correctDelegationData = { label: `${runLabelBase} - Correct Assign Rate`, data: run.performance.correctDelegationHistory.map(h => h.correctRate), borderColor: runColor, backgroundColor: runColor + '1A', tension: 0.1, fill: false, borderWidth: 1.5 };
+                return { score: scoreData, confidence: confidenceData, delegation: delegationData, correctDelegation: correctDelegationData };
+            });
+
+            // Update charts
+            scoreChartInstance.data.labels = labels;
+            scoreChartInstance.data.datasets = [...(currentRunDatasets.score ? [currentRunDatasets.score] : []), ...savedRunDatasets.map(ds => ds.score)];
+            scoreChartInstance.update();
+            confidenceChartInstance.data.labels = labels;
+            confidenceChartInstance.data.datasets = [...(currentRunDatasets.confidence ? currentRunDatasets.confidence : []), ...savedRunDatasets.flatMap(ds => ds.confidence)];
+            confidenceChartInstance.update();
+            delegationChartInstance.data.labels = labels;
+            delegationChartInstance.data.datasets = [...(currentRunDatasets.delegation ? [currentRunDatasets.delegation] : []), ...savedRunDatasets.map(ds => ds.delegation)];
+            delegationChartInstance.update();
+            correctDelegationChartInstance.data.labels = labels;
+            correctDelegationChartInstance.data.datasets = [...(currentRunDatasets.correctDelegation ? [currentRunDatasets.correctDelegation] : []), ...savedRunDatasets.map(ds => ds.correctDelegation)];
+            correctDelegationChartInstance.update();
+        }
+
+        // --- Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+             initializeDefaultPrompts(); // Initialize default prompt text on load
+             // API key setup will trigger the rest (populate editor, reset sim, init charts)
+             updateSavedRunsDisplay();
+        });
+
+    </script>
+</body>
+</html>

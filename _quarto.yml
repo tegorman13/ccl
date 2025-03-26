@@ -44,6 +44,7 @@ website:
         - ai_decision.qmd
         - llm_energy.qmd
         - ai_interaction.qmd
+        - tms_llm.qmd
       - text: "---"
       - section: "Misc"
         contents:
