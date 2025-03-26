@@ -69,6 +69,8 @@ Simulations of Transactive Memory Systems
 
 - Then press save key to start the simulation demo
 - Press the **Run full simulation button** to see the simulation in action
+- Run simulations, track team scores, and visualize performance using charts. 
+- Compare different settings to see which factors best help the AI team develop an effective TMS
 
 :::: {.content-visible when-format="html"}
 
@@ -209,3 +211,13 @@ Essentially, this demo is a sandbox for observing how communication patterns (Ag
 This simulation provides a visual and interactive way to explore the dynamics of team knowledge sharing and task delegation, offering insights into how different factors can influence the development of an effective Transactive Memory System.
 
 ---
+
+
+::: {#fig-tms-llm layout-ncol=2}
+
+![](images/tms_llm_wide3.png){width="400" height="380"}
+
+![](images/tms_llm_wide4.png){width="400" height="380"}
+
+Simulations of Transactive Memory Systems
+:::
