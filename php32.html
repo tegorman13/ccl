@@ -1,0 +1,2386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMS Simulation Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; background-color: #f9fafb; padding: 1rem; }
+        #resultsArea, #storedLogDisplay /* Container for log panels */ {
+            white-space: pre-wrap; /* Preserve formatting in children */
+            background-color: #f3f4f6; /* Slightly lighter gray for container */
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border: 1px solid #d1d5db;
+        }
+        #resultsArea {
+            height: 300px; /* Adjusted height */
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+            background-color: #ffffff; /* Keep results area white */
+            padding: 10px; /* Slightly less padding */
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem; /* rounded-md */
+        }
+
+        /* --- Stored Log Modal Tab and Panel Styles --- */
+        .log-tabs { display: flex; border-bottom: 1px solid #d1d5db; margin-bottom: 10px; }
+        .tab-button { padding: 8px 16px; cursor: pointer; border: 1px solid transparent; border-bottom: none; border-radius: 4px 4px 0 0; background-color: #e5e7eb; color: #4b5563; font-size: 0.9em; margin-right: 4px; transition: background-color 0.2s, border-color 0.2s; }
+        .tab-button:hover { background-color: #d1d5db; }
+        .tab-button.active { background-color: #fff; border-color: #d1d5db; font-weight: 600; color: #1f2937; }
+        #storedLogDisplay { height: calc(75vh - 60px); overflow: hidden; padding: 0; border: none; margin-top: 0; background-color: transparent; }
+        .log-panel { display: none; border: 1px solid #d1d5db; padding: 15px; border-radius: 4px; background-color: #fff; overflow-y: auto; height: 100%; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
+        .log-panel.active { display: block; }
+
+        /* Specific panel text styling */
+        #logOverviewPanel { font-size: 0.95em; line-height: 1.5; }
+        #logOverviewPanel p { margin-bottom: 12px; padding: 8px 12px; background-color: #f9fafb; border-radius: 4px; }
+        #logOverviewPanel h3, #logOverviewPanel h4 { margin: 16px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #e5e7eb; color: #4338ca; }
+        #logOverviewPanel span { display: inline-block; min-width: 180px; font-weight: 600; color: #4b5563; }
+        #logPromptsPanel pre { background-color: #f3f4f6; padding: 12px; margin-top: 6px; margin-bottom: 16px; border-radius: 3px; white-space: pre-wrap; word-break: break-word; font-size: 0.85em; max-height: 200px; overflow-y: auto; border-left: 3px solid #d1d5db; }
+        #logPromptsPanel h5 { margin-top: 16px; padding: 6px 10px; background-color: #eef2ff; border-radius: 4px; font-weight: 600; }
+        #logResultsPanel { font-size: 0.9em; font-family: monospace; line-height: 1.5; }
+        #logResultsPanel .log-round-container { margin-bottom: 16px; padding: 8px; background-color: #f9fafb; border-radius: 6px; }
+        #logResultsPanel .log-round-header { font-size: 1.1em; color: #4338ca; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #d1d5db; }
+        #logResultsPanel .log-item { padding: 6px 10px; margin-bottom: 6px; background-color: white; border-left: 3px solid #d1d5db; border-radius: 0 4px 4px 0; }
+        #logPromptsPanel h3, #logResultsPanel h3 { margin-bottom: 16px; color: #4338ca; font-size: 1.1em; }
+
+        button { transition: background-color 0.2s; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .result-round-header, .log-round-header { font-weight: bold; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #d1d5db; color: #1f2937; }
+        .result-item, .log-item { margin-bottom: 4px; margin-left: 12px; line-height: 1.4; } /* Indent results */
+        #resultsArea > div:last-child .result-round-header { border-bottom: none; } /* Remove border on last round */
+        #logResultsPanel > div:last-child .log-round-header { border-bottom: none; }
+        .success { color: #16a34a; font-weight: bold; }
+        .failure { color: #dc2626; font-weight: bold; }
+        .delegation-info { font-size: 0.85em; color: #4b5563; margin-left: 10px;}
+
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 800px; border-radius: 8px; max-height: 90vh; display: flex; flex-direction: column; }
+        .modal-content-large { width: 90%; max-width: 1200px; /* For wider log/prompt modal */ }
+        .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; align-self: flex-end; } /* Position close button */
+        .close-button:hover, .close-button:focus { color: black; text-decoration: none; }
+        #memoryDisplay, #detailedHistoryDisplay, .prompt-textarea { white-space: pre-wrap; font-family: monospace; font-size: 0.9em; background-color: #f3f4f6; padding: 10px; border-radius: 4px; max-height: 400px; overflow-y: auto;}
+        #detailedHistoryDisplay pre { background-color: #e5e7eb; padding: 5px; margin-top: 2px; margin-bottom: 8px; border-radius: 3px; white-space: pre-wrap; word-break: break-all; font-size: 0.85em; max-height: 150px; overflow-y: auto; }
+        /* <<< MODIFICATION START >>> - Added style for Thinking block */
+        #detailedHistoryDisplay .thinking-block pre { background-color: #fffbe6; border-left: 3px solid #facc15; padding: 5px; margin-top: 2px; margin-bottom: 8px; border-radius: 0 3px 3px 0; color: #713f12; }
+        /* <<< MODIFICATION END >>> */
+        .history-entry, .log-entry { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed #ccc; }
+        .history-entry:last-child, .log-entry:last-child { border-bottom: none; }
+        select, input[type="number"], textarea { padding: 0.3rem 0.6rem; border: 1px solid #d1d5db; border-radius: 0.375rem; background-color: white; font-size: 0.875rem; line-height: 1.25rem; width: 100%; /* Make inputs/selects full width */ }
+        input[type="number"] { width: 6em; } /* Specific width for number input */
+        textarea.prompt-textarea { width: 100%; min-height: 100px; font-size: 0.8em; }
+
+        /* Comparison Area Styles */
+        #comparisonSelectorArea { background-color: #eef2ff; border: 1px dashed #a5b4fc; padding: 15px; border-radius: 5px; font-size: 0.9em;}
+        #savedRunsList .run-item { display: flex; align-items: center; margin-bottom: 5px; gap: 8px; }
+        #savedRunsList label { cursor: pointer; flex-grow: 1; display: inline-flex; align-items: center; }
+        #savedRunsList input[type="checkbox"] { margin-right: 8px; width: auto; /* Override full width */ }
+        .run-label-color-box { display: inline-block; width: 12px; height: 12px; margin-right: 5px; border: 1px solid #ccc; vertical-align: middle; flex-shrink: 0;}
+        .comparison-button { /* Shared style for view/delete */ padding: 1px 5px; font-size: 0.75rem; border-radius: 3px; border: 1px solid; cursor: pointer; flex-shrink: 0; margin-left: 5px; }
+        .view-log-button { background-color: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
+        .view-log-button:hover { background-color: #bfdbfe; }
+        .delete-run-button { background-color: #fee2e2; color: #991b1b; border-color: #fecaca; }
+        .delete-run-button:hover { background-color: #fecaca; }
+        #comparisonActionButtons button { margin-right: 8px; padding: 4px 10px; font-size: 0.8rem; }
+
+        /* Chart container styling */
+        .chart-container { background-color: white; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); padding: 1rem; position: relative; height: 18rem; /* FIXED HEIGHT */ }
+
+        /* Agent Choice Matrices Area Styles */
+        #agentChoiceMatrices { background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem; }
+        #agentChoiceMatrices h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; text-align: center; color: #495057; }
+        .matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .choice-matrix-table { width: 100%; border-collapse: collapse; font-size: 0.85em; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-radius: 4px; overflow: hidden; }
+        .choice-matrix-table caption { font-weight: 600; padding: 0.5rem; background-color: #e9ecef; color: #495057; border-bottom: 1px solid #dee2e6; }
+        .choice-matrix-table th, .choice-matrix-table td { border: 1px solid #dee2e6; padding: 0.4rem 0.6rem; text-align: center; }
+        .choice-matrix-table th { background-color: #f8f9fa; font-weight: 500; }
+        .choice-matrix-table td:first-child { text-align: left; font-weight: 500; background-color: #f8f9fa; }
+        .choice-matrix-table td { min-width: 50px; }
+        .matrix-no-data { text-align: center; font-style: italic; color: #6c757d; padding: 1rem; }
+        .correct-choice { background-color: #d1e7dd !important; font-weight: 600; color: #0f5132; }
+
+        /* Inspect Agent Buttons Area */
+        #inspectAgentButtons { display: inline-flex; align-items: center; gap: 5px; border-r: 1px solid #d1d5db; padding-right: 12px; margin-right: 4px; }
+
+        /* General Panel Styling */
+        .panel { background-color: #f8f9fa; /* Lighter gray like screenshot */ padding: 1rem; border-radius: 0.5rem; /* rounded-lg */ border: 1px solid #dee2e6; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */ }
+
+    </style>
+</head>
+<body class="bg-gray-100">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Transactive Memory Simulation with LLM Agents</h1>
+
+    <div id="apiSetup" class="bg-white rounded-xl shadow-md p-6 mb-6 max-w-md mx-auto">
+        <h2 class="text-xl font-semibold mb-4">API Key Setup</h2>
+        <div class="mb-4">
+            <label for="apiKeyInput" class="block text-sm font-medium text-gray-700 mb-1">Enter your Purdue API Key (Optional):</label>
+            <input type="password" id="apiKeyInput" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter API key (leave blank to skip)" value="sk-4597455063b242e9a43187a32115c04a">
+             <p class="text-xs text-gray-500 mt-1" id="apiKeyStatus">No valid API key set (or &lt; 10 characters).</p>
+              <p class="text-xs text-red-600 mt-1">Warning: API Key visible in source. Use backend in production.</p>
+        </div>
+        <button id="saveApiKey" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md">
+            Save API Key & Start
+        </button>
+         <button id="skipApiKey" class="mt-2 w-full bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md">
+            Skip (Use Simulation Only)
+        </button>
+    </div>
+
+    <div id="simulationArea" class="hidden max-w-7xl mx-auto">
+
+        <div class="bg-white rounded-xl shadow-md p-4 mb-6 flex justify-between items-center flex-wrap gap-y-3">
+            <div>
+                <h2 class="font-semibold text-lg">Simulation Status</h2>
+                <p class="text-sm text-gray-600" id="simulationStatus">Ready to start</p>
+                <p class="text-sm text-gray-600 mt-1 font-medium" id="scoreDisplay">Total Score: 0</p>
+                 <p class="text-xs text-gray-500 mt-1" id="currentOrgInstructionDisplay">Instruction: Baseline</p>
+                 <p class="text-xs text-gray-500 mt-1" id="currentModelDisplay">Model: phi4:latest</p>
+            </div>
+            <div class="flex items-center space-x-3 flex-wrap gap-y-2">
+                <div id="inspectAgentButtons">
+                    <span class="text-sm font-medium text-gray-600">Inspect:</span>
+                     </div>
+                 <div id="loadingIndicator" class="hidden items-center">
+                     <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-indigo-600 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                     </svg>
+                     <span class="text-sm text-gray-600" id="loadingText">Processing...</span>
+                 </div>
+                 <button id="stopBtn" class="hidden bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-md">Stop Auto Run</button>
+
+            </div>
+        </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <div class="md:col-span-1 space-y-6">
+
+                <div id="settingsPanel" class="panel">
+                    <h3 class="font-semibold text-lg mb-4 border-b pb-2">Simulation Settings</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Agent Mode:</label>
+                            <div class="flex flex-col space-y-1">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="agentMode" value="direct" class="form-radio text-indigo-600 h-4 w-4">
+                                    <span class="ml-2 text-sm">Direct Interactions Only</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="agentMode" value="global" class="form-radio text-indigo-600 h-4 w-4" checked>
+                                    <span class="ml-2 text-sm">Observe Everything (Global)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="modelSelect" class="block text-sm font-medium text-gray-700 mb-1">LLM Model:</label>
+                            <select id="modelSelect">
+                                <option value="phi4:latest" selected>phi4:latest (Default)</option>
+                                <option value="llama3.2:latest">llama3.2:latest</option>
+                                <option value="mistral:latest">mistral:latest</option>
+                                <!-- <option value="deepseek-r1:14b">deepseek-r1:14b</option> -->
+                                <!-- <option value="qwq:latest">qwq:latest</option> -->
+                                <!-- <option value="qwen2.5:72b">qwen2.5:72b</option>  -->
+                                <option value="llama3.3:70b">llama3.3:70b</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="orgInstructionSelect" class="block text-sm font-medium text-gray-700 mb-1">Organizational Prompt:</label>
+                            <select id="orgInstructionSelect">
+                                <option value="baseline" selected>Baseline (No extra guidance)</option>
+                                <option value="focus_history">Focus on Best History</option>
+                                <option value="encourage_delegation">Encourage Delegation</option>
+                                <option value="self_reliant">Self-Reliant Bias</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-1">
+                                <label for="maxRoundsInput" class="block text-sm font-medium text-gray-700 mb-1">Total Rounds:</label>
+                                <input type="number" id="maxRoundsInput" value="15" min="1" max="50">
+                            </div>
+                            <div class="flex-1" id="memoryDepthSetting">
+                                <label for="memoryDepthInput" class="block text-sm font-medium text-gray-700 mb-1">History Depth:</label>
+                                <input type="number" id="memoryDepthInput" value="3" min="0" max="10">
+                                <span id="memoryDepthInfo" class="hidden text-xs text-gray-500 ml-1">(Used by Direct/Global modes)</span>
+                            </div>
+                        </div>
+                        <button id="resetBtn" class="w-full bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md mt-2">Reset Simulation</button>
+                    </div>
+                </div>
+
+                <div id="actionsPanel" class="panel">
+                    <h3 class="font-semibold text-lg mb-4 border-b pb-2">Actions</h3>
+                    <div class="space-y-3">
+                        <button id="nextRoundBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md">Run Next Step</button>
+                        <button id="runAllBtn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md">Run Full Simulation</button>
+                        <button id="storeRunBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md" disabled>Save Simulation Results</button>
+                    </div>
+                </div>
+
+                 <div id="promptsPanel" class="panel">
+                    <h3 class="font-semibold text-lg mb-4 border-b pb-2">Customize Prompts</h3>
+                     <p class="text-xs text-gray-600 mb-3">Modify base system prompts. Org. guidance & task info added automatically. Reset simulation for changes to take effect.</p>
+                    <div id="promptEditorContainer" class="space-y-4 mb-4">
+                         </div>
+                    <div class="space-y-2">
+                        <button id="savePromptsBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md">Save Prompts (in session)</button>
+                        <button id="resetPromptsBtn" class="w-full bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md">Reset Prompts to Default</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="md:col-span-2 space-y-6">
+
+                <div class="panel">
+                     <h3 class="font-semibold text-lg mb-2 border-b pb-2">Current Simulation Results</h3>
+                    <div id="resultsArea">
+                        No results yet.
+                    </div>
+                </div>
+
+                <div id="comparisonSelectorArea" class="panel bg-indigo-50 border-indigo-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-base font-semibold">Compare Stored Runs (Select to Plot)</h3>
+                        <div id="comparisonActionButtons">
+                            <button id="selectAllRunsBtn" class="bg-blue-500 hover:bg-blue-600 text-white rounded">Select All</button>
+                            <button id="deselectAllRunsBtn" class="bg-gray-500 hover:bg-gray-600 text-white rounded">Deselect All</button>
+                            <button id="deleteSelectedRunsBtn" class="bg-red-600 hover:bg-red-700 text-white rounded">Delete Selected</button>
+                        </div>
+                    </div>
+                    <div id="savedRunsList">
+                        <p class="text-sm text-gray-500 italic">No runs stored yet. Complete a simulation and click "Save Simulation Results".</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="chart-container">
+                        <h3 class="text-base font-semibold mb-2 text-center">Cumulative Score</h3>
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="text-base font-semibold mb-2 text-center">Correct Assignment Rate</h3>
+                        <canvas id="correctDelegationChart"></canvas>
+                    </div>
+                </div>
+
+                 <div id="agentChoiceMatrices" class="panel">
+                     <h3 class="text-lg font-semibold mb-4 text-center">Individual Agent Choice Proportions (by Task Assigned)</h3>
+                     <div id="matrixGridContainer" class="matrix-grid">
+                         <p class="matrix-no-data md:col-span-2 lg:col-span-3">No data yet. Matrices will update as simulation proceeds.</p>
+                     </div>
+                 </div>
+
+            </div>
+        </div>
+    </div> <div id="memoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" data-modal-id="memoryModal">×</span>
+            <h2 id="memoryModalTitle" class="text-xl font-semibold mb-4">Agent Memory</h2>
+            <div id="memoryDisplay"></div>
+            <button id="viewDetailedHistoryBtn" class="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium py-1 px-3 rounded">View Detailed Interaction History</button>
+            <div id="detailedHistoryDisplay" class="mt-4 pt-4 border-t border-gray-300" style="display: none; white-space: normal;">
+                 </div>
+        </div>
+    </div>
+
+    <div id="storedLogModal" class="modal">
+        <div class="modal-content modal-content-large">
+             <span class="close-button" data-modal-id="storedLogModal">×</span>
+            <h2 id="storedLogModalTitle" class="text-xl font-semibold mb-4">Detailed Simulation Log</h2>
+            <div class="log-tabs">
+                 <button class="tab-button active" data-target="logOverviewPanel">Overview</button>
+                 <button class="tab-button" data-target="logPromptsPanel">System Prompts</button>
+                 <button class="tab-button" data-target="logResultsPanel">Result Logs</button>
+            </div>
+             <div id="storedLogDisplay">
+                 <div id="logOverviewPanel" class="log-panel active"></div>
+                 <div id="logPromptsPanel" class="log-panel"></div>
+                 <div id="logResultsPanel" class="log-panel"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Constants ---
+        const CONSTANTS = {
+            AGENT_MODE: {
+                DIRECT: 'direct',
+                GLOBAL: 'global'
+            },
+            ORG_INSTRUCTION: {
+                BASELINE: 'baseline',
+                FOCUS_HISTORY: 'focus_history',
+                ENCOURAGE_DELEGATION: 'encourage_delegation',
+                SELF_RELIANT: 'self_reliant'
+            },
+            SKILL_LEVEL: {
+                GOOD: 'Good',
+                MEDIOCRE: 'Mediocre',
+                POOR: 'Poor'
+            },
+            TASK_TYPES: ["Math", "Writing", "Logic"],
+            AVAILABLE_MODELS: [ // Added list of models
+               "phi4:latest", "llama3.2:latest", "mistral:latest", 
+                 "llama3.3:70b" // deepseek-r1:14b  qwq:latest "qwen2.5:72b", FIX: Corrected deepseek name
+            ],
+            DEFAULT_MODEL: "phi4:latest", // Default model
+            POINTS_FOR_ALL_SUCCESS: 3,
+            MAX_ROUNDS_LIMIT: 50,
+            MEMORY_DEPTH_LIMIT: 10,
+            NOTIFICATION_DURATION: 3000,
+            COMPARISON_COLORS: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF', '#E56717', '#581845', '#1F618D'],
+            API_MAX_TOKENS: 60, // Increased slightly in case thinking adds tokens
+            API_TEMPERATURE: 0.1,
+            SELF_DECISION: "Self",
+            API_KEY_MIN_LENGTH: 10 // Added minimum length for basic API key validation
+        };
+
+        // --- Main Application Object ---
+        const simulationApp = {
+            // --- Configuration ---
+            config: {
+                purdue_api_key: null, // Start with null, user needs to input or skip
+                apiUrl: "https://genai.rcac.purdue.edu/api/chat/completions",
+                model: CONSTANTS.DEFAULT_MODEL, // Use default model from constants
+                skillSuccessRate: {
+                    [CONSTANTS.SKILL_LEVEL.GOOD]: 0.9,
+                    [CONSTANTS.SKILL_LEVEL.MEDIOCRE]: 0.5,
+                    [CONSTANTS.SKILL_LEVEL.POOR]: 0.1
+                },
+                initialAgentsDefinition: [ // Renamed from initialAgents
+                    { id: "Agent 1", skills: { "Math": CONSTANTS.SKILL_LEVEL.GOOD, "Writing": CONSTANTS.SKILL_LEVEL.POOR, "Logic": CONSTANTS.SKILL_LEVEL.POOR }, color: "#4338CA", defaultSystemPrompt: null, customSystemPrompt: null }, // Indigo
+                    { id: "Agent 2", skills: { "Math": CONSTANTS.SKILL_LEVEL.POOR, "Writing": CONSTANTS.SKILL_LEVEL.GOOD, "Logic": CONSTANTS.SKILL_LEVEL.POOR }, color: "#047857", defaultSystemPrompt: null, customSystemPrompt: null }, // Emerald
+                    { id: "Agent 3", skills: { "Math": CONSTANTS.SKILL_LEVEL.POOR, "Writing": CONSTANTS.SKILL_LEVEL.POOR, "Logic": CONSTANTS.SKILL_LEVEL.GOOD }, color: "#BE185D", defaultSystemPrompt: null, customSystemPrompt: null }  // Pink
+                ],
+                agentIds: [], // Will be populated in init
+                taskTypes: CONSTANTS.TASK_TYPES,
+            },
+
+            // --- State ---
+            state: {
+                apiKeySet: false,
+                apiSkipped: false, // Flag to track if API key step was skipped
+                currentRound: 0,
+                maxRounds: 15,
+                memoryDepth: 3,
+                isRunning: false,
+                isAutoRunning: false,
+                stopRequested: false,
+                resultsLog: [], // Log for CURRENT run { round, results: [{..., systemPrompt}, ...] }
+                agents: [], // Holds agent objects for the current run (including activeSystemPrompt)
+                agentMode: CONSTANTS.AGENT_MODE.GLOBAL,
+                organizationalInstruction: CONSTANTS.ORG_INSTRUCTION.BASELINE,
+                totalScore: 0,
+                roundScores: [],
+                correctDelegationHistory: [], // { round, correctRate }
+                savedSimulations: [], // { id, timestamp, settings: {...}, performance: {...}, color, label }
+                currentlyInspectingAgentId: null, // Store ID instead of object ref
+                currentRunInstanceStored: false // FIX: Added flag to track if current instance is stored
+            },
+
+            // --- Chart Instances ---
+            charts: {
+                scoreChartInstance: null,
+                correctDelegationChartInstance: null,
+            },
+
+            // --- DOM Elements Cache ---
+            elements: {},
+
+             // --- Initialize parent references after object creation ---
+             initParentReferences() {
+                 // Bind `this` for sub-modules to refer back to simulationApp
+                 for (const moduleKey in this) {
+                     if (typeof this[moduleKey] === 'object' && this[moduleKey] !== null && moduleKey !== 'config' && moduleKey !== 'state' && moduleKey !== 'elements' && moduleKey !== 'charts') {
+                         this[moduleKey].parent = this;
+                     }
+                 }
+                 // Specifically for charts as it's nested differently
+                 if (this.charts) {
+                     this.charts.parent = this;
+                 }
+             },
+
+            // --- Initialization ---
+            init() {
+                this.initParentReferences(); // Initialize parent references first
+                this.cacheDOMElements();
+                this.config.agentIds = this.config.initialAgentsDefinition.map(a => a.id);
+                this.bindEventListeners();
+                this.prompts.generateDefaultPrompts(); // Initialize default prompt text on load
+                this.prompts.populateEditor(); // Populate the inline editor
+
+                // API Key Setup: Pre-fill if available in local storage (more persistent but still insecure)
+                const storedKey = localStorage.getItem('purdueApiKey');
+                if (storedKey) {
+                    this.elements.apiKeyInput.value = storedKey;
+                    this.config.purdue_api_key = storedKey; // Use stored key if valid length
+                    this.validateAndSetApiKeyStatus(storedKey);
+                } else {
+                     this.elements.apiKeyStatus.textContent = 'No API key stored.';
+                }
+
+                this.ui.updateSavedRunsDisplay(); // Populate list if any runs were previously stored
+                this.charts.init(); // Initialize charts with empty data
+                this.ui.updateControlStates(); // Ensure initial state is correct (simulation area hidden)
+                this.ui.populateInspectAgentButtons(); // Add inspect buttons
+                this.ui.updateCurrentModelDisplay(); // Show initial model
+            },
+
+             cacheDOMElements() {
+                 const ids = [
+                     'apiKeyInput', 'saveApiKey', 'skipApiKey', 'apiKeyStatus', 'simulationArea', 'apiSetup',
+                     'settingsPanel', 'memoryDepthSetting', 'memoryDepthInput', 'memoryDepthInfo',
+                     'maxRoundsInput', 'modelSelect', 'orgInstructionSelect',
+                     'currentOrgInstructionDisplay', 'currentModelDisplay', /*'customizePromptsBtn', - Removed */
+                     'actionsPanel', 'nextRoundBtn', 'runAllBtn', 'stopBtn', 'resetBtn', 'storeRunBtn',
+                     'promptsPanel', 'promptEditorContainer', 'resetPromptsBtn', 'savePromptsBtn',
+                     'resultsArea', 'loadingIndicator', 'loadingText', 'simulationStatus', 'scoreDisplay',
+                     'memoryModal', 'memoryModalTitle', 'memoryDisplay', 'viewDetailedHistoryBtn', 'detailedHistoryDisplay',
+                     'comparisonSelectorArea', 'savedRunsList', 'selectAllRunsBtn', 'deselectAllRunsBtn', 'deleteSelectedRunsBtn',
+                     /*'promptModal', 'promptEditorContainer', 'resetPromptsBtn', 'savePromptsBtn', - Removed/Moved */
+                     'storedLogModal', 'storedLogModalTitle', 'storedLogDisplay',
+                     'logOverviewPanel', 'logPromptsPanel', 'logResultsPanel',
+                     'agentChoiceMatrices', 'matrixGridContainer', 'scoreChart', 'correctDelegationChart',
+                     'inspectAgentButtons'
+                 ];
+                 ids.forEach(id => {
+                     const el = document.getElementById(id);
+                     if (el) {
+                         this.elements[id] = el;
+                     } else {
+                         // Only log warning if element *should* exist based on current structure
+                         if (!['promptModal'].includes(id)) { // Add removed IDs here
+                             console.warn(`Cache DOM: Element with ID '${id}' not found.`);
+                         }
+                     }
+                 });
+                 this.elements.agentModeRadios = document.querySelectorAll('input[name="agentMode"]');
+                 this.elements.logTabButtons = this.elements.storedLogModal?.querySelectorAll('.log-tabs .tab-button');
+                 this.elements.closeModalButtons = document.querySelectorAll('.close-button'); // Cache all close buttons
+             },
+
+            bindEventListeners() {
+                this.elements.saveApiKey?.addEventListener('click', () => this.handleSaveApiKey());
+                this.elements.skipApiKey?.addEventListener('click', () => this.handleSkipApiKey());
+                this.elements.apiKeyInput?.addEventListener('input', () => this.validateAndSetApiKeyStatus(this.elements.apiKeyInput.value));
+
+
+                this.elements.nextRoundBtn?.addEventListener('click', () => this.runNextRound());
+                this.elements.runAllBtn?.addEventListener('click', () => this.runFullSimulation());
+                this.elements.stopBtn?.addEventListener('click', () => this.requestStopAutoRun());
+                this.elements.resetBtn?.addEventListener('click', () => this.resetSimulation());
+                this.elements.storeRunBtn?.addEventListener('click', () => this.storeCurrentRun());
+
+                // Settings Listeners
+                this.elements.agentModeRadios?.forEach(radio => {
+                    radio.addEventListener('change', (event) => this.handleSettingChange('agentMode', event.target.value));
+                });
+                 this.elements.modelSelect?.addEventListener('change', (event) => this.handleSettingChange('model', event.target.value));
+                this.elements.orgInstructionSelect?.addEventListener('change', (event) => this.handleSettingChange('organizationalInstruction', event.target.value));
+                this.elements.maxRoundsInput?.addEventListener('change', () => this.handleMaxRoundsChange());
+                this.elements.memoryDepthInput?.addEventListener('change', () => this.handleMemoryDepthChange());
+
+                // Inspect Agent Buttons (Event Delegation)
+                this.elements.inspectAgentButtons?.addEventListener('click', (event) => {
+                    if (event.target.classList.contains('inspect-agent-btn')) {
+                        const agentId = event.target.dataset.agentId;
+                        this.ui.showMemoryModal(agentId);
+                    }
+                });
+
+                // Prompt Customization (Inline)
+                //this.elements.customizePromptsBtn.addEventListener('click', () => this.ui.showPromptModal()); // Removed
+                this.elements.savePromptsBtn?.addEventListener('click', () => this.prompts.saveCustom());
+                this.elements.resetPromptsBtn?.addEventListener('click', () => this.prompts.resetEditorToDefaults());
+
+                // Comparison Actions
+                this.elements.selectAllRunsBtn?.addEventListener('click', () => this.comparison.selectAll());
+                this.elements.deselectAllRunsBtn?.addEventListener('click', () => this.comparison.deselectAll());
+                this.elements.deleteSelectedRunsBtn?.addEventListener('click', () => this.comparison.deleteSelected());
+
+                // Saved Runs List Actions (Event Delegation)
+                this.elements.savedRunsList?.addEventListener('click', (event) => {
+                     const target = event.target;
+                     const runItem = target.closest('.run-item');
+                     if (!runItem) return;
+                     const runId = runItem.dataset.runId;
+
+                     if (target.type === 'checkbox') {
+                           this.charts.update(); // Update charts when checkbox changes
+                     } else if (target.classList.contains('view-log-button')) {
+                           this.ui.showStoredRunLogModal(runId);
+                     } else if (target.classList.contains('delete-run-button')) {
+                           this.comparison.deleteSingle(runId);
+                     }
+                });
+
+
+                // Stored Log Modal Tabs
+                this.elements.logTabButtons?.forEach(button => {
+                    button.addEventListener('click', () => this.ui.activateLogTab(button));
+                });
+
+                // Modal Close Buttons
+                 this.elements.closeModalButtons?.forEach(button => {
+                       button.addEventListener('click', () => this.ui.closeModal(button.dataset.modalId));
+                 });
+                 window.addEventListener('click', (event) => {
+                       if (event.target.classList.contains('modal')) {
+                            this.ui.closeModal(event.target.id);
+                       }
+                 });
+
+                // Detailed History Button (within Memory Modal)
+                this.elements.viewDetailedHistoryBtn?.addEventListener('click', () => this.ui.toggleDetailedHistory());
+
+            },
+
+              // --- Event Handlers ---
+               validateAndSetApiKeyStatus(apiKey) {
+                   if (!this.elements.apiKeyStatus) return; // Element might not exist if setup is hidden
+                   const key = apiKey?.trim() || '';
+                   if (key && key.length >= CONSTANTS.API_KEY_MIN_LENGTH) {
+                       this.elements.apiKeyStatus.textContent = 'API key entered (length OK).';
+                       this.elements.apiKeyStatus.className = 'text-xs text-green-600 mt-1';
+                       return true;
+                   } else {
+                       this.elements.apiKeyStatus.textContent = 'No valid API key set (or < 10 characters).';
+                        this.elements.apiKeyStatus.className = 'text-xs text-gray-500 mt-1';
+                       return false;
+                   }
+              },
+
+            handleSaveApiKey() {
+                const apiKey = this.elements.apiKeyInput.value.trim();
+                 if (this.validateAndSetApiKeyStatus(apiKey)) {
+                     this.config.purdue_api_key = apiKey;
+                     localStorage.setItem('purdueApiKey', apiKey); // Store locally
+                     this.state.apiKeySet = true;
+                     this.state.apiSkipped = false;
+                     this.elements.apiSetup.classList.add('hidden');
+                     this.elements.simulationArea.classList.remove('hidden');
+                     this.resetSimulation(); // Initialize simulation state
+                     this.ui.updateStatus(`API Key set. Ready for Round 1.`);
+                     this.ui.showNotification('API key saved.', 'success');
+                 } else {
+                     this.ui.showNotification('Please enter a valid API key (basic check failed). Key not saved.', 'error');
+                      this.config.purdue_api_key = null; // Ensure it's null if invalid
+                      localStorage.removeItem('purdueApiKey');
+                      this.state.apiKeySet = false;
+                      this.state.apiSkipped = false;
+                 }
+            },
+
+            handleSkipApiKey() {
+                 this.config.purdue_api_key = null;
+                 localStorage.removeItem('purdueApiKey'); // Clear any stored key
+                 this.state.apiKeySet = false;
+                 this.state.apiSkipped = true;
+                 this.elements.apiSetup.classList.add('hidden');
+                 this.elements.simulationArea.classList.remove('hidden');
+                 this.resetSimulation(); // Initialize simulation state
+                 this.ui.updateStatus(`API Key skipped. Ready for simulated Round 1 (LLM calls disabled).`);
+                 this.ui.showNotification('API key skipped. LLM interactions disabled.', 'info');
+                 // Disable LLM-dependent controls maybe? Or handle in runNextRound
+            },
+
+            handleSettingChange(setting, value) {
+                 if (setting === 'model') {
+                     if (CONSTANTS.AVAILABLE_MODELS.includes(value)) {
+                         this.config[setting] = value; // Update config directly
+                          this.ui.updateCurrentModelDisplay();
+                          if (this.state.currentRound > 0) this.ui.showNotification(`Model changed to ${value}. Reset run for change to take effect.`, 'info');
+                     } else {
+                         console.warn(`Invalid model selected: ${value}. Reverting.`);
+                         this.elements.modelSelect.value = this.config.model; // Revert dropdown
+                          this.ui.showNotification(`Invalid model selected.`, 'error');
+                     }
+                 } else if (this.state[setting] !== undefined) {
+                     this.state[setting] = value;
+                      if (setting === 'organizationalInstruction') this.ui.updateCurrentOrgInstructionDisplay();
+                     if (this.state.currentRound > 0) this.ui.showNotification(`${setting.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} changed. Reset current run for change to take full effect.`, 'info');
+                      // Re-generate defaults might be needed if base prompts depend on mode/org (currently they don't directly, but for future safety)
+                      // If settings affect default prompts, uncomment below:
+                      // this.prompts.generateDefaultPrompts();
+                      // this.prompts.populateEditor(); // Ensure editor reflects potential default changes
+                 } else {
+                     console.warn(`Attempted to change unknown setting: ${setting}`);
+                 }
+            },
+
+               handleMaxRoundsChange(updateChartScales = true) {
+                   const input = this.elements.maxRoundsInput;
+                   const rounds = parseInt(input.value);
+                   const currentMax = this.state.maxRounds;
+
+                   if (!isNaN(rounds) && rounds >= 1 && rounds <= CONSTANTS.MAX_ROUNDS_LIMIT) {
+                       this.state.maxRounds = rounds;
+                       // Update status based on current round
+                        if (this.state.currentRound === 0 && !this.state.isRunning && !this.state.isAutoRunning) {
+                            this.ui.updateStatus(`Ready to start (${this.state.maxRounds} rounds).`);
+                        } else if (this.state.currentRound > 0) {
+                            const finished = this.state.currentRound >= this.state.maxRounds;
+                            this.ui.updateStatus(
+                                finished
+                                ? `Simulation complete after ${this.state.currentRound} rounds (Max set to ${this.state.maxRounds}).`
+                                : `Round ${this.state.currentRound} complete. Max rounds set to ${this.state.maxRounds}. Ready for Round ${this.state.currentRound + 1}.`
+                            );
+                        }
+                       if (updateChartScales) {
+                            this.charts.init(); // Re-initialize to update scale options based on new maxRounds
+                            this.charts.update(); // Redraw
+                       }
+                       this.ui.updateControlStates(); // Update button states
+                   } else {
+                       input.value = currentMax; // Revert invalid input
+                       this.ui.showNotification(`Please enter rounds between 1 and ${CONSTANTS.MAX_ROUNDS_LIMIT}.`, 'error');
+                   }
+              },
+
+               handleMemoryDepthChange() {
+                    const input = this.elements.memoryDepthInput;
+                    const depth = parseInt(input.value);
+                    if (!isNaN(depth) && depth >= 0 && depth <= CONSTANTS.MEMORY_DEPTH_LIMIT) {
+                         this.state.memoryDepth = depth;
+                         if (this.state.currentRound > 0) this.ui.showNotification('Prompt history depth changed. Effect applies to future rounds or on reset.', 'info');
+                    } else {
+                         input.value = this.state.memoryDepth; // Revert invalid input
+                         this.ui.showNotification(`Please enter a history depth between 0 and ${CONSTANTS.MEMORY_DEPTH_LIMIT}.`, 'error');
+                    }
+               },
+
+            // --- Simulation Core Logic ---
+            async runNextRound() {
+                 // Check if API is needed but not set/skipped
+                 if (!this.state.apiKeySet && !this.state.apiSkipped) { this.ui.showNotification('Please set or skip API key first.', 'error'); return; }
+                 if (this.state.isRunning || this.state.isAutoRunning) return;
+                 if (this.state.currentRound >= this.state.maxRounds) { this.ui.showNotification('Simulation complete.', 'info'); return; }
+
+                 this.state.isRunning = true;
+                 this.ui.updateControlStates();
+                 this.state.currentRound++;
+                 this.ui.updateStatus(`Running Round ${this.state.currentRound} of ${this.state.maxRounds}...`);
+
+                 try {
+                     await this.simulation.executeRound();
+                 } catch (error) {
+                     console.error(`Error during Round ${this.state.currentRound}:`, error);
+                     this.ui.showNotification(`Error in Round ${this.state.currentRound}. Check console. ${error.message}`, 'error');
+                 } finally {
+                     this.state.isRunning = false;
+                     this.ui.updateControlStates();
+                     // Loading indicator handled in updateControlStates
+                     const finished = this.state.currentRound >= this.state.maxRounds;
+                      this.ui.updateStatus(finished ? `Simulation complete after ${this.state.maxRounds} rounds.` : `Round ${this.state.currentRound} complete. Ready for Round ${this.state.currentRound + 1}.`);
+                       if (finished) {
+                            this.ui.showNotification('Simulation complete.', 'info');
+                       }
+                 }
+            },
+
+            async runFullSimulation() {
+                 if (!this.state.apiKeySet && !this.state.apiSkipped) { this.ui.showNotification('Please set or skip API key first.', 'error'); return; }
+                 if (this.state.isRunning || this.state.isAutoRunning) return;
+                 if (this.state.currentRound >= this.state.maxRounds) { this.ui.showNotification('Simulation already complete.', 'info'); return; }
+
+                 this.state.isAutoRunning = true;
+                 this.state.stopRequested = false;
+                 this.ui.updateControlStates();
+
+                 while (this.state.currentRound < this.state.maxRounds && !this.state.stopRequested) {
+                     this.state.isRunning = true; // Mark inner loop as running
+                     this.state.currentRound++;
+                     this.ui.updateStatus(`Running Round ${this.state.currentRound} of ${this.state.maxRounds} (Auto)...`);
+                     try {
+                         await this.simulation.executeRound();
+                     } catch (error) {
+                         console.error("Error during auto-run round:", error);
+                         this.ui.showNotification(`Error in Round ${this.state.currentRound}. Stopping auto-run. ${error.message}`, 'error');
+                         this.state.stopRequested = true; // Stop on error
+                     } finally {
+                         this.state.isRunning = false;
+                          // Optional small delay if rounds execute too fast visually
+                          // await new Promise(resolve => setTimeout(resolve, 50));
+                     }
+                 }
+
+                 this.state.isAutoRunning = false;
+                  if (this.state.stopRequested) {
+                       this.ui.updateStatus(`Auto-run stopped at Round ${this.state.currentRound}.`);
+                       this.ui.showNotification(`Auto-run stopped.`, 'info');
+                  } else {
+                       this.ui.updateStatus(`Auto-run complete after ${this.state.maxRounds} rounds.`);
+                       this.ui.showNotification('Simulation complete.', 'info');
+                  }
+                 this.state.stopRequested = false; // Reset flag
+                 this.ui.updateControlStates();
+            },
+
+               requestStopAutoRun() {
+                  if (this.state.isAutoRunning) {
+                        this.state.stopRequested = true;
+                        this.ui.updateStatus(`Stopping auto-run after Round ${this.state.currentRound}...`);
+                        if(this.elements.stopBtn) {
+                             this.elements.stopBtn.disabled = true;
+                             this.elements.stopBtn.textContent = "Stopping...";
+                        }
+                  }
+              },
+
+            resetSimulation() {
+                 // Reset CURRENT Run State
+                 this.state.currentRound = 0;
+                 this.state.isRunning = false;
+                 this.state.isAutoRunning = false;
+                 this.state.stopRequested = false;
+                 this.state.resultsLog = [];
+                 this.state.totalScore = 0;
+                 this.state.roundScores = [];
+                 this.state.correctDelegationHistory = [];
+                 this.state.currentlyInspectingAgentId = null;
+                 this.state.currentRunInstanceStored = false; // FIX: Reset the flag
+
+                 // Read settings from UI
+                 this.state.agentMode = Array.from(this.elements.agentModeRadios).find(r => r.checked)?.value || CONSTANTS.AGENT_MODE.GLOBAL;
+                 this.state.organizationalInstruction = this.elements.orgInstructionSelect.value;
+                 this.config.model = this.elements.modelSelect.value; // Update config model
+                 this.handleMaxRoundsChange(false); // Read max rounds without re-initializing charts yet
+                 this.handleMemoryDepthChange(); // Read memory depth
+
+                 // Create fresh agent objects for the NEW run, including their active prompt
+                  this.state.agents = this.config.initialAgentsDefinition.map(agentDef => {
+                      const activePrompt = (agentDef.customSystemPrompt && agentDef.customSystemPrompt.trim() !== "")
+                           ? agentDef.customSystemPrompt
+                           : agentDef.defaultSystemPrompt;
+
+                      return {
+                           ...agentDef, // Copy id, skills, color, prompt definitions
+                           observations: this.simulation.initializeAgentObservations(), // Clean slate observation log structure
+                           decisionHistory: [], // Clean slate interaction log
+                           activeSystemPrompt: activePrompt // Set the prompt to be used for this run
+                      };
+                  });
+
+                 // Reset UI elements
+                 this.elements.resultsArea.innerHTML = '<div class="text-gray-500 italic">Simulation reset. Start a new run.</div>';
+                 const startStatus = (this.state.apiKeySet || this.state.apiSkipped)
+                      ? `Ready to start new run (${this.state.maxRounds} rounds).`
+                      : 'Waiting for API Key setup.';
+                 this.ui.updateStatus(startStatus + ' Stored runs preserved.');
+                 this.ui.updateCurrentOrgInstructionDisplay();
+                 this.ui.updateCurrentModelDisplay(); // Update model display
+                 this.elements.scoreDisplay.textContent = `Total Score: 0`;
+
+                 this.charts.update(); // Update charts - clears current run, shows selected saved runs
+                 this.ui.updateControlStates(); // Enable/disable controls
+                 if (this.elements.resetBtn) this.elements.resetBtn.textContent = 'Reset Simulation'; // Keep consistent text
+
+                 this.ui.showNotification('Current simulation run reset. Stored runs kept.', 'info');
+            },
+
+            // --- Simulation Sub-module ---
+              simulation: {
+                 async executeRound() {
+                  const roundAssignments = this.assignTasks();
+                  const agentDecisions = [];
+                  const roundResults = [];
+                  const currentRoundForLog = this.parent.state.currentRound; // Capture round number for logging clarity
+
+                  // 1. Get Decisions
+                  console.log(`--- Round ${currentRoundForLog}: Getting Decisions ---`);
+                  for (const agent of this.parent.state.agents) {
+                      if (this.parent.state.stopRequested) break;
+                      const assignedTask = roundAssignments[agent.id];
+                      this.parent.elements.loadingText.textContent = `${agent.id} deciding on ${assignedTask}...`;
+
+                      let decisionTargetId, systemPromptUsed, thinkingText; // <<< MODIFICATION: Add thinkingText here
+                      if (this.parent.state.apiSkipped || !this.parent.state.apiKeySet) {
+                           decisionTargetId = CONSTANTS.SELF_DECISION;
+                           systemPromptUsed = "[API Skipped - Simulated Decision]";
+                           thinkingText = null; // <<< MODIFICATION: No thinking if API skipped
+                           console.log(`[Simulate] ${agent.id} assigned ${assignedTask}, decisionTargetId set to: '${decisionTargetId}'`);
+                      } else {
+                           try {
+                                const decisionResult = await this.getAgentDecisionLLM(agent, assignedTask);
+                                // --- Log the direct result ---
+                                console.log(`[LLM Result Raw] ${agent.id} decisionResult:`, decisionResult);
+                                // --- End Log ---
+                                // <<< MODIFICATION START >>>
+                                decisionTargetId = decisionResult?.decisionTargetId; // Use parsed decision
+                                systemPromptUsed = decisionResult?.systemPromptUsed;
+                                thinkingText = decisionResult?.thinking; // Store thinking
+                                // <<< MODIFICATION END >>>
+
+                                // --- Explicit Undefined Check ---
+                                if (decisionTargetId === undefined) {
+                                    console.error(`*** CRITICAL ALERT: decisionTargetId became UNDEFINED after getAgentDecisionLLM for ${agent.id} in Round ${currentRoundForLog}! Defaulting to Self. Check getAgentDecisionLLM return value. ***`, "decisionResult was:", decisionResult);
+                                    decisionTargetId = CONSTANTS.SELF_DECISION; // Force default if undefined
+                                    thinkingText = "[Error during parsing, decisionTargetId undefined]"; // Note parsing error in thinking
+                                }
+                                // --- End Check ---
+                           } catch (llmError) {
+                                console.error(`Error during getAgentDecisionLLM call for ${agent.id} in Round ${currentRoundForLog}:`, llmError);
+                                decisionTargetId = CONSTANTS.SELF_DECISION; // Default on error during the call itself
+                                systemPromptUsed = "[LLM Call Error]";
+                                thinkingText = `[LLM Call Error: ${llmError.message}]`; // <<< MODIFICATION: Store error in thinking
+                           }
+                      }
+
+                      console.log(`Pushing to agentDecisions for ${agent.id} in Round ${currentRoundForLog}: decision='${decisionTargetId}' (Type: ${typeof decisionTargetId})`);
+                      agentDecisions.push({
+                          assignedAgentId: agent.id, task: assignedTask,
+                          decision: decisionTargetId, // Value stored here
+                          systemPrompt: systemPromptUsed,
+                          thinking: thinkingText // <<< MODIFICATION: Add thinking here
+                      });
+                  }
+
+                  if (this.parent.state.stopRequested) return;
+                  this.parent.elements.loadingText.textContent = `Simulating results...`;
+
+                  // 2. Simulate Task Solving
+                  console.log(`--- Round ${currentRoundForLog}: Simulating Results ---`);
+                  for (const decisionData of agentDecisions) {
+                      // --- Log the decisionData being processed ---
+                      console.log(`Processing decisionData for Round ${currentRoundForLog}:`, JSON.parse(JSON.stringify(decisionData))); // Log a clean copy
+                       // --- Add explicit check here too ---
+                       if (decisionData.decision === undefined) {
+                            console.error(`*** CRITICAL ALERT: decisionData.decision is UNDEFINED when starting task solving for ${decisionData.assignedAgentId} in Round ${currentRoundForLog}! ***`);
+                            // Cannot proceed reliably, maybe skip? Or use default? Let's skip.
+                            continue;
+                       }
+                       // --- End Check ---
+
+                      const { actualSolver, actualSolverId, finalDecisionDisplay } = this.determineActualSolver(decisionData);
+                      if (!actualSolver || !actualSolver.skills) {
+                           console.error(`*** CRITICAL: Could not determine valid actualSolver or skills for decisionData in Round ${currentRoundForLog}:`, decisionData);
+                           continue; // Skip this result if solver is invalid
+                      }
+                      const skillLevel = actualSolver.skills[decisionData.task];
+                      const success = this.simulateTaskSuccess(skillLevel);
+
+                      console.log(`Adding to roundResults for ${decisionData.assignedAgentId}, Round ${currentRoundForLog}: originalDecisionValue='${decisionData.decision}'`);
+
+                      roundResults.push({
+                          assignedAgent: decisionData.assignedAgentId,
+                          task: decisionData.task,
+                          decision: finalDecisionDisplay,
+                          originalDecision: decisionData.decision, // This MUST have a value here
+                          actualSolver: actualSolverId,
+                          success: success,
+                          systemPrompt: decisionData.systemPrompt,
+                          thinking: decisionData.thinking // <<< MODIFICATION: Pass thinking through
+                      });
+                  }
+
+                  // 3. Log results for CURRENT run
+                  console.log(`--- Round ${currentRoundForLog}: Logging Results ---`);
+                  // Log the content being pushed
+                  console.log(`Pushing to resultsLog for Round ${currentRoundForLog}:`, JSON.parse(JSON.stringify({ round: currentRoundForLog, results: roundResults })));
+                  this.parent.state.resultsLog.push({ round: currentRoundForLog, results: roundResults });
+
+                  // 4. Update Agent Observation Logs
+                  this.updateAgentObservations(roundResults);
+
+                  // 5. Calculate Score and Metrics
+                  this.calculateRoundScore(roundResults);
+                  this.calculateRoundMetrics(roundResults);
+
+                  // 6. Display Textual Results & Update Charts
+                  this.parent.ui.displayResults();
+                  this.parent.charts.update(); // This triggers calculateAgentChoiceCounts -> updateAgentChoiceMatrices
+                 },
+
+                  assignTasks() {
+                       const shuffledTasks = [...this.parent.config.taskTypes].sort(() => 0.5 - Math.random());
+                       const assignments = {};
+                       this.parent.state.agents.forEach((agent, index) => {
+                           assignments[agent.id] = shuffledTasks[index % shuffledTasks.length];
+                       });
+                       return assignments;
+                  },
+
+                  determineActualSolver(decisionData) {
+                       let actualSolver = null;
+                       let actualSolverId = '';
+                       let finalDecisionDisplay = decisionData.decision;
+
+                       if (decisionData.decision === CONSTANTS.SELF_DECISION) {
+                           actualSolver = this.parent.state.agents.find(a => a.id === decisionData.assignedAgentId);
+                           actualSolverId = actualSolver?.id || decisionData.assignedAgentId; // Fallback
+                       } else {
+                           actualSolver = this.parent.state.agents.find(a => a.id === decisionData.decision);
+                           if (!actualSolver) {
+                               console.warn(`Agent ${decisionData.assignedAgentId} made invalid decision '${decisionData.decision}'. Forcing Self-solve.`);
+                               actualSolver = this.parent.state.agents.find(a => a.id === decisionData.assignedAgentId);
+                               actualSolverId = actualSolver?.id || decisionData.assignedAgentId; // Fallback
+                               finalDecisionDisplay = `${CONSTANTS.SELF_DECISION} (Forced from: ${this.parent.ui.escapeHtml(String(decisionData.decision))})`; // Ensure decision is string
+                           } else {
+                               actualSolverId = actualSolver.id;
+                           }
+                       }
+                       // Ensure solver object exists if possible
+                       if (!actualSolver) actualSolver = this.parent.state.agents.find(a => a.id === actualSolverId);
+                        // Handle case where solver still not found (should be rare)
+                       if (!actualSolver) {
+                            console.error(`Could not determine actual solver for decision:`, decisionData);
+                            // Force self-solve as ultimate fallback
+                            actualSolver = this.parent.state.agents.find(a => a.id === decisionData.assignedAgentId);
+                            actualSolverId = actualSolver?.id || decisionData.assignedAgentId;
+                            finalDecisionDisplay = `${CONSTANTS.SELF_DECISION} (Forced - Solver Error)`;
+                            // Create a placeholder solver object if absolutely necessary to avoid downstream errors
+                            if (!actualSolver) {
+                                actualSolver = { id: actualSolverId, skills: {} }; // Placeholder
+                            }
+                       }
+
+
+                       return { actualSolver, actualSolverId, finalDecisionDisplay };
+                  },
+
+
+                  simulateTaskSuccess(skillLevel) {
+                       const rate = this.parent.config.skillSuccessRate[skillLevel] || 0.1; // Default to poor if undefined
+                       return Math.random() < rate;
+                  },
+
+                  initializeAgentObservations() {
+                       const observations = {};
+                        this.parent.config.agentIds.forEach(id => {
+                            observations[id] = {};
+                            this.parent.config.taskTypes.forEach(task => {
+                                observations[id][task] = [];
+                            });
+                        });
+                       return observations;
+                  },
+
+                  updateAgentObservations(roundResults) {
+                       this.parent.state.agents.forEach(agent => {
+                           roundResults.forEach(res => {
+                               const isDirectInteraction = (agent.id === res.assignedAgent || agent.id === res.actualSolver);
+                               const shouldRemember = (this.parent.state.agentMode === CONSTANTS.AGENT_MODE.GLOBAL || isDirectInteraction);
+
+                               if (shouldRemember && res.actualSolver) {
+                                    const observedAgentId = res.actualSolver;
+                                    const task = res.task;
+                                     // Defensive checks for observation structure
+                                    if (agent.observations?.[observedAgentId]?.[task]) {
+                                          agent.observations[observedAgentId][task].push({
+                                               round: this.parent.state.currentRound,
+                                               success: res.success
+                                          });
+                                    } else {
+                                         console.error(`CRITICAL: Observation structure missing during update for Agent ${agent.id}, Observed ${observedAgentId}, Task ${task}.`);
+                                         // Attempt to initialize if missing?
+                                         if (!agent.observations) agent.observations = {};
+                                         if (!agent.observations[observedAgentId]) agent.observations[observedAgentId] = {};
+                                         if (!agent.observations[observedAgentId][task]) agent.observations[observedAgentId][task] = [];
+                                         agent.observations[observedAgentId][task].push({ round: this.parent.state.currentRound, success: res.success });
+                                    }
+                               }
+                           });
+                       });
+                  },
+
+                  calculateRoundScore(roundResults) {
+                       const allSucceeded = roundResults.every(res => res.success);
+                       const scoreThisRound = allSucceeded ? CONSTANTS.POINTS_FOR_ALL_SUCCESS : 0;
+                       this.parent.state.roundScores.push(scoreThisRound);
+                       this.parent.state.totalScore += scoreThisRound;
+                       if(this.parent.elements.scoreDisplay) this.parent.elements.scoreDisplay.textContent = `Total Score: ${this.parent.state.totalScore}`;
+                  },
+
+                  calculateRoundMetrics(roundResults) {
+                       const totalTasks = roundResults.length; if (totalTasks === 0) return;
+                       let correctAssignments = 0;
+                       roundResults.forEach(res => {
+                           const actualSolverId = res.actualSolver;
+                           const task = res.task;
+                           let bestAgentId = this.parent.prompts.getBestAgentForTask(task); // Use helper
+                           if (actualSolverId && actualSolverId === bestAgentId) {
+                               correctAssignments++;
+                           }
+                       });
+                       const correctAssignmentRate = totalTasks > 0 ? correctAssignments / totalTasks : 0;
+                       this.parent.state.correctDelegationHistory.push({ round: this.parent.state.currentRound, correctRate: correctAssignmentRate });
+                  },
+
+                 async getAgentDecisionLLM(agent, assignedTask) {
+                    //console.log(`[Debug] getAgentDecisionLLM called for ${agent.id} with task ${assignedTask}`); // DEBUG
+                     if (this.parent.state.apiSkipped || !this.parent.state.apiKeySet) {
+                          console.warn(`[Warn] Skipping LLM call for ${agent.id} as API key is not set or skipped.`);
+                          // <<< MODIFICATION START >>>
+                          return { decisionTargetId: CONSTANTS.SELF_DECISION, systemPromptUsed: "[API Skipped]", thinking: null }; // Return object with null thinking
+                          // <<< MODIFICATION END >>>
+                     }
+
+                     const otherAgentIds = this.parent.config.agentIds.filter(id => id !== agent.id);
+                     const validResponses = [CONSTANTS.SELF_DECISION, ...otherAgentIds];
+                     const responseOptionsString = validResponses.map(r => `'${r}'`).join(', ');
+
+                     const contextContent = this.parent.prompts.buildLLMContext(agent.id);
+                     const orgInstructionText = this.parent.prompts.getOrganizationalInstructionText();
+                     const { systemPrompt, userPrompt } = this.parent.prompts.formatLLMPrompts(agent, assignedTask, contextContent, orgInstructionText, responseOptionsString);
+
+                     //console.log(`[Debug] ${agent.id} - System Prompt:\n`, systemPrompt); // DEBUG
+                     //console.log(`[Debug] ${agent.id} - User Prompt:\n`, userPrompt); // DEBUG
+
+                     let responseContent = '';
+                     // <<< MODIFICATION START >>>
+                     let parsedResponse = { decision: CONSTANTS.SELF_DECISION, thinking: null }; // Default object
+                     // <<< MODIFICATION END >>>
+                     let historyEntry = null;
+                     let apiError = null; // DEBUG
+
+                     try {
+                          this.parent.elements.loadingText.textContent = `${agent.id} thinking...`;
+                          console.log(`[Debug] Calling API for ${agent.id}... Model: ${this.parent.config.model}`); // DEBUG
+                          responseContent = await this.parent.api.callLLM(systemPrompt, userPrompt);
+                          console.log(`[Debug] ${agent.id} - Raw API Response:`, responseContent); // DEBUG
+                          // <<< MODIFICATION START >>>
+                          // Parse response into decision and thinking parts
+                          parsedResponse = this.parent.prompts.parseLLMResponse(responseContent, validResponses, agent.id);
+                          console.log(`[Debug] ${agent.id} - Parsed Response:`, parsedResponse); // DEBUG
+
+                          // Check if the default was returned due to parsing failure (excluding actual 'Self' decisions)
+                          if (parsedResponse.decision === CONSTANTS.SELF_DECISION && !parsedResponse.thinking) { // Check thinking is also null/empty if Self
+                              let minimallyCleanedRaw = responseContent.trim();
+                              // Simplified check for whether the raw response *looked* like 'Self' or agent ID
+                              if (minimallyCleanedRaw.toLowerCase() !== CONSTANTS.SELF_DECISION.toLowerCase() &&
+                                  minimallyCleanedRaw.toLowerCase() !== agent.id.toLowerCase()) {
+                                    console.warn(`[Warn] Invalid or unparseable response from ${agent.id} resulted in default '${CONSTANTS.SELF_DECISION}'. Raw='${responseContent}'. Valid options were: ${responseOptionsString}`);
+                              }
+                          }
+                          // <<< MODIFICATION END >>>
+
+                     } catch (error) {
+                          console.error(`[Error] Error getting decision for ${agent.id}:`, error); // DEBUG
+                          apiError = error; // Store error for history
+                          this.parent.ui.showNotification(`API Error for ${agent.id}. Defaulting to ${CONSTANTS.SELF_DECISION}. Check console.`, 'error');
+                          // <<< MODIFICATION START >>>
+                          parsedResponse.decision = CONSTANTS.SELF_DECISION;
+                          parsedResponse.thinking = `**API_ERROR**: ${error.message}`; // Store error in thinking part
+                          responseContent = `**API_ERROR**: ${error.message}`; // Also keep in raw response for history
+                          // <<< MODIFICATION END >>>
+                     }
+
+                     historyEntry = {
+                          round: this.parent.state.currentRound, task: assignedTask,
+                          systemPrompt: systemPrompt, userPrompt: userPrompt,
+                          rawResponse: responseContent,
+                          // <<< MODIFICATION START >>>
+                          cleanedDecision: parsedResponse.decision, // Store cleaned decision
+                          thinking: parsedResponse.thinking, // Store thinking process
+                          // <<< MODIFICATION END >>>
+                          apiError: apiError ? apiError.message : null // Add error to history
+                     };
+
+                     // Ensure agent object and decisionHistory array exist before pushing
+                     if (agent && agent.decisionHistory && Array.isArray(agent.decisionHistory)) {
+                          agent.decisionHistory.push(historyEntry);
+                          //console.log(`[Debug] Pushed decision history for ${agent.id}`, historyEntry); // DEBUG
+                     } else {
+                          console.error(`[Error] Could not save decision history for ${agent.id}. Agent object or decisionHistory array missing/invalid.`, agent); // DEBUG
+                     }
+
+                     // <<< MODIFICATION START >>>
+                     // Return object containing the final decision ID, prompt, and thinking
+                     return {
+                        decisionTargetId: parsedResponse.decision,
+                        systemPromptUsed: systemPrompt,
+                        thinking: parsedResponse.thinking
+                    };
+                     // <<< MODIFICATION END >>>
+                 }
+              }, // End simulation sub-module
+
+            // --- Prompting Sub-module ---
+              prompts: {
+                  generateDefaultPrompts() {
+                       this.parent.config.initialAgentsDefinition.forEach(agentDef => {
+                           const otherIds = this.parent.config.agentIds.filter(id => id !== agentDef.id);
+                           agentDef.defaultSystemPrompt = this.generateSingleDefaultPrompt(agentDef, otherIds);
+                       });
+                  },
+
+                  generateSingleDefaultPrompt(agentDef, otherAgentIds) {
+                       // Ensure skills exist before accessing
+                       const mathSkill = agentDef.skills?.Math || 'Unknown';
+                       const writingSkill = agentDef.skills?.Writing || 'Unknown';
+                       const logicSkill = agentDef.skills?.Logic || 'Unknown';
+                       let base = `You are ${agentDef.id}, part of a team with ${otherAgentIds.join(', ')}. Your goal is successful task completion.`;
+                       base += `\nYour own skills (Good/Mediocre/Poor) are: Math=${mathSkill}, Writing=${writingSkill}, Logic=${logicSkill}.`;
+                       return base;
+                  },
+
+                  buildLLMContext(agentId) {
+                      let contextContent = "";
+                      const historyDepth = this.parent.state.memoryDepth;
+                      const resultsLog = this.parent.state.resultsLog;
+
+                      if (historyDepth > 0 && resultsLog.length > 0) {
+                           contextContent = "Recent History (Task -> Solver = Result):\n";
+                           const relevantHistoryLog = resultsLog.slice(-historyDepth);
+                           relevantHistoryLog.forEach(logEntry => {
+                               contextContent += `--- Round ${logEntry.round} ---\n`;
+                               logEntry.results.forEach(res => {
+                                   const wasObserved = this.parent.state.agentMode === CONSTANTS.AGENT_MODE.GLOBAL || agentId === res.assignedAgent || agentId === res.actualSolver;
+                                   if (wasObserved && res.actualSolver) { // Added check for res.actualSolver
+                                        contextContent += `  ${res.task} by ${res.actualSolver} = ${res.success ? 'OK' : 'FAIL'}\n`;
+                                   }
+                               });
+                           });
+                           contextContent += "---\n";
+                      } else if (historyDepth > 0) {
+                           contextContent = "No past rounds recorded.\n---\n";
+                      } else {
+                           contextContent = "No past history provided (Memory Depth is 0).\n---\n";
+                      }
+                      return contextContent;
+                  },
+
+                  getOrganizationalInstructionText() {
+                       const instructionKey = this.parent.state.organizationalInstruction;
+                       const contextInfo = 'past results'; // Simplified context description
+                       switch (instructionKey) {
+                           case CONSTANTS.ORG_INSTRUCTION.FOCUS_HISTORY: return `Decision Guidance: Analyze the history carefully. Assign the task to the agent (${CONSTANTS.SELF_DECISION} or others) with the best ${contextInfo}. If history is unclear or tied, you may choose ${CONSTANTS.SELF_DECISION}.`;
+                           case CONSTANTS.ORG_INSTRUCTION.ENCOURAGE_DELEGATION: return `Decision Guidance: Analyze the history. If another agent seems significantly better suited based on ${contextInfo}, assign the task to them. Otherwise, assign to ${CONSTANTS.SELF_DECISION}.`;
+                           case CONSTANTS.ORG_INSTRUCTION.SELF_RELIANT: return `Decision Guidance: Prioritize assigning the task to ${CONSTANTS.SELF_DECISION} unless the history strongly suggest another agent is much better based on ${contextInfo}.`;
+                           default: return `Decision Guidance: Use the history (if provided) and your own skills to decide who is best suited for the task (${CONSTANTS.SELF_DECISION} or others).`; // Baseline
+                       }
+                  },
+
+                  formatLLMPrompts(agent, assignedTask, contextContent, orgInstructionText, responseOptionsString) {
+                       let baseSystemPrompt = agent.activeSystemPrompt || this.generateSingleDefaultPrompt(agent, this.parent.config.agentIds.filter(id => id !== agent.id)); // Fallback if activeSystemPrompt is missing
+                       let systemPrompt = `${baseSystemPrompt}`;
+                       systemPrompt += `\n${orgInstructionText}`;
+                       systemPrompt += `\nDo not justify your choice. Respond ONLY with one of the exact strings: ${responseOptionsString}. Be concise.`;
+
+                       const userPrompt = `${contextContent}Current task for you: ${assignedTask}.\nWho should do it? Respond with only one of: ${responseOptionsString}.`;
+
+                       return { systemPrompt, userPrompt };
+                  },
+
+                 // <<< MODIFICATION START >>> - Modify function to handle <think> tags
+                 parseLLMResponse(responseContent, validResponses, currentAgentId) {
+                     let thinkingText = null;
+                     let decisionText = responseContent; // Assume no thinking tag initially
+
+                     if (!decisionText || typeof decisionText !== 'string') {
+                         console.warn(`[Warn] parseLLMResponse received invalid input:`, decisionText);
+                         return { decision: CONSTANTS.SELF_DECISION, thinking: thinkingText };
+                     }
+                     decisionText = decisionText.trim(); // Trim initial response
+
+                     const thinkStartTag = '<think>';
+                     const thinkEndTag = '</think>';
+
+                     if (decisionText.startsWith(thinkStartTag)) {
+                         const endTagIndex = decisionText.indexOf(thinkEndTag);
+                         if (endTagIndex !== -1) {
+                             // Extract thinking and decision parts
+                             thinkingText = decisionText.substring(thinkStartTag.length, endTagIndex).trim();
+                             decisionText = decisionText.substring(endTagIndex + thinkEndTag.length).trim();
+                             console.log(`[Debug] Extracted Thinking:`, thinkingText);
+                             console.log(`[Debug] Remaining Decision Text:`, decisionText);
+                         } else {
+                             // Found <think> but not </think> - treat rest as potential decision, log warning
+                             console.warn(`[Warn] Found '<think>' tag but no matching '</think>' in response:`, responseContent);
+                             thinkingText = decisionText.substring(thinkStartTag.length).trim(); // Capture partial thinking
+                             decisionText = ""; // No valid decision part found after incomplete think block
+                         }
+                     }
+
+                     // --- Now parse the decisionText (the part after </think> or the whole thing if no tags) ---
+                     let cleanedDecision = decisionText; // Use the potentially modified decisionText
+
+                     // Remove surrounding quotes (single or double)
+                     if ((cleanedDecision.startsWith("'") && cleanedDecision.endsWith("'")) || (cleanedDecision.startsWith('"') && cleanedDecision.endsWith('"'))) {
+                         cleanedDecision = cleanedDecision.substring(1, cleanedDecision.length - 1);
+                     }
+                     // Remove trailing punctuation if it exists
+                     const trailingPunctuation = ['.', ',', '!', '?'];
+                      if (cleanedDecision.length > 0 && trailingPunctuation.includes(cleanedDecision[cleanedDecision.length - 1])) {
+                          cleanedDecision = cleanedDecision.slice(0, -1);
+                      }
+                     cleanedDecision = cleanedDecision.trim(); // Trim again after potential removals
+
+                     // Check if the cleaned response matches the current agent's ID (case-insensitive)
+                     if (currentAgentId && cleanedDecision.toLowerCase() === currentAgentId.toLowerCase()) {
+                         console.log(`[Debug] parseLLMResponse interpreted agent's own ID '${decisionText}' as '${CONSTANTS.SELF_DECISION}'`);
+                         return { decision: CONSTANTS.SELF_DECISION, thinking: thinkingText };
+                     }
+
+                     // Case-insensitive check against other valid responses ("Self" is still checked here)
+                     const lowerCaseCleaned = cleanedDecision.toLowerCase();
+                     for (const validId of validResponses) {
+                          // Check if validId itself exists and is a string before calling toLowerCase
+                         if (validId && typeof validId === 'string' && validId.toLowerCase() === lowerCaseCleaned) {
+                             console.log(`[Debug] parseLLMResponse matched '${decisionText}' to '${validId}'`);
+                             return { decision: validId, thinking: thinkingText }; // Return the canonical valid response and thinking
+                         }
+                     }
+
+                     // If no match found AFTER checking own ID and the validResponses list, log the failure and return the default
+                     console.warn(`[Warn] parseLLMResponse failed to match decision part '${decisionText}' (cleaned: '${cleanedDecision}') to any valid option (incl. own ID '${currentAgentId}'): ${validResponses.join(', ')}. Defaulting to Self.`);
+                     return { decision: CONSTANTS.SELF_DECISION, thinking: thinkingText }; // Return default decision but keep any extracted thinking
+                 },
+                 // <<< MODIFICATION END >>>
+
+
+                  populateEditor() {
+                       const container = this.parent.elements.promptEditorContainer;
+                       if (!container) {
+                            console.error("Prompt editor container not found.");
+                            return;
+                       }
+                       container.innerHTML = ''; // Clear existing
+                       this.parent.config.initialAgentsDefinition.forEach(agentDef => {
+                            const promptToShow = (agentDef.customSystemPrompt && agentDef.customSystemPrompt.trim() !== '')
+                                 ? agentDef.customSystemPrompt
+                                 : agentDef.defaultSystemPrompt; // Show default if no custom
+
+                            const div = document.createElement('div');
+                            div.innerHTML = `
+                                <label for="prompt-${agentDef.id}" class="block text-sm font-medium text-gray-700 mb-1">${this.parent.ui.escapeHtml(agentDef.id)} System Prompt:</label>
+                                <textarea id="prompt-${agentDef.id}" class="prompt-textarea">${this.parent.ui.escapeHtml(promptToShow || '')}</textarea>
+                            `;
+                            container.appendChild(div);
+                       });
+                  },
+
+                  saveCustom() {
+                       let changed = false;
+                       this.parent.config.initialAgentsDefinition.forEach(agentDef => {
+                            const textarea = document.getElementById(`prompt-${agentDef.id}`);
+                            if (textarea) {
+                                const newPrompt = textarea.value.trim();
+                                 // Store only if it's different from the default and not empty
+                                if (newPrompt !== "" && newPrompt !== agentDef.defaultSystemPrompt) {
+                                     if (agentDef.customSystemPrompt !== newPrompt) {
+                                         agentDef.customSystemPrompt = newPrompt;
+                                         changed = true;
+                                     }
+                                } else { // If it matches default or is empty, clear the custom prompt
+                                     if (agentDef.customSystemPrompt !== null) {
+                                         agentDef.customSystemPrompt = null;
+                                         changed = true;
+                                     }
+                                }
+                            }
+                       });
+                        if (changed) {
+                             this.parent.ui.showNotification('Custom prompts saved. Reset the current run to use them.', 'success');
+                             // If resetSimulation isn't called immediately, update the state.agents if a run is in progress (though not recommended)
+                             if(this.parent.state.currentRound > 0) {
+                                  this.parent.state.agents.forEach(agent => {
+                                       const definition = this.parent.config.initialAgentsDefinition.find(def => def.id === agent.id);
+                                       agent.activeSystemPrompt = definition.customSystemPrompt || definition.defaultSystemPrompt;
+                                  });
+                             }
+                        } else {
+                             this.parent.ui.showNotification('No changes detected in prompts.', 'info');
+                        }
+                       // No longer closing a modal
+                  },
+
+                  resetEditorToDefaults() {
+                       if (confirm("Reset all agent prompts to their defaults? Any unsaved changes will be lost.")) {
+                            this.parent.config.initialAgentsDefinition.forEach(agentDef => {
+                                 agentDef.customSystemPrompt = null; // Clear custom setting in config
+                                 const textarea = document.getElementById(`prompt-${agentDef.id}`);
+                                 if (textarea) {
+                                     textarea.value = agentDef.defaultSystemPrompt || ''; // Set text area to default
+                                 }
+                            });
+                            this.parent.ui.showNotification('Prompts reset to default. Click "Save Prompts" to confirm or reset simulation.', 'info');
+                       }
+                  },
+
+                  getBestAgentForTask(task) {
+                       let bestAgentId = null;
+                       let highestSkillRate = -1;
+                       this.parent.config.initialAgentsDefinition.forEach(agentDef => {
+                           const skillLevel = agentDef.skills?.[task];
+                           const rate = this.parent.config.skillSuccessRate[skillLevel] || 0;
+                           if (rate > highestSkillRate) {
+                               highestSkillRate = rate;
+                               bestAgentId = agentDef.id;
+                           } else if (rate === highestSkillRate && bestAgentId !== null) {
+                               // Tie-breaking (consistent lower ID) - assumes 'Agent N' format
+                               try {
+                                   const currentBestNum = parseInt(bestAgentId.split(' ')[1]);
+                                   const potentialNewBestNum = parseInt(agentDef.id.split(' ')[1]);
+                                   if (!isNaN(potentialNewBestNum) && !isNaN(currentBestNum) && potentialNewBestNum < currentBestNum) {
+                                       bestAgentId = agentDef.id;
+                                   } else if (isNaN(currentBestNum) || isNaN(potentialNewBestNum)) { // Fallback alpha sort if parsing fails
+                                        if (agentDef.id < bestAgentId) bestAgentId = agentDef.id;
+                                   }
+                               } catch (e) { // Fallback alpha sort on any error
+                                    if (agentDef.id < bestAgentId) bestAgentId = agentDef.id;
+                               }
+                           }
+                       });
+                       return bestAgentId;
+                  }
+
+              }, // End prompts sub-module
+
+            // --- API Interaction ---
+              api: {
+                  // <<< Keep the existing callLLM function exactly as it was >>>
+                  async callLLM(systemPrompt, userPrompt) {
+                      if (!this.parent.config.purdue_api_key && !this.parent.state.apiSkipped) { // Check if skipped
+                           console.error("[Error] API Key not set and not skipped.");
+                           throw new Error("API Key not set or invalid");
+                      }
+                       // If skipped, this function shouldn't even be called ideally, but add a safeguard
+                       if (this.parent.state.apiSkipped) {
+                           console.warn("[Warn] Attempted to call LLM API while API key was skipped.");
+                           throw new Error("API calls disabled as API key was skipped.");
+                       }
+
+
+                      const requestBody = {
+                           "model": this.parent.config.model, // Uses the dynamically set model
+                           "messages": [
+                               { "role": "system", "content": systemPrompt },
+                               { "role": "user", "content": userPrompt }
+                           ],
+                           "max_tokens": CONSTANTS.API_MAX_TOKENS,
+                           "temperature": CONSTANTS.API_TEMPERATURE,
+                           "stream": false
+                      };
+
+                      //console.log("[Debug] API Request Body:", JSON.stringify(requestBody, null, 2));
+
+                      let response;
+                      try {
+                           response = await fetch(this.parent.config.apiUrl, {
+                               method: "POST",
+                               headers: {
+                                   "Authorization": `Bearer ${this.parent.config.purdue_api_key}`,
+                                   "Content-Type": "application/json"
+                               },
+                               body: JSON.stringify(requestBody)
+                           });
+                           // console.log(`[Debug] API Response Status: ${response.status} ${response.statusText}`);
+
+                      } catch (networkError) {
+                           console.error("[Error] Network error calling LLM API:", networkError);
+                           throw new Error(`Network Error: ${networkError.message}`);
+                      }
+
+                      if (!response.ok) {
+                           let errorBodyText = '';
+                           try { errorBodyText = await response.text(); } catch (e) { errorBodyText = "[Could not read error body]";}
+                           console.error(`[Error] API Error ${response.status}: ${errorBodyText}`);
+                            if (response.status === 401) throw new Error(`API Error: 401 Unauthorized. Check your API Key.`);
+                            if (response.status === 429) throw new Error(`API Error: 429 Too Many Requests. Please wait and try again.`);
+                            if (response.status >= 500) throw new Error(`API Error: ${response.status} Server Error. The API service might be down.`);
+                           throw new Error(`API Error: ${response.status} ${response.statusText}. ${errorBodyText.substring(0, 200)}`);
+                      }
+
+                      let data;
+                      try {
+                           const responseText = await response.text();
+                           //console.log("[Debug] API Raw Response Text:", responseText);
+                           data = JSON.parse(responseText);
+                      } catch (jsonError) {
+                           console.error("[Error] Error parsing JSON response from API:", jsonError);
+                           throw new Error("API Error: Invalid JSON response received.");
+                      }
+
+
+                      if (!data || !data.choices || data.choices.length === 0 || !data.choices[0].message || data.choices[0].message.content === undefined || data.choices[0].message.content === null) {
+                           console.error("[Error] Invalid API response structure received:", data);
+                           throw new Error("Invalid API response structure (missing or empty content)");
+                      }
+                      //console.log("[Debug] API Parsed Data:", data);
+
+                      return data.choices[0].message.content.trim();
+                  }
+              }, // End API sub-module
+
+
+            // --- UI Update Functions ---
+              ui: {
+                  escapeHtml(unsafe) {
+                       if (typeof unsafe !== 'string') return '';
+                       return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+                  },
+
+                  showNotification(message, type = 'info') {
+                       const colors = { 'success': 'bg-green-500', 'error': 'bg-red-500', 'info': 'bg-blue-500', 'warning': 'bg-yellow-500' };
+                       const notification = document.createElement('div');
+                       // Ensure z-index is high enough
+                       notification.className = `fixed top-5 right-5 px-4 py-2 rounded-lg shadow-lg text-white ${colors[type] || colors['info']} transition-opacity duration-300 z-[1000]`;
+                       notification.textContent = message;
+                       document.body.appendChild(notification);
+
+                       setTimeout(() => {
+                           notification.style.opacity = '0';
+                           setTimeout(() => {
+                               if (document.body.contains(notification)) {
+                                   document.body.removeChild(notification);
+                               }
+                           }, 300); // Wait for fade out before removing
+                       }, CONSTANTS.NOTIFICATION_DURATION);
+                  },
+
+                  updateStatus(message) {
+                       if(this.parent.elements.simulationStatus) this.parent.elements.simulationStatus.textContent = message;
+                  },
+
+                  updateCurrentOrgInstructionDisplay() {
+                       const select = this.parent.elements.orgInstructionSelect;
+                       const selectedOption = select?.options[select.selectedIndex];
+                       if(this.parent.elements.currentOrgInstructionDisplay) {
+                            this.parent.elements.currentOrgInstructionDisplay.textContent = `Instruction: ${selectedOption ? this.escapeHtml(selectedOption.text) : 'N/A'}`;
+                       }
+                  },
+                    updateCurrentModelDisplay() { // Added function
+                       if(this.parent.elements.currentModelDisplay) {
+                            this.parent.elements.currentModelDisplay.textContent = `Model: ${this.parent.config.model}`;
+                       }
+                   },
+
+                updateControlStates() {
+                    const finished = this.parent.state.currentRound >= this.parent.state.maxRounds;
+                    const running = this.parent.state.isRunning || this.parent.state.isAutoRunning;
+                    // Disable settings if currentRound > 0 OR if running.
+                    const settingsDisabled = this.parent.state.currentRound > 0 || running;
+                    const setupIncomplete = !this.parent.state.apiKeySet && !this.parent.state.apiSkipped;
+
+                    // API Setup Area (Inverse logic)
+                    const showApiSetup = setupIncomplete;
+                    if (this.parent.elements.apiSetup) this.parent.elements.apiSetup.classList.toggle('hidden', !showApiSetup);
+                    if (this.parent.elements.simulationArea) this.parent.elements.simulationArea.classList.toggle('hidden', showApiSetup);
+
+
+                    // Main Controls
+                    if (this.parent.elements.nextRoundBtn) this.parent.elements.nextRoundBtn.disabled = running || finished || setupIncomplete;
+                    if (this.parent.elements.runAllBtn) this.parent.elements.runAllBtn.disabled = running || finished || setupIncomplete;
+                    if (this.parent.elements.resetBtn) this.parent.elements.resetBtn.disabled = running || setupIncomplete; // Can reset unless running or setup incomplete
+                    if (this.parent.elements.stopBtn) {
+                         this.parent.elements.stopBtn.disabled = !this.parent.state.isAutoRunning; // Only enable stop if auto-running
+                         this.parent.elements.stopBtn.classList.toggle('hidden', !this.parent.state.isAutoRunning);
+                          if (!running && this.parent.elements.stopBtn.textContent === "Stopping...") { // Reset stop button text after stop completes
+                              this.parent.elements.stopBtn.textContent = "Stop Auto Run";
+                          }
+                    }
+
+                    // Store Button: Enabled only if finished, not running, setup is complete, AND current instance hasn't been stored yet
+                    if (this.parent.elements.storeRunBtn) {
+                         this.parent.elements.storeRunBtn.disabled = running || !finished || setupIncomplete || this.parent.state.currentRunInstanceStored;
+                    }
+
+
+                    // Settings Panel Elements
+                     const settingElements = [
+                           this.parent.elements.maxRoundsInput, this.parent.elements.memoryDepthInput,
+                           this.parent.elements.modelSelect, this.parent.elements.orgInstructionSelect,
+                           this.parent.elements.savePromptsBtn, this.parent.elements.resetPromptsBtn // Include prompt buttons
+                     ];
+                     settingElements.forEach(el => { if (el) el.disabled = settingsDisabled; });
+                     this.parent.elements.agentModeRadios?.forEach(radio => radio.disabled = settingsDisabled);
+                     // Disable prompt textareas too
+                     this.parent.elements.promptEditorContainer?.querySelectorAll('textarea').forEach(ta => ta.disabled = settingsDisabled);
+
+
+                    // Inspect Buttons
+                    this.parent.elements.inspectAgentButtons?.querySelectorAll('button').forEach(btn => btn.disabled = running || this.parent.state.currentRound === 0); // Disable if running or before round 1
+
+
+                    // Comparison Actions & List
+                     const comparisonElements = [
+                           this.parent.elements.selectAllRunsBtn, this.parent.elements.deselectAllRunsBtn,
+                           this.parent.elements.deleteSelectedRunsBtn
+                     ];
+                     comparisonElements.forEach(el => { if (el) el.disabled = running; });
+                     this.parent.elements.savedRunsList?.querySelectorAll('button, input[type="checkbox"]').forEach(el => el.disabled = running);
+
+
+                    // Loading Indicator
+                    if (this.parent.elements.loadingIndicator) this.parent.elements.loadingIndicator.style.display = running ? 'inline-flex' : 'none'; // Use style.display
+
+                },
+
+                // FIX: Removed isCurrentRunStored() as it's replaced by state.currentRunInstanceStored
+
+
+                  displayResults() {
+                       const log = this.parent.state.resultsLog;
+                       const container = this.parent.elements.resultsArea;
+                       if (!container) return;
+
+                       if (log.length === 0) {
+                           container.innerHTML = '<div class="text-gray-500 italic">No results yet.</div>';
+                       } else {
+                           container.innerHTML = log
+                               .map(logEntry => this.formatRoundResultsHTML(logEntry.round, logEntry.results))
+                               .join('');
+                           container.scrollTop = container.scrollHeight; // Scroll to bottom
+                       }
+                  },
+
+                  formatRoundResultsHTML(roundNum, results) {
+                      let output = `<div class="result-round-container mb-2">`;
+                      output += `<div class="result-round-header">--- Round ${roundNum} ---</div>`;
+                      (results || []).forEach(res => {
+                          const outcome = res.success ? '<span class="success">Success</span>' : '<span class="failure">Failure</span>';
+                          let decisionText = `decided: ${this.escapeHtml(res.decision || 'N/A')}`;
+                           // Add indicators for forced/original/actual solver if different
+                           // Make sure originalDecision is treated as string for comparison
+                           const originalDecisionStr = String(res.originalDecision);
+                           const decisionStr = String(res.decision);
+                           if (decisionStr !== originalDecisionStr && res.originalDecision != null && res.originalDecision !== "[API Skipped]" && !decisionStr.includes("(Forced")) { // Don't show 'original' if forced or simulated
+                                decisionText += ` (original: ${this.escapeHtml(originalDecisionStr)})`;
+                           } else if (decisionStr.includes("(Forced")) {
+                                // Decision text already contains the info
+                           } else if (res.actualSolver && decisionStr !== res.actualSolver && !(decisionStr === CONSTANTS.SELF_DECISION && res.assignedAgent === res.actualSolver)) {
+                               // Only show solver if it's different AND wasn't a simple 'Self' decision that resulted in self solve.
+                               decisionText += ` (solved by: ${this.escapeHtml(res.actualSolver || '?')})`;
+                           }
+
+
+                           let correctnessInfo = '';
+                            if(res.actualSolver && res.task) {
+                                const bestAgentId = this.parent.prompts.getBestAgentForTask(res.task);
+                                 correctnessInfo = res.actualSolver === bestAgentId
+                                     ? '<span class="delegation-info success">[Optimal Solver]</span>'
+                                     : `<span class="delegation-info failure">[Suboptimal Solver (Best: ${this.escapeHtml(bestAgentId||'?')})]</span>`;
+                            }
+
+                          output += `
+                               <div class="result-item">
+                                    ${this.escapeHtml(res.assignedAgent || '?')} assigned ${this.escapeHtml(res.task || '?')} &rarr;
+                                    ${decisionText} &rarr;
+                                    ${outcome} ${correctnessInfo}
+                               </div>`;
+                      });
+                      output += `</div>`;
+                      return output;
+                  },
+
+                  populateInspectAgentButtons() {
+                       const container = this.parent.elements.inspectAgentButtons;
+                       if (!container) return;
+                       container.innerHTML = '<span class="text-sm font-medium text-gray-600 mr-2">Inspect:</span>'; // Reset container
+                       this.parent.config.initialAgentsDefinition.forEach(agentDef => {
+                           const button = document.createElement('button');
+                           button.textContent = agentDef.id.replace('Agent ', 'A'); // Shorten label A1, A2 etc.
+                           button.title = `Inspect ${agentDef.id}`;
+                           button.className = 'inspect-agent-btn text-xs font-medium py-1 px-2 rounded';
+                            // Use agent color for background/border
+                            button.style.backgroundColor = agentDef.color + '20'; // Add alpha transparency
+                            button.style.color = agentDef.color;
+                            button.style.borderColor = agentDef.color;
+                            button.style.borderWidth = '1px';
+
+                           button.dataset.agentId = agentDef.id;
+                           container.appendChild(button);
+                       });
+                  },
+
+                  // --- Modal UI ---
+                  showMemoryModal(agentId) {
+                      const agent = this.parent.state.agents.find(a => a.id === agentId);
+                      if (!agent) { this.showNotification(`Cannot inspect agent: ${this.escapeHtml(agentId)} not found.`, 'error'); return; }
+
+                      this.parent.state.currentlyInspectingAgentId = agentId; // Store ID
+
+                      if(this.parent.elements.memoryModalTitle) this.parent.elements.memoryModalTitle.textContent = `${agent.id} Memory (${this.parent.state.agentMode} mode, Round ${this.parent.state.currentRound})`;
+
+                      let memoryString = `Knowledge based on '${this.parent.state.agentMode}' observation mode.\n\n`;
+                       memoryString += `Own Skills (Ground Truth):\n Math: ${agent.skills?.Math || '?'}, Writing: ${agent.skills?.Writing || '?'}, Logic: ${agent.skills?.Logic || '?'}\n\n`;
+                       memoryString += `Raw Observations Log (Last ${this.parent.state.memoryDepth * 2} relevant):\n`; // Show more for context
+
+                        const subjects = Object.keys(agent.observations || {}).sort((a, b) => a.localeCompare(b));
+                        if (subjects.length === 0) {
+                            memoryString += "  (No observations recorded yet)\n";
+                        } else {
+                            subjects.forEach(subjectId => {
+                                memoryString += `  Observed ${this.escapeHtml(subjectId)}:\n`;
+                                let hasData = false;
+                                this.parent.config.taskTypes.forEach(task => {
+                                    const observationsForTask = agent.observations?.[subjectId]?.[task];
+                                    if (observationsForTask && observationsForTask.length > 0) {
+                                        const recentObservations = observationsForTask.slice(-(this.parent.state.memoryDepth * 2)); // Limit display
+                                        if(recentObservations.length > 0) {
+                                             memoryString += `     - ${this.escapeHtml(task)}: `;
+                                             memoryString += recentObservations.map(obs => `R${obs.round}(${obs.success ? 'OK' : 'Fail'})`).join(', ');
+                                             memoryString += `\n`;
+                                             hasData = true;
+                                        }
+                                    }
+                                });
+                                if (!hasData) { memoryString += `     (No relevant data recorded for this agent)\n`; }
+                            });
+                        }
+                      if (this.parent.elements.memoryDisplay) this.parent.elements.memoryDisplay.textContent = memoryString;
+
+
+                        // Reset detailed history view
+                        if (this.parent.elements.detailedHistoryDisplay) {
+                            this.parent.elements.detailedHistoryDisplay.innerHTML = '<h3 class="text-lg font-semibold mb-2">Detailed Interaction History</h3>'; // Keep header
+                            this.parent.elements.detailedHistoryDisplay.style.display = 'none';
+                        }
+                        if (this.parent.elements.viewDetailedHistoryBtn) this.parent.elements.viewDetailedHistoryBtn.textContent = 'View Detailed Interaction History';
+
+                      if(this.parent.elements.memoryModal) this.parent.elements.memoryModal.style.display = "block";
+                  },
+
+                 // <<< MODIFICATION START >>> - Update to display thinking block
+                 toggleDetailedHistory() {
+                     const agentId = this.parent.state.currentlyInspectingAgentId;
+                     const agent = agentId ? this.parent.state.agents.find(a => a.id === agentId) : null;
+                     const displayArea = this.parent.elements.detailedHistoryDisplay;
+                     const button = this.parent.elements.viewDetailedHistoryBtn;
+
+                     if (!agent || !displayArea || !button) return; // Should not happen
+
+                     if (displayArea.style.display === 'none') {
+                         let historyHTML = '<h3 class="text-lg font-semibold mb-2">Detailed Interaction History</h3>'; // Start with header
+                         const history = agent.decisionHistory || [];
+                         if (history.length === 0) {
+                             historyHTML += '<p class="text-sm text-gray-500 italic">No interactions recorded for this agent.</p>';
+                         } else {
+                             // Display in reverse chronological order (most recent first)
+                             [...history].reverse().forEach(entry => {
+                                 let thinkingBlock = '';
+                                 if (entry.thinking && entry.thinking.trim() !== '') {
+                                     thinkingBlock = `
+                                        <div class="thinking-block mt-1">
+                                            <p class="text-xs font-medium text-yellow-700">LLM Thinking:</p>
+                                            <pre>${this.escapeHtml(entry.thinking)}</pre>
+                                        </div>
+                                    `;
+                                 }
+
+                                 historyHTML += `
+                                     <div class="history-entry">
+                                          <h4 class="font-semibold text-sm">Round ${entry.round} - Task: ${this.escapeHtml(entry.task || '?')}</h4>
+                                          <p class="text-xs mt-1 mb-0 font-medium">System Prompt:</p><pre>${this.escapeHtml(entry.systemPrompt || '')}</pre>
+                                          <p class="text-xs mt-1 mb-0 font-medium">User Prompt:</p><pre>${this.escapeHtml(entry.userPrompt || '')}</pre>
+                                          ${thinkingBlock} {/* Insert the thinking block here */}
+                                          <p class="text-xs mt-1 mb-0 font-medium">LLM Raw Response:</p><pre>${this.escapeHtml(entry.rawResponse || '')}</pre>
+                                          ${entry.apiError ? `<p class="text-xs mt-1 text-red-600"><strong>API Error:</strong> ${this.escapeHtml(entry.apiError)}</p>` : ''}
+                                          <p class="text-xs mt-1"><strong>Resulting Decision:</strong> ${this.escapeHtml(entry.cleanedDecision || '?')}</p>
+                                     </div>`;
+                             });
+                         }
+                         displayArea.innerHTML = historyHTML;
+                         displayArea.style.display = 'block';
+                         button.textContent = 'Hide Detailed Interaction History';
+                     } else {
+                         displayArea.style.display = 'none';
+                         button.textContent = 'View Detailed Interaction History';
+                     }
+                 },
+                 // <<< MODIFICATION END >>>
+
+                // showPromptModal removed as it's inline now
+
+                  showStoredRunLogModal(runId) {
+                      const runData = this.parent.state.savedSimulations.find(run => run.id === runId);
+                      if (!runData) {
+                           this.showNotification('Could not find data for the selected run.', 'error');
+                           return;
+                      }
+                       if (this.parent.elements.storedLogModalTitle) this.parent.elements.storedLogModalTitle.textContent = `Detailed Log for: ${this.escapeHtml(runData.label || runId)}`;
+
+                       // Populate Panels
+                      this.populateLogOverviewPanel(runData);
+                      this.populateLogPromptsPanel(runData);
+                      this.populateLogResultsPanel(runData);
+
+                        // Activate the default tab (Overview) and scroll to top
+                        if(this.parent.elements.logTabButtons?.[0]) {
+                           this.activateLogTab(this.parent.elements.logTabButtons[0]);
+                        }
+
+                      if(this.parent.elements.storedLogModal) this.parent.elements.storedLogModal.style.display = 'block';
+                  },
+
+                  populateLogOverviewPanel(runData) {
+                       const panel = this.parent.elements.logOverviewPanel;
+                       if (!panel) return;
+                       try {
+                            const settings = runData.settings || {};
+                            const performance = runData.performance || {};
+                            const history = performance.correctDelegationHistory || [];
+                            const avgCorrectAssignmentRate = history.length > 0
+                                ? (history.reduce((sum, h) => sum + (h?.correctRate ?? 0), 0) / history.length * 100).toFixed(1) + '%'
+                                : 'N/A';
+
+                            // Re-check custom prompts used based on *stored* data
+                            const customPromptsWereUsed = this.parent.config.initialAgentsDefinition.some(agentDef => {
+                                 const defaultPrompt = agentDef.defaultSystemPrompt; // Assumes generateDefaultPrompts ran
+                                 const usedPrompt = settings.agentSystemPrompts?.[agentDef.id];
+                                 return usedPrompt && defaultPrompt && usedPrompt.trim() !== defaultPrompt.trim();
+                            });
+
+
+                           panel.innerHTML = `
+                               <h3 class="text-md font-semibold mb-2">Run Summary</h3>
+                               <p><span>Run ID:</span> ${this.escapeHtml(runData.id)}</p>
+                               <p><span>Date/Time:</span> ${this.escapeHtml(runData.timestamp || 'N/A')}</p>
+                               <h4 class="font-semibold mt-3 mb-2">Settings:</h4>
+                               <p><span>Agent Mode:</span> ${this.escapeHtml(settings.agentMode || 'N/A')}</p>
+                               <p><span>Memory Depth:</span> ${settings.memoryDepth ?? 'N/A'}</p>
+                               <p><span>Org Instruction:</span> ${this.escapeHtml(settings.organizationalInstruction || 'N/A')}</p>
+                               <p><span>Total Rounds:</span> ${settings.maxRounds ?? 'N/A'}</p>
+                               <p><span>Model:</span> ${this.escapeHtml(settings.model || 'N/A')}</p>
+                               <p><span>Custom Prompts Used:</span> ${customPromptsWereUsed ? 'Yes' : 'No'}</p>
+                               <h4 class="font-semibold mt-3 mb-2">Performance:</h4>
+                               <p><span>Final Score:</span> ${performance.finalScore ?? 'N/A'}</p>
+                               <p><span>Avg Correct Assignment Rate:</span> ${avgCorrectAssignmentRate}</p>
+                           `;
+                       } catch (e) {
+                            console.error("Error populating overview panel:", e);
+                            panel.innerHTML = "<h3 class='text-md font-semibold mb-2'>Run Summary</h3><p class='text-red-600'>Error loading overview data.</p>";
+                       }
+                  },
+
+                  populateLogPromptsPanel(runData) {
+                      const panel = this.parent.elements.logPromptsPanel;
+                       if (!panel) return;
+                      panel.innerHTML = '<h3 class="text-md font-semibold mb-2">System Prompts Used</h3>'; // Reset content except header
+                       try {
+                            let promptsHTML = '';
+                             // Re-generate defaults to compare against stored prompts
+                            this.parent.prompts.generateDefaultPrompts(); // Ensure defaults are available
+                            this.parent.config.initialAgentsDefinition.forEach(agentDef => {
+                                 const agentId = agentDef.id;
+                                 const usedPrompt = runData.settings?.agentSystemPrompts?.[agentId] || '(Prompt not found in log)';
+                                 const isCustom = usedPrompt && agentDef.defaultSystemPrompt && usedPrompt.trim() !== agentDef.defaultSystemPrompt.trim();
+                                 promptsHTML += `
+                                     <div class="mb-4">
+                                          <h5 class="font-semibold text-sm">${this.escapeHtml(agentId)} ${isCustom ? '<span class="text-yellow-600 font-normal text-xs">(Modified)</span>' : '<span class="text-gray-500 font-normal text-xs">(Default)</span>'}</h5>
+                                          <pre>${this.escapeHtml(usedPrompt)}</pre>
+                                     </div>
+                                   `;
+                            });
+                           panel.innerHTML += promptsHTML;
+                       } catch (e) {
+                            console.error("Error populating prompts panel:", e);
+                           panel.innerHTML += "<p class='text-red-600'>Error loading prompt data.</p>";
+                       }
+                  },
+
+                  populateLogResultsPanel(runData) {
+                       const panel = this.parent.elements.logResultsPanel;
+                       if (!panel) return;
+                      panel.innerHTML = '<h3 class="text-md font-semibold mb-2">Detailed Round Results</h3>'; // Reset content except header
+                       try {
+                           const fullLog = runData.performance?.fullResultsLog || [];
+                           let resultsHTML = '';
+
+                           if (fullLog.length === 0) {
+                                resultsHTML += '<p class="italic text-gray-500">No round results found in the stored log.</p>';
+                           } else {
+                                fullLog.forEach(roundEntry => {
+                                    if (!roundEntry || roundEntry.round == null) return; // Skip malformed entries
+                                    // Use the *same* formatting function as the main results display
+                                    resultsHTML += this.formatRoundResultsHTML(roundEntry.round, roundEntry.results);
+                                });
+                           }
+                           panel.innerHTML += resultsHTML;
+                       } catch (e) {
+                           console.error("Error populating results panel:", e);
+                           panel.innerHTML += "<p class='text-red-600'>Error loading results data.</p>";
+                       }
+                  },
+
+                  activateLogTab(clickedButton) {
+                       if (!clickedButton || !this.parent.elements.logTabButtons || !this.parent.elements.storedLogDisplay) return;
+                       // Remove active class from all buttons and panels
+                       this.parent.elements.logTabButtons.forEach(btn => btn.classList.remove('active'));
+                       this.parent.elements.storedLogDisplay.querySelectorAll('.log-panel').forEach(panel => panel.classList.remove('active'));
+
+                       // Add active class to the clicked button and corresponding panel
+                       clickedButton.classList.add('active');
+                       const targetPanelId = clickedButton.getAttribute('data-target');
+                       const targetPanel = document.getElementById(targetPanelId);
+                       if (targetPanel) {
+                           targetPanel.classList.add('active');
+                           targetPanel.scrollTop = 0; // Scroll panel to top when activated
+                       }
+                  },
+
+                  closeModal(modalId) {
+                       const modalElement = document.getElementById(modalId);
+                       if (modalElement) modalElement.style.display = "none";
+
+                        // Specific cleanup actions on close
+                        if (modalId === 'memoryModal') {
+                            this.parent.state.currentlyInspectingAgentId = null;
+                            if(this.parent.elements.detailedHistoryDisplay) this.parent.elements.detailedHistoryDisplay.style.display = 'none';
+                            if(this.parent.elements.viewDetailedHistoryBtn) this.parent.elements.viewDetailedHistoryBtn.textContent = 'View Detailed Interaction History';
+                        }
+                        if (modalId === 'storedLogModal') {
+                            // Clear content of panels to prevent showing old data briefly next time
+                            if(this.parent.elements.logOverviewPanel) this.parent.elements.logOverviewPanel.innerHTML = '';
+                            if(this.parent.elements.logPromptsPanel) this.parent.elements.logPromptsPanel.innerHTML = '';
+                            if(this.parent.elements.logResultsPanel) this.parent.elements.logResultsPanel.innerHTML = '';
+                        }
+                  },
+
+                updateSavedRunsDisplay() {
+                    const container = this.parent.elements.savedRunsList;
+                    if (!container) return;
+                    const savedRuns = this.parent.state.savedSimulations;
+
+                    if (savedRuns.length === 0) {
+                        container.innerHTML = '<p class="text-sm text-gray-500 italic">No runs stored yet.</p>';
+                    } else {
+                        container.innerHTML = ''; // Clear list
+                        savedRuns.forEach((run) => {
+                            const runId = run.id;
+                            const runLabel = run.label || `Run ${run.id}`;
+                            const runColor = run.color || '#cccccc';
+
+                            const div = document.createElement('div');
+                            div.className = 'run-item';
+                            div.dataset.runId = runId; // Store runId for event delegation
+
+                            const checkboxId = `compare-run-${runId}`;
+
+                            // Checkbox, Color Box, Label Text
+                            const label = document.createElement('label');
+                            label.htmlFor = checkboxId;
+                             // Ensure checkbox takes minimal width
+                            label.innerHTML = `
+                                <input type="checkbox" id="${checkboxId}" value="${runId}" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out flex-shrink-0" checked style="width: auto;">
+                                <span class="run-label-color-box" style="background-color: ${runColor};"></span>
+                                <span class="ml-2 truncate" title="${this.escapeHtml(runLabel)}">${this.escapeHtml(runLabel)}</span>
+                            `;
+                            div.appendChild(label);
+
+                            // View Log Button
+                            const logButton = document.createElement('button');
+                            logButton.textContent = 'View Log';
+                            logButton.className = 'comparison-button view-log-button';
+                            logButton.title = `View detailed log for ${this.escapeHtml(runLabel)}`;
+                            // Onclick handled by event delegation
+                            div.appendChild(logButton);
+
+                            // Delete Button
+                            const deleteButton = document.createElement('button');
+                            deleteButton.textContent = 'Delete';
+                            deleteButton.className = 'comparison-button delete-run-button';
+                            deleteButton.title = `Delete run: ${this.escapeHtml(runLabel)}`;
+                             // Onclick handled by event delegation
+                            div.appendChild(deleteButton);
+
+                            container.appendChild(div);
+                        });
+                    }
+                    // Update charts after modifying the list
+                    this.parent.charts.update();
+                }
+
+              }, // End UI sub-module
+
+            // --- Charting ---
+              charts: {
+                  init() {
+                       const scoreCtx = this.parent.elements.scoreChart?.getContext('2d');
+                       const correctDelegationCtx = this.parent.elements.correctDelegationChart?.getContext('2d');
+
+                       if (!scoreCtx || !correctDelegationCtx) {
+                            console.error("Cannot initialize charts: Canvas element not found.");
+                            return;
+                       }
+
+                       if (this.parent.charts.scoreChartInstance) this.parent.charts.scoreChartInstance.destroy();
+                       if (this.parent.charts.correctDelegationChartInstance) this.parent.charts.correctDelegationChartInstance.destroy();
+
+                       const suggestedMaxScore = CONSTANTS.POINTS_FOR_ALL_SUCCESS * this.parent.state.maxRounds;
+
+                       const lineChartOptions = (yLabel, suggestedMax = null, showYPercent = false) => ({
+                            scales: {
+                                y: { beginAtZero: true, suggestedMax: suggestedMax, title: { display: true, text: yLabel, font: { size: 10 } }, ticks: { callback: showYPercent ? value => `${(value * 100).toFixed(0)}%` : undefined } },
+                                x: { title: { display: true, text: 'Round', font: { size: 10 } } }
+                            },
+                            plugins: {
+                                title: { display: false },
+                                legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 }, padding: 10 } },
+                                tooltip: {
+                                    callbacks: {
+                                        label: (context) => {
+                                             let label = context?.dataset?.label || '';
+                                             if (label) {
+                                                  // Basic shortening for tooltip
+                                                  const separatorIndex = label.indexOf(':'); // Find first colon
+                                                  label = (separatorIndex !== -1 ? label.substring(0, separatorIndex) : label) + ': ';
+                                             }
+                                             if (context?.parsed?.y !== null) {
+                                                  const value = showYPercent ? (context.parsed.y * 100).toFixed(1) + '%' : context.parsed.y.toFixed(0);
+                                                  label += value;
+                                             }
+                                             return label;
+                                        }
+                                    }
+                                }
+                            },
+                           responsive: true, maintainAspectRatio: false, animation: { duration: 200 }, elements: { point: { radius: 2 }, line: { tension: 0.1 } }
+                       });
+
+                       this.parent.charts.scoreChartInstance = new Chart(scoreCtx, { type: 'line', data: { labels: [], datasets: [] }, options: lineChartOptions('Cumulative Score', suggestedMaxScore > 0 ? suggestedMaxScore : 10) });
+                       this.parent.charts.correctDelegationChartInstance = new Chart(correctDelegationCtx, { type: 'line', data: { labels: [], datasets: [] }, options: lineChartOptions('Correct Assignment Rate', 1.0, true) });
+                  },
+
+                  update() {
+                       // Ensure charts are initialized
+                        if (!this.parent.charts.scoreChartInstance || !this.parent.charts.correctDelegationChartInstance) {
+                            this.init(); // Attempt to initialize if not already
+                            if (!this.parent.charts.scoreChartInstance || !this.parent.charts.correctDelegationChartInstance) {
+                                console.error("Chart instances not available, cannot update.");
+                                return; // Exit if still not initialized
+                            }
+                        }
+
+                       const selectedRunIds = Array.from(this.parent.elements.savedRunsList?.querySelectorAll('input[type="checkbox"]:checked') || []).map(cb => cb.value);
+                       const savedRunsToDisplay = this.parent.state.savedSimulations.filter(run => selectedRunIds.includes(run.id));
+
+                       // Determine max rounds for X-axis
+                       let maxRoundsAcrossRuns = this.parent.state.currentRound; // Start with current run
+                       savedRunsToDisplay.forEach(run => { maxRoundsAcrossRuns = Math.max(maxRoundsAcrossRuns, run?.settings?.maxRounds || 0); });
+                       maxRoundsAcrossRuns = Math.max(maxRoundsAcrossRuns, 1); // Ensure at least 1 round label
+                       const lineChartLabels = Array.from({ length: maxRoundsAcrossRuns }, (_, i) => `R${i + 1}`);
+
+                       // --- Prepare Line Chart Data ---
+                       const { currentRunScoreData, currentRunCorrectnessData } = this.prepareCurrentRunLineData();
+                       const savedRunLineDatasets = this.prepareSavedRunsLineData(savedRunsToDisplay);
+
+                       // --- Update Line Charts ---
+                       this.updateLineChart(this.parent.charts.scoreChartInstance, lineChartLabels, currentRunScoreData, savedRunLineDatasets.map(ds => ds.score));
+                       this.updateLineChart(this.parent.charts.correctDelegationChartInstance, lineChartLabels, currentRunCorrectnessData, savedRunLineDatasets.map(ds => ds.correctDelegation));
+
+                       // --- Prepare and Update Agent Choice Matrices ---
+                       const agentChoiceCounts = this.calculateAgentChoiceCounts(savedRunsToDisplay);
+                       this.updateAgentChoiceMatrices(agentChoiceCounts);
+                  },
+
+                  prepareCurrentRunLineData() {
+                       let scoreData = null, correctnessData = null;
+                       if (this.parent.state.currentRound > 0) {
+                           const currentRunColor = '#000000'; // Black for current run
+                           const currentRunLabelBase = `Current (${this.parent.state.agentMode.substring(0,4)}(d${this.parent.state.memoryDepth})/${this.parent.state.organizationalInstruction.substring(0,4)}/${this.parent.config.model.split(':')[0]})`; // Include model
+
+
+                           const cumulativeScores = (this.parent.state.roundScores || []).reduce((acc, score, i) => { acc.push((acc[i - 1] || 0) + score); return acc; }, []);
+                           scoreData = { label: `${currentRunLabelBase} - Score`, data: cumulativeScores, borderColor: currentRunColor, backgroundColor: currentRunColor + '30', fill: false, borderWidth: 2.5, pointRadius: 3 };
+
+                           const correctnessHistory = (this.parent.state.correctDelegationHistory || []).map(h => h?.correctRate ?? 0);
+                           correctnessData = { label: `${currentRunLabelBase} - Correct Rate`, data: correctnessHistory, borderColor: currentRunColor, backgroundColor: currentRunColor + '30', fill: false, borderWidth: 2.5, pointRadius: 3 };
+                       }
+                       return { currentRunScoreData: scoreData, currentRunCorrectnessData: correctnessData };
+                  },
+
+                  prepareSavedRunsLineData(savedRunsToDisplay) {
+                       return savedRunsToDisplay.map(run => {
+                           const runLabelBase = run.label || run.id;
+                           const runColor = run.color || '#cccccc';
+                           const scores = run.performance?.scoresPerRound || [];
+                           const correctness = run.performance?.correctDelegationHistory || [];
+
+                           const cumulativeScores = scores.reduce((acc, score, i) => { acc.push((acc[i - 1] || 0) + score); return acc; }, []);
+                           const scoreData = { label: `${runLabelBase} - Score`, data: cumulativeScores, borderColor: runColor, backgroundColor: runColor + '1A', fill: false, borderWidth: 1.5 };
+
+                           const correctnessRates = correctness.map(h => h?.correctRate ?? 0);
+                           const correctDelegationData = { label: `${runLabelBase} - Correct Rate`, data: correctnessRates, borderColor: runColor, backgroundColor: runColor + '1A', fill: false, borderWidth: 1.5 };
+
+                           return { score: scoreData, correctDelegation: correctDelegationData };
+                       });
+                  },
+
+                  updateLineChart(chartInstance, labels, currentRunData, savedRunsData) {
+                       if (!chartInstance) return;
+                       chartInstance.data.labels = labels;
+                       chartInstance.data.datasets = [...(currentRunData ? [currentRunData] : []), ...savedRunsData];
+                       chartInstance.update();
+                  },
+
+                  calculateAgentChoiceCounts(savedRunsToDisplay) {
+                   // Alias parent for clarity and potential 'this' context issues
+                   const parentApp = this.parent;
+
+                   const agentChoiceCounts = {};
+                   const agentIds = parentApp.config.agentIds;
+                   const taskTypes = parentApp.config.taskTypes;
+
+                   // 1. Initialize structure robustly
+                   agentIds.forEach(assigningAgentId => {
+                       agentChoiceCounts[assigningAgentId] = {};
+                       taskTypes.forEach(task => {
+                           agentChoiceCounts[assigningAgentId][task] = { total: 0 };
+                           // Initialize counts for each potential chosen agent ID + "Self"
+                           [...agentIds].forEach(chosenAgentId => { // Use copy to avoid modifying original
+                               agentChoiceCounts[assigningAgentId][task][chosenAgentId] = 0;
+                           });
+                       });
+                   });
+                   //console.log("Initialized agentChoiceCounts structure:", JSON.parse(JSON.stringify(agentChoiceCounts))); // Log initial structure
+
+                   let totalObservations = 0;
+
+                   // Helper function to tally from a log
+                   const tallyFromLog = (resultsLog, logSourceName) => { // Added logSourceName
+                       console.log(`--- Tallying from ${logSourceName} ---`);
+                       (resultsLog || []).forEach((roundLog, roundIndex) => {
+                           console.log(`  Processing Round ${roundLog.round} (Index ${roundIndex})`);
+                           (roundLog.results || []).forEach((res, resIndex) => {
+                               const assigningAgentId = res.assignedAgent;
+                               const task = res.task;
+                               let originalDecisionFromLog = res.originalDecision; // Agent's *intended* choice from the log
+
+                               console.log(`    Item ${resIndex}: Assigner='${assigningAgentId}', Task='${task}', OriginalDecision='${originalDecisionFromLog}'`);
+
+                               // Skip incomplete data early
+                               if (!assigningAgentId || !task || originalDecisionFromLog == null || !agentIds.includes(assigningAgentId)) {
+                                   console.warn(`      SKIP: Incomplete data or invalid assigningAgentId.`);
+                                   return;
+                               }
+
+                               // Use the robust parseLLMResponse to ensure we get a canonical ID or "Self"
+                               // Pass ALL agent IDs as valid options for parsing (even if technically invalid delegation target)
+                               const validChoicesForParsing = [CONSTANTS.SELF_DECISION, ...agentIds];
+                               // Ensure input to parseLLMResponse is a string
+                               let parsedResult = parentApp.prompts.parseLLMResponse(String(originalDecisionFromLog), validChoicesForParsing, assigningAgentId);
+                               let canonicalChoice = parsedResult.decision; // Get the decision part
+                               console.log(`      Canonical Choice after parse: '${canonicalChoice}'`);
+
+                               // Convert "Self" to the actual assigning agent ID for counting key purposes
+                               let finalChosenSolverIdForKey = (canonicalChoice === CONSTANTS.SELF_DECISION) ? assigningAgentId : canonicalChoice;
+                               console.log(`      Final Key for lookup: '${finalChosenSolverIdForKey}'`);
+
+                               // Check if structure exists and the final key is valid before incrementing
+                               if (agentChoiceCounts[assigningAgentId]?.[task] &&
+                                   Object.prototype.hasOwnProperty.call(agentChoiceCounts[assigningAgentId][task], finalChosenSolverIdForKey))
+                               {
+                                   console.log(`      SUCCESS: Incrementing [${assigningAgentId}][${task}][${finalChosenSolverIdForKey}] and total.`);
+                                   agentChoiceCounts[assigningAgentId][task].total++;
+                                   agentChoiceCounts[assigningAgentId][task][finalChosenSolverIdForKey]++;
+                                   totalObservations++;
+                               } else {
+                                   // Log the failure more informatively if the final key wasn't found
+                                   console.error(`      *** FAIL ***: finalChosenSolverIdForKey='${finalChosenSolverIdForKey}' not found as property in structure for [${assigningAgentId}][${task}]. Check initialization or key value.`);
+                                   console.error(`      Structure slice:`, agentChoiceCounts[assigningAgentId]?.[task]); // Log the object where the key was expected
+                               }
+                           });
+                       });
+                       console.log(`--- Finished Tallying from ${logSourceName} ---`);
+                   };
+
+                   // 2. Tally from current run (if exists)
+                   if (parentApp.state.currentRound > 0) {
+                       // console.log("Current run log content:", JSON.parse(JSON.stringify(parentApp.state.resultsLog))); // Deep copy for logging
+                       tallyFromLog(parentApp.state.resultsLog, "Current Run");
+                   } else {
+                       console.log("Skipping tally from current run (currentRound=0).");
+                   }
+
+                   // 3. Tally from selected saved runs
+                   if (savedRunsToDisplay && savedRunsToDisplay.length > 0) {
+                        console.log("Tallying from SAVED runs:", savedRunsToDisplay.map(r => r.id));
+                        savedRunsToDisplay.forEach(run => {
+                            // console.log(`Saved run '${run.id}' log content:`, JSON.parse(JSON.stringify(run.performance?.fullResultsLog))); // Deep copy for logging
+                             tallyFromLog(run.performance?.fullResultsLog, `Saved Run ${run.id}`);
+                        });
+                   } else {
+                        console.log("No saved runs selected for tallying.");
+                   }
+
+
+                   console.log("%ccalculateAgentChoiceCounts FINAL RESULT:", "color: blue; font-weight: bold;", "Total Observations=", totalObservations, "Counts=", JSON.parse(JSON.stringify(agentChoiceCounts)));
+                   return { counts: agentChoiceCounts, totalObservations };
+               },
+
+                updateAgentChoiceMatrices({ counts: agentChoiceCounts, totalObservations }) {
+                    const parentApp = this.parent; // Alias parent
+                    const container = parentApp.elements.matrixGridContainer;
+                    if (!container) {
+                        console.error("updateAgentChoiceMatrices: matrixGridContainer not found!");
+                        return;
+                    }
+                    // Clear previous matrices or "no data" message
+                    container.innerHTML = '';
+
+                    console.log("%cupdateAgentChoiceMatrices received:", "color: green; font-weight: bold;", "Total Observations=", totalObservations);
+
+                    if (totalObservations === 0) {
+                        console.log("updateAgentChoiceMatrices: No observations, displaying 'No data yet'.");
+                        container.innerHTML = '<p class="matrix-no-data md:col-span-2 lg:col-span-3">No data yet. Run simulation or select saved runs.</p>';
+                        return;
+                    }
+
+                    // If we have observations, proceed to render tables
+                    console.log("updateAgentChoiceMatrices: Rendering matrices...");
+
+                    const agentIds = parentApp.config.agentIds;
+                    const taskTypes = parentApp.config.taskTypes;
+                    const uiUtils = parentApp.ui;
+                    const promptUtils = parentApp.prompts;
+
+                    let matrixRendered = false; // Flag to track if at least one matrix was added
+
+                    agentIds.forEach(assigningAgentId => {
+                        const agentData = agentChoiceCounts[assigningAgentId];
+
+                        // Check if data exists for this assigning agent
+                        if (!agentData || Object.keys(agentData).length === 0) {
+                             console.log(`Skipping matrix render for ${assigningAgentId} - no assignment data found in counts.`);
+                             return; // Skip rendering matrix for this agent
+                        }
+
+                        console.log(`Rendering matrix for: ${assigningAgentId}`);
+
+                        let tableHTML = `<table class="choice-matrix-table">`;
+                        tableHTML += `<caption>${uiUtils.escapeHtml(assigningAgentId)}'s Choices</caption>`;
+                        tableHTML += `<thead><tr><th>Assigned Task</th>`;
+                        // Table Header: Use agentIds for columns (representing the *chosen* agent)
+                        agentIds.forEach(choiceId => {
+                            const columnHeader = (choiceId === assigningAgentId) ? CONSTANTS.SELF_DECISION : choiceId;
+                            tableHTML += `<th>Chose: ${uiUtils.escapeHtml(columnHeader)}</th>`;
+                        });
+                        tableHTML += `</tr></thead><tbody>`;
+
+                        let taskRowsRendered = false; // Flag for tasks within this agent's table
+                        taskTypes.forEach(task => {
+                            const taskData = agentData[task];
+
+                            // Check if this agent was ever assigned this task
+                            if (!taskData || taskData.total === 0) {
+                                console.log(`  Skipping task row '${task}' for ${assigningAgentId} - total assignments is 0.`);
+                                // Optionally render a row indicating no assignments for this task
+                                // tableHTML += `<tr><td>${uiUtils.escapeHtml(task)}</td><td colspan="${agentIds.length}">No assignments</td></tr>`;
+                                return; // Skip to next task
+                            }
+
+                            console.log(`  Rendering task row '${task}' for ${assigningAgentId}`);
+                            taskRowsRendered = true; // Mark that we have data for at least one task
+
+                            const bestAgentIdForTask = promptUtils.getBestAgentForTask(task);
+
+                            tableHTML += `<tr><td>${uiUtils.escapeHtml(task)}</td>`;
+                            // Iterate through potential *chosen* agents (columns)
+                            agentIds.forEach(choiceId_key => { // choiceId_key is 'Agent 1', 'Agent 2', etc.
+                                const count = taskData[choiceId_key] || 0;
+                                const total = taskData.total; // Already checked total > 0 above
+                                const proportion = count / total;
+                                const percentage = (proportion * 100).toFixed(1) + '%';
+
+                                // Determine if the *key* representing the chosen agent is the best agent for this task
+                                const isCorrectChoiceCell = choiceId_key === bestAgentIdForTask;
+                                const cellClass = isCorrectChoiceCell ? 'correct-choice' : '';
+
+                                console.log(`    Cell[${choiceId_key}]: Count=${count}, Total=${total}, %=${percentage}, Correct=${isCorrectChoiceCell}`);
+                                tableHTML += `<td class="${cellClass}" title="Count: ${count} / ${total}">${percentage}</td>`; // Add tooltip with raw count
+                            });
+                            tableHTML += `</tr>`;
+                        });
+
+                        tableHTML += `</tbody></table>`;
+
+                        // Only add the table if it contains actual task data
+                        if (taskRowsRendered) {
+                            const wrapperDiv = document.createElement('div');
+                            wrapperDiv.innerHTML = tableHTML;
+                            container.appendChild(wrapperDiv);
+                            matrixRendered = true; // Mark that we added at least one valid matrix
+                        } else {
+                             console.log(`Finished matrix for ${assigningAgentId}, but no task rows had data. Table not added.`);
+                        }
+                    });
+
+                    // Fallback if loop finishes but no valid matrices were added (e.g., data exists but not for selected agents/tasks)
+                     if (!matrixRendered) {
+                        console.log("updateAgentChoiceMatrices: Processing complete, but no valid matrix data found to render. Displaying 'No data'.");
+                        container.innerHTML = '<p class="matrix-no-data md:col-span-2 lg:col-span-3">Processed results, but no relevant choice data found for display.</p>';
+                     } else {
+                        console.log("updateAgentChoiceMatrices: Finished rendering matrices.");
+                     }
+                }
+              }, // End charting sub-module
+
+
+             // --- Data Storage & Comparison ---
+             storeCurrentRun() {
+               console.log("[Debug] Attempting to store current run...");
+               // FIX: Use this.state directly, not this.parent.state
+               if (this.state.currentRound < this.state.maxRounds || this.state.isRunning || this.state.isAutoRunning) {
+                    console.warn("[Warn] Cannot store run yet - simulation not complete.");
+                    // FIX: Use this.ui directly
+                    this.ui.showNotification('Cannot store run until simulation is complete.', 'warning');
+                    return;
+               }
+               // FIX: Use this.state directly
+               if (this.state.resultsLog.length === 0) {
+                    console.warn("[Warn] Cannot store run - resultsLog is empty.");
+                    // FIX: Use this.ui directly
+                    this.ui.showNotification('Cannot store run - no results were generated.', 'warning');
+                    return;
+               }
+               // FIX: Use this.state directly
+               if (this.state.savedSimulations.length >= CONSTANTS.COMPARISON_COLORS.length) {
+                    console.warn("[Warn] Cannot store run - storage limit reached.");
+                    // FIX: Use this.ui directly
+                   this.ui.showNotification(`Storage limit reached (${CONSTANTS.COMPARISON_COLORS.length} runs). Delete runs to store new ones.`, 'warning');
+                   return;
+               }
+               // FIX: Use this.state directly
+               if (this.state.currentRunInstanceStored) {
+                   console.log("[Debug] Current run instance already stored.");
+                   // FIX: Use this.ui directly
+                   this.ui.showNotification('This run instance has already been stored.', 'info');
+                   return;
+               }
+
+
+               try {
+                   // Prepare data for storage (using deep copies where needed)
+                    // FIX: Use this.state directly
+                    const agentSystemPromptsUsed = this.state.agents.reduce((acc, agent) => {
+                        acc[agent.id] = agent.activeSystemPrompt;
+                        return acc;
+                   }, {});
+
+                   // Deep copy decision history and results log - Add error checking for JSON
+                   let agentDecisionHistoriesStored, fullResultsLogStored;
+                   try {
+                        // FIX: Use this.state directly
+                         agentDecisionHistoriesStored = JSON.parse(JSON.stringify(
+                             this.state.agents.reduce((acc, agent) => {
+                                  acc[agent.id] = agent.decisionHistory;
+                                  return acc;
+                             }, {})
+                         ));
+                        //console.log("[Debug] Successfully cloned agent decision histories for storage.");
+                   } catch (e) {
+                         console.error("[Error] Failed to clone agent decision histories for storage:", e);
+                         throw new Error("Failed to serialize agent decision histories.");
+                   }
+                   try {
+                        // FIX: Use this.state directly
+                         fullResultsLogStored = JSON.parse(JSON.stringify(this.state.resultsLog));
+                        //console.log("[Debug] Successfully cloned full results log for storage.");
+                   } catch (e) {
+                         console.error("[Error] Failed to clone full results log for storage:", e);
+                         throw new Error("Failed to serialize full results log.");
+                   }
+
+
+                   const runData = {
+                        id: `run_${Date.now()}`,
+                        timestamp: new Date().toLocaleString(),
+                        settings: {
+                            maxRounds: this.state.maxRounds,
+                            agentMode: this.state.agentMode,
+                            memoryDepth: this.state.memoryDepth,
+                            organizationalInstruction: this.state.organizationalInstruction,
+                             // FIX: Use this.config directly
+                            model: this.config.model, // Store the model used
+                            agentSystemPrompts: agentSystemPromptsUsed, // Store the prompts used
+                            // FIX: Use this.config directly
+                             customPromptsUsed: this.config.initialAgentsDefinition.some(aDef =>
+                                 agentSystemPromptsUsed[aDef.id] && aDef.defaultSystemPrompt && agentSystemPromptsUsed[aDef.id].trim() !== aDef.defaultSystemPrompt.trim()
+                             )
+                        },
+                        performance: {
+                            // FIX: Use this.state directly
+                            finalScore: this.state.totalScore,
+                            scoresPerRound: [...this.state.roundScores],
+                            correctDelegationHistory: [...this.state.correctDelegationHistory],
+                            agentDecisionHistories: agentDecisionHistoriesStored, // Store detailed history
+                            fullResultsLog: fullResultsLogStored // Store the main results log
+                        },
+                        // FIX: Use this.state directly
+                        color: CONSTANTS.COMPARISON_COLORS[this.state.savedSimulations.length % CONSTANTS.COMPARISON_COLORS.length],
+                        // FIX: Use this.state and this.config directly
+                         label: `Run ${this.state.savedSimulations.length + 1}: ${this.state.agentMode.substring(0,4)}(d${this.state.memoryDepth})/${this.state.organizationalInstruction.substring(0,4)}/${this.config.model.split(':')[0]}/${this.state.totalScore}pts` // Include model in label
+                   };
+
+                   this.state.savedSimulations.push(runData);
+                    console.log("[Debug] Run data pushed to savedSimulations:", runData.id);
+                   this.ui.updateSavedRunsDisplay(); // Update the UI (will also call charts.update)
+                   this.ui.showNotification(`Run stored as "${runData.label}".`, 'success');
+                   this.state.currentRunInstanceStored = true;
+                   this.ui.updateControlStates(); // This will now correctly disable the button based on the flag
+
+               } catch (error) {
+                   console.error("[Error] Error storing run:", error);
+                   this.ui.showNotification(`Failed to store run data. ${error.message}. Check console.`, 'error');
+               }
+           },
+             comparison: { // Comparison logic (Select/Deselect/Delete) - kept as is
+                  selectAll() {
+                       this.parent.elements.savedRunsList?.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+                       this.parent.charts.update();
+                  },
+
+                  deselectAll() {
+                       this.parent.elements.savedRunsList?.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+                       this.parent.charts.update();
+                  },
+
+                  deleteSelected() {
+                       const selectedIds = Array.from(this.parent.elements.savedRunsList?.querySelectorAll('input[type="checkbox"]:checked') || []).map(cb => cb.value);
+                       if (selectedIds.length === 0) {
+                           this.parent.ui.showNotification('No runs selected to delete.', 'info');
+                           return;
+                       }
+                       if (confirm(`Are you sure you want to delete ${selectedIds.length} selected run(s)? This cannot be undone.`)) {
+                           this.parent.state.savedSimulations = this.parent.state.savedSimulations.filter(run => !selectedIds.includes(run.id));
+                            // Re-assign colors after deletion to maintain consistency? Optional.
+                            this.parent.state.savedSimulations.forEach((run, index) => {
+                                 run.color = CONSTANTS.COMPARISON_COLORS[index % CONSTANTS.COMPARISON_COLORS.length];
+                            });
+                           this.parent.ui.updateSavedRunsDisplay(); // This will re-render list and update charts
+                           this.parent.ui.showNotification(`${selectedIds.length} run(s) deleted.`, 'success');
+                       }
+                  },
+
+                  deleteSingle(runId) {
+                       const runToDelete = this.parent.state.savedSimulations.find(run => run.id === runId);
+                       if (!runToDelete) return;
+
+                       if (confirm(`Are you sure you want to delete run "${this.parent.ui.escapeHtml(runToDelete.label || runId)}"? This cannot be undone.`)) {
+                           this.parent.state.savedSimulations = this.parent.state.savedSimulations.filter(run => run.id !== runId);
+                            // Re-assign colors after deletion
+                            this.parent.state.savedSimulations.forEach((run, index) => {
+                                 run.color = CONSTANTS.COMPARISON_COLORS[index % CONSTANTS.COMPARISON_COLORS.length];
+                            });
+                           this.parent.ui.updateSavedRunsDisplay(); // Re-render list and update charts
+                           this.parent.ui.showNotification(`Run "${this.parent.ui.escapeHtml(runToDelete.label || runId)}" deleted.`, 'success');
+                       }
+                  }
+             } // End comparison sub-module
+
+        }; // End simulationApp object
+
+        // --- Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            simulationApp.init();
+        });
+
+    </script>
+
+</body>
+</html>

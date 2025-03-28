@@ -78,9 +78,9 @@ Simulations of Transactive Memory Systems
 
 
 
-[Open task in separate window (optional - provides more space)](php30.html)
+[Open task in separate window (optional - provides more space)](php32.html)
 
-![](php30.html){width="1300" height="1600"}
+![](php32.html){width="1300" height="1600"}
 
 
 -----------------------------
@@ -211,6 +211,37 @@ Essentially, this demo is a sandbox for observing how communication patterns (Ag
 This simulation provides a visual and interactive way to explore the dynamics of team knowledge sharing and task delegation, offering insights into how different factors can influence the development of an effective Transactive Memory System.
 
 ---
+
+
+
+
+
+
+
+
+
+:::: {.content-visible when-format="html"}
+
+::: column-page
+
+### Old version of task 
+
+[Open task in separate window (optional - provides more space)](php30.html)
+
+![](php30.html){width="1300" height="1600"}
+
+-----------------------------
+
+<br> <br>
+
+
+:::
+
+
+:::: 
+
+
+
 
 
 ::: {#fig-tms-llm layout-ncol=2}
